@@ -6,5 +6,7 @@ package lv.javaguru.java2.Denisstest;
 public class Dinjvald {
 
     String xaxa = "Axaxaxaxaxa";
+    String yes = "Yes";
+
 
 }
