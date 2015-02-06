@@ -12,11 +12,11 @@ public class Company {
     private String country;
     private String type;
 
-    public long getcompanyId() {
+    public long getCompanyId() {
         return companyId;
     }
 
-    public void setcompanyId(long companyId) {
+    public void setCompanyId(long companyId) {
         this.companyId = companyId;
     }
 
