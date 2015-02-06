@@ -3,7 +3,7 @@ package lv.javaguru.java2.domain;
 /**
  * Created by andre on 06.02.2015.
  */
-public class Agreements {
+public class Agreement {
 
 
     private long Id;
