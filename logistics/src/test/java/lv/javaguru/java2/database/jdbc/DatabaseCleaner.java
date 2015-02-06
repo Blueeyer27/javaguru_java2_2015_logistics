@@ -14,7 +14,11 @@ public class DatabaseCleaner extends DAOImpl {
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<String>();
-        tableNames.add("USERS");
+        tableNames.add("user");
+        tableNames.add("vehicle");
+        tableNames.add("agreement");
+        tableNames.add("cargo");
+        tableNames.add("company");
         return tableNames;
     }
 
