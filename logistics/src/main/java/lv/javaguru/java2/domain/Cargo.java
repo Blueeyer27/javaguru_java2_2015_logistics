@@ -1,22 +1,25 @@
 package lv.javaguru.java2.domain;
 
-/**
- * Created by andre on 06.02.2015.
- */
+import java.util.Date;
+
 public class Cargo {
 
-    private long Id;
+    private long cargoId;
     private long userId;
-    private String vehicleName;
-    private String vehicleCapacity;
-    private String vehicleStatus;
+    private String vehicleType;
+    private Double weight;
+    private String loadAddress;
+    private String unloadAddress;
+    private Date loadDate;
+    private Date unloaDate;
+    private String status;
 
-    public long getId() {
-        return Id;
+    public long getCargoId() {
+        return cargoId;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setCargoId(long cargoId) {
+        this.cargoId = cargoId;
     }
 
     public long getUserId() {
@@ -27,27 +30,60 @@ public class Cargo {
         this.userId = userId;
     }
 
-    public String getVehicleName() {
-        return vehicleName;
+    public String getVehicleType() {
+        return vehicleType;
     }
 
-    public void setVehicleName(String vehicleName) {
-        this.vehicleName = vehicleName;
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
-    public String getVehicleCapacity() {
-        return vehicleCapacity;
+    public Double getWeight() {
+        return weight;
     }
 
-    public void setVehicleCapacity(String vehicleCapacity) {
-        this.vehicleCapacity = vehicleCapacity;
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
-    public String getVehicleStatus() {
-        return vehicleStatus;
+    public String getLoadAddress() {
+        return loadAddress;
     }
 
-    public void setVehicleStatus(String vehicleStatus) {
-        this.vehicleStatus = vehicleStatus;
+    public void setLoadAddress(String loadAddress) {
+        this.loadAddress = loadAddress;
     }
+
+    public String getUnloadAddress() {
+        return unloadAddress;
+    }
+
+    public void setUnloadAddress(String unloadAddress) {
+        this.unloadAddress = unloadAddress;
+    }
+
+    public Date getLoadDate() {
+        return loadDate;
+    }
+
+    public void setLoadDate(Date loadDate) {
+        this.loadDate = loadDate;
+    }
+
+    public Date getUnloaDate() {
+        return unloaDate;
+    }
+
+    public void setUnloaDate(Date unloaDate) {
+        this.unloaDate = unloaDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

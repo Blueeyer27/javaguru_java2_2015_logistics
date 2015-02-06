@@ -1,22 +1,18 @@
 package lv.javaguru.java2.domain;
 
-/**
- * Created by andre on 06.02.2015.
- */
-public class Agreements {
+public class Agreement {
 
-
-    private long Id;
+    private long agreementId;
     private long cargoId;
     private long vehicleId;
     private String status;
 
-    public long getId() {
-        return Id;
+    public long getAgreementId() {
+        return agreementId;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setAgreementId(long agreementId) {
+        this.agreementId = agreementId;
     }
 
     public long getCargoId() {
@@ -42,4 +38,5 @@ public class Agreements {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }
