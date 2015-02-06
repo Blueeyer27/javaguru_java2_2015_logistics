@@ -12,7 +12,7 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.User;
 
 
-public class UserDAOImplTest {
+public class UserDAOImplTest_origin {
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
