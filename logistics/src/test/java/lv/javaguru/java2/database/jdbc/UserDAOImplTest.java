@@ -27,9 +27,7 @@ public class UserDAOImplTest {
     @Test
     public void testCreate() throws DBException {
         User user = createUser("F", "L");
-
         userDAO.create(user);
-
         User userFromDB = userDAO.getById(user.getUserId());
         assertNotNull(userFromDB);
         assertEquals(user.getUserId(), userFromDB.getUserId());
@@ -48,28 +46,50 @@ public class UserDAOImplTest {
     }
 
     @Test
-    public void testDelete() throws DBException{
-        User user1 = createUser("F1", "L1");
-        User user2 = createUser("F2", "L2");
-        userDAO.create(user1);
-        userDAO.create(user2);
-        userDAO.delete(user1.getUserId());
-        List<User> users = userDAO.getAll();
-        assertEquals(1, users.size());
-
+    public void testDeleteUser() throws DBException {
+        User user = createUser("Frank", "Lewis");
+        userDAO.create(user);
+        User userFromDB = userDAO.getById(user.getUserId());
+        assertNotNull(userFromDB);
+        assertEquals(user.getUserId(), userFromDB.getUserId());
+        userDAO.delete(user.getUserId());
+        User userFromDB2 = userDAO.getById(user.getUserId());
+        assertNull(userFromDB2);
     }
 
     @Test
-    public void testUpdate() throws DBException{
-        User user1 = createUser("F1", "L1");
+    public void testDeleteMultipleUser() throws DBException {
+        User user1 = createUser("Del1", "Lastname1");
+        User user2 = createUser("Del2", "Lastname2");
+        User user3 = createUser("Del3", "Lastname3");
         userDAO.create(user1);
-        changeUserName(user1, "F2", "L2");
-        userDAO.update(user1);
-        User userFromDb = userDAO.getById(user1.getUserId());
-        assertEquals(user1.getFirstName() , userFromDb.getFirstName());
-        assertEquals(user1.getLastName(), userFromDb.getLastName());
+        userDAO.create(user2);
+        userDAO.create(user3);
+        assertEquals(3, userDAO.getAll().size());
+        userDAO.delete(user1.getUserId());
+        assertEquals(2, userDAO.getAll().size());
+        userDAO.delete(user2.getUserId());
+        assertEquals(1, userDAO.getAll().size());
+        userDAO.delete(user3.getUserId());
+        assertEquals(0, userDAO.getAll().size());
+    }
 
-
+    @Test
+    public void testUpdateUser() throws DBException {
+        User user = createUser("Foo", "Bar");
+        userDAO.create(user);
+        User userFromDB = userDAO.getById(user.getUserId());
+        assertEquals(user.getUserId(), userFromDB.getUserId());
+        assertEquals(userFromDB.getFirstName(), user.getFirstName());
+        assertEquals(user.getLastName(), userFromDB.getLastName());
+        user.setFirstName("John");
+        user.setLastName("Barson");
+        userDAO.update(user);
+        User userFromDbUpdated = userDAO.getById(user.getUserId());
+        assertNotEquals(user.getFirstName(), userFromDB.getFirstName());
+        assertNotEquals(user.getLastName(), userFromDB.getLastName());
+        assertEquals(user.getFirstName(), userFromDbUpdated.getFirstName());
+        assertEquals(user.getLastName(), userFromDbUpdated.getLastName());
     }
 
     @Test
@@ -101,13 +121,5 @@ public class UserDAOImplTest {
         user.setLastName(lastName);
         return user;
     }
-
-    private void changeUserName(User user, String firstName, String lastName){
-      user.setFirstName(firstName);
-        user.setLastName(lastName);
-
-    }
-
-
 
 }
