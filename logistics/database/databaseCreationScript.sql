@@ -6,19 +6,6 @@ CREATE SCHEMA IF NOT EXISTS `logistics` DEFAULT CHARACTER SET utf8 ;
 USE `logistics` ;
 
 -- -----------------------------------------------------
--- Table `logistics`.`users`
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `logistics`.`users`;
-
-CREATE TABLE IF NOT EXISTS `logistics`.`users` (
-  `UserID` INT(11) NOT NULL AUTO_INCREMENT,
-  `FirstName` CHAR(32) NOT NULL,
-  `LastName` CHAR(32) NOT NULL,
-  PRIMARY KEY (`UserID`)
-);
-
--- -----------------------------------------------------
 -- Table `logistics`.`user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `logistics`.`user`;

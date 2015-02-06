@@ -10,9 +10,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Viktor on 01/07/2014.
- */
 public class UserDAOImpl extends DAOImpl implements UserDAO {
 
     @Override
@@ -26,10 +23,15 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into USERS values (default, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-
+                    connection.prepareStatement("insert into USER values (default, ?, ?, ?, ?, ?, ?, ?)",
+                            PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getFirstName());
+            preparedStatement.setString(4, user.getLastName());
+            preparedStatement.setString(5, user.getEMail());
+            preparedStatement.setString(6, user.getPhoneNumber());
+            preparedStatement.setLong(7, user.getCompanyId());
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if (rs.next()){
@@ -42,7 +44,6 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         } finally {
             closeConnection(connection);
         }
-
     }
 
     @Override
@@ -52,15 +53,20 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from USERS where UserID = ?");
+                    .prepareStatement("select * from user where id = ?");
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             User user = null;
             if (resultSet.next()) {
                 user = new User();
-                user.setUserId(resultSet.getLong("UserID"));
-                user.setFirstName(resultSet.getString("FirstName"));
-                user.setLastName(resultSet.getString("LastName"));
+                user.setUserId(resultSet.getLong("id"));
+                user.setLogin(resultSet.getString("login"));
+                user.setPassword(resultSet.getString("password"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setEMail(resultSet.getString("e_mail"));
+                user.setPhoneNumber(resultSet.getString("phone_number"));
+                user.setCompanyId(resultSet.getLong("company_id"));
             }
             return user;
         } catch (Throwable e) {
@@ -72,21 +78,29 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         }
     }
 
+    @Override
     public List<User> getAll() throws DBException {
-        List<User> users = new ArrayList<User>();
+
         Connection connection = null;
         try {
             connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from USERS");
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from user");
 
             ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> users = new ArrayList<User>();
             while (resultSet.next()) {
                 User user = new User();
-                user.setUserId(resultSet.getLong("UserID"));
-                user.setFirstName(resultSet.getString("FirstName"));
-                user.setLastName(resultSet.getString("LastName"));
+                user.setUserId(resultSet.getLong("id"));
+                user.setLogin(resultSet.getString("login"));
+                user.setPassword(resultSet.getString("password"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setEMail(resultSet.getString("e_mail"));
+                user.setPhoneNumber(resultSet.getString("phone_number"));
+                user.setCompanyId(resultSet.getLong("company_id"));
                 users.add(user);
             }
+            return users;
         } catch (Throwable e) {
             System.out.println("Exception while getting customer list UserDAOImpl.getList()");
             e.printStackTrace();
@@ -94,7 +108,6 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         } finally {
             closeConnection(connection);
         }
-        return users;
     }
 
     @Override
@@ -103,7 +116,7 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from USERS where UserID = ?");
+                    .prepareStatement("delete from user where id = ?");
             preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
@@ -125,11 +138,17 @@ public class UserDAOImpl extends DAOImpl implements UserDAO {
         try {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("update USERS set FirstName = ?, LastName = ? " +
-                            "where UserID = ?");
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setLong(3, user.getUserId());
+                    .prepareStatement("update user set login = ?, password = ? , " +
+                            "first_name = ? , last_name = ? , e_mail = ? , " +
+                            "phone_number = ? , company_id = ? where id = ?");
+            preparedStatement.setString(1, user.getLogin());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getFirstName());
+            preparedStatement.setString(4, user.getLastName());
+            preparedStatement.setString(5, user.getEMail());
+            preparedStatement.setString(6, user.getPhoneNumber());
+            preparedStatement.setLong(7, user.getCompanyId());
+            preparedStatement.setLong(8, user.getUserId());
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
             System.out.println("Exception while execute UserDAOImpl.update()");
