@@ -27,7 +27,7 @@ public class VehicleDAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-        User user = createUser("F", "L");
+        User user = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         Vehicle vehicle = createVehicle(userFromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 302, "PENDING");
@@ -48,8 +48,8 @@ public class VehicleDAOImplTest {
 
     @Test
     public void testGetAll() throws DBException{
-        User user1 = createUser("F1", "L1");
-        User user2 = createUser("F2", "L2");
+        User user1 = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user2 = createUser("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
         userDAO.create(user1);
         userDAO.create(user2);
         User user1FromDB = userDAO.getById(user1.getUserId());
@@ -72,8 +72,8 @@ public class VehicleDAOImplTest {
 
     @Test
     public void testDeleteVehicle() throws DBException {
-        User user1 = createUser("F1", "L1");
-        User user2 = createUser("F2", "L2");
+        User user1 = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user2 = createUser("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
         userDAO.create(user1);
         userDAO.create(user2);
         User user1FromDB = userDAO.getById(user1.getUserId());
@@ -94,7 +94,7 @@ public class VehicleDAOImplTest {
 
     @Test
     public void testUpdateVehicle() throws DBException {
-        User user = createUser("FF", "L");
+        User user = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         Vehicle vehicle = createVehicle(userFromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 302, "PENDING");
@@ -130,15 +130,18 @@ public class VehicleDAOImplTest {
         assertEquals(vehicle.getStatus(), vehicleFromDBUpdated.getStatus());
     }
 
-
-    private User createUser(String firstName, String lastName) {
+    private User createUser(String login, String password, String firstName, String lastName,
+                            String eMail, String phoneNumber, Long companyId) {
         User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setEMail(eMail);
+        user.setPhoneNumber(phoneNumber);
+        user.setCompanyId(companyId);
         return user;
     }
-
-
 
     private Vehicle createVehicle(long userId, String name, String plateNumber, String type, String trailerNumber, double capacity, String status){
         Vehicle vehicle = new Vehicle();

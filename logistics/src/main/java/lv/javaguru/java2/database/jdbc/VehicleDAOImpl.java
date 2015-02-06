@@ -1,6 +1,7 @@
 package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.Vehicle;
 
