@@ -11,7 +11,7 @@ public class Cargo {
     private String loadAddress;
     private String unloadAddress;
     private Date loadDate;
-    private Date unloaDate;
+    private Date unloadDate;
     private String status;
 
     public long getCargoId() {
@@ -70,12 +70,12 @@ public class Cargo {
         this.loadDate = loadDate;
     }
 
-    public Date getUnloaDate() {
-        return unloaDate;
+    public Date getUnloadDate() {
+        return unloadDate;
     }
 
-    public void setUnloaDate(Date unloaDate) {
-        this.unloaDate = unloaDate;
+    public void setUnloadDate(Date unloadDate) {
+        this.unloadDate = unloadDate;
     }
 
     public String getStatus() {
