@@ -11,14 +11,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
-
-public class CompanyDAOImplTest {
-
+public class CompanyDAOImplTest extends DAOImplTest {
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
     private CompanyDAOImpl companyDAO = new CompanyDAOImpl();
-
 
     @Before
     public void init() throws DBException {
@@ -95,18 +92,4 @@ public class CompanyDAOImplTest {
         assertEquals(size - 3, companyDAO.getAll().size());
     }
 
-    private Company createCompany(String name, String regNumber, String regAddress,
-                               String actualAddress, String bank, String iban,
-                               String country, String type) {
-        Company company = new Company();
-        company.setName(name);
-        company.setRegNumber(regNumber);
-        company.setRegAddress(regAddress);
-        company.setActualAddress(actualAddress);
-        company.setBank(bank);
-        company.setIban(iban);
-        company.setCountry(country);
-        company.setType(type);
-        return company;
-    }
 }

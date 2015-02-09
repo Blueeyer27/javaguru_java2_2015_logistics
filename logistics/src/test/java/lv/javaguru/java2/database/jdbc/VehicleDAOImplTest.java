@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 
-public class VehicleDAOImplTest {
+public class VehicleDAOImplTest extends DAOImplTest {
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
@@ -128,31 +128,6 @@ public class VehicleDAOImplTest {
         assertEquals(vehicle.gettrailerNumber(), vehicleFromDBUpdated.gettrailerNumber());
         assertEquals(vehicle.getCapacity(), vehicleFromDBUpdated.getCapacity());
         assertEquals(vehicle.getStatus(), vehicleFromDBUpdated.getStatus());
-    }
-
-    private User createUser(String login, String password, String firstName, String lastName,
-                            String eMail, String phoneNumber, Long companyId) {
-        User user = new User();
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEMail(eMail);
-        user.setPhoneNumber(phoneNumber);
-        user.setCompanyId(companyId);
-        return user;
-    }
-
-    private Vehicle createVehicle(long userId, String name, String plateNumber, String type, String trailerNumber, double capacity, String status){
-        Vehicle vehicle = new Vehicle();
-        vehicle.setUserId(userId);
-        vehicle.setName(name);
-        vehicle.setplateNumber(plateNumber);
-        vehicle.setType(type);
-        vehicle.settrailerNumber(trailerNumber);
-        vehicle.setCapacity(capacity);
-        vehicle.setStatus(status);
-        return vehicle;
     }
 
 }
