@@ -9,13 +9,15 @@ import org.junit.Test;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.domain.Company;
 
-
-public class UserDAOImplTest {
+public class UserDAOImplTest extends DAOImplTest {
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
     private UserDAOImpl userDAO = new UserDAOImpl();
+
+    private CompanyDAOImpl companyDAO = new CompanyDAOImpl();
 
     @Before
     public void init() throws DBException {
@@ -24,6 +26,13 @@ public class UserDAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
+
+        Company company = createCompany("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+        companyDAO.create(company);
+        Company companyFromDB = companyDAO.getById((company.getCompanyId()));
+
+
         User user = createUser("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
@@ -100,16 +109,4 @@ public class UserDAOImplTest {
         assertEquals(size - 3, userDAO.getAll().size());
     }
 
-    private User createUser(String login, String password, String firstName, String lastName,
-                            String eMail, String phoneNumber, Long companyId) {
-        User user = new User();
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEMail(eMail);
-        user.setPhoneNumber(phoneNumber);
-        user.setCompanyId(companyId);
-        return user;
-    }
 }

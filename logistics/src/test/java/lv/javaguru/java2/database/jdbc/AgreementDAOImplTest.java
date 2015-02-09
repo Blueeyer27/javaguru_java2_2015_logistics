@@ -14,7 +14,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by andre on 07.02.2015.
  */
-public class AgreementDAOImplTest {
+public class AgreementDAOImplTest extends DAOImplTest{
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
@@ -96,19 +96,5 @@ public class AgreementDAOImplTest {
         assertEquals(size - 3, agreementDAO.getAll().size());
 
     }
-
-
-
-
-
-    private Agreement createAgreement(Long cargoID, Long vehicleID, String status) {
-        Agreement agreement = new Agreement();
-        agreement.setCargoId(cargoID);
-        agreement.setVehicleId(vehicleID);
-        agreement.setStatus(status);
-        return agreement;
-    }
-
-
 
 }
