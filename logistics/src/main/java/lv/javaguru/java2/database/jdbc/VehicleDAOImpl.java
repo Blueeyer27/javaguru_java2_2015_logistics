@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class VehicleDAOImpl extends DAOImpl implements VehicleDAO {
     @Override
-    public void create(Vehicle vehicle, User user) throws DBException {
+    public void create(Vehicle vehicle) throws DBException {
 
         if (vehicle == null) {
             return;
@@ -28,7 +28,7 @@ public class VehicleDAOImpl extends DAOImpl implements VehicleDAO {
             connection = getConnection();
             PreparedStatement preparedStatement =
                     connection.prepareStatement("insert into VEHICLE values (default, ?, ?, ?, ?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setLong(1, user.getUserId());
+            preparedStatement.setLong(1, vehicle.getUserId());
             preparedStatement.setString(2, vehicle.getName());
             preparedStatement.setString(3, vehicle.getplateNumber());
             preparedStatement.setString(4, vehicle.getType());

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface VehicleDAO {
 
-    void create(Vehicle vehicle, User user) throws DBException;
+    void create(Vehicle vehicle) throws DBException;
 
     Vehicle getById(Long id) throws DBException;
 
