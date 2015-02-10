@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by Dinjvald on 07/02/15.
  */
-public class CargoDAOImplTest {
+public class CargoDAOImplTest extends DAOImplTest {
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
     private CargoDAOImpl cargoDAO = new CargoDAOImpl();
@@ -30,13 +30,13 @@ public class CargoDAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-        User user = createUserObject("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
+        User user = createUser("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Cargo cargo = createCargoObject(userFromDB.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo = createCargo(userFromDB.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
                 stringToDate("09/02/2015"), stringToDate("15/02/2015"), "ready");
-        cargoDAO.create(cargo, userFromDB);
+        cargoDAO.create(cargo);
         Cargo cargoFromDB = cargoDAO.getById(cargo.getCargoId());
         assertNotNull(userFromDB);
         assertNotNull(cargoFromDB);
@@ -54,18 +54,18 @@ public class CargoDAOImplTest {
 
     @Test
     public void testDeleteAndGetAll() throws DBException {
-        User user1 = createUserObject("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
+        User user1 = createUser("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
-        User user2 = createUserObject("dinjab", "ytrewq", "Sergejs", "Popovs", "ytrewq@email.com",
+        User user2 = createUser("dinjab", "ytrewq", "Sergejs", "Popovs", "ytrewq@email.com",
                 "+37128453698", 54321L);
         userDAO.create(user1);
         userDAO.create(user2);
-        Cargo cargo1 = createCargoObject(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo1 = createCargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
                 stringToDate("09/02/2015"), stringToDate("15/02/2015"), "ready");
-        Cargo cargo2 = createCargoObject(user2.getUserId(), "tilt", 19.4, "LV Kurzemes", "DE Rein",
+        Cargo cargo2 = createCargo(user2.getUserId(), "tilt", 19.4, "LV Kurzemes", "DE Rein",
                 stringToDate("05/02/2015"), stringToDate("10/02/2015"), "ready");
-        cargoDAO.create(cargo1, user1);
-        cargoDAO.create(cargo2, user2);
+        cargoDAO.create(cargo1);
+        cargoDAO.create(cargo2);
         cargoDAO.delete(cargo1.getCargoId());
         List<Cargo> cargos = cargoDAO.getAll();
         assertEquals(1, cargos.size());
@@ -73,12 +73,12 @@ public class CargoDAOImplTest {
 
     @Test
     public void testUpdate() throws DBException {
-        User user1 = createUserObject("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
+        User user1 = createUser("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
         userDAO.create(user1);
-        Cargo cargo1 = createCargoObject(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo1 = createCargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
                 stringToDate("09/02/2015"), stringToDate("15/02/2015"), "ready");
-        cargoDAO.create(cargo1, user1);
+        cargoDAO.create(cargo1);
         Cargo cargoFromDB = cargoDAO.getById(cargo1.getCargoId());
         assertEquals(cargo1.getCargoId(), cargoFromDB.getCargoId());
 
@@ -104,7 +104,7 @@ public class CargoDAOImplTest {
         assertEquals(cargo1.getStatus(), updatedCargoFromDB.getStatus());
 
     }
-
+/*
     private User createUserObject(String login, String password, String firstName, String lastName,
                                   String eMail, String phoneNumber, Long companyId) {
         User user = new User();
@@ -130,7 +130,7 @@ public class CargoDAOImplTest {
         cargo.setUnloadDate(unloadDate);
         cargo.setStatus(status);
         return cargo;
-    }
+    }*/
 
     private Date stringToDate(String incomingDate) {
         SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");

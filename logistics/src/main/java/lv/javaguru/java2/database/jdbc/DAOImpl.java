@@ -79,7 +79,6 @@ public abstract class DAOImpl<T> implements BaseDAO<T> {
             PreparedStatement preparedStatement =
                     connection.prepareStatement("insert into "+ getTableName() + getInsertString(),
                             PreparedStatement.RETURN_GENERATED_KEYS);
-
             setInsertArguments(preparedStatement, type);
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -108,9 +107,6 @@ public abstract class DAOImpl<T> implements BaseDAO<T> {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("select * from " + getTableName() +" where id = ?");
             preparedStatement.setLong(1, id);
-
-            System.out.println(preparedStatement.toString());
-
             ResultSet resultSet = preparedStatement.executeQuery();
             return createObject(resultSet);
         } catch (Throwable e) {

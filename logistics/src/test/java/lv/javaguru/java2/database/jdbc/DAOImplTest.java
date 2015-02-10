@@ -1,9 +1,8 @@
 package lv.javaguru.java2.database.jdbc;
 
-import lv.javaguru.java2.domain.Agreement;
-import lv.javaguru.java2.domain.Company;
-import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.domain.Vehicle;
+import lv.javaguru.java2.domain.*;
+
+import java.util.Date;
 
 public class DAOImplTest {
 
@@ -45,6 +44,20 @@ public class DAOImplTest {
         vehicle.setCapacity(capacity);
         vehicle.setStatus(status);
         return vehicle;
+    }
+
+    protected Cargo createCargo(long userId, String vehicleType, double weight, String loadAddress,
+                                    String unloadAddress, Date loadDate, Date unloadDate, String status) {
+        Cargo cargo = new Cargo();
+        cargo.setUserId(userId);
+        cargo.setVehicleType(vehicleType);
+        cargo.setWeight(weight);
+        cargo.setLoadAddress(loadAddress);
+        cargo.setUnloadAddress(unloadAddress);
+        cargo.setLoadDate(loadDate);
+        cargo.setUnloadDate(unloadDate);
+        cargo.setStatus(status);
+        return cargo;
     }
 
     protected Agreement createAgreement(Long cargoID, Long vehicleID, String status) {
