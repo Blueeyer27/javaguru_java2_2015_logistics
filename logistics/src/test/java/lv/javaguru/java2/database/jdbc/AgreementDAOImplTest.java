@@ -14,6 +14,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by andre on 07.02.2015.
  */
+
 public class AgreementDAOImplTest extends DAOImplTest{
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();

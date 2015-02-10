@@ -1,161 +1,94 @@
 package lv.javaguru.java2.database.jdbc;
 
-import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
-public class UserDAOImpl extends DAOImpl implements UserDAO {
+public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
+
+    private static final String TABLE_NAME = "user";
+    private static final String UPDATE_STRING = " set login = ?, password = ? , " +
+            "first_name = ? , last_name = ? , e_mail = ? , " +
+            "phone_number = ? , company_id = ? where id = ?";
+    private static final String INSERT_STRING = " values (default, ?, ?, ?, ?, ?, ?, ?)";
 
     @Override
-    public void create(User user) throws DBException {
-        if (user == null) {
-            return;
-        }
-
-        Connection connection = null;
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert into USER values (default, ?, ?, ?, ?, ?, ?, ?)",
-                            PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getFirstName());
-            preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getEMail());
-            preparedStatement.setString(6, user.getPhoneNumber());
-            preparedStatement.setLong(7, user.getCompanyId());
-            preparedStatement.executeUpdate();
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()){
-                user.setUserId(rs.getLong(1));
-            }
-        } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.create()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+    public String getTableName() {
+        return TABLE_NAME;
     }
 
     @Override
-    public User getById(Long id) throws DBException {
-        Connection connection = null;
-
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("select * from user where id = ?");
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            User user = null;
-            if (resultSet.next()) {
-                user = new User();
-                user.setUserId(resultSet.getLong("id"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setEMail(resultSet.getString("e_mail"));
-                user.setPhoneNumber(resultSet.getString("phone_number"));
-                user.setCompanyId(resultSet.getLong("company_id"));
-            }
-            return user;
-        } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.getById()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+    public String getUpdateString() {
+        return UPDATE_STRING;
     }
 
     @Override
-    public List<User> getAll() throws DBException {
-
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from user");
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<User> users = new ArrayList<User>();
-            while (resultSet.next()) {
-                User user = new User();
-                user.setUserId(resultSet.getLong("id"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setEMail(resultSet.getString("e_mail"));
-                user.setPhoneNumber(resultSet.getString("phone_number"));
-                user.setCompanyId(resultSet.getLong("company_id"));
-                users.add(user);
-            }
-            return users;
-        } catch (Throwable e) {
-            System.out.println("Exception while getting customer list UserDAOImpl.getList()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+    public String getInsertString() {
+        return INSERT_STRING;
     }
 
     @Override
-    public void delete(Long id) throws DBException {
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from user where id = ?");
-            preparedStatement.setLong(1, id);
-            preparedStatement.executeUpdate();
-        } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.delete()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
-        }
+    public void setInsertArguments(PreparedStatement preparedStatement, User user) throws SQLException {
+        preparedStatement.setString(1, user.getLogin());
+        preparedStatement.setString(2, user.getPassword());
+        preparedStatement.setString(3, user.getFirstName());
+        preparedStatement.setString(4, user.getLastName());
+        preparedStatement.setString(5, user.getEMail());
+        preparedStatement.setString(6, user.getPhoneNumber());
+        preparedStatement.setLong(7, user.getCompanyId());
     }
 
     @Override
-    public void update(User user) throws DBException {
-        if (user == null) {
-            return;
-        }
+    public void setId(User user, long id) {
+        user.setUserId(id);
+    }
 
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("update user set login = ?, password = ? , " +
-                            "first_name = ? , last_name = ? , e_mail = ? , " +
-                            "phone_number = ? , company_id = ? where id = ?");
-            preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getFirstName());
-            preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getEMail());
-            preparedStatement.setString(6, user.getPhoneNumber());
-            preparedStatement.setLong(7, user.getCompanyId());
-            preparedStatement.setLong(8, user.getUserId());
-            preparedStatement.executeUpdate();
-        } catch (Throwable e) {
-            System.out.println("Exception while execute UserDAOImpl.update()");
-            e.printStackTrace();
-            throw new DBException(e);
-        } finally {
-            closeConnection(connection);
+    @Override
+    protected User createObject(ResultSet resultSet) throws SQLException {
+        User user = null;
+        if (resultSet.next()) {
+            user = new User();
+            user.setUserId(resultSet.getLong("id"));
+            user.setLogin(resultSet.getString("login"));
+            user.setPassword(resultSet.getString("password"));
+            user.setFirstName(resultSet.getString("first_name"));
+            user.setLastName(resultSet.getString("last_name"));
+            user.setEMail(resultSet.getString("e_mail"));
+            user.setPhoneNumber(resultSet.getString("phone_number"));
+            user.setCompanyId(resultSet.getLong("company_id"));
+        }
+        return user;
+    }
+
+    @Override
+    public void setUpdateArguments(PreparedStatement preparedStatement, User user) throws SQLException {
+        preparedStatement.setString(1, user.getLogin());
+        preparedStatement.setString(2, user.getPassword());
+        preparedStatement.setString(3, user.getFirstName());
+        preparedStatement.setString(4, user.getLastName());
+        preparedStatement.setString(5, user.getEMail());
+        preparedStatement.setString(6, user.getPhoneNumber());
+        preparedStatement.setLong(7, user.getCompanyId());
+        preparedStatement.setLong(8, user.getUserId());
+    }
+
+    @Override
+    public void fillObjectsList(List<User> objectsList, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            User user = new User();
+            user.setUserId(resultSet.getLong("id"));
+            user.setLogin(resultSet.getString("login"));
+            user.setPassword(resultSet.getString("password"));
+            user.setFirstName(resultSet.getString("first_name"));
+            user.setLastName(resultSet.getString("last_name"));
+            user.setEMail(resultSet.getString("e_mail"));
+            user.setPhoneNumber(resultSet.getString("phone_number"));
+            user.setCompanyId(resultSet.getLong("company_id"));
+            objectsList.add(user);
         }
     }
 
