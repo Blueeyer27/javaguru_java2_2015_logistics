@@ -41,7 +41,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
         assertEquals(vehicle.getplateNumber(), vehicleFromDB.getplateNumber());
         assertEquals(vehicle.getType(), vehicleFromDB.getType());
         assertEquals(vehicle.gettrailerNumber(), vehicleFromDB.gettrailerNumber());
-        assertEquals(vehicle.getCapacity(), vehicleFromDB.getCapacity());
+       assertEquals(vehicle.getCapacity(), vehicleFromDB.getCapacity());
         assertEquals(vehicle.getStatus(), vehicleFromDB.getStatus());
 
     }

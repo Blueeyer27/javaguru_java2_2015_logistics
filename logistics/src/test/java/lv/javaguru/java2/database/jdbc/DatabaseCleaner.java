@@ -12,7 +12,9 @@ import java.util.List;
 /**
  * Created by Viktor on 01/07/2014.
  */
-public class DatabaseCleaner extends DAOImpl {
+public class DatabaseCleaner extends DBConnection {
+
+
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<String>();
@@ -25,7 +27,7 @@ public class DatabaseCleaner extends DAOImpl {
     }
 
     public void cleanDatabase() throws DBException {
-        for(String tableName : getTableNames()) {
+            for(String tableName : getTableNames()) {
             Connection connection = getConnection();
             try {
                 connection = getConnection();
@@ -42,43 +44,5 @@ public class DatabaseCleaner extends DAOImpl {
         }
     }
 
-    @Override
-    public void setInsertArguments(PreparedStatement preparedStatement, Object type) throws SQLException {
 
-    }
-
-    @Override
-    public void setId(Object type, long id) {
-
-    }
-
-    @Override
-    protected Object createObject(ResultSet resultSet) throws SQLException {
-        return null;
-    }
-
-    @Override
-    public void setUpdateArguments(PreparedStatement preparedStatement, Object type) throws SQLException {
-
-    }
-
-    @Override
-    public void fillObjectsList(List objectsList, ResultSet resultSet) throws SQLException {
-
-    }
-
-    @Override
-    public String getTableName() {
-        return null;
-    }
-
-    @Override
-    public String getUpdateString() {
-        return null;
-    }
-
-    @Override
-    public String getInsertString() {
-        return null;
-    }
 }
