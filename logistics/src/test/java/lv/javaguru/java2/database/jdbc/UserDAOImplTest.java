@@ -17,8 +17,6 @@ public class UserDAOImplTest extends DAOImplTest {
 
     private UserDAOImpl userDAO = new UserDAOImpl();
 
-    private CompanyDAOImpl companyDAO = new CompanyDAOImpl();
-
     @Before
     public void init() throws DBException {
         databaseCleaner.cleanDatabase();
@@ -26,11 +24,6 @@ public class UserDAOImplTest extends DAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-
-        Company company = createCompany("FirstCompany", "asdf1234567890", "Riga, registred",
-                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
-        companyDAO.create(company);
-        Company companyFromDB = companyDAO.getById((company.getCompanyId()));
 
 
         User user = createUser("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);

@@ -4,6 +4,8 @@ import lv.javaguru.java2.database.DBException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,4 +42,43 @@ public class DatabaseCleaner extends DAOImpl {
         }
     }
 
+    @Override
+    public void setInsertArguments(PreparedStatement preparedStatement, Object type) throws SQLException {
+
+    }
+
+    @Override
+    public void setId(Object type, long id) {
+
+    }
+
+    @Override
+    protected Object createObject(ResultSet resultSet) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void setUpdateArguments(PreparedStatement preparedStatement, Object type) throws SQLException {
+
+    }
+
+    @Override
+    public void fillObjectsList(List objectsList, ResultSet resultSet) throws SQLException {
+
+    }
+
+    @Override
+    public String getTableName() {
+        return null;
+    }
+
+    @Override
+    public String getUpdateString() {
+        return null;
+    }
+
+    @Override
+    public String getInsertString() {
+        return null;
+    }
 }
