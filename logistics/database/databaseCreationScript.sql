@@ -52,7 +52,7 @@ CREATE TABLE `vehicle` (
   `type` CHAR(30) NOT NULL,
   `plate_number` CHAR(30) NOT NULL,
   `trailer_number` CHAR(30) NOT NULL,
-  `capacity` DECIMAL NOT NULL,
+  `capacity` FLOAT(4,2) NOT NULL,
   `status` CHAR(30) NOT NULL,
   PRIMARY KEY (`id`)
 );
@@ -79,7 +79,7 @@ CREATE TABLE `cargo` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `user_id` INTEGER(11) NOT NULL,
   `vehicle_type` CHAR(20) NOT NULL,
-  `weight` DECIMAL NOT NULL,
+  `weight` FLOAT(4,2) NOT NULL,
   `load_address` CHAR(100) NOT NULL,
   `unload_address` CHAR(100) NOT NULL,
   `load_date` DATE NOT NULL,
