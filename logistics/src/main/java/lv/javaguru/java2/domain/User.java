@@ -11,6 +11,22 @@ public class User {
     private String phoneNumber;
     private long companyId;
 
+
+    public User() {
+
+    }
+
+
+    public User(String login, String password, String firstName, String lastName, String eMail, String phoneNumber, long companyId) {
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.eMail = eMail;
+        this.phoneNumber = phoneNumber;
+        this.companyId = companyId;
+    }
+
     public long getUserId() {
         return userId;
     }

@@ -2,8 +2,11 @@ package lv.javaguru.java2.servlet;
 
 
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.database.jdbc.UserDAOImpl;
+import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.domain.Vehicle;
 
 
 import javax.servlet.ServletException;
@@ -38,7 +41,8 @@ public class UserServlet extends HttpServlet {
 
 
         UserDAOImpl userDAO = new UserDAOImpl();
-        User userNew = createUser("login1", "pass1", "FoAA", "Barsky", "fb33@email.com", "+371234567890", 11111L);
+        //constructor in UserDOA class
+        User userNew = new User("login1", "pass1", "FoAA", "Barsky", "fb33@email.com", "+371234567890", 11111L);
         try {
             userDAO.create(userNew);
         } catch (DBException e) {
@@ -53,7 +57,7 @@ public class UserServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        out.println("<h1>" + userNewFromDB.getFirstName() + " " + userNewFromDB.getLastName() + " " + " " + userNewFromDB.getEMail() +  "</h1>");
+        out.println("<h1>" + userNewFromDB.getUserId() + " " + userNewFromDB.getFirstName() + " " + userNewFromDB.getLastName() + " " + " " + userNewFromDB.getEMail() +  "</h1>");
 
 
         out.println("<h1>" + "." + "</h1>");
@@ -69,14 +73,14 @@ public class UserServlet extends HttpServlet {
         }
 
         for (User user : users) {
-            out.println("<h1>" + user.getFirstName() + " " + user.getLastName() + " " + " " + user.getEMail() + " " + users.size() + "</h1>");
+            out.println("<h1>" + user.getUserId() + " " + user.getFirstName() + " " + user.getLastName() + " " + " " + user.getEMail() + " " + users.size() + "</h1>");
             //System.out.println(user.getFirstName());
         }
 
 
     }
 
-
+/*
     private User createUser(String login, String password, String firstName, String lastName,
                               String eMail, String phoneNumber, Long companyId) {
         User user = new User();
@@ -89,5 +93,5 @@ public class UserServlet extends HttpServlet {
         user.setCompanyId(companyId);
         return user;
     }
-
+*/
 }
