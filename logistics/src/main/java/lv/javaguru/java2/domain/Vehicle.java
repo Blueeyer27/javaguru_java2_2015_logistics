@@ -11,6 +11,23 @@ public class Vehicle {
     private Double capacity;
     private String status;
 
+
+
+    public Vehicle(){
+
+    }
+
+    public Vehicle(long userId, String name, String type, String plateNumber, String trailerNumber, Double capacity, String status) {
+        this.userId = userId;
+        this.name = name;
+        this.type = type;
+        this.plateNumber = plateNumber;
+        this.trailerNumber = trailerNumber;
+        this.capacity = capacity;
+        this.status = status;
+    }
+
+
     public long getVehicleId() {
         return vehicleId;
     }
