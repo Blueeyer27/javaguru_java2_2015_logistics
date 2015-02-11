@@ -56,11 +56,11 @@ public class VehicleRegServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-/*
+
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/vehiclereg.jsp");
         requestDispatcher.forward(request, response);
-*/
+
 
     }
 }
