@@ -46,7 +46,14 @@ public class UserRegServlet extends HttpServlet {
         //хардкод
         String companyid = "911";
 
-/*
+        out.println("<h1>" + login + "</h1>");
+        out.println("<h1>" + password + "</h1>");
+        out.println("<h1>" + firstname + "</h1>");
+        out.println("<h1>" + lastname + "</h1>");
+        out.println("<h1>" + email + "</h1>");
+        out.println("<h1>" + phone + "</h1>");
+
+
         List<String> parameters = new ArrayList<String>();
 
         parameters.add(login);
@@ -64,9 +71,9 @@ public class UserRegServlet extends HttpServlet {
         } catch (DBException e) {
             e.printStackTrace();
         }
-*/
 
 
+/*
         UserDAOImpl userDAO = new UserDAOImpl();
         //constructor in UserDOA class
         //User userNew = new User("andrey55", "password", "firstname", "lastname", "email", "phone", 123);
@@ -76,7 +83,7 @@ public class UserRegServlet extends HttpServlet {
         } catch (DBException e) {
             e.printStackTrace();
         }
-
+*/
 
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/userreg.jsp");

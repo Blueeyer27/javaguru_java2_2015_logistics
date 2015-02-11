@@ -19,10 +19,12 @@ import java.util.List;
  */
 public class VehicleRegServlet extends HttpServlet {
 
+
     protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
+
 
         String name = request.getParameter("name");
         String type = request.getParameter("type");
@@ -34,6 +36,7 @@ public class VehicleRegServlet extends HttpServlet {
         String userid = "13";
         String status = "pending";
 
+
         List<String> parameters = new ArrayList<String>();
 
         parameters.add(userid);
@@ -44,6 +47,7 @@ public class VehicleRegServlet extends HttpServlet {
         parameters.add(capacity);
         parameters.add(status);
 
+
         VehicleReg reg = new VehicleReg();
 
         try {
@@ -52,9 +56,11 @@ public class VehicleRegServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+/*
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/vehiclereg.jsp");
         requestDispatcher.forward(request, response);
+*/
 
     }
 }
