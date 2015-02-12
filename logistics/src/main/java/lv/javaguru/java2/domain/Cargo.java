@@ -14,6 +14,21 @@ public class Cargo {
     private Date unloadDate;
     private String status;
 
+    public Cargo() {
+    }
+
+
+    public Cargo(long userId, String vehicleType, Double weight, String loadAddress, String unloadAddress, Date loadDate, Date unloadDate, String status) {
+        this.userId = userId;
+        this.vehicleType = vehicleType;
+        this.weight = weight;
+        this.loadAddress = loadAddress;
+        this.unloadAddress = unloadAddress;
+        this.loadDate = loadDate;
+        this.unloadDate = unloadDate;
+        this.status = status;
+    }
+
     public long getCargoId() {
         return cargoId;
     }

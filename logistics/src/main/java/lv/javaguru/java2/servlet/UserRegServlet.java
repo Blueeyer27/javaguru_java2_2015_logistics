@@ -28,21 +28,21 @@ import java.util.List;
 public class UserRegServlet extends HttpServlet {
 
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Prepare output html
-        PrintWriter out = resp.getWriter();
+        PrintWriter out = response.getWriter();
         // Set response content type
-        resp.setContentType("text/html");
+        response.setContentType("text/html");
         out.println("<h1>" + "New User" + "</h1>");
 
 
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String firstname = req.getParameter("firstname");
-        String lastname = req.getParameter("lastname");
-        String email = req.getParameter("email");
-        String phone = req.getParameter("phone");
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
 
         //хардкод
         String companyid = "911";
@@ -86,9 +86,18 @@ public class UserRegServlet extends HttpServlet {
         }
 */
 
+
+        request.setAttribute("login", login);
+        request.setAttribute("password", password);
+        request.setAttribute("firstname", firstname);
+        request.setAttribute("lastname", lastname);
+        request.setAttribute("email", email);
+        request.setAttribute("phone", phone);
+
+
         ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/userreg.jsp");
-        requestDispatcher.forward(req, resp);
+        requestDispatcher.forward(request, response);
 
 
     }

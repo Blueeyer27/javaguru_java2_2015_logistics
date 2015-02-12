@@ -24,16 +24,16 @@ import java.util.List;
 public class UserLoginServlet extends HttpServlet {
 
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Prepare output html
-        PrintWriter out = resp.getWriter();
+        PrintWriter out = response.getWriter();
         // Set response content type
-        resp.setContentType("text/html");
+        response.setContentType("text/html");
 
 
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
 
         out.println("<h1>" + login + "</h1>");
         out.println("<h1>" + password + "</h1>");
@@ -56,14 +56,19 @@ public class UserLoginServlet extends HttpServlet {
         out.println("<h1>" + "exist=" + String.valueOf(exist) + "</h1>");
 
 
+
+        request.setAttribute("login", login);
+        request.setAttribute("password", password);
+
+
         ServletContext servletContext = getServletContext();
         if (exist){
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/userlogin.jsp");
-            requestDispatcher.forward(req, resp);
+            requestDispatcher.forward(request, response);
         }
         else {
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/userloginnot.jsp");
-            requestDispatcher.forward(req, resp);
+            requestDispatcher.forward(request, response);
         }
 
 

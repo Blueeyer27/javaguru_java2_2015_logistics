@@ -2,10 +2,14 @@ package lv.javaguru.java2.servlet.model;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.*;
+import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Company;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.Vehicle;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -68,4 +72,46 @@ public class RegistrationMethods {
         Company company = new Company(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
         companyDAO.create(company);
     }
+
+
+    public void cargoCreate(List<String> parameteres) throws DBException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        int userid = Integer.parseInt(parameteres.get(0));
+        String type = parameteres.get(1);
+        double weight = Double.parseDouble(parameteres.get(2));
+        String loadaddress = parameteres.get(3);
+        String unloadaddress = parameteres.get(4);
+
+
+        Date loaddate = null;
+        try {
+            loaddate = sdf.parse(parameteres.get(5));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Date unloaddate = null;
+        try {
+            unloaddate = sdf.parse(parameteres.get(6));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        //Date loaddate = new Date();
+        //Date unloaddate = new Date();
+
+
+        String status = parameteres.get(7);
+
+        Cargo cargo = new Cargo(userid, type, weight, loadaddress, unloadaddress, loaddate, unloaddate, status);
+        //Cargo cargo = new Cargo(123, "fruits", 200.0, "saharova6", "saharova9", loaddate, loaddate, "pending");
+        cargoDAO.create(cargo);
+
+    }
+
+
+
 }

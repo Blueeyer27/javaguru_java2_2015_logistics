@@ -57,6 +57,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>CargoRegServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.CargoRegServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CargoRegServlet</servlet-name>
+        <url-pattern>/cargoreg</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>UserLoginServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.UserLoginServlet</servlet-class>
     </servlet>
