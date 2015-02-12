@@ -1,0 +1,60 @@
+package lv.javaguru.java2.servlet.model;
+
+import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.jdbc.*;
+import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.domain.Vehicle;
+
+import java.util.List;
+
+/**
+ * Created by user on 12.02.2015.
+ */
+public class RegistrationMethods {
+
+    //методы для регистрации
+
+    private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+
+    private UserDAOImpl userDAO = new UserDAOImpl();
+
+    private CompanyDAOImpl companyDAO = new CompanyDAOImpl();
+
+    private CargoDAOImpl cargoDAO = new CargoDAOImpl();
+
+    private AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
+
+
+    public void vehicleCreate(List<String> parameteres) throws DBException {
+        int userid = Integer.parseInt(parameteres.get(0));
+        String name = parameteres.get(1);
+        String type = parameteres.get(2);
+        String plateNumber = parameteres.get(3);
+        String trailerNumber = parameteres.get(4);
+        String capacityString = parameteres.get(5);
+        String status = parameteres.get(6);
+        Double capacity = Double.parseDouble(capacityString);
+
+        Vehicle vehicle = new Vehicle(userid, name, type, plateNumber, trailerNumber, capacity, status);
+        vehicleDAO.create(vehicle);
+
+    }
+
+    public void userCreate(List<String> parameteres) throws DBException {
+        String login = parameteres.get(0);
+        String password = parameteres.get(1);
+        String firstname = parameteres.get(2);
+        String lastname = parameteres.get(3);
+        String email = parameteres.get(4);
+        String phone = parameteres.get(5);
+        int companyid = Integer.parseInt(parameteres.get(6));
+
+        User userNew = new User(login, password, firstname, lastname, email, phone, companyid);
+        userDAO.create(userNew);
+
+    }
+
+
+
+
+}

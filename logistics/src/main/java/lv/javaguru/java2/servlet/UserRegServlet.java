@@ -3,7 +3,8 @@ package lv.javaguru.java2.servlet;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.servlet.model.UserReg;
+import lv.javaguru.java2.servlet.model.RegistrationMethods;
+
 
 
 
@@ -64,10 +65,10 @@ public class UserRegServlet extends HttpServlet {
         parameters.add(phone);
         parameters.add(companyid);
 
-        UserReg userReg = new UserReg();
+        RegistrationMethods reg = new RegistrationMethods();
 
         try {
-            userReg.userCreate(parameters);
+            reg.userCreate(parameters);
         } catch (DBException e) {
             e.printStackTrace();
         }

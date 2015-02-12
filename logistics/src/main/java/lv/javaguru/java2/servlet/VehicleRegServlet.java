@@ -1,7 +1,7 @@
 package lv.javaguru.java2.servlet;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.servlet.model.VehicleReg;
+import lv.javaguru.java2.servlet.model.RegistrationMethods;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -48,7 +48,7 @@ public class VehicleRegServlet extends HttpServlet {
         parameters.add(status);
 
 
-        VehicleReg reg = new VehicleReg();
+        RegistrationMethods reg = new RegistrationMethods();
 
         try {
             reg.vehicleCreate(parameters);
@@ -56,10 +56,20 @@ public class VehicleRegServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        //request.setAttribute("params", parameters);
 
-        ServletContext servletContext = getServletContext();
+        request.setAttribute("name", name);
+        request.setAttribute("type", type);
+        request.setAttribute("platenumber", plateNumber);
+        request.setAttribute("trailernumber", trailerNumber);
+        request.setAttribute("capacity", capacity);
+
+        RequestDispatcher view = request.getRequestDispatcher("/jsp/vehiclereg.jsp");
+        view.forward(request, response);
+
+       /* ServletContext servletContext = getServletContext();
         RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/vehiclereg.jsp");
-        requestDispatcher.forward(request, response);
+        requestDispatcher.forward(request, response);*/
 
 
     }
