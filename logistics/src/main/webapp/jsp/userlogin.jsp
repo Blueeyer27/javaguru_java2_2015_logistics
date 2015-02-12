@@ -5,10 +5,10 @@
 <%@ page import="java.util.*" %>
 <html>
 <head>
-    <title>user creation</title>
+    <title>user login check</title>
 </head>
 <body>
-<h1>user created succesfully!</h1>
+<h1>YES! user EXIST!</h1>
 <p>
 
 </body>

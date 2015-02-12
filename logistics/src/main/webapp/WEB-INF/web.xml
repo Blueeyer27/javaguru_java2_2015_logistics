@@ -35,15 +35,6 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>lv.javaguru.java2.servlet.UserServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/user</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>UserRegServlet</servlet-name>
@@ -53,6 +44,16 @@
     <servlet-mapping>
         <servlet-name>UserRegServlet</servlet-name>
         <url-pattern>/userreg</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.UserLoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <url-pattern>/userlogin</url-pattern>
     </servlet-mapping>
 
     <servlet>
