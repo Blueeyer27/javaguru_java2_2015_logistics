@@ -9,7 +9,6 @@
         <servlet-name>HelloWorldServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.HelloWorldServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>HelloWorldServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
@@ -19,7 +18,6 @@
         <servlet-name>VehicleRegServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.VehicleRegServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>VehicleRegServlet</servlet-name>
         <url-pattern>/vehiclereg</url-pattern>
@@ -29,48 +27,35 @@
         <servlet-name>CompanyRegServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.CompanyRegServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>CompanyRegServlet</servlet-name>
         <url-pattern>/companyreg</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>LoginPageServlet</servlet-name>
-        <servlet-class>lv.javaguru.java2.servlet.LoginPageServlet</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>LoginPageServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-
-
-    <servlet>
-        <servlet-name>UserRegServlet</servlet-name>
-        <servlet-class>lv.javaguru.java2.servlet.UserRegServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UserRegServlet</servlet-name>
-        <url-pattern>/userreg</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>CargoRegServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.CargoRegServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>CargoRegServlet</servlet-name>
         <url-pattern>/cargoreg</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>UserRegServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.UserRegServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserRegServlet</servlet-name>
+        <url-pattern>/userreg</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>UserLoginServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.UserLoginServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>UserLoginServlet</servlet-name>
         <url-pattern>/userlogin</url-pattern>
@@ -80,7 +65,6 @@
         <servlet-name>ParameterProcessingServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.ParameterProcessingServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>ParameterProcessingServlet</servlet-name>
         <url-pattern>/paramProcessing</url-pattern>
@@ -90,7 +74,6 @@
         <servlet-name>SessionUsageServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.SessionUsageServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>SessionUsageServlet</servlet-name>
         <url-pattern>/session</url-pattern>
@@ -100,7 +83,6 @@
         <servlet-name>RedirectToJSPServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.RedirectToJSPServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>RedirectToJSPServlet</servlet-name>
         <url-pattern>/jsp</url-pattern>
