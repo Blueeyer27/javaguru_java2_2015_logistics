@@ -16,6 +16,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>AllCompaniesServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.AllCompaniesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllCompaniesServlet</servlet-name>
+        <url-pattern>/companies</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>VehicleRegServlet</servlet-name>
         <servlet-class>lv.javaguru.java2.servlet.VehicleRegServlet</servlet-class>
     </servlet>

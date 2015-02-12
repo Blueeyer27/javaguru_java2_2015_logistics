@@ -12,6 +12,21 @@ public class Company {
     private String country;
     private String type;
 
+    public Company() {
+    }
+
+    public Company(String name, String regNumber, String regAddress, String actualAddress,
+                   String bank, String iban, String country, String type) {
+        this.name = name;
+        this.regNumber = regNumber;
+        this.regAddress = regAddress;
+        this.actualAddress = actualAddress;
+        this.bank = bank;
+        this.iban = iban;
+        this.country = country;
+        this.type = type;
+    }
+
     public long getCompanyId() {
         return companyId;
     }
