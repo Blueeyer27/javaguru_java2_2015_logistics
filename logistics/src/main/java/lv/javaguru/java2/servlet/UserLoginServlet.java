@@ -2,7 +2,7 @@ package lv.javaguru.java2.servlet;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.servlet.model.UserLogin;
-import lv.javaguru.java2.servlet.model.UserReg;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
