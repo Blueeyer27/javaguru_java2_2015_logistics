@@ -2,6 +2,7 @@ package lv.javaguru.java2.servlet.model;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.*;
+import lv.javaguru.java2.domain.Company;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.Vehicle;
 
@@ -54,7 +55,17 @@ public class RegistrationMethods {
 
     }
 
+    public void companyCreate(List<String> parameteres) throws DBException {
+        String name = parameteres.get(0);
+        String regNumber = parameteres.get(1);
+        String regAddress = parameteres.get(2);
+        String actualAddress = parameteres.get(3);
+        String bank = parameteres.get(4);
+        String iban = parameteres.get(5);
+        String country = parameteres.get(6);
+        String type = parameteres.get(7);
 
-
-
+        Company company = new Company(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
+        companyDAO.create(company);
+    }
 }
