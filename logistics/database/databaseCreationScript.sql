@@ -9,7 +9,7 @@ USE `logistics` ;
 -- Table `logistics`.`user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `logistics`.`user`;
-		
+
 CREATE TABLE `user` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `login` CHAR(32) NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `company` (
 -- Table `logistics`.`vehicle`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `logistics`.`vehicle`;
-		
+
 CREATE TABLE `vehicle` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `user_id` INTEGER(11) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE `vehicle` (
   `type` CHAR(30) NOT NULL,
   `plate_number` CHAR(30) NOT NULL,
   `trailer_number` CHAR(30) NOT NULL,
-  `capacity` FLOAT(4,2) NOT NULL,
+  `capacity` FLOAT(8,2) NOT NULL,
   `status` CHAR(30) NOT NULL,
   PRIMARY KEY (`id`)
 );
@@ -61,7 +61,7 @@ CREATE TABLE `vehicle` (
 -- Table `logistics`.`agreement`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `logistics`.`agreement`;
-		
+
 CREATE TABLE `agreement` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `cargo_id` INTEGER(11) NOT NULL ,
@@ -74,12 +74,12 @@ CREATE TABLE `agreement` (
 -- Table `logistics`.`cargo`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `logistics`.`cargo`;
-		
+
 CREATE TABLE `cargo` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `user_id` INTEGER(11) NOT NULL,
   `vehicle_type` CHAR(20) NOT NULL,
-  `weight` FLOAT(4,2) NOT NULL,
+  `weight` FLOAT(8,2) NOT NULL,
   `load_address` CHAR(100) NOT NULL,
   `unload_address` CHAR(100) NOT NULL,
   `load_date` DATE NOT NULL,
