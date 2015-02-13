@@ -27,7 +27,7 @@ public class RegistrationMethods {
 
     private CargoDAOImpl cargoDAO = new CargoDAOImpl();
 
-    private AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
+    //private AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
 
 
     public void vehicleCreate(List<String> parameteres) throws DBException {
@@ -80,7 +80,7 @@ public class RegistrationMethods {
 
         int userid = Integer.parseInt(parameteres.get(0));
         String type = parameteres.get(1);
-        double weight = Double.parseDouble(parameteres.get(2));
+        Double weight = Double.parseDouble(parameteres.get(2));
         String loadaddress = parameteres.get(3);
         String unloadaddress = parameteres.get(4);
 
@@ -89,6 +89,7 @@ public class RegistrationMethods {
         try {
             loaddate = sdf.parse(parameteres.get(5));
         } catch (ParseException e) {
+            System.out.println("Invalid or Empty Date format in RegistrationMethods class ->cargoCreate().");
             e.printStackTrace();
         }
 
@@ -96,6 +97,7 @@ public class RegistrationMethods {
         try {
             unloaddate = sdf.parse(parameteres.get(6));
         } catch (ParseException e) {
+            System.out.println("Invalid or Empty Date format in RegistrationMethods class ->cargoCreate().");
             e.printStackTrace();
         }
 

@@ -40,7 +40,7 @@ public class CargoRegServlet extends HttpServlet {
         String unloaddate = request.getParameter("unloaddate");
 
         //хардкод
-        String userid = "333";
+        String userid = "1020";
         String status = "pending";
 
         out.println("<h1>" + type + "</h1>");
