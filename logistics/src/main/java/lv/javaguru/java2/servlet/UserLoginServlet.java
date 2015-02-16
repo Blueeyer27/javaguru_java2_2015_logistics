@@ -1,6 +1,7 @@
 package lv.javaguru.java2.servlet;
 
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.servlet.model.UserLogin;
 
 
@@ -15,14 +16,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Created by andre on 10.02.2015.
  */
 
-
 public class UserLoginServlet extends HttpServlet {
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -38,7 +36,6 @@ public class UserLoginServlet extends HttpServlet {
         out.println("<h1>" + login + "</h1>");
         out.println("<h1>" + password + "</h1>");
 
-
         List<String> parameters = new ArrayList<String>();
 
         parameters.add(login);
@@ -52,17 +49,23 @@ public class UserLoginServlet extends HttpServlet {
         } catch (DBException e) {
             e.printStackTrace();
         }
-
         out.println("<h1>" + "exist=" + String.valueOf(exist) + "</h1>");
-
-
 
         request.setAttribute("login", login);
         request.setAttribute("password", password);
 
-
         ServletContext servletContext = getServletContext();
         if (exist){
+            User user = null;
+            try {
+                user = userLogin.getUserByLogin(login);
+            } catch (DBException e) {
+                e.printStackTrace();
+            }
+            request.setAttribute("firstName", user.getFirstName());
+            request.setAttribute("lastName", user.getLastName());
+            request.setAttribute("eMail", user.getEMail());
+            request.setAttribute("company", user.getCompanyId());
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/userlogin.jsp");
             requestDispatcher.forward(request, response);
         }
@@ -70,9 +73,5 @@ public class UserLoginServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/jsp/userloginnot.jsp");
             requestDispatcher.forward(request, response);
         }
-
-
-
     }
-
 }
