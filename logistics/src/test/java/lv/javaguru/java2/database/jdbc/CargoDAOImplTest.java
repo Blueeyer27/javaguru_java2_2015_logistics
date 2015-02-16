@@ -6,9 +6,6 @@ import lv.javaguru.java2.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -35,7 +32,7 @@ public class CargoDAOImplTest extends DAOImplTest {
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         Cargo cargo = createCargo(userFromDB.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
-                stringToDate("09/02/2015"), stringToDate("15/02/2015"), "ready");
+                cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
         cargoDAO.create(cargo);
         Cargo cargoFromDB = cargoDAO.getById(cargo.getCargoId());
         assertNotNull(userFromDB);
@@ -61,9 +58,9 @@ public class CargoDAOImplTest extends DAOImplTest {
         userDAO.create(user1);
         userDAO.create(user2);
         Cargo cargo1 = createCargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
-                stringToDate("09/02/2015"), stringToDate("15/02/2015"), "ready");
+                cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
         Cargo cargo2 = createCargo(user2.getUserId(), "tilt", 19.4, "LV Kurzemes", "DE Rein",
-                stringToDate("05/02/2015"), stringToDate("10/02/2015"), "ready");
+                cargoDAO.stringToDate("05/02/2015"), cargoDAO.stringToDate("10/02/2015"), "ready");
         cargoDAO.create(cargo1);
         cargoDAO.create(cargo2);
         cargoDAO.delete(cargo1.getCargoId());
@@ -77,7 +74,7 @@ public class CargoDAOImplTest extends DAOImplTest {
                 "+37126957815", 12345L);
         userDAO.create(user1);
         Cargo cargo1 = createCargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
-                stringToDate("09/02/2015"), stringToDate("15/02/2015"), "ready");
+                cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
         cargoDAO.create(cargo1);
         Cargo cargoFromDB = cargoDAO.getById(cargo1.getCargoId());
         assertEquals(cargo1.getCargoId(), cargoFromDB.getCargoId());
@@ -86,8 +83,8 @@ public class CargoDAOImplTest extends DAOImplTest {
         cargo1.setWeight(19.4);
         cargo1.setLoadAddress("LV Lurzemes");
         cargo1.setUnloadAddress("DE Rein");
-        cargo1.setLoadDate(stringToDate("05/02/2015"));
-        cargo1.setUnloadDate(stringToDate("10/02/2015"));
+        cargo1.setLoadDate(cargoDAO.stringToDate("05/02/2015"));
+        cargo1.setUnloadDate(cargoDAO.stringToDate("10/02/2015"));
         cargo1.setStatus("pending");
 
         cargoDAO.update(cargo1);
@@ -102,45 +99,27 @@ public class CargoDAOImplTest extends DAOImplTest {
         assertEquals(cargo1.getLoadDate(), updatedCargoFromDB.getLoadDate());
         assertEquals(cargo1.getUnloadDate(), updatedCargoFromDB.getUnloadDate());
         assertEquals(cargo1.getStatus(), updatedCargoFromDB.getStatus());
-
-    }
-/*
-    private User createUserObject(String login, String password, String firstName, String lastName,
-                                  String eMail, String phoneNumber, Long companyId) {
-        User user = new User();
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEMail(eMail);
-        user.setPhoneNumber(phoneNumber);
-        user.setCompanyId(companyId);
-        return user;
     }
 
-    private Cargo createCargoObject(long userId, String vehicleType, double weight, String loadAddress,
-                                    String unloadAddress, Date loadDate, Date unloadDate, String status) {
-        Cargo cargo = new Cargo();
-        cargo.setUserId(userId);
-        cargo.setVehicleType(vehicleType);
-        cargo.setWeight(weight);
-        cargo.setLoadAddress(loadAddress);
-        cargo.setUnloadAddress(unloadAddress);
-        cargo.setLoadDate(loadDate);
-        cargo.setUnloadDate(unloadDate);
-        cargo.setStatus(status);
-        return cargo;
-    }*/
-
-    private Date stringToDate(String incomingDate) {
-        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            Date date = formater.parse(incomingDate);
-            return date;
-        } catch (ParseException ex) {
-            System.out.println("Invalid Date format in method stringToDate(). Should be dd/MM/yyyy");
-            ex.printStackTrace();
-            return null;
-        }
+    @Test
+    public void testGetByParameters() throws DBException {
+        Cargo cargo1 = new Cargo(1111, "refrigerator", 21.5, "LV Maskavas", "RU Moscow",
+                cargoDAO.stringToDate("01/02/2015"), cargoDAO.stringToDate("15/03/2015"), "ready");
+        Cargo cargo2 = new Cargo(1111, "refrigerator", 19.4, "LV Kurzemes", "DE Rein",
+                cargoDAO.stringToDate("12/02/2015"), cargoDAO.stringToDate("10/03/2015"), "ready");
+        Cargo cargo3 = new Cargo(1111, "refrigerator", 31.4, "LV AAA", "RU Moscow",
+                cargoDAO.stringToDate("23/02/2015"), cargoDAO.stringToDate("25/03/2015"), "ready");
+        Cargo cargo4 = new Cargo(1111, "refrigerator", 9.8, "LV BBB", "DE Rein",
+                cargoDAO.stringToDate("05/02/2015"), cargoDAO.stringToDate("13/03/2015"), "ready");
+        cargoDAO.create(cargo1);
+        cargoDAO.create(cargo2);
+        cargoDAO.create(cargo3);
+        cargoDAO.create(cargo4);
+        List<Cargo> cargos = cargoDAO.getByParameters("refrigerator", 15.0, 32.0, cargoDAO.stringToDate("04/02/2015"),
+                cargoDAO.stringToDate("25/02/2015"), cargoDAO.stringToDate("10/03/2015"), cargoDAO.stringToDate("26/03/2015"));
+        assertEquals(2, cargos.size());
+        cargos = cargoDAO.getByParameters("refrigerator", 15.0, 32.0, cargoDAO.stringToDate("01/02/2015"),
+                cargoDAO.stringToDate("25/02/2015"), cargoDAO.stringToDate("10/03/2015"), cargoDAO.stringToDate("26/03/2015"));
+        assertEquals(3, cargos.size());
     }
 }

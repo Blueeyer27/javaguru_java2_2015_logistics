@@ -41,7 +41,14 @@
         <url-pattern>/cargoreg</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>CargoSearchServlet</servlet-name>
+        <servlet-class>lv.javaguru.java2.servlet.CargoSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CargoSearchServlet</servlet-name>
+        <url-pattern>/cargosearch</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>UserRegServlet</servlet-name>
