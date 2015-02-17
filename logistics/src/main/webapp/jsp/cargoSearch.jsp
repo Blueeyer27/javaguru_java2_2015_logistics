@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: rz
-  Date: 16.02.2015
-  Time: 15:06
-  To change this template use File | Settings | File Templates.
---%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +10,7 @@
 <div align="right"><a href="../index.html">BACK</a></div>
 <hr />
 <div align="center">
-    <form method="post" action="../cargosearch" onsubmit="validate(form)">
+    <form method="post" action="../java2/cargoSearchResult">
         Vehicle type:
         <select name="type">
             <option value="platform" selected>&nbsp;platform

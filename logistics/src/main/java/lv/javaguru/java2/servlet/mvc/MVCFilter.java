@@ -22,7 +22,8 @@ public class MVCFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         controllerMapping = new HashMap<String, MVCController>();
         controllerMapping.put("/hello", new HelloWorldController());
-        
+        controllerMapping.put("/cargoSearch", new CargoSearchController());
+        controllerMapping.put("/cargoSearchResult", new CargoSearchResultController());
     }
 
     @Override
@@ -34,20 +35,14 @@ public class MVCFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse)response;
 
         String contextURI = req.getServletPath();
-
         System.out.println("contextURI " + contextURI);
-
         MVCController controller = controllerMapping.get(contextURI);
         MVCModel model = controller.processRequest(req, resp);
-
         req.setAttribute("model", model.getData());
-
         ServletContext context = req.getServletContext();
-
         RequestDispatcher requestDispacher =
                 context.getRequestDispatcher(model.getView());
         requestDispacher.forward(req, resp);
-                
     }
 
     @Override
