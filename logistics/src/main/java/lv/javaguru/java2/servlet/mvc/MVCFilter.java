@@ -17,14 +17,21 @@ import javax.servlet.http.HttpServletResponse;
 public class MVCFilter implements Filter {
 
     private Map<String, MVCController> controllerMapping;
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         controllerMapping = new HashMap<String, MVCController>();
         controllerMapping.put("/hello", new HelloWorldController());
-        controllerMapping.put("/cargoSearch", new CargoSearchController());
-        controllerMapping.put("/cargoSearchResult", new CargoSearchResultController());
+        controllerMapping.put("/userreg", new UserRegController());
+
     }
+
+    public void doFilter(ServletRequest request,
+                         ServletResponse response) throws IOException, ServletException {
+
+
+    }
+
 
     @Override
     public void doFilter(ServletRequest request, 
@@ -35,14 +42,29 @@ public class MVCFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse)response;
 
         String contextURI = req.getServletPath();
+
+
+
         System.out.println("contextURI " + contextURI);
-        MVCController controller = controllerMapping.get(contextURI);
-        MVCModel model = controller.processRequest(req, resp);
-        req.setAttribute("model", model.getData());
-        ServletContext context = req.getServletContext();
-        RequestDispatcher requestDispacher =
-                context.getRequestDispatcher(model.getView());
-        requestDispacher.forward(req, resp);
+
+        if (controllerMapping.keySet().contains(contextURI)){
+
+            MVCController controller = controllerMapping.get(contextURI);
+            MVCModel model = controller.processRequest(req, resp);
+
+            req.setAttribute("model", model.getData());
+
+            ServletContext context = req.getServletContext();
+
+
+
+            RequestDispatcher requestDispacher =
+                    context.getRequestDispatcher(model.getView());
+            requestDispacher.forward(req, resp);
+
+        }
+        else filterChain.doFilter(request,response);
+
     }
 
     @Override
