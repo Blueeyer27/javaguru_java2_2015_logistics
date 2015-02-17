@@ -17,18 +17,21 @@ import javax.servlet.http.HttpServletResponse;
 public class MVCFilter implements Filter {
 
     private Map<String, MVCController> controllerMapping;
-    
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         controllerMapping = new HashMap<String, MVCController>();
         controllerMapping.put("/hello", new HelloWorldController());
         controllerMapping.put("/userreg", new UserRegController());
 
-        //Html filters ?
-        controllerMapping.put("/i", new HtmlIndexController());
-        controllerMapping.put("/html/userreg.html", new HtmlUserController());
+    }
+
+    public void doFilter(ServletRequest request,
+                         ServletResponse response) throws IOException, ServletException {
+
 
     }
+
 
     @Override
     public void doFilter(ServletRequest request, 
@@ -40,19 +43,28 @@ public class MVCFilter implements Filter {
 
         String contextURI = req.getServletPath();
 
+
+
         System.out.println("contextURI " + contextURI);
 
-        MVCController controller = controllerMapping.get(contextURI);
-        MVCModel model = controller.processRequest(req, resp);
+        if (controllerMapping.keySet().contains(contextURI)){
 
-        req.setAttribute("model", model.getData());
+            MVCController controller = controllerMapping.get(contextURI);
+            MVCModel model = controller.processRequest(req, resp);
 
-        ServletContext context = req.getServletContext();
+            req.setAttribute("model", model.getData());
 
-        RequestDispatcher requestDispacher =
-                context.getRequestDispatcher(model.getView());
-        requestDispacher.forward(req, resp);
-                
+            ServletContext context = req.getServletContext();
+
+
+
+            RequestDispatcher requestDispacher =
+                    context.getRequestDispatcher(model.getView());
+            requestDispacher.forward(req, resp);
+
+        }
+        else filterChain.doFilter(request,response);
+
     }
 
     @Override
