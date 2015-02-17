@@ -23,6 +23,8 @@ public class MVCFilter implements Filter {
         controllerMapping = new HashMap<String, MVCController>();
         controllerMapping.put("/hello", new HelloWorldController());
         controllerMapping.put("/userreg", new UserRegController());
+        controllerMapping.put("/cargoSearch", new CargoSearchController());
+        controllerMapping.put("/cargoSearchResult", new CargoSearchResultController());
 
     }
 
