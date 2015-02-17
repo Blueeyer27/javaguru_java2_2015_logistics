@@ -76,17 +76,16 @@ public class RegistrationMethods {
 
     public void cargoCreate(List<String> parameteres) throws DBException {
 
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
         int userid = Integer.parseInt(parameteres.get(0));
         String type = parameteres.get(1);
         Double weight = Double.parseDouble(parameteres.get(2));
         String loadaddress = parameteres.get(3);
         String unloadaddress = parameteres.get(4);
 
+        Date loaddate = cargoDAO.stringToDate2(parameteres.get(5), 2);
+        Date unloaddate = cargoDAO.stringToDate2(parameteres.get(6), 2);
 
-        Date loaddate = cargoDAO.stringToDate2(parameteres.get(5));
-        Date unloaddate = cargoDAO.stringToDate2(parameteres.get(6));
+
 
 
         String status = parameteres.get(7);

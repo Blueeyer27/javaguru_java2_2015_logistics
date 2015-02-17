@@ -113,17 +113,29 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
         }
     }
 
-    public java.util.Date stringToDate2(String incomingDate) {
-        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+
+    public java.util.Date stringToDate2(String incomingDate, int i) {
+        SimpleDateFormat formater = new SimpleDateFormat();
+
+        switch (i) {
+            case 1:
+                formater = new SimpleDateFormat("dd/MM/yyyy");
+                break;
+            case 2:
+                formater = new SimpleDateFormat("yyyy-MM-dd");
+                break;
+        }
+
         try {
             java.util.Date date = formater.parse(incomingDate);
             return date;
         } catch (ParseException ex) {
-            System.out.println("Invalid or Empty Date format in class CargoDAOImpl -> method stringToDate(). Should be yyyy-MM-dd");
+            System.out.println("Invalid or Empty Date format in class CargoDAOImpl -> method stringToDate().");
             ex.printStackTrace();
             return null;
         }
     }
+
 
     @Override
     public List<Cargo> getByParameters(String vehicleType, Double weightFrom, Double weightTo, java.util.Date loadDateFrom,
