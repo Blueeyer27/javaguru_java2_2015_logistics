@@ -12,7 +12,6 @@ import java.util.List;
 public class UserLogin {
 
     private UserDAOImpl userDAO = new UserDAOImpl();
-    private boolean exist=false;
 
     public boolean userLoginCheck(List<String> parameteres) throws DBException {
         String login = parameteres.get(0);
@@ -20,11 +19,21 @@ public class UserLogin {
 
         List<User> users = userDAO.getAll();
         for (User user : users) {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)) exist=true;
+            if (user.getLogin().equals(login) && user.getPassword().equals(password))
+                return true;
         }
-
-        return exist;
+        return false;
     }
 
-
+    public User getUserByLogin(String login) throws DBException {
+        User user = null;
+        List<User> users = userDAO.getAll();
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getLogin().equals(login)) {
+                user = users.get(i);
+                break;
+            }
+        }
+        return user;
+    }
 }

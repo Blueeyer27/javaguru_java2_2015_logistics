@@ -1,12 +1,12 @@
 package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.CargoDAO;
+import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Cargo;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Dinjvald on 07/02/15.
@@ -99,5 +99,46 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
     public java.sql.Date utilDateToSQL(java.util.Date date) {
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         return sqlDate;
+    }
+
+    public java.util.Date stringToDate(String incomingDate) {
+        SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            java.util.Date date = formater.parse(incomingDate);
+            return date;
+        } catch (ParseException ex) {
+            System.out.println("Invalid Date format in method stringToDate(). Should be dd/MM/yyyy");
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Cargo> getByParameters(String vehicleType, Double weightFrom, Double weightTo, java.util.Date loadDateFrom,
+                                       java.util.Date loadDateTo, java.util.Date unloadDateFrom, java.util.Date unloadDateTo) throws DBException {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from " + getTableName() +
+                    " where vehicle_type = ? and (weight between ? and ?) and " +
+                    "(load_date between ? and ?) and (unload_date between ? and ?);");
+            preparedStatement.setString(1, vehicleType);
+            preparedStatement.setDouble(2, weightFrom);
+            preparedStatement.setDouble(3, weightTo);
+            preparedStatement.setDate(4, utilDateToSQL(loadDateFrom));
+            preparedStatement.setDate(5, utilDateToSQL(loadDateTo));
+            preparedStatement.setDate(6, utilDateToSQL(unloadDateFrom));
+            preparedStatement.setDate(7, utilDateToSQL(unloadDateTo));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Cargo> objectsList = new ArrayList<Cargo>();
+            fillObjectsList(objectsList, resultSet);
+            return objectsList;
+        } catch (Throwable e) {
+            System.out.println("Exception while getting customer list CargoDAOImpl.getByParameters()");
+            e.printStackTrace();
+            throw new DBException(e);
+        } finally {
+            closeConnection(connection);
+        }
     }
 }

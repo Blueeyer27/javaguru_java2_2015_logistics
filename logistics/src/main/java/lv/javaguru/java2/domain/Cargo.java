@@ -17,7 +17,6 @@ public class Cargo {
     public Cargo() {
     }
 
-
     public Cargo(long userId, String vehicleType, Double weight, String loadAddress, String unloadAddress, Date loadDate, Date unloadDate, String status) {
         this.userId = userId;
         this.vehicleType = vehicleType;

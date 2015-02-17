@@ -9,18 +9,12 @@
 </head>
 <body>
 <h1> :) </h1>
-<h1>YES! user EXIST!</h1>
+<h1>Welcome!</h1>
 <p>
-<h1>DATA:</h1>
-
-<%
-    String login = (String)request.getAttribute("login");
-    String password = (String)request.getAttribute("password");
-
-    out.print("<h1>Username: " + login + "<br/></h1>");
-%>
-
-
+<h2>Hello, <%out.print(request.getAttribute("firstName"));%>, <%out.print(request.getAttribute("lastName"));%>,</h2>
+<h2>Your login in system is "<%out.print(request.getAttribute("login"));%>"</h2>
+<h2>Your e-mail: <%out.print(request.getAttribute("eMail"));%>"</h2>
+<h2>You work in company with id = : <%out.print(request.getAttribute("company"));%>"</h2>
 
 </body>
 </html>
