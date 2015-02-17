@@ -22,7 +22,12 @@ public class MVCFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         controllerMapping = new HashMap<String, MVCController>();
         controllerMapping.put("/hello", new HelloWorldController());
-        
+        controllerMapping.put("/userreg", new UserRegController());
+
+        //Html filters ?
+        controllerMapping.put("/i", new HtmlIndexController());
+        controllerMapping.put("/html/userreg.html", new HtmlUserController());
+
     }
 
     @Override
