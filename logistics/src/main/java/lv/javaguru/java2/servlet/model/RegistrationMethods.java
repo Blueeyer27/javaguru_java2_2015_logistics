@@ -76,7 +76,7 @@ public class RegistrationMethods {
 
     public void cargoCreate(List<String> parameteres) throws DBException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         int userid = Integer.parseInt(parameteres.get(0));
         String type = parameteres.get(1);
@@ -85,25 +85,8 @@ public class RegistrationMethods {
         String unloadaddress = parameteres.get(4);
 
 
-        Date loaddate = null;
-        try {
-            loaddate = sdf.parse(parameteres.get(5));
-        } catch (ParseException e) {
-            System.out.println("Invalid or Empty Date format in RegistrationMethods class ->cargoCreate().");
-            e.printStackTrace();
-        }
-
-        Date unloaddate = null;
-        try {
-            unloaddate = sdf.parse(parameteres.get(6));
-        } catch (ParseException e) {
-            System.out.println("Invalid or Empty Date format in RegistrationMethods class ->cargoCreate().");
-            e.printStackTrace();
-        }
-
-
-        //Date loaddate = new Date();
-        //Date unloaddate = new Date();
+        Date loaddate = cargoDAO.stringToDate2(parameteres.get(5));
+        Date unloaddate = cargoDAO.stringToDate2(parameteres.get(6));
 
 
         String status = parameteres.get(7);

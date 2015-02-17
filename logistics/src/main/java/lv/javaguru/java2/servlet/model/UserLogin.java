@@ -21,6 +21,7 @@ public class UserLogin {
         for (User user : users) {
             if (user.getLogin().equals(login) && user.getPassword().equals(password))
                 return true;
+                break;
         }
         return false;
     }
