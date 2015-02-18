@@ -21,7 +21,7 @@ public class UserRegController implements MVCController {
 
 
         String message = "";
-        MVCModel model = new MVCModel("/jsp/userReg.jsp", message);
+        MVCModel model = new MVCModel("/jsp/userreg.jsp", message);
         return model;
 
     }
