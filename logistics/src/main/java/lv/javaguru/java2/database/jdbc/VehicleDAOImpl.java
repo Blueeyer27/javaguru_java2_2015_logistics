@@ -37,8 +37,8 @@ public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
     public void setInsertArguments(PreparedStatement preparedStatement, Vehicle vehicle) throws SQLException {
         preparedStatement.setLong(1, vehicle.getUserId());
         preparedStatement.setString(2, vehicle.getName());
-        preparedStatement.setString(3, vehicle.getplateNumber());
-        preparedStatement.setString(4, vehicle.getType());
+        preparedStatement.setString(3, vehicle.getType());
+        preparedStatement.setString(4, vehicle.getplateNumber());
         preparedStatement.setString(5, vehicle.gettrailerNumber());
         preparedStatement.setDouble(6, vehicle.getCapacity());
         preparedStatement.setString(7, vehicle.getStatus());

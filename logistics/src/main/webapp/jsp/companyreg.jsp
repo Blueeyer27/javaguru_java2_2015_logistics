@@ -1,36 +1,66 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.*" %>
+<%@ page import="lv.javaguru.java2.servlet.mvc.MVCModel" %>
+<%@ page import="lv.javaguru.java2.domain.Company" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Registration successful</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>New Company created!</title>
 </head>
 <body>
-<div align = "center">
-<h1>New company created!</h1>
-<p>
-    <%
-    String name = (String)request.getAttribute("name");
-    String regNumber = (String)request.getAttribute("regNumber");
-    String regAddress = (String)request.getAttribute("regAddress");
-    String actualAddress = (String)request.getAttribute("actualAddress");
-    String bank = (String)request.getAttribute("bank");
-    String iban = (String)request.getAttribute("iban");
-    String country = (String)request.getAttribute("country");
-    String type = (String)request.getAttribute("type");
+<div align="center"><img src="images/indexlogo.jpg"/></div>
+<hr />
+<div align="right" ><a href="index.html">BACK</a></div>
+<hr />
+<div align="center">
+    <table align="center" border="3" width="700">
+        <tr>
+            <td width="600"><b>New company created!</b></td>
+        <tr>
+        </tr>
+    </table>
 
-    out.print("<h2>Name: " + name + "<br/></h2>");
-    out.print("<h2>Registration number: " + regNumber + "<br/></h2>");
-    out.print("<h2>Registration address: " + regAddress + "<br/></h2>");
-    out.print("<h2>Actual address: " + actualAddress + "<br/></h2>");
-    out.print("<h2>Bank: " + bank + "<br/></h2>");
-    out.print("<h2>IBAN: " + iban + "<br/></h2>");
-    out.print("<h2>Country: " + country + "<br/></h2>");
-    out.print("<h2>Type: " + type + "<br/></h2>");
-  %>
+    <BR>
+    <BR>
 
+    <table align="center" border="1" width="700">
+        <tr>
+            <td width="500"><b>company data:</b></td>
+        </tr>
+        <tr>
+            <td width="200" ><b>Name</b></td>
+            <td width="200"><b>Reg Number</b></td>
+            <td width="200"><b>Reg Address</b></td>
+            <td width="200"><b>Actual Address</b></td>
+            <td width="200"><b>Bank name</b></td>
+            <td width="200"><b>Bank IBAN nr</b></td>
+            <td width="200"><b>Country</b></td>
+            <td width="200"><b>Company Type</b></td>
+        </tr>
+        <%
+            Company company = (Company)request.getAttribute("model");
+        %>
+        <tr>
+            <td width="200"><%=company.getName()%></td>
+            <td width="200"><%=company.getRegNumber()%></td>
+            <td width="200"><%=company.getRegAddress()%></td>
+            <td width="200"><%=company.getActualAddress()%></td>
+            <td width="200"><%=company.getBank()%></td>
+            <td width="200"><%=company.getIban()%></td>
+            <td width="200"><%=company.getCountry()%></td>
+            <td width="200"><%=company.getType()%></td>
+        </tr>
+    </table>
 </div>
+</body>
+</html>
 
 
+<html>
+<head>
+    <title>MVC</title>
+</head>
 </body>
 </html>

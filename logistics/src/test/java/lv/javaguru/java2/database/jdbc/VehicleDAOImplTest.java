@@ -130,4 +130,34 @@ public class VehicleDAOImplTest extends DAOImplTest {
         assertEquals(vehicle.getStatus(), vehicleFromDBUpdated.getStatus());
     }
 
+
+    @Test
+    public void testGetByParameters() throws DBException {
+
+        User user1 = createUser("username1", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user2 = createUser("username2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        User user3 = createUser("username3", "pass3", "Nikolajs", "Petrovs", "petr@email.com", "+37125551111", 11111L);
+        userDAO.create(user1);
+        userDAO.create(user2);
+        userDAO.create(user3);
+        User user1FromDB = userDAO.getById(user1.getUserId());
+        User user2FromDB = userDAO.getById(user2.getUserId());
+        User user3FromDB = userDAO.getById(user3.getUserId());
+
+        Vehicle vehicle1 = new Vehicle(user1FromDB.getUserId(), "KAMAZ" , "tilt", "GG4107", "DZ855", 12.5, "PENDING");
+        Vehicle vehicle2 = new Vehicle(user2FromDB.getUserId(), "URAL" , "platform", "DF3908", "UF440", 18.5, "PENDING");
+        Vehicle vehicle3 = new Vehicle(user3FromDB.getUserId(), "ZIL" , "platform", "DF3908", "UF440", 8.0, "PENDING");
+        vehicleDAO.create(vehicle1);
+        vehicleDAO.create(vehicle2);
+        vehicleDAO.create(vehicle3);
+
+        List<Vehicle> vehicles = vehicleDAO.getByParameters("platform", 5.0, 22.0);
+        assertEquals(2, vehicles.size());
+
+        vehicles = vehicleDAO.getByParameters("tilt", 5.0, 22.0);
+        assertEquals(1, vehicles.size());
+    }
+
+
+
 }

@@ -15,9 +15,19 @@
 <div align="right"><a href="index.html">BACK</a></div>
 <hr />
 <div align="center">
+    <table align="center" border="3" width="700">
+        <tr>
+            <td width="600"><b>New user created!</b></td>
+        <tr>
+        </tr>
+    </table>
+
+    <BR>
+    <BR>
+
     <table align="center" border="1" width="700">
         <tr>
-            <td width="600"><b>New user data:</b></td>
+            <td width="200"><b>User data:</b></td>
         <tr>
         <tr>
             <td width="200"><b>Login</b></td>
