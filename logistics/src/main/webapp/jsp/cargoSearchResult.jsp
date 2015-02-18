@@ -9,9 +9,9 @@
     <title>Search result</title>
 </head>
 <body>
-<div align="center"><img src="../images/indexlogo.jpg"/></div>
+<div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
-<div align="right"><a href="../index.html">BACK</a></div>
+<div align="right"><a href="index.html">BACK</a></div>
 <hr />
 <div align="center">
     <table align="center" border="1" width="450">

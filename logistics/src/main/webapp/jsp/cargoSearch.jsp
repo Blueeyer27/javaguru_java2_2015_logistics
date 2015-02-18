@@ -10,7 +10,7 @@
 <div align="right"><a href="../index.html">BACK</a></div>
 <hr />
 <div align="center">
-    <form method="post" action="../java2/cargoSearchResult">
+    <form method="post" action="../cargoSearchResult">
         Vehicle type:
         <select name="type">
             <option value="platform" selected>&nbsp;platform

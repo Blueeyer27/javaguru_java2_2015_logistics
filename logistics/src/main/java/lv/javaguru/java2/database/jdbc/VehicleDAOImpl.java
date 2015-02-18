@@ -1,11 +1,14 @@
 package lv.javaguru.java2.database.jdbc;
 
+import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.domain.Vehicle;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -90,4 +93,28 @@ public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
         }
     }
 
+    //Insert into vehicle values (default, 11, "KAMAZ", "platform", 111, 222, 22, "pending")
+    //SELECT * FROM logistics.vehicle where type = "platform" and (capacity between 1 and 22)
+    @Override
+    public List<Vehicle> getByParameters(String vehicleType, Double capacityFrom, Double capacityTo) throws DBException {
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from " + getTableName() +
+                    " where type = ? and (capacity between ? and ?);");
+            preparedStatement.setString(1, vehicleType);
+            preparedStatement.setDouble(2, capacityFrom);
+            preparedStatement.setDouble(3, capacityTo);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Vehicle> objectsList = new ArrayList<Vehicle>();
+            fillObjectsList(objectsList, resultSet);
+            return objectsList;
+        } catch (Throwable e) {
+            System.out.println("Exception while getting customer-vehicle list VehicleDAOImpl.getByParameters()");
+            e.printStackTrace();
+            throw new DBException(e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
 }

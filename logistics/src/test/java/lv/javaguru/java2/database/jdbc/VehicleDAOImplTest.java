@@ -30,7 +30,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
         User user = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Vehicle vehicle = createVehicle(userFromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 18.5, "PENDING");
+        Vehicle vehicle = createVehicle(userFromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
         vehicleDAO.create(vehicle);
         Vehicle vehicleFromDB = vehicleDAO.getById(vehicle.getVehicleId());
         assertNotNull(userFromDB);
@@ -56,8 +56,8 @@ public class VehicleDAOImplTest extends DAOImplTest {
         User user2FromDB = userDAO.getById(user2.getUserId());
 
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
-        Vehicle vehicle1 = createVehicle(user1FromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 18.5, "PENDING");
-        Vehicle vehicle2 = createVehicle(user2FromDB.getUserId(), "VOLVO" , "Container", "DF3908", "UF440", 14.9, "PENDING");
+        Vehicle vehicle1 = createVehicle(user1FromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
+        Vehicle vehicle2 = createVehicle(user2FromDB.getUserId(), "VOLVO" , "platform", "DF3908", "UF440", 14.9, "PENDING");
         vehicles.add(vehicle1);
         vehicles.add(vehicle2);
         vehicleDAO.create(vehicle1);
@@ -80,8 +80,8 @@ public class VehicleDAOImplTest extends DAOImplTest {
         User user2FromDB = userDAO.getById(user2.getUserId());
 
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
-        Vehicle vehicle1 = createVehicle(user1FromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 13.8, "PENDING");
-        Vehicle vehicle2 = createVehicle(user2FromDB.getUserId(), "VOLVO" , "Container", "DF3908", "UF440", 15.1, "PENDING");
+        Vehicle vehicle1 = createVehicle(user1FromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 13.8, "PENDING");
+        Vehicle vehicle2 = createVehicle(user2FromDB.getUserId(), "VOLVO" , "platform", "DF3908", "UF440", 15.1, "PENDING");
         vehicleDAO.create(vehicle1);
         vehicleDAO.create(vehicle2);
         Vehicle vehicle1FromDB = vehicleDAO.getById(vehicle1.getVehicleId());
