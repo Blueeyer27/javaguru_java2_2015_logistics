@@ -17,26 +17,54 @@ import java.util.Map;
 
 public class CargoSearchResultController implements MVCController {
 
+    public static final Double MIN_WEIGHT = 0.0;
+    public static final Double MAX_WEIGHT = 99.99;
+    public static final String MIN_DATE = "1000-01-01";
+    public static final String MAX_DATE = "9999-12-31";
+
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) throws IOException {
+        String errorMessage = "";
         List<Cargo> cargoList = new ArrayList<Cargo>();
-
         CargoDAOImpl cargoDAO = new CargoDAOImpl();
         String type = request.getParameter("type");
-        Double weightFrom = Double.parseDouble(request.getParameter("weightFrom"));
-        Double weightTo = Double.parseDouble(request.getParameter("weightTo"));
+        String weightFrom = request.getParameter("weightFrom");
+        String weightTo = request.getParameter("weightTo");
         String loadDateFrom = request.getParameter("loadDateFrom");
         String loadDateTo = request.getParameter("loadDateTo");
         String unloadDateFrom = request.getParameter("unloadDateFrom");
         String unloadDateTo = request.getParameter("unloadDateTo");
 
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-        List<Cargo> cargoes = null;
-
+        // fill empty fields with default values
+        Double weightFromDouble = MIN_WEIGHT;
+        Double weightToDouble = MAX_WEIGHT;
         try {
-            cargoes = cargoDAO.getByParameters(type, weightFrom, weightTo, stringToDate(loadDateFrom),
+            if (!weightFrom.isEmpty() && weightFrom != null)
+                weightFromDouble = Double.parseDouble(weightFrom);
+            if (!weightTo.isEmpty() && weightTo != null)
+                weightToDouble = Double.parseDouble(weightTo);
+        } catch (Exception e) {
+            errorMessage += "Please enter correct weight values!<br/>";
+        }
+        loadDateFrom = (!loadDateFrom.isEmpty() && loadDateFrom != null) ? loadDateFrom : MIN_DATE;
+        loadDateTo = (!loadDateTo.isEmpty() && loadDateTo != null) ? loadDateTo : MAX_DATE;
+        unloadDateFrom = (!unloadDateFrom.isEmpty() && unloadDateFrom != null) ? unloadDateFrom : MIN_DATE;
+        unloadDateTo = (!unloadDateTo.isEmpty() && unloadDateTo != null) ? unloadDateTo : MAX_DATE;
+
+        // data validation
+        if (stringToDate(loadDateFrom).after(stringToDate(loadDateTo)))
+            errorMessage += "Load date: second date can't be before first!<br/>";
+        if (stringToDate(unloadDateFrom).after(stringToDate(unloadDateTo)))
+            errorMessage += "Unload date: second date can't be before first!<br/>";
+        if (weightFromDouble > weightToDouble)
+            errorMessage += "Weight: second number can't be less than first!<br/>";
+        if(!errorMessage.isEmpty())
+            return new MVCModel("/jsp/errorPage.jsp", errorMessage);
+
+        List<Cargo> cargoes = null;
+        try {
+            cargoes = cargoDAO.getByParameters(type, weightFromDouble, weightToDouble, stringToDate(loadDateFrom),
                     stringToDate(loadDateTo), stringToDate(unloadDateFrom), stringToDate(unloadDateTo));
         } catch (DBException e) {
             e.printStackTrace();
@@ -47,8 +75,7 @@ public class CargoSearchResultController implements MVCController {
                 cargoList.add(cargoes.get(i));
             }
         }
-        MVCModel model = new MVCModel("/jsp/cargoSearchResult.jsp", cargoList);
-        return model;
+        return new MVCModel("/jsp/cargoSearchResult.jsp", cargoList);
     }
 
     // TEMPORARY here (we need to do create easier way to work with date formats! )

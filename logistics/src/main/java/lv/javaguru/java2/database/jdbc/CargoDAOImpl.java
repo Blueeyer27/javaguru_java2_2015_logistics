@@ -113,7 +113,6 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
         }
     }
 
-
     public java.util.Date stringToDate2(String incomingDate, int i) {
         SimpleDateFormat formater = new SimpleDateFormat();
 

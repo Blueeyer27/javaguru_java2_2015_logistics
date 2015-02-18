@@ -28,7 +28,6 @@ public class MVCFilter implements Filter {
         controllerMapping.put("/userLogin", new UserLoginController());
         controllerMapping.put("/vehicleSearchResult", new VehicleSearchResultController());
         controllerMapping.put("/companyReg", new CompanyRegController());
-
         controllerMapping.put("/cargoSearchResult", new CargoSearchResultController());
 
     }
@@ -50,10 +49,6 @@ public class MVCFilter implements Filter {
 
         String contextURI = req.getServletPath();
 
-
-
-        System.out.println("contextURI " + contextURI);
-
         if (controllerMapping.keySet().contains(contextURI)){
 
             MVCController controller = controllerMapping.get(contextURI);
@@ -71,7 +66,6 @@ public class MVCFilter implements Filter {
 
         }
         else filterChain.doFilter(request,response);
-
     }
 
     @Override
