@@ -53,12 +53,28 @@ public class CargoSearchResultController implements MVCController {
         unloadDateTo = (!unloadDateTo.isEmpty() && unloadDateTo != null) ? unloadDateTo : MAX_DATE;
 
         // data validation
-        if (stringToDate(loadDateFrom).after(stringToDate(loadDateTo)))
-            errorMessage += "Load date: second date can't be before first!<br/>";
-        if (stringToDate(unloadDateFrom).after(stringToDate(unloadDateTo)))
-            errorMessage += "Unload date: second date can't be before first!<br/>";
-        if (weightFromDouble > weightToDouble)
+        if (weightFromDouble > MAX_WEIGHT || weightToDouble > MAX_WEIGHT ||
+                weightFromDouble < MIN_WEIGHT || weightToDouble < MIN_WEIGHT)
+            errorMessage += "Weight: The weight entered is invalid<br/>";
+        else if (weightFromDouble > weightToDouble)
             errorMessage += "Weight: second number can't be less than first!<br/>";
+
+        if (stringToDate(loadDateFrom).before(stringToDate(MIN_DATE))
+                || stringToDate(loadDateFrom).after(stringToDate(MAX_DATE))
+                || stringToDate(loadDateTo).before(stringToDate(MIN_DATE))
+                || stringToDate(loadDateTo).after(stringToDate(MAX_DATE)))
+            errorMessage += "Date: The Load date entered is invalid<br/>";
+        else if (stringToDate(loadDateFrom).after(stringToDate(loadDateTo)))
+            errorMessage += "Load date: second date can't be before first!<br/>";
+
+        if (stringToDate(unloadDateFrom).before(stringToDate(MIN_DATE))
+                || stringToDate(unloadDateFrom).after(stringToDate(MAX_DATE))
+                || stringToDate(unloadDateTo).before(stringToDate(MIN_DATE))
+                || stringToDate(unloadDateTo).after(stringToDate(MAX_DATE)))
+            errorMessage += "Date: The Unload date entered is invalid<br/>";
+        else if (stringToDate(unloadDateFrom).after(stringToDate(unloadDateTo)))
+            errorMessage += "Unload date: second date can't be before first!<br/>";
+
         if(!errorMessage.isEmpty())
             return new MVCModel("/jsp/errorPage.jsp", errorMessage);
 
