@@ -15,6 +15,7 @@
 <h1>uhaha</h1>
 <a href = "../jsp/vehiclereg.jsp">Vehicle Registration</a>
 <br>
-<a href = "../jsp/getallvehicles.jsp">Show all vehicles</a>
+<a href = "../getallvehicles">Show all vehicles</a>
+
 </body>
 </html>

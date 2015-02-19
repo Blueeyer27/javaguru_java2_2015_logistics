@@ -22,19 +22,14 @@ public class GetAllVehiclesController implements MVCController {
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         List<Vehicle> vehicleList = new ArrayList<Vehicle>();
-
         try {
             vehicleList = vehicleDAO.getAll();
-           } catch (DBException e) {
+        } catch (DBException e) {
             e.printStackTrace();
         }
 
-       Vehicle vehicleTest = vehicleList.get(1);
-
-        String message = "Hello from MVC!";
-        MVCModel model = new MVCModel("/jsp/getallvehicles.jsp", message);
-
+        Vehicle vehicleTest = vehicleList.get(1);
+        MVCModel model = new MVCModel("/jsp/getallvehicles.jsp", vehicleTest);
         return model;
-
     }
 }

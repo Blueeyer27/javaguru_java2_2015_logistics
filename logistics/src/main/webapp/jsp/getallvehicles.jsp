@@ -1,3 +1,4 @@
+<%@ page import="lv.javaguru.java2.domain.Vehicle" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -11,8 +12,8 @@
     <title></title>
 </head>
 <body>
-<h1>zaebalo</h1>
-<%=(String)request.getAttribute("model")%>
+<h1>FIXED</h1>
+<%=(Vehicle)request.getAttribute("model")%>
 
 </body>
 </html>
