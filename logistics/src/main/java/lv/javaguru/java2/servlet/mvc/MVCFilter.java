@@ -30,6 +30,9 @@ public class MVCFilter implements Filter {
         controllerMapping.put("/cargoSearchResult", new CargoSearchResultController());
         controllerMapping.put("/sendRequestCargo", new SendRequestCargoController());
         controllerMapping.put("/createAgreement", new CreateAgreementController());
+        controllerMapping.put("/vehiclereg", new VehicleRegController());
+        controllerMapping.put("/vehicleregresult", new VehicleRegResultController());
+        controllerMapping.put("/getallvehicles", new GetAllVehiclesController());
     }
 
     public void doFilter(ServletRequest request,
