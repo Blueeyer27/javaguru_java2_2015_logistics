@@ -31,7 +31,7 @@ public class CargoDAOImplTest extends DAOImplTest {
                 "+37126957815", 12345L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Cargo cargo = createCargo(userFromDB.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo = createCargo(userFromDB.getUserId(), "tilt", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
         cargoDAO.create(cargo);
         Cargo cargoFromDB = cargoDAO.getById(cargo.getCargoId());

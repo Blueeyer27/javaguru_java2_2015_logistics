@@ -26,6 +26,7 @@
         <tr>
             <td width="50"><b>Id</b></td>
             <td width="200"><b>Name</b></td>
+            <td width="200"><b>Type</b></td>
             <td width="200"><b>PlateNumber</b></td>
             <td width="200"><b>Trailer Number</b></td>
             <td width="200"><b>Capacity</b></td>
@@ -39,6 +40,7 @@
             <tr>
                 <td width="50"><%=vehicle.getVehicleId()%></td>
                 <td width="200"><%=vehicle.getName()%></td>
+                <td width="200"><%=vehicle.getType()%></td>
                 <td width="200"><%=vehicle.getplateNumber()%></td>
                 <td width="200"><%=vehicle.gettrailerNumber()%></td>
                 <td width="200"><%=vehicle.getCapacity()%></td>
