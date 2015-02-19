@@ -86,7 +86,7 @@ public class CargoSearchResultController implements MVCController {
             e.printStackTrace();
         }
 
-        if (cargoes.size() > 0) {
+        if (cargoes != null) {
             for (int i = 0; i < cargoes.size(); i++) {
                 cargoList.add(cargoes.get(i));
             }
