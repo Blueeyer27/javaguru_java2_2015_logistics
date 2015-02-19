@@ -7,6 +7,16 @@ public class Agreement {
     private long vehicleId;
     private String status;
 
+    public Agreement() {
+
+    }
+
+    public Agreement(long cargoId, long vehicleId, String status) {
+        this.cargoId = cargoId;
+        this.vehicleId = vehicleId;
+        this.status = status;
+    }
+
     public long getAgreementId() {
         return agreementId;
     }

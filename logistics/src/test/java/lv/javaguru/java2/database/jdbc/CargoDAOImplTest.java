@@ -103,22 +103,22 @@ public class CargoDAOImplTest extends DAOImplTest {
 
     @Test
     public void testGetByParameters() throws DBException {
-        Cargo cargo1 = new Cargo(1111, "refrigerator", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo1 = new Cargo(1111, "platform", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("01/02/2015"), cargoDAO.stringToDate("15/03/2015"), "ready");
-        Cargo cargo2 = new Cargo(1111, "refrigerator", 19.4, "LV Kurzemes", "DE Rein",
+        Cargo cargo2 = new Cargo(1111, "platform", 19.4, "LV Kurzemes", "DE Rein",
                 cargoDAO.stringToDate("12/02/2015"), cargoDAO.stringToDate("10/03/2015"), "ready");
-        Cargo cargo3 = new Cargo(1111, "refrigerator", 31.4, "LV AAA", "RU Moscow",
+        Cargo cargo3 = new Cargo(1111, "platform", 31.4, "LV AAA", "RU Moscow",
                 cargoDAO.stringToDate("23/02/2015"), cargoDAO.stringToDate("25/03/2015"), "ready");
-        Cargo cargo4 = new Cargo(1111, "refrigerator", 9.8, "LV BBB", "DE Rein",
+        Cargo cargo4 = new Cargo(1111, "platform", 9.8, "LV BBB", "DE Rein",
                 cargoDAO.stringToDate("05/02/2015"), cargoDAO.stringToDate("13/03/2015"), "ready");
         cargoDAO.create(cargo1);
         cargoDAO.create(cargo2);
         cargoDAO.create(cargo3);
         cargoDAO.create(cargo4);
-        List<Cargo> cargos = cargoDAO.getByParameters("refrigerator", 15.0, 32.0, cargoDAO.stringToDate("04/02/2015"),
+        List<Cargo> cargos = cargoDAO.getByParameters("platform", 15.0, 32.0, cargoDAO.stringToDate("04/02/2015"),
                 cargoDAO.stringToDate("25/02/2015"), cargoDAO.stringToDate("10/03/2015"), cargoDAO.stringToDate("26/03/2015"));
         assertEquals(2, cargos.size());
-        cargos = cargoDAO.getByParameters("refrigerator", 15.0, 32.0, cargoDAO.stringToDate("01/02/2015"),
+        cargos = cargoDAO.getByParameters("platform", 15.0, 32.0, cargoDAO.stringToDate("01/02/2015"),
                 cargoDAO.stringToDate("25/02/2015"), cargoDAO.stringToDate("10/03/2015"), cargoDAO.stringToDate("26/03/2015"));
         assertEquals(3, cargos.size());
     }

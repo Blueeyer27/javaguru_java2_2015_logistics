@@ -22,14 +22,14 @@ public class MVCFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         controllerMapping = new HashMap<String, MVCController>();
         controllerMapping.put("/hello", new HelloWorldController());
-
         controllerMapping.put("/userReg", new UserRegController());
         controllerMapping.put("/userRegResult", new UserRegResultController());
         controllerMapping.put("/userLogin", new UserLoginController());
         controllerMapping.put("/vehicleSearchResult", new VehicleSearchResultController());
         controllerMapping.put("/companyReg", new CompanyRegController());
         controllerMapping.put("/cargoSearchResult", new CargoSearchResultController());
-
+        controllerMapping.put("/sendRequestCargo", new SendRequestCargoController());
+        controllerMapping.put("/createAgreement", new CreateAgreementController());
     }
 
     public void doFilter(ServletRequest request,

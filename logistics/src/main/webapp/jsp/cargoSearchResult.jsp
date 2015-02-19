@@ -1,4 +1,3 @@
-<%@ page import="lv.javaguru.java2.servlet.mvc.MVCModel" %>
 <%@ page import="lv.javaguru.java2.domain.Cargo" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -13,33 +12,41 @@
 <div align="right"><a href="index.html">BACK</a></div>
 <hr />
 <div align="center">
-    <table align="center" border="1" width="450">
+
+    <table align="center" border="1" width="750">
         <tr>
             <td width="50"><b>Id</b></td>
             <td width="100"><b>Weight</b></td>
             <td width="100"><b>Vehicle Type</b></td>
             <td width="100"><b>Status</b></td>
-            <td width="100"><b>Load Date</b></td>
-            <td width="100"><b>Unload Date</b></td>
-            <td width="100"><b>Load Address</b></td>
-            <td width="100"><b>Unload Address</b></td>
+            <td width="200"><b>Load Date</b></td>
+            <td width="200"><b>Unload Date</b></td>
+            <td width="200"><b>Load Address</b></td>
+            <td width="200"><b>Unload Address</b></td>
         </tr>
         <%
             List<Cargo> cargoList = (ArrayList<Cargo>)request.getAttribute("model");
             for (int i = 0; i < cargoList.size(); i ++) {
                 Cargo cargo = cargoList.get(i);
         %>
-        <tr>
-            <td width="50"><%=cargo.getCargoId()%></td>
-            <td width="100"><%=cargo.getWeight()%></td>
-            <td width="100"><%=cargo.getVehicleType()%></td>
-            <td width="100"><%=cargo.getStatus()%></td>
-            <td width="100"><%=cargo.getLoadDate()%></td>
-            <td width="100"><%=cargo.getUnloadDate()%></td>
-            <td width="100"><%=cargo.getLoadAddress()%></td>
-            <td width="100"><%=cargo.getUnloadAddress()%></td>
-        </tr>
+        <form method="post" action="sendRequestCargo">
+            <tr>
+                <td width="50"><%=cargo.getCargoId()%></td>
+                <td width="100"><%=cargo.getWeight()%></td>
+                <td width="100"><%=cargo.getVehicleType()%></td>
+                <td width="100"><%=cargo.getStatus()%></td>
+                <td width="200"><%=cargo.getLoadDate()%></td>
+                <td width="200"><%=cargo.getUnloadDate()%></td>
+                <td width="200"><%=cargo.getLoadAddress()%></td>
+                <td width="200"><%=cargo.getUnloadAddress()%></td>
+                <td>
+                    <input type="hidden" name="id" value="<%=cargo.getCargoId()%>">
+                    <input type="submit" name="action" value="Send Request">
+                </td>
+            </tr>
+        </form>
         <%}%>
+
     </table>
 </div>
 </body>
