@@ -34,7 +34,7 @@ public class DAOImplTest {
         return user;
     }
 
-    protected Vehicle createVehicle(long userId, String name, String plateNumber, String type, String trailerNumber, double capacity, String status){
+    protected Vehicle createVehicle(long userId, String name,  String type, String plateNumber, String trailerNumber, double capacity, String status){
         Vehicle vehicle = new Vehicle();
         vehicle.setUserId(userId);
         vehicle.setName(name);

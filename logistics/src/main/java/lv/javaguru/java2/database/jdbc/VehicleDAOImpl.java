@@ -14,8 +14,8 @@ import java.util.List;
 
 public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
     private static final String TABLE_NAME = "vehicle";
-    private static final String UPDATE_STRING = " set NAME = ?, PLATE_NUMBER = ?, " +
-            "TYPE = ?, TRAILER_NUMBER = ?, CAPACITY = ?, STATUS = ? where ID = ?";
+    private static final String UPDATE_STRING = " set NAME = ?, TYPE = ?, " +
+            "PLATE_NUMBER = ?, TRAILER_NUMBER = ?, CAPACITY = ?, STATUS = ? where ID = ?";
     private static final String INSERT_STRING = " values (default, ?, ?, ?, ?, ?, ?, ?)";
 
     @Override
@@ -57,8 +57,8 @@ public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
             vehicle.setVehicleId(resultSet.getLong("ID"));
             vehicle.setUserId(resultSet.getLong("User_ID"));
             vehicle.setName(resultSet.getString("Name"));
-            vehicle.setplateNumber(resultSet.getString("type"));
-            vehicle.setType(resultSet.getString("plate_number"));
+            vehicle.setType(resultSet.getString("type"));
+            vehicle.setplateNumber(resultSet.getString("plate_number"));
             vehicle.settrailerNumber(resultSet.getString("trailer_Number"));
             vehicle.setCapacity(resultSet.getDouble("capacity"));
             vehicle.setStatus(resultSet.getString("status"));
@@ -84,8 +84,8 @@ public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
             vehicle.setVehicleId(resultSet.getLong("ID"));
             vehicle.setUserId(resultSet.getLong("User_ID"));
             vehicle.setName(resultSet.getString("Name"));
-            vehicle.setplateNumber(resultSet.getString("type"));
-            vehicle.setType(resultSet.getString("plate_number"));
+            vehicle.setType(resultSet.getString("type"));
+            vehicle.setplateNumber(resultSet.getString("plate_number"));
             vehicle.settrailerNumber(resultSet.getString("trailer_Number"));
             vehicle.setCapacity(resultSet.getDouble("capacity"));
             vehicle.setStatus(resultSet.getString("status"));
