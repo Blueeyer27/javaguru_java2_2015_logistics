@@ -28,8 +28,7 @@ public class GetAllVehiclesController implements MVCController {
             e.printStackTrace();
         }
 
-        Vehicle vehicleTest = vehicleList.get(1);
-        MVCModel model = new MVCModel("/jsp/getallvehicles.jsp", vehicleTest);
+        MVCModel model = new MVCModel("/jsp/getallvehicles.jsp", vehicleList);
         return model;
     }
 }
