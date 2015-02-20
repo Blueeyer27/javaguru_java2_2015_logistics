@@ -21,7 +21,7 @@
     %>
     <h2>Choosen Vehicle id = <%=vehicle.getVehicleId()%>
         (Vehicle Type = <%=vehicle.getType()%>) (Vehicle Capacity = <%=vehicle.getCapacity()%>) </h2>
-    <h2><font color="red" ><b>Important cargo serch result by TYPE = <%=vehicle.getType()%> and WEIGHT <=  <%=vehicle.getCapacity()%>.</b></font>
+    <h2><font color="red" ><b>Important!  Cargo serch result by TYPE = <%=vehicle.getType()%> and WEIGHT <=  <%=vehicle.getCapacity()%>.</b></font>
     <BR><b>Please choose cargo from the list:</b></h2>
     <table align="center" border="1" width="750">
         <tr>
