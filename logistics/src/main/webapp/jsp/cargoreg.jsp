@@ -42,16 +42,23 @@
         User:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select name="userid">
             <%
-                UserDAOImpl userDAO = new UserDAOImpl();
-                List<User> users = userDAO.getAll();
-                if (users.size()>0)
-                    for (User user : users) {
-            %>
-            <option value=<%=user.getUserId()%>> id=<%=user.getUserId()%> <%=user.getFirstName()%> <%=user.getLastName()%> (<%=user.getLogin()%>)
-                    <%  }
+            UserDAOImpl userDAO = new UserDAOImpl();
+            List<User> users = userDAO.getAll();
+            if (users.size()>0)
+                for (User user : users) {
+                %>
+                    <option value=<%=user.getUserId()%>> id=<%=user.getUserId()%> <%=user.getFirstName()%> <%=user.getLastName()%> (<%=user.getLogin()%>)
+                <%  }
             else {%>
             <option value="1">! id=1 NoUser found
-                    <%}%>
+
+            <script language="Javascript">
+                <!--
+                alert ("Sorry, NO user found in DB! :( You can use default id=1 instead")
+                //-->
+            </script>
+
+           <%}%>
         </select><br/>
         <br/>
         <input type="submit" value="register" />

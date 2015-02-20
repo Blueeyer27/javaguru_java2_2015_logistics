@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Search result</title>
+    <title>Agreement created!</title>
 </head>
 <body>
 <div align="center"><img src="images/indexlogo.jpg"/></div>
@@ -17,6 +17,13 @@
     <b>Vehicle id = <%=agreement.getVehicleId()%></b><br>
     <b>Status = <%=agreement.getStatus()%></b><br>
 </div>
+
+<script language="Javascript">
+    <!--
+    alert ("Congratulations! :) Agreement created with ID =<%=agreement.getAgreementId()%>")
+    //-->
+</script>
+
 </body>
 </html>
 

@@ -17,35 +17,55 @@ import java.util.List;
 
 public class VehicleSearchResultController implements MVCController {
 
+    public static final Double MIN_WEIGHT = 0.0;
+    public static final Double MAX_WEIGHT = 99.99;
+
+
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) throws IOException {
-        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
 
         VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
-        String type = request.getParameter("type");
-        Double capacityFrom = Double.parseDouble(request.getParameter("capacityFrom"));
-        Double capacityTo = Double.parseDouble(request.getParameter("capacityTo"));
-
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-
         List<Vehicle> vehicles = null;
 
+        String errorMessage = "";
+        String type = request.getParameter("type");
+        String capacityFrom = request.getParameter("capacityFrom");
+        String capacityTo = request.getParameter("capacityTo");
+
+
+        // fill empty fields with default values
+        Double capacityFromDouble = MIN_WEIGHT;
+        Double capacityToDouble = MAX_WEIGHT;
         try {
-            vehicles = vehicleDAO.getByParameters(type, capacityFrom, capacityTo);
+            if (!capacityFrom.isEmpty() && capacityFrom != null)
+                capacityFromDouble = Double.parseDouble(capacityFrom);
+            if (!capacityTo.isEmpty() && capacityTo != null)
+                capacityToDouble = Double.parseDouble(capacityTo);
+        } catch (Exception e) {
+            errorMessage += "BLIN! Please enter correct capacity values!<br/>";
+        }
+
+
+        // data validation
+        if (capacityFromDouble > MAX_WEIGHT || capacityToDouble > MAX_WEIGHT ||
+                capacityFromDouble < MIN_WEIGHT || capacityToDouble < MIN_WEIGHT)
+            errorMessage += "BLIN! Capacity: The weight entered is invalid<br/>";
+        else if (capacityFromDouble > capacityToDouble)
+            errorMessage += "BLIN! Capacity: second number can't be less than first!<br/>";
+
+        if(!errorMessage.isEmpty())
+            return new MVCModel("/jsp/errorPage.jsp", errorMessage);
+
+
+
+
+        try {
+            vehicles = vehicleDAO.getByParameters(type, capacityFromDouble, capacityToDouble);
             } catch (DBException e) {
             e.printStackTrace();
         }
 
-        //WHY ??? andrey
-/*
-        if (vehicles.size() > 0) {
-            for (int i = 0; i < vehicles.size(); i++) {
-                vehicleList.add(vehicles.get(i));
-            }
-        }
-*/
 
         MVCModel model = new MVCModel("/jsp/vehicleSearchResult.jsp", vehicles);
         return model;

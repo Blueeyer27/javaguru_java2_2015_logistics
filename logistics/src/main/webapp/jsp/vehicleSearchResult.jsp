@@ -28,6 +28,7 @@
             for (int i = 0; i < vehicleList.size(); i ++) {
                 Vehicle vehicle = vehicleList.get(i);
         %>
+        <form method="post" action="sendRequestVehicle">
         <tr>
             <td width="50"><%=vehicle.getVehicleId()%></td>
             <td width="200"><%=vehicle.getName()%></td>
@@ -36,8 +37,23 @@
             <td width="200"><%=vehicle.getStatus()%></td>
             <td width="200"><%=vehicle.getplateNumber()%></td>
             <td width="200"><%=vehicle.gettrailerNumber()%></td>
+            <td>
+                <input type="hidden" name="id" value="<%=vehicle.getVehicleId()%>">
+                <input type="submit" name="action" value="Send Request">
+            </td>
         </tr>
+        </form>
+        <%}
+
+        if (vehicleList.size()==0) {
+        %>
+        <script language="Javascript">
+            <!--
+            alert ("Sorry, NO VEHICLES FOUND in DB! :(")
+            //-->
+        </script>
         <%}%>
+
     </table>
 </div>
 </body>

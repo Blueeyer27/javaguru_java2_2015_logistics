@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Add new cargo</title>
+    <title>Find my cargo</title>
 </head>
 <body>
 <div align="center"><img src="../images/indexlogo.jpg"/></div>

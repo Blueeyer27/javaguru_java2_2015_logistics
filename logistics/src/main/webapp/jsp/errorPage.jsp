@@ -7,6 +7,9 @@
 <body>
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
+<div align="right"><a href="index.html">BACK</a></div>
+<hr />
+
 <div align="center">
     Oops! Something went wrong:<br/>
     <% String errorMessage = (String)request.getAttribute("model"); %>

@@ -28,17 +28,24 @@
         <br/>
         Company:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select name="companyid">
-        <%
-        CompanyDAOImpl companyDAO = new CompanyDAOImpl();
-        List<Company> companyes = companyDAO.getAll();
-        if (companyes.size()>0)
-            for (Company company : companyes) {
-        %>
-                <option value=<%=company.getCompanyId()%>> id=<%=company.getCompanyId()%> <%=company.getName()%>
-        <%  }
+            <%
+            CompanyDAOImpl companyDAO = new CompanyDAOImpl();
+            List<Company> companyes = companyDAO.getAll();
+            if (companyes.size()>0)
+                for (Company company : companyes) {
+                %>
+                    <option value=<%=company.getCompanyId()%>> id=<%=company.getCompanyId()%> <%=company.getName()%>
+                <%  }
             else {%>
                 <option value="1">! id=1 NoCompany found
-        <%}%>
+
+                <script language="Javascript">
+                    <!--
+                    alert ("Sorry, NO company found in DB! :( You can use default id=1 instead")
+                    //-->
+                </script>
+
+            <%}%>
         </select><br/>
         <br/>
         <input type="submit" value="register" />
