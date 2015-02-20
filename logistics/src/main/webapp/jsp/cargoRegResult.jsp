@@ -10,6 +10,7 @@
     <title>New CARGO created!</title>
 </head>
 <body>
+
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
 <div align="right"><a href="index.html">BACK</a></div>
@@ -58,8 +59,10 @@
 
 
 <html>
-<head>
-    <title>MVC</title>
-</head>
+<script language="Javascript">
+    <!--
+    alert ("New CARGO record inserted to main DB Pentagon server!  Urra, tovarishi-comrads, URRA! :)")
+    //-->
+</script>
 </body>
 </html>
