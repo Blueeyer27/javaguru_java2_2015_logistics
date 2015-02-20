@@ -43,7 +43,7 @@ public class UserRegResultController implements MVCController {
         try {
             userDAO.create(userNew);
         } catch (DBException e) {
-            System.out.println("Exception while creating new user UserRegController");
+            System.out.println("Exception while creating new user UserRegResultController");
             e.printStackTrace();
         }
 

@@ -22,17 +22,26 @@ public class MVCFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         controllerMapping = new HashMap<String, MVCController>();
         controllerMapping.put("/hello", new HelloWorldController());
+
         controllerMapping.put("/userReg", new UserRegController());
         controllerMapping.put("/userRegResult", new UserRegResultController());
         controllerMapping.put("/userLogin", new UserLoginController());
-        controllerMapping.put("/vehicleSearchResult", new VehicleSearchResultController());
-        controllerMapping.put("/companyReg", new CompanyRegController());
+
+
+        controllerMapping.put("/cargoReg", new CargoRegController());
+        controllerMapping.put("/cargoRegResult", new CargoRegResultController());
         controllerMapping.put("/cargoSearchResult", new CargoSearchResultController());
         controllerMapping.put("/sendRequestCargo", new SendRequestCargoController());
-        controllerMapping.put("/createAgreement", new CreateAgreementController());
+
+        controllerMapping.put("/vehicleSearchResult", new VehicleSearchResultController());
         controllerMapping.put("/vehiclereg", new VehicleRegController());
         controllerMapping.put("/vehicleregresult", new VehicleRegResultController());
         controllerMapping.put("/getallvehicles", new GetAllVehiclesController());
+
+        controllerMapping.put("/createAgreement", new CreateAgreementController());
+
+        controllerMapping.put("/companyReg", new CompanyRegController());
+
     }
 
     public void doFilter(ServletRequest request,
