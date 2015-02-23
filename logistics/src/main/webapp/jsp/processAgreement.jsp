@@ -20,11 +20,13 @@
         -=Press BACK to see updated overview!</b><br>
 </div>
 
+<%--
 <script language="Javascript">
     <!--
     alert ("Congratulations! :) Agreement processed processType= <%=processType%>")
     //-->
 </script>
+--%>
 
 </body>
 </html>
