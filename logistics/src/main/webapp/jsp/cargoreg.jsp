@@ -3,6 +3,7 @@
 <%@ page import="lv.javaguru.java2.database.jdbc.CompanyDAOImpl" %>
 <%@ page import="lv.javaguru.java2.database.jdbc.UserDAOImpl" %>
 <%@ page import="lv.javaguru.java2.domain.User" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,10 +43,11 @@
         User:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select name="userid">
             <%
-            UserDAOImpl userDAO = new UserDAOImpl();
-            List<User> users = userDAO.getAll();
-            if (users.size()>0)
-                for (User user : users) {
+
+            List<User> userList = (ArrayList<User>)request.getAttribute("model");
+
+            if (userList.size()>0)
+                for (User user : userList) {
                 %>
                     <option value=<%=user.getUserId()%>> id=<%=user.getUserId()%> <%=user.getFirstName()%> <%=user.getLastName()%> (<%=user.getLogin()%>)
                 <%  }

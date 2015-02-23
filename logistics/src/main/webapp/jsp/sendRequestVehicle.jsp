@@ -51,8 +51,8 @@
                 <td width="50"><%=cargo.getStatus()%></td>
                 <td width="50"><%=cargo.getUserId()%></td>
                 <td>
-                    <input type="hidden" name="cargoId" value="<%=vehicle.getVehicleId()%>">
-                    <input type="hidden" name="vehicleId" value="<%=cargo.getCargoId()%>">
+                    <input type="hidden" name="cargoId" value="<%=cargo.getCargoId()%>">
+                    <input type="hidden" name="vehicleId" value="<%=vehicle.getVehicleId()%>">
                     <input type="submit" name="action" value="Create Agreement">
                 </td>
             </tr>

@@ -44,24 +44,6 @@ public class SendRequestVehicleController implements MVCController {
             e.printStackTrace();
         }
 
-/*
-               List<Cargo> cargos = cargoDAO.getByParameters("platform", 15.0, 32.0, cargoDAO.stringToDate("04/02/2015"),
-                cargoDAO.stringToDate("25/02/2015"), cargoDAO.stringToDate("10/03/2015"), cargoDAO.stringToDate("26/03/2015"));
-
-        PreparedStatement preparedStatement = connection.prepareStatement("select * from " + getTableName() +
-                " where vehicle_type = ? and (weight between ? and ?) and " +
-                "(load_date between ? and ?) and (unload_date between ? and ?);");
-        preparedStatement.setString(1, vehicleType);
-        preparedStatement.setDouble(2, weightFrom);
-        preparedStatement.setDouble(3, weightTo);
-        preparedStatement.setDate(4, utilDateToSQL(loadDateFrom));
-        preparedStatement.setDate(5, utilDateToSQL(loadDateTo));
-        preparedStatement.setDate(6, utilDateToSQL(unloadDateFrom));
-        preparedStatement.setDate(7, utilDateToSQL(unloadDateTo));
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-
-*/
 
         modelHashMap.put("vehicle", vehicle);
         modelHashMap.put("cargoList", cargoList);

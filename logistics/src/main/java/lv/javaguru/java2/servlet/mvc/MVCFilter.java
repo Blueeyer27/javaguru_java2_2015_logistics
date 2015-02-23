@@ -40,6 +40,8 @@ public class MVCFilter implements Filter {
         controllerMapping.put("/sendRequestVehicle", new SendRequestVehicleController());
 
         controllerMapping.put("/createAgreement", new CreateAgreementController());
+        controllerMapping.put("/agreementOverview", new AgreementOverviewController());
+        controllerMapping.put("/processAgreement", new ProcessAgreementController());
 
         controllerMapping.put("/companyReg", new CompanyRegController());
 
