@@ -23,46 +23,63 @@
         CargoDAOImpl cargoDAO = new CargoDAOImpl();
         VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
     %>
-    <h2><b>Agreements overview list:</b></h2>
+    <h2><b><U>Agreements overview list:</U></b></h2>
     <table align="center" border="1" width="80%">
-        <tr>
-            <td width="200"><b>ID</b></td>
-            <td width="200"><b>Cargo ID</b></td>
-            <td width="200"><b>Vehicle ID</b></td>
-            <td width="200"><b>Status</b></td>
-        </tr>
-        <%
+    <tr>
+        <td width="200"><b>ID</b></td>
+        <td width="200"><b>Cargo ID</b></td>
+        <td width="200"><b>Vehicle ID</b></td>
+        <td width="200"><b>Status</b></td>
+        <td width="80"><b>Decission</b></td>
+        <td width="130"><b>Press!</b></td>
+    </tr>
+    </table>
 
-            for (int i = 0; i < agreementList.size(); i ++) {
-                Agreement agreement = agreementList.get(i);
-                Cargo cargo = cargoDAO.getById(agreement.getCargoId());
-                Vehicle vehicle = vehicleDAO.getById(agreement.getVehicleId());
-        %>
+    <%
+    for (int i = 0; i < agreementList.size(); i ++) {
+        Agreement agreement = agreementList.get(i);
+        Cargo cargo = cargoDAO.getById(agreement.getCargoId());
+        Vehicle vehicle = vehicleDAO.getById(agreement.getVehicleId());
+    %>
+        <HR>
+        <BR>
+        <table align="center" border="1" width="80%">
+            <%--<tr>--%>
+                <%--<td width="200"><b>ID</b></td>--%>
+                <%--<td width="200"><b>Cargo ID</b></td>--%>
+                <%--<td width="200"><b>Vehicle ID</b></td>--%>
+                <%--<td width="200"><b>Status</b></td>--%>
+                <%--<td width="80"><b>Decission</b></td>--%>
+                <%--<td width="130"><b>Press!</b></td>--%>
+            <%--</tr>--%>
         <form method="post" action="processAgreement">
-            <tr>
-                <td width="200"><%=agreement.getAgreementId()%></td>
-                <td width="200"><%=agreement.getCargoId()%></td>
-                <td width="200"><%=agreement.getVehicleId()%></td>
-                <td width="200"><%=agreement.getStatus()%></td>
-                <td width="20">
-                    <select name="processType">
-                        <option value="accept" selected>&nbsp;Accept
-                        <option value="cancel" >&nbsp;Cancel
-                    </select><br/>
-                </td>
-                <td>
-                    <input type="hidden" name="agreementId" value="<%=agreement.getAgreementId()%>">
-                    <input type="hidden" name="cargoId" value="<%=agreement.getCargoId()%>">
-                    <input type="hidden" name="vehicleId" value="<%=agreement.getVehicleId()%>">
-                    <input type="submit" name="action" value="Process Agreement">
-                </td>
+        <tr>
+            <td width="200"><%=agreement.getAgreementId()%></td>
+            <td width="200"><%=agreement.getCargoId()%></td>
+            <td width="200"><%=agreement.getVehicleId()%></td>
+            <td width="200"><%=agreement.getStatus()%></td>
+            <td width="20">
+               <select name="processType">
+               <option value="accept" selected>&nbsp;Accept
+               <option value="cancel" >&nbsp;Cancel
+               </select><br/>
+            </td>
+            <td width="20">
+                <input type="hidden" name="agreementId" value="<%=agreement.getAgreementId()%>">
+                <input type="hidden" name="cargoId" value="<%=agreement.getCargoId()%>">
+                <input type="hidden" name="vehicleId" value="<%=agreement.getVehicleId()%>">
+                <input type="submit" name="action" value="Process Agreement">
+            </td>
             </tr>
-            <%
-            if (cargo != null && vehicle != null) {
-            %>
+        </form>
+        </table>
+        <%
+        if (cargo != null && vehicle != null) {
+        %>
+            <U>Agreement details:</U>
+            <table align="center" border="1" width="80%">
             <tr>
-                <td width="200">Cargo type=<%=cargo.getVehicleType()%>
-                </td>
+                <td width="200">Cargo type=<%=cargo.getVehicleType()%></td>
                 <td width="200">Cargo weight=<%=cargo.getWeight()%></td>
                 <td width="200">Load date=<%=cargo.getLoadDate()%></td>
                 <td width="200">Unload date=<%=cargo.getUnloadDate()%></td>
@@ -76,22 +93,17 @@
                 <td width="200">Vehicle status=<%=vehicle.getStatus()%></td>
             </tr>
             <%}%>
-            <tr>
-                <td width="200">.</td>
-            </tr>
-        </form>
-        <%}
-
-            if (agreementList.size()==0) {
-        %>
-        <script language="Javascript">
-            <!--
-            alert ("Sorry, NO AGREEMENTS FOUND in DB! :(")
-            //-->
-        </script>
-        <%}%>
-    </table>
-    <hr>
+            </table>
+        <BR>
+    <%}
+    if (agreementList.size()==0) {
+    %>
+    <script language="Javascript">
+        <!--
+        alert ("Sorry, NO AGREEMENTS FOUND in DB! :(")
+        //-->
+    </script>
+    <%}%>
 </div>
 </body>
 </html>
