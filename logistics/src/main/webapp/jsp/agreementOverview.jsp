@@ -71,8 +71,8 @@
             <tr>
                 <td width="200">Vehicle name=<%=vehicle.getName()%></td>
                 <td width="200">Vehicle capacity=<%=vehicle.getCapacity()%></td>
-                <td width="200">Vehicle capacity=<%=vehicle.getplateNumber()%></td>
-                <td width="200">Vehicle capacity=<%=vehicle.gettrailerNumber()%></td>
+                <td width="200">Vehicle plate=<%=vehicle.getplateNumber()%></td>
+                <td width="200">Vehicle trailer=<%=vehicle.gettrailerNumber()%></td>
                 <td width="200">Vehicle status=<%=vehicle.getStatus()%></td>
             </tr>
             <%}%>
