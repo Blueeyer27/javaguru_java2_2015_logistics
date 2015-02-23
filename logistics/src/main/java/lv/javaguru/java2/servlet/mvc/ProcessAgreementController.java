@@ -2,10 +2,16 @@ package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
+import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
+import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
+import lv.javaguru.java2.domain.Cargo;
+import lv.javaguru.java2.domain.Vehicle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProcessAgreementController implements MVCController {
 
@@ -22,28 +28,40 @@ public class ProcessAgreementController implements MVCController {
         Agreement agreement = new Agreement();
         AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
 
+        Cargo cargo = null;
+        CargoDAOImpl cargoDAO = new CargoDAOImpl();
+
+        Vehicle vehicle = null;
+        VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+
 
         try {
             agreement = agreementDAO.getById(agreementId);
+            cargo = cargoDAO.getById(cargoId);
+            vehicle = vehicleDAO.getById(vehicleId);
         } catch (DBException e) {
             System.out.println("Exception while agreementDAO.getById()  in ProcessAgreementController()");
             e.printStackTrace();
         }
 
         //here we need(or must) to update status also for Cargo and Vehicle items
-        if (processType.equals("yes")) {
+        if (processType.equals("accept")) {
 
             agreement.setStatus(status);
+            cargo.setStatus(status);
+            vehicle.setStatus(status);
             try {
                 agreementDAO.update(agreement);
+                cargoDAO.update(cargo);
+                vehicleDAO.update(vehicle);
             } catch (DBException e) {
-                System.out.println("Exception while agreementDAO.update()  in ProcessAgreementController()");
+                System.out.println("Exception while agreementDAO.update() or cargoDAO.update() or vehicleDAO.update()  in ProcessAgreementController()");
                 e.printStackTrace();
             }
         }
 
 
-        if (processType.equals("no")) {
+        if (processType.equals("cancel")) {
             try {
                 agreementDAO.delete(agreement.getAgreementId());
             } catch (DBException e) {
@@ -52,7 +70,22 @@ public class ProcessAgreementController implements MVCController {
             }
         }
 
-        return new MVCModel("/jsp/processAgreement.jsp", processType);
+
+        List<Agreement> agreementList = new ArrayList<Agreement>();
+
+        try {
+            agreementList = agreementDAO.getAll();
+        } catch (DBException e) {
+            System.out.println("Exception while getting agreementList ProcessAgreementController");
+            e.printStackTrace();
+        }
+
+
+        MVCModel model = new MVCModel("/jsp/agreementOverview.jsp", agreementList);
+        return model;
+
+
+
     }
 }
 

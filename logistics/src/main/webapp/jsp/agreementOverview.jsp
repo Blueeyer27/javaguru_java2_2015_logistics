@@ -46,8 +46,8 @@
                 <td width="200"><%=agreement.getStatus()%></td>
                 <td width="20">
                     <select name="processType">
-                        <option value="yes" selected>&nbsp;Accept
-                        <option value="no" >&nbsp;Cancel
+                        <option value="accept" selected>&nbsp;Accept
+                        <option value="cancel" >&nbsp;Cancel
                     </select><br/>
                 </td>
                 <td>
