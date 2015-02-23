@@ -30,8 +30,8 @@
         <td width="200"><b>Cargo ID</b></td>
         <td width="200"><b>Vehicle ID</b></td>
         <td width="200"><b>Status</b></td>
-        <td width="80"><b>Decission</b></td>
-        <td width="130"><b>Press!</b></td>
+        <td width="70"><b>Decision</b></td>
+        <td width="140"><b>Press it!</b></td>
     </tr>
     </table>
 
