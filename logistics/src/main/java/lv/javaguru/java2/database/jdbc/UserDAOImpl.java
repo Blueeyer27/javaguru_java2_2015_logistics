@@ -1,13 +1,16 @@
 package lv.javaguru.java2.database.jdbc;
 
-import lv.javaguru.java2.database.UserDAO;
-import lv.javaguru.java2.domain.User;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+import lv.javaguru.java2.database.UserDAO;
+import lv.javaguru.java2.domain.User;
+
+@Component
 public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
 
     private static final String TABLE_NAME = "user";

@@ -3,6 +3,8 @@ package lv.javaguru.java2.servlet.mvc;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -14,39 +16,62 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import lv.javaguru.java2.servlet.SpringAppConfig;
+
 public class MVCFilter implements Filter {
 
+    private static Logger logger = Logger.getLogger(MVCFilter.class.getName());
+    
+    private ApplicationContext springContext;
+    
     private Map<String, MVCController> controllerMapping;
 
+    
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+
+        try {
+            springContext =
+                    new AnnotationConfigApplicationContext(SpringAppConfig.class);
+        } catch (BeansException e) {
+            logger.log(Level.INFO, "Spring context failed to start", e);
+        }
+        
         controllerMapping = new HashMap<String, MVCController>();
-        controllerMapping.put("/hello", new HelloWorldController());
+        controllerMapping.put("/hello", getBean(HelloWorldController.class));
 
-        controllerMapping.put("/userReg", new UserRegController());
-        controllerMapping.put("/userRegResult", new UserRegResultController());
-        controllerMapping.put("/userLogin", new UserLoginController());
+        controllerMapping.put("/userReg", getBean(UserRegController.class));
+        controllerMapping.put("/userRegResult", getBean(UserRegResultController.class));
+        controllerMapping.put("/userLogin", getBean(UserLoginController.class));
 
 
-        controllerMapping.put("/cargoReg", new CargoRegController());
-        controllerMapping.put("/cargoRegResult", new CargoRegResultController());
-        controllerMapping.put("/cargoSearchResult", new CargoSearchResultController());
-        controllerMapping.put("/sendRequestCargo", new SendRequestCargoController());
+        controllerMapping.put("/cargoReg", getBean(CargoRegController.class));
+        controllerMapping.put("/cargoRegResult", getBean(CargoRegResultController.class));
+        controllerMapping.put("/cargoSearchResult", getBean(CargoSearchResultController.class));
+        controllerMapping.put("/sendRequestCargo", getBean(SendRequestCargoController.class));
 
-        controllerMapping.put("/vehicleSearchResult", new VehicleSearchResultController());
-        controllerMapping.put("/vehiclereg", new VehicleRegController());
-        controllerMapping.put("/vehicleregresult", new VehicleRegResultController());
-        controllerMapping.put("/getallvehicles", new GetAllVehiclesController());
-        controllerMapping.put("/sendRequestVehicle", new SendRequestVehicleController());
+        controllerMapping.put("/vehicleSearchResult", getBean(VehicleSearchResultController.class));
+        controllerMapping.put("/vehiclereg", getBean(VehicleRegController.class));
+        controllerMapping.put("/vehicleregresult", getBean(VehicleRegResultController.class));
+        controllerMapping.put("/getallvehicles", getBean(GetAllVehiclesController.class));
+        controllerMapping.put("/sendRequestVehicle", getBean(SendRequestVehicleController.class));
 
-        controllerMapping.put("/createAgreement", new CreateAgreementController());
-        controllerMapping.put("/agreementOverview", new AgreementOverviewController());
-        controllerMapping.put("/processAgreement", new ProcessAgreementController());
+        controllerMapping.put("/createAgreement", getBean(CreateAgreementController.class));
+        controllerMapping.put("/agreementOverview", getBean(AgreementOverviewController.class));
+        controllerMapping.put("/processAgreement", getBean(ProcessAgreementController.class));
 
-        controllerMapping.put("/companyReg", new CompanyRegController());
+        controllerMapping.put("/companyReg", getBean(CompanyRegController.class));
 
     }
 
+    private MVCController getBean(Class clazz){
+        return (MVCController) springContext.getBean(clazz);
+    }
+    
     public void doFilter(ServletRequest request,
                          ServletResponse response) throws IOException, ServletException {
 

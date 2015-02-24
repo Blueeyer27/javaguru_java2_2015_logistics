@@ -1,12 +1,15 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Component;
+
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+@Component
 public class CreateAgreementController implements MVCController {
 
 

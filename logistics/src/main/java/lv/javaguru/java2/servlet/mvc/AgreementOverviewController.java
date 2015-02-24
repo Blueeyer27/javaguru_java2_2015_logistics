@@ -1,21 +1,19 @@
 package lv.javaguru.java2.servlet.mvc;
 
-import lv.javaguru.java2.database.AgreementDAO;
-import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
-import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
-import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
-import lv.javaguru.java2.domain.Agreement;
-import lv.javaguru.java2.domain.Cargo;
-import lv.javaguru.java2.domain.Vehicle;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
+
+import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
+import lv.javaguru.java2.domain.Agreement;
+
+@Component
 public class AgreementOverviewController implements MVCController {
 
     @Override

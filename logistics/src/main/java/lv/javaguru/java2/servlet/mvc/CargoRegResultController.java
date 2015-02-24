@@ -1,16 +1,19 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Component;
+
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
 import lv.javaguru.java2.domain.Cargo;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-
 /**
  * Created by andre on 20.02.2015.
  */
+@Component
 public class CargoRegResultController implements MVCController {
 
 

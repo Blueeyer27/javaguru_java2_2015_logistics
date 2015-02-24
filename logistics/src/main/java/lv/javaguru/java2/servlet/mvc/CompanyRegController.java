@@ -1,25 +1,27 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Component;
+
+import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.CompanyDAOImpl;
 import lv.javaguru.java2.domain.Company;
 
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * Created by andre on 17.02.2015.
  */
+@Component
 public class CompanyRegController implements MVCController {
+
+    private CompanyDAO companyDAO = new CompanyDAOImpl();
 
 
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
-
-
-
         if (request.getMethod().equals("POST"))
             System.out.println("Metod POST ispolzuetsa");
         else
@@ -35,8 +37,7 @@ public class CompanyRegController implements MVCController {
         String country = request.getParameter("country");
         String type = request.getParameter("type");
 
-        CompanyDAOImpl companyDAO = new CompanyDAOImpl();
-
+        
         Company companyNew = new Company(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
 
         try {

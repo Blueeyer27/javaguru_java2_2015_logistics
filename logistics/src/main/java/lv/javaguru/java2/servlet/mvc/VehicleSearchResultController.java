@@ -1,20 +1,17 @@
 package lv.javaguru.java2.servlet.mvc;
 
-import lv.javaguru.java2.database.DBException;
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Component;
+
+import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Vehicle;
 
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
+@Component
 public class VehicleSearchResultController implements MVCController {
 
     public static final Double MIN_WEIGHT = 0.0;
