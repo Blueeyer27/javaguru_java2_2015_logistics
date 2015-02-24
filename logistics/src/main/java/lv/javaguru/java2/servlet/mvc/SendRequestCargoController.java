@@ -16,6 +16,7 @@ import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
 
 @Component
+@URL(value="/sendRequestCargo")
 public class SendRequestCargoController implements MVCController {
 
     @Override

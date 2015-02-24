@@ -15,12 +15,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import lv.javaguru.java2.servlet.SpringAppConfig;
+import org.springframework.stereotype.Component;
 
 public class MVCFilter implements Filter {
 
@@ -30,7 +30,6 @@ public class MVCFilter implements Filter {
     
     private Map<String, MVCController> controllerMapping;
 
-    
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -40,44 +39,34 @@ public class MVCFilter implements Filter {
         } catch (BeansException e) {
             logger.log(Level.INFO, "Spring context failed to start", e);
         }
-        
-        controllerMapping = new HashMap<String, MVCController>();
-        controllerMapping.put("/hello", getBean(HelloWorldController.class));
 
-        controllerMapping.put("/userReg", getBean(UserRegController.class));
-        controllerMapping.put("/userRegResult", getBean(UserRegResultController.class));
-        controllerMapping.put("/userLogin", getBean(UserLoginController.class));
-
-
-        controllerMapping.put("/cargoReg", getBean(CargoRegController.class));
-        controllerMapping.put("/cargoRegResult", getBean(CargoRegResultController.class));
-        controllerMapping.put("/cargoSearchResult", getBean(CargoSearchResultController.class));
-        controllerMapping.put("/sendRequestCargo", getBean(SendRequestCargoController.class));
-
-        controllerMapping.put("/vehicleSearchResult", getBean(VehicleSearchResultController.class));
-        controllerMapping.put("/vehiclereg", getBean(VehicleRegController.class));
-        controllerMapping.put("/vehicleregresult", getBean(VehicleRegResultController.class));
-        controllerMapping.put("/getallvehicles", getBean(GetAllVehiclesController.class));
-        controllerMapping.put("/sendRequestVehicle", getBean(SendRequestVehicleController.class));
-
-        controllerMapping.put("/createAgreement", getBean(CreateAgreementController.class));
-        controllerMapping.put("/agreementOverview", getBean(AgreementOverviewController.class));
-        controllerMapping.put("/processAgreement", getBean(ProcessAgreementController.class));
-
-        controllerMapping.put("/companyReg", getBean(CompanyRegController.class));
-
+        try {
+            putControllersIntoMap();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private MVCController getBean(Class clazz){
         return (MVCController) springContext.getBean(clazz);
     }
+
+    public void putControllersIntoMap() throws Exception {
+
+        controllerMapping = new HashMap<String, MVCController>();
+        for (Map.Entry<String,MVCController> entry : springContext.getBeansOfType(MVCController.class).entrySet()) {
+            Class clas = entry.getValue().getClass();
+            if(clas.isAnnotationPresent(Component.class) && clas.isAnnotationPresent(URL.class)) {
+                String url = entry.getValue().getClass().getAnnotation(URL.class).value();
+                controllerMapping.put(url, getBean(clas));
+            }
+        }
+    }
     
     public void doFilter(ServletRequest request,
                          ServletResponse response) throws IOException, ServletException {
 
-
     }
-
 
     @Override
     public void doFilter(ServletRequest request, 
@@ -98,8 +87,6 @@ public class MVCFilter implements Filter {
 
             ServletContext context = req.getServletContext();
 
-
-
             RequestDispatcher requestDispacher =
                     context.getRequestDispatcher(model.getView());
             requestDispacher.forward(req, resp);
@@ -112,5 +99,4 @@ public class MVCFilter implements Filter {
     public void destroy() {
 
     }
-    
 }

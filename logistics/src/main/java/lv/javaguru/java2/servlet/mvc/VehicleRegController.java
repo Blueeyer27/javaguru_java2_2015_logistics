@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
  * Created by user on 17.02.2015.
  */
 @Component
+@URL(value="/vehiclereg")
 public class VehicleRegController implements MVCController {
     @Override
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) {

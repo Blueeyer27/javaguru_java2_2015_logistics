@@ -16,6 +16,7 @@ import lv.javaguru.java2.domain.User;
  */
 
 @Component
+@URL(value="/userLogin")
 public class UserLoginController implements MVCController {
 
     @Autowired

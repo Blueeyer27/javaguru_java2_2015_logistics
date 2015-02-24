@@ -14,6 +14,7 @@ import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
 
 @Component
+@URL(value="/agreementOverview")
 public class AgreementOverviewController implements MVCController {
 
     @Override

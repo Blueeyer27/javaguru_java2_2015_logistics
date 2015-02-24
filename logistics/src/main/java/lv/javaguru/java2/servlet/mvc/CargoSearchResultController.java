@@ -15,6 +15,7 @@ import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
 import lv.javaguru.java2.domain.Cargo;
 
 @Component
+@URL(value="/cargoSearchResult")
 public class CargoSearchResultController implements MVCController {
 
     public static final Double MIN_WEIGHT = 0.0;

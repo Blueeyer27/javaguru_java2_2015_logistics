@@ -15,6 +15,7 @@ import lv.javaguru.java2.servlet.model.RegistrationMethods;
  * Created by user on 17.02.2015.
  */
 @Component
+@URL(value="/vehicleregresult")
 public class VehicleRegResultController implements MVCController {
     @Override
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) {

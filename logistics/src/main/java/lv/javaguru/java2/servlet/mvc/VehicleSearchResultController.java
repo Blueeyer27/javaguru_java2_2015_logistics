@@ -12,6 +12,7 @@ import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Vehicle;
 
 @Component
+@URL(value="/vehicleSearchResult")
 public class VehicleSearchResultController implements MVCController {
 
     public static final Double MIN_WEIGHT = 0.0;

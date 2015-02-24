@@ -14,6 +14,7 @@ import lv.javaguru.java2.domain.Company;
  * Created by andre on 17.02.2015.
  */
 @Component
+@URL(value="/companyReg")
 public class CompanyRegController implements MVCController {
 
     private CompanyDAO companyDAO = new CompanyDAOImpl();

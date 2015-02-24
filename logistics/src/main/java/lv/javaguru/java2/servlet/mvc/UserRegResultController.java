@@ -13,6 +13,7 @@ import lv.javaguru.java2.domain.User;
  * Created by andre on 17.02.2015.
  */
 @Component
+@URL(value="/userRegResult")
 public class UserRegResultController implements MVCController {
 
 

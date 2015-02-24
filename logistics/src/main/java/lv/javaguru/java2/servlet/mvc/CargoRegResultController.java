@@ -14,6 +14,7 @@ import lv.javaguru.java2.domain.Cargo;
  * Created by andre on 20.02.2015.
  */
 @Component
+@URL(value="/cargoRegResult")
 public class CargoRegResultController implements MVCController {
 
 

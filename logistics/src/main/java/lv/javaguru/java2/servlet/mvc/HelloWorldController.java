@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 @Component
+@URL(value="/hello")
 public class HelloWorldController implements MVCController {
 
     @Override

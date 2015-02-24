@@ -10,8 +10,8 @@ import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
 
 @Component
+@URL(value="/createAgreement")
 public class CreateAgreementController implements MVCController {
-
 
     @Override
     public MVCModel processRequest(HttpServletRequest request,
