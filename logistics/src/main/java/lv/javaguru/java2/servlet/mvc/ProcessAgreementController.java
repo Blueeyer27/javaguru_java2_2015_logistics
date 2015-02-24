@@ -38,8 +38,8 @@ public class ProcessAgreementController implements MVCController {
 
         try {
             agreement = agreementDAO.getById(agreementId);
-//            cargo = cargoDAO.getById(cargoId);
-//            vehicle = vehicleDAO.getById(vehicleId);
+            cargo = cargoDAO.getById(cargoId);
+            vehicle = vehicleDAO.getById(vehicleId);
         } catch (DBException e) {
             System.out.println("Exception while agreementDAO.getById()  in ProcessAgreementController()");
             e.printStackTrace();
@@ -49,12 +49,14 @@ public class ProcessAgreementController implements MVCController {
         if (processType.equals("accept")) {
 
             agreement.setStatus(status);
-//            cargo.setStatus(status);
-//            vehicle.setStatus(status);
+            if (cargo !=null && vehicle != null) {
+                cargo.setStatus(status);
+                vehicle.setStatus(status);
+            }
             try {
                 agreementDAO.update(agreement);
-//                cargoDAO.update(cargo);
-//                vehicleDAO.update(vehicle);
+                cargoDAO.update(cargo);
+                vehicleDAO.update(vehicle);
             } catch (DBException e) {
                 System.out.println("Exception while agreementDAO.update() or cargoDAO.update() or vehicleDAO.update()  in ProcessAgreementController()");
                 e.printStackTrace();
