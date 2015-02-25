@@ -39,15 +39,16 @@ public class UserLoginController implements MVCController {
 
         MVCModel model = null;
 
-        if (user != null) {
+        if (user != null)
             model = new MVCModel("/jsp/userlogin.jsp", user);
-        }
-        else {
+        else
             model = new MVCModel("/jsp/userloginnot.jsp", login);
-        }
 
         return model;
     }
+
+
+
 
     protected User getUserIfExist(List<User> users,
                                   String login,
@@ -60,6 +61,9 @@ public class UserLoginController implements MVCController {
         }
         return null;
     }
+
+
+
 
     protected List<User> getUserListFromDatabase() {
         List<User> users = null;
