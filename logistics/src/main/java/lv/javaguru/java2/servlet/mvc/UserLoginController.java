@@ -4,13 +4,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
+import lv.javaguru.java2.servlet.model.URL;
 
 /**
  * Created by andre on 17.02.2015.
@@ -23,27 +23,45 @@ public class UserLoginController implements MVCController {
     @Autowired
     private UserDAO userDAO;
 
-    
+
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
-
-
-
-        if (request.getMethod().equals("POST"))
-            System.out.println("Metod POST ispolzuetsa");
-        else
-            if (request.getMethod().equals("GET"))
-                System.out.println("Metod GET ispolzuetsa");
-
-
-
+        printLogInfo(request);
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        boolean exist = false;
 
+        List<User> users = getUserListFromDatabase();
+
+        User user = getUserIfExist(users, login, password);
+
+        MVCModel model = null;
+
+        if (user != null) {
+            model = new MVCModel("/jsp/userlogin.jsp", user);
+        }
+        else {
+            model = new MVCModel("/jsp/userloginnot.jsp", login);
+        }
+
+        return model;
+    }
+
+    protected User getUserIfExist(List<User> users,
+                                  String login,
+                                  String password) {
+        for (User user : users) {
+            if (user.getLogin().equals(login)
+                    && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    protected List<User> getUserListFromDatabase() {
         List<User> users = null;
         try {
             users = userDAO.getAll();
@@ -51,28 +69,16 @@ public class UserLoginController implements MVCController {
             System.out.println("Exception while getting all users UserLoginController");
             e.printStackTrace();
         }
+        return users;
+    }
 
-        User user = null;
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getLogin().equals(login) && users.get(i).getPassword().equals(password)) {
-                user = users.get(i);
-                exist = true;
-                break;
-            }
-        }
-
-
-        MVCModel model = new MVCModel("");
-        if (exist)
-            model = new MVCModel("/jsp/userlogin.jsp", user);
+    protected void printLogInfo(HttpServletRequest request) {
+        if (request.getMethod().equals("POST"))
+            System.out.println("Metod POST ispolzuetsa");
         else
-            model = new MVCModel("/jsp/userloginnot.jsp", login);
-
-//        MVCModel model = new MVCModel("/jsp/userLoginNot.jsp", login);
-
-
-        return model;
+        if (request.getMethod().equals("GET"))
+            System.out.println("Metod GET ispolzuetsa");
 
     }
-}
 
+}
