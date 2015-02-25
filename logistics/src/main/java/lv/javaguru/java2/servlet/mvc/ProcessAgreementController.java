@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;

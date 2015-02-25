@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
+import lv.javaguru.java2.servlet.model.URL;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;

@@ -1,7 +1,12 @@
 package lv.javaguru.java2.servlet.model;
 
-/**
- * Created by rz on 25.02.2015.
- */
-public class URL {
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface URL {
+    String value();
 }

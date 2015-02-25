@@ -21,6 +21,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import lv.javaguru.java2.servlet.SpringAppConfig;
 import org.springframework.stereotype.Component;
+import lv.javaguru.java2.servlet.model.URL;
 
 public class MVCFilter implements Filter {
 

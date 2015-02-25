@@ -3,6 +3,7 @@ package lv.javaguru.java2.servlet.mvc;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.stereotype.Component;
 
 @Component
