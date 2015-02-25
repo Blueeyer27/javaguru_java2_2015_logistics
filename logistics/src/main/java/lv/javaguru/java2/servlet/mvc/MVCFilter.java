@@ -19,7 +19,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import lv.javaguru.java2.servlet.SpringAppConfig;
 import org.springframework.stereotype.Component;
 import lv.javaguru.java2.servlet.model.URL;
 
