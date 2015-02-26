@@ -46,7 +46,7 @@ public class UserLoginController implements MVCController {
             model = new MVCModel("/jsp/userlogin.jsp", user);
         }
         else
-            model = new MVCModel("/jsp/userloginnot.jsp", login);
+            model = new MVCModel("/jsp/errorPage.jsp", "Incorrect LOGIN or PASSWORD entered. Sorry!");
 
         return model;
     }
