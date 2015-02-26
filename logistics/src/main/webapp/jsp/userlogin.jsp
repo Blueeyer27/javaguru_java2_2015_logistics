@@ -9,9 +9,10 @@
     <title>:) Login successfull!</title>
 </head>
 <body>
-<div align="right"><b>Hello, <%=session.getAttribute("firstName")%>
-    <%=session.getAttribute("lastName")%>
-    (<%=session.getAttribute("login")%>)!
+<% User user = (User)session.getAttribute("user");%>
+<div align="right"><b>Hello, <%=user.getLogin()%>
+    <%=user.getFirstName()%>
+    (<%=user.getLastName()%>)!
     <br>[Type: <%=session.getAttribute("userType")%>]</b></div>
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
@@ -19,10 +20,6 @@
 <hr />
 <div align="center">
     <table align="center" border="1" width="700">
-        <%
-            User user = (User)request.getAttribute("model");
-        %>
-
         <tr>
             <td width="400"><b>Hi, :) <%=user.getFirstName() + " " + user.getLastName()%> </b></td>
         <tr>
@@ -51,7 +48,6 @@
 </div>
 </body>
 </html>
-
 
 <html>
 <head>

@@ -28,7 +28,6 @@ public class UserLoginController implements MVCController {
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
-        printLogInfo(request);
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "UserLogin");
 
@@ -41,7 +40,7 @@ public class UserLoginController implements MVCController {
 
         MVCModel model = null;
 
-        if (user != null) {
+        if (user != null && user.getUserCompanyType() != null) {
             setSessionAttributes(session, user);
             model = new MVCModel("/jsp/userlogin.jsp", user);
         }
@@ -64,9 +63,7 @@ public class UserLoginController implements MVCController {
     }
 
     private void setSessionAttributes(HttpSession session, User user) {
-        session.setAttribute("login", user.getLogin());
-        session.setAttribute("firstName", user.getFirstName());
-        session.setAttribute("lastName", user.getLastName());
+        session.setAttribute("user", user);
         session.setAttribute("userType", user.getUserCompanyType());
     }
 
@@ -79,14 +76,5 @@ public class UserLoginController implements MVCController {
             e.printStackTrace();
         }
         return users;
-    }
-
-    protected void printLogInfo(HttpServletRequest request) {
-        if (request.getMethod().equals("POST"))
-            System.out.println("Metod POST ispolzuetsa");
-        else
-        if (request.getMethod().equals("GET"))
-            System.out.println("Metod GET ispolzuetsa");
-
     }
 }
