@@ -17,6 +17,8 @@ public class VehicleRegController implements MVCController {
 
        String lol = ":)";
 
-        return new MVCModel("/jsp/vehiclereg.jsp", lol);
+        MVCModel model = new MVCModel("/jsp/vehiclereg.jsp", lol);
+
+        return model;
     }
 }

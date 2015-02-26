@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 /**
  * Created by andre on 17.02.2015.
  */
-@SuppressWarnings("UnnecessaryLocalVariable")
 @Component
 @URL(value="/userReg")
 public class UserRegController implements MVCController {

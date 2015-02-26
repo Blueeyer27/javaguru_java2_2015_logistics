@@ -51,7 +51,8 @@ public class ProcessAgreementController implements MVCController {
 
         List<Agreement> agreementList = getAgreementListFromDB();
 
-        return new MVCModel("/jsp/agreementOverview.jsp", agreementList);
+        MVCModel model = new MVCModel("/jsp/agreementOverview.jsp", agreementList);
+        return model;
     }
 
     private void updateObjectsStatuses(Agreement agreement, Cargo cargo,

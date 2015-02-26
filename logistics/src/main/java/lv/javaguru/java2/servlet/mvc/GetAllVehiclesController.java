@@ -16,7 +16,6 @@ import lv.javaguru.java2.domain.Vehicle;
 /**
  * Created by user on 19.02.2015.
  */
-@SuppressWarnings("UnnecessaryLocalVariable")
 @Component
 @URL(value="/getallvehicles")
 public class GetAllVehiclesController implements MVCController {

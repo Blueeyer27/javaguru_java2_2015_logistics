@@ -36,7 +36,8 @@ public class CargoRegController implements MVCController {
             e.printStackTrace();
         }
 
-        return new MVCModel("/jsp/cargoreg.jsp", userList);
+        MVCModel model = new MVCModel("/jsp/cargoreg.jsp", userList);
+        return model;
     }
 }
 

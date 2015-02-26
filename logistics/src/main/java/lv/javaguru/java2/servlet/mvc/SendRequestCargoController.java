@@ -16,7 +16,6 @@ import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
 
-@SuppressWarnings("UnnecessaryLocalVariable")
 @Component
 @URL(value="/sendRequestCargo")
 public class SendRequestCargoController implements MVCController {

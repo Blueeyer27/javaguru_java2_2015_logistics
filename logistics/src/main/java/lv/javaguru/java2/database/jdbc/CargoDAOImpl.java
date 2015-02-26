@@ -102,14 +102,16 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
 
     @Override
     public java.sql.Date utilDateToSQL(java.util.Date date) {
-        return new java.sql.Date(date.getTime());
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return sqlDate;
     }
 
     @Override
     public java.util.Date stringToDate(String incomingDate) {
         SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            return formater.parse(incomingDate);
+            java.util.Date date = formater.parse(incomingDate);
+            return date;
         } catch (ParseException ex) {
             System.out.println("Invalid Date format in method stringToDate(). Should be dd/MM/yyyy");
             ex.printStackTrace();
@@ -131,7 +133,8 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
         }
 
         try {
-            return formater.parse(incomingDate);
+            java.util.Date date = formater.parse(incomingDate);
+            return date;
         } catch (ParseException ex) {
             System.out.println("Invalid or Empty Date format in class CargoDAOImpl -> method stringToDate().");
             ex.printStackTrace();

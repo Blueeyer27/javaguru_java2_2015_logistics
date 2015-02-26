@@ -43,7 +43,8 @@ public class CargoRegResultController implements MVCController {
 
         Cargo cargo = getCreatedCargoFromDB(cargoId);
 
-        return new MVCModel("/jsp/cargoRegResult.jsp", cargo);
+        MVCModel model = new MVCModel("/jsp/cargoRegResult.jsp", cargo);
+        return model;
     }
 
     private Long createCargoInDatabase(Long userid, String type, Double weight,
