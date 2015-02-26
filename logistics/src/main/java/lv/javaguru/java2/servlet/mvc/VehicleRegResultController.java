@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.database.VehicleDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import lv.javaguru.java2.servlet.model.URL;
 
@@ -18,6 +20,10 @@ import lv.javaguru.java2.servlet.model.RegistrationMethods;
 @Component
 @URL(value="/vehicleregresult")
 public class VehicleRegResultController implements MVCController {
+
+    @Autowired
+    private VehicleDAO vehicleDAO;
+
     @Override
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) {
 
@@ -27,36 +33,53 @@ public class VehicleRegResultController implements MVCController {
         String trailerNumber = request.getParameter("trailernumber");
         String capacity = request.getParameter("capacity");
 
-        //эту хрень тупо захардкодил
+        //эту хрень тупо захардкодил покачто
         String userid = "13";
         String status = "new";
 
-
-        List<String> parameters = new ArrayList<String>();
-
-        parameters.add(userid);
-        parameters.add(name);
-        parameters.add(type);
-        parameters.add(plateNumber);
-        parameters.add(trailerNumber);
-        parameters.add(capacity);
-        parameters.add(status);
-
-        RegistrationMethods reg = new RegistrationMethods();
-
-        try {
-            reg.vehicleCreate(parameters);
-        } catch (DBException e) {
-            e.printStackTrace();
-        }
-
+        //parsing
         long realUserid = Integer.parseInt(userid);
         double realcapacity = Double.parseDouble(capacity);
 
-        Vehicle vehicle = new Vehicle(realUserid,name,type,plateNumber,trailerNumber,realcapacity,status);
 
-        MVCModel model = new MVCModel("/jsp/vehicleregresult.jsp", vehicle);
+        long vehicleId = createVehicleInDatabase(new Vehicle(realUserid, name, type, plateNumber, trailerNumber, realcapacity, status));
+
+        Vehicle vehicleFromDb = getCreatedVehicleFromDatabase(vehicleId);
+
+        MVCModel model = new MVCModel("/jsp/vehicleregresult.jsp", vehicleFromDb);
 
         return model;
+    }
+
+    protected long createVehicleInDatabase(Vehicle vehicle){
+        Vehicle newVehicle = vehicle;
+        long vehicleId;
+        try {
+            vehicleDAO.create(newVehicle);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        vehicleId = newVehicle.getVehicleId();
+        return vehicleId;
+    }
+
+    protected Vehicle getCreatedVehicleFromDatabase(long vehicleId){
+        Vehicle vehicleFromDb = null;
+        try {
+           vehicleFromDb = vehicleDAO.getById(vehicleId);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        return vehicleFromDb;
+    }
+
+    protected List<Vehicle> getAllVehiclesFromDb(){
+        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        try {
+            vehicleList = vehicleDAO.getAll();
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        return vehicleList;
     }
 }
