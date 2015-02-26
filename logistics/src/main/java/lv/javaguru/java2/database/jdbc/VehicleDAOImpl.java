@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.domain.Vehicle;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
     private static final String TABLE_NAME = "vehicle";
     private static final String UPDATE_STRING = " set NAME = ?, TYPE = ?, " +

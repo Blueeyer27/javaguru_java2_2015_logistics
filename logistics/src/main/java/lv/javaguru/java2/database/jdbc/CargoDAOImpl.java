@@ -3,6 +3,8 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Cargo;
+import org.springframework.stereotype.Component;
+
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +13,8 @@ import java.util.*;
 /**
  * Created by Dinjvald on 07/02/15.
  */
+
+@Component
 public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
     private static final String TABLE_NAME = "cargo";
     private static final String UPDATE_STRING = " SET vehicle_type = ?, weight = ?," +
@@ -96,11 +100,13 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
         }
     }
 
+    @Override
     public java.sql.Date utilDateToSQL(java.util.Date date) {
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         return sqlDate;
     }
 
+    @Override
     public java.util.Date stringToDate(String incomingDate) {
         SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -113,6 +119,7 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
         }
     }
 
+    @Override
     public java.util.Date stringToDate2(String incomingDate, int i) {
         SimpleDateFormat formater = new SimpleDateFormat();
 
@@ -134,7 +141,6 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
             return null;
         }
     }
-
 
     @Override
     public List<Cargo> getByParameters(String vehicleType, Double weightFrom, Double weightTo, java.util.Date loadDateFrom,

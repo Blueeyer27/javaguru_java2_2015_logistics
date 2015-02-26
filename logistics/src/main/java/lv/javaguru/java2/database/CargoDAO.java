@@ -9,4 +9,10 @@ public interface CargoDAO extends BaseDAO<Cargo> {
 
     List<Cargo> getByParameters(String vehicleType, Double weightFrom, Double weightTo, java.util.Date loadDateFrom,
                                 java.util.Date loadDateTo, java.util.Date unloadDateFrom, java.util.Date unloadDateTo) throws DBException;
+
+    Date utilDateToSQL(java.util.Date date);
+
+    java.util.Date stringToDate(String incomingDate);
+
+    java.util.Date stringToDate2(String incomingDate, int i);
 }

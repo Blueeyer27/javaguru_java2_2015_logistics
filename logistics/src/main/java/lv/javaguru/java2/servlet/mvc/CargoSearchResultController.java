@@ -8,11 +8,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.servlet.model.URL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
 import lv.javaguru.java2.domain.Cargo;
 
 @Component
@@ -24,7 +25,9 @@ public class CargoSearchResultController implements MVCController {
     public static final String MIN_DATE = "1000-01-01";
     public static final String MAX_DATE = "9999-12-31";
     private String errorMessage;
-    private CargoDAOImpl cargoDAO = new CargoDAOImpl();
+
+    @Autowired
+    private CargoDAO cargoDAO;
 
     @Override
     public MVCModel processRequest(HttpServletRequest request,

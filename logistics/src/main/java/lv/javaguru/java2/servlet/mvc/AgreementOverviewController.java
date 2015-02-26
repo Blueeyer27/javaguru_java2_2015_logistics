@@ -7,24 +7,26 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.database.AgreementDAO;
 import lv.javaguru.java2.servlet.model.URL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
 
 @Component
 @URL(value="/agreementOverview")
 public class AgreementOverviewController implements MVCController {
 
+    @Autowired
+    private AgreementDAO agreementDAO;
+
     @Override
     public MVCModel processRequest(HttpServletRequest request, 
                                    HttpServletResponse response) {
 
         Map<String, Object> modelHashMap = new HashMap<String, Object> ();
-
-        AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
 
         List<Agreement> agreementList = new ArrayList<Agreement>();
 

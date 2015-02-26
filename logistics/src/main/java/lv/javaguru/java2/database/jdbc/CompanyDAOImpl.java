@@ -2,12 +2,14 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.domain.Company;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Component
 public class CompanyDAOImpl extends DAOImpl<Company> implements CompanyDAO {
 
     private static final String TABLE_NAME = "company";

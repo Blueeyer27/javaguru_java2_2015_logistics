@@ -2,15 +2,15 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.AgreementDAO;
 import lv.javaguru.java2.domain.Agreement;
+import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-
+@Component
 public class AgreementDAOImpl extends DAOImpl<Agreement> implements AgreementDAO {
-
 
     private static final String TABLE_NAME = "agreement";
     private static final String UPDATE_STRING = " set cargo_id = ?, " +

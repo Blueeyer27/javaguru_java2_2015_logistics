@@ -5,11 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.servlet.model.URL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.domain.User;
 
 /**
@@ -19,26 +20,24 @@ import lv.javaguru.java2.domain.User;
 @URL(value="/cargoReg")
 public class CargoRegController implements MVCController {
 
+    @Autowired
+    private UserDAO userDAO;
 
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
 
-
         List<User> userList = new ArrayList<User>();
-        UserDAOImpl userDAO = new UserDAOImpl();
 
         try {
             userList = userDAO.getAll();
         } catch (DBException e) {
-            System.out.println("Exception while getting user listo CargoRegController");
+            System.out.println("Exception while getting user list CargoRegController");
             e.printStackTrace();
         }
 
-
         MVCModel model = new MVCModel("/jsp/cargoreg.jsp", userList);
         return model;
-
     }
 }
 
