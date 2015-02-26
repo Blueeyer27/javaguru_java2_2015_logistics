@@ -72,4 +72,14 @@ public class VehicleRegResultController implements MVCController {
         }
         return vehicleFromDb;
     }
+
+    protected List<Vehicle> getAllVehiclesFromDb(){
+        List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+        try {
+            vehicleList = vehicleDAO.getAll();
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        return vehicleList;
+    }
 }
