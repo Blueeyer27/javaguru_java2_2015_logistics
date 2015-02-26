@@ -1,5 +1,8 @@
 package lv.javaguru.java2.domain;
 
+import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.jdbc.CompanyDAOImpl;
+
 public class User {
 
     private long userId;
@@ -11,11 +14,9 @@ public class User {
     private String phoneNumber;
     private long companyId;
 
-
     public User() {
 
     }
-
 
     public User(String login, String password, String firstName, String lastName, String eMail, String phoneNumber, long companyId) {
         this.login = login;
@@ -91,4 +92,18 @@ public class User {
         this.companyId = companyId;
     }
 
+    public String getUserCompanyType() {
+        return getUserCompany().getType();
+    }
+
+    private Company getUserCompany() {
+        CompanyDAOImpl companyDAO = new CompanyDAOImpl();
+        Company company = null;
+        try {
+            company = companyDAO.getById(getCompanyId());
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        return company;
+    }
 }

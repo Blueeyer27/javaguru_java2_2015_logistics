@@ -1,4 +1,3 @@
-<%@ page import="lv.javaguru.java2.servlet.mvc.MVCModel" %>
 <%@ page import="lv.javaguru.java2.domain.User" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
@@ -10,6 +9,10 @@
     <title>:) Login successfull!</title>
 </head>
 <body>
+<div align="right"><b>Hello, <%=session.getAttribute("firstName")%>
+    <%=session.getAttribute("lastName")%>
+    (<%=session.getAttribute("login")%>)!
+    <br>[Type: <%=session.getAttribute("userType")%>]</b></div>
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
 <div align="right"><a href="index.html">BACK</a></div>

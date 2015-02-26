@@ -3,6 +3,7 @@ package lv.javaguru.java2.servlet.mvc;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,10 +29,11 @@ public class UserLoginController implements MVCController {
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
         printLogInfo(request);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("pageName", "UserLogin");
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-
 
         List<User> users = getUserListFromDatabase();
 
@@ -39,16 +41,15 @@ public class UserLoginController implements MVCController {
 
         MVCModel model = null;
 
-        if (user != null)
+        if (user != null) {
+            setSessionAttributes(session, user);
             model = new MVCModel("/jsp/userlogin.jsp", user);
+        }
         else
             model = new MVCModel("/jsp/userloginnot.jsp", login);
 
         return model;
     }
-
-
-
 
     protected User getUserIfExist(List<User> users,
                                   String login,
@@ -62,8 +63,12 @@ public class UserLoginController implements MVCController {
         return null;
     }
 
-
-
+    private void setSessionAttributes(HttpSession session, User user) {
+        session.setAttribute("login", user.getLogin());
+        session.setAttribute("firstName", user.getFirstName());
+        session.setAttribute("lastName", user.getLastName());
+        session.setAttribute("userType", user.getUserCompanyType());
+    }
 
     protected List<User> getUserListFromDatabase() {
         List<User> users = null;
@@ -84,5 +89,4 @@ public class UserLoginController implements MVCController {
             System.out.println("Metod GET ispolzuetsa");
 
     }
-
 }
