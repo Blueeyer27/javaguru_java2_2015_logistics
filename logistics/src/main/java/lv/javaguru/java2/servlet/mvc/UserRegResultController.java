@@ -42,26 +42,47 @@ public class UserRegResultController implements MVCController {
         String phone = request.getParameter("phone");
         int companyid = Integer.parseInt(request.getParameter("companyid"));
 
-        User userNew = createNewUserInDB(login, password, firstname, lastname, email, phone, companyid);
 
+        Long userId = createNewUserInDB(login, password, firstname, lastname, email, phone, companyid);
 
+        User userNewFromDB = getNewUserFromDB(userId);
 
 //        String message = "New User -" + login + "- created! :)";
 //        MVCModel model = new MVCModel("/jsp/userreg.jsp", message);
-        MVCModel model = new MVCModel("/jsp/userRegResult.jsp", userNew);
+
+        MVCModel model = new MVCModel("/jsp/userRegResult.jsp", userNewFromDB);
         return model;
+
     }
 
 
-    protected User createNewUserInDB(String login, String password, String firstname, String lastname, String email, String phone, int companyid) {
-        User userNew = new User(login, password, firstname, lastname, email, phone, companyid);
+
+
+
+
+    protected User getNewUserFromDB(Long userId) {
+        User user = null;
         try {
-            userDAO.create(userNew);
+            user = userDAO.getById(userId);
+        } catch (DBException e) {
+            System.out.println("Exception while getting user from DB UserRegResultController");
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
+    protected Long createNewUserInDB(String login, String password, String firstname, String lastname, String email, String phone, int companyid) {
+        User user = new User(login, password, firstname, lastname, email, phone, companyid);
+        Long id = null;
+        try {
+            userDAO.create(user);
+            id = user.getUserId();
         } catch (DBException e) {
             System.out.println("Exception while creating new user UserRegResultController");
             e.printStackTrace();
         }
-        return userNew;
+        return id;
     }
 
 
