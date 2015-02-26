@@ -8,14 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>Vehicles Page</title>
 </head>
 <body>
+<div align="center"><img src="../images/indexlogo.jpg"/></div>
+<hr />
+<div align="right"><a href="index.html">BACK</a></div>
+<hr />
 
-<h1>uhaha</h1>
-<a href = "../jsp/vehiclereg.jsp">Vehicle Registration</a>
-<br>
-<a href = "../getallvehicles">Show all vehicles</a>
-
+<div align="center"><a href = "../jsp/vehiclereg.jsp">Vehicle Registration</a></div>
+<br/>
+<div align="center"><a href = "../getallvehicles">Show all vehicles</a></div>
+<br/>
+<div align="center"><a href="vehicleSearch.jsp">Find Vehicle)</a></div>
 </body>
 </html>

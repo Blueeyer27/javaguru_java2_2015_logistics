@@ -11,17 +11,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+  <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>Vehicle registration confirmation</title>
 </head>
 <body>
-<h1>ETO USPEH!!!</h1>
+<div align="center"><img src="images/indexlogo.jpg"/></div>
+<hr />
+<div align="right"><a href="index.html">BACK</a></div>
+<hr />
+<h1><div align="center">Registration successful</div></h1>
+<div align="center">
+  <table align="center" border="1" width="450">
+    <tr>
+      <td width="200"><b>Vehicle Name</b></td>
+      <td width="200"><b>Vehicle Type</b></td>
+      <td width="200"><b>Capacity</b></td>
+      <td width="200"><b>Status</b></td>
+      </tr>
 
 <%
   Vehicle vehicle = (Vehicle)request.getAttribute("model");
 %>
-<td>Vehicle name: <%=vehicle.getName()%></td>
-<br>
-i tak daleje....
+    <td width="200"><%=vehicle.getName()%></td>
+    <td width="200"><%=vehicle.getType()%></td>
+    <td width="200"><%=vehicle.getCapacity()%></td>
+    <td width="200"><%=vehicle.getStatus()%></td>
+    <br>
 
 </body>
 </html>
