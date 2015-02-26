@@ -15,6 +15,7 @@ import lv.javaguru.java2.servlet.model.RegistrationMethods;
 /**
  * Created by user on 17.02.2015.
  */
+@SuppressWarnings("UnnecessaryLocalVariable")
 @Component
 @URL(value="/vehicleregresult")
 public class VehicleRegResultController implements MVCController {

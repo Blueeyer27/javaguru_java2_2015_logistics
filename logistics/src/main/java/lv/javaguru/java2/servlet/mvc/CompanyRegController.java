@@ -42,8 +42,7 @@ public class CompanyRegController implements MVCController {
             e.printStackTrace();
         }
 
-        MVCModel model = new MVCModel("/jsp/companyreg.jsp", companyNew);
-        return model;
+        return new MVCModel("/jsp/companyreg.jsp", companyNew);
     }
 }
 

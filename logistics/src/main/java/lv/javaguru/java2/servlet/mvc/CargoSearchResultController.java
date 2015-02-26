@@ -111,6 +111,7 @@ public class CargoSearchResultController implements MVCController {
     }
 
     // TEMPORARY here (we need to do create easier way to work with date formats! )
+    @SuppressWarnings("UnnecessaryLocalVariable")
     public java.util.Date stringToDate(String incomingDate) {
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
         try {

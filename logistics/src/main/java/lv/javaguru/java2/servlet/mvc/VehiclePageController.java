@@ -8,6 +8,7 @@ import java.io.IOException;
  * Created by user on 19.02.2015.
  */
 public class VehiclePageController implements MVCController {
+    @SuppressWarnings("UnnecessaryLocalVariable")
     @Override
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

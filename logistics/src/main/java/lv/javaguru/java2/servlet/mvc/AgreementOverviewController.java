@@ -37,7 +37,6 @@ public class AgreementOverviewController implements MVCController {
             e.printStackTrace();
         }
 
-        MVCModel model = new MVCModel("/jsp/agreementOverview.jsp", agreementList);
-        return model;
+        return new MVCModel("/jsp/agreementOverview.jsp", agreementList);
     }
 }

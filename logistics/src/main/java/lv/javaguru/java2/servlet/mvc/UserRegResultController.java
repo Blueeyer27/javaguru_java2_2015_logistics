@@ -38,27 +38,17 @@ public class UserRegResultController implements MVCController {
         int companyid = Integer.parseInt(request.getParameter("companyid"));
 
         User userNew = createNewUserInDB(new User(login, password, firstname, lastname, email, phone, companyid));
-
-
-//        String message = "New User -" + login + "- created! :)";
-//        MVCModel model = new MVCModel("/jsp/userreg.jsp", message);
-        MVCModel model = new MVCModel("/jsp/userRegResult.jsp", userNew);
-        return model;
+        return new MVCModel("/jsp/userRegResult.jsp", userNew);
     }
 
-
-
-
-
     protected User createNewUserInDB(User user) {
-        User userNew = user;
         try {
-            userDAO.create(userNew);
+            userDAO.create(user);
         } catch (DBException e) {
             System.out.println("Exception while creating new user UserRegResultController");
             e.printStackTrace();
         }
-        return userNew;
+        return user;
     }
 
 }

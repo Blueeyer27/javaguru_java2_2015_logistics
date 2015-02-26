@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("UnnecessaryLocalVariable")
 @Component
 @URL(value="/hello")
 public class HelloWorldController implements MVCController {
