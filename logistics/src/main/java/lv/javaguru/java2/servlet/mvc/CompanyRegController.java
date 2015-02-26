@@ -24,12 +24,6 @@ public class CompanyRegController implements MVCController {
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
-        if (request.getMethod().equals("POST"))
-            System.out.println("Metod POST ispolzuetsa");
-        else
-            if (request.getMethod().equals("GET"))
-                System.out.println("Metod GET ispolzuetsa");
-
         String name = request.getParameter("name");
         String regNumber = request.getParameter("regNumber");
         String regAddress = request.getParameter("regAddress");
@@ -39,7 +33,6 @@ public class CompanyRegController implements MVCController {
         String country = request.getParameter("country");
         String type = request.getParameter("type");
 
-        
         Company companyNew = new Company(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
 
         try {
@@ -49,12 +42,8 @@ public class CompanyRegController implements MVCController {
             e.printStackTrace();
         }
 
-//        String message = "New Company -" + name + "- created! :)";
-//        MVCModel model = new MVCModel("/jsp/userreg.jsp", message);
         MVCModel model = new MVCModel("/jsp/companyreg.jsp", companyNew);
         return model;
-
-
     }
 }
 

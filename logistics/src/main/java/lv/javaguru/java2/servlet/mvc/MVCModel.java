@@ -15,14 +15,11 @@ public class MVCModel {
         this.data = new Object();
     }
 
-
-
-        public String getView() {
+    public String getView() {
         return view;
     }
 
     public Object getData() {
         return data;
     }
-    
 }
