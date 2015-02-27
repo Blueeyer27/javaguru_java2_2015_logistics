@@ -5,15 +5,15 @@
     <title>Error</title>
 </head>
 <body>
-<%if (!session.getAttribute("pageName").equals("UserLogin")) { %>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="index.html">BACK</a></div>
-<hr />
-<%} else {%>
+<%if (session.getAttribute("pageName").equals("UserLogin")) { %>
 <div align="center"><img src="../images/indexlogo.jpg"/></div>
 <hr />
 <div align="right"><a href="../index.html">BACK</a></div>
+<hr />
+<%} else {%>
+<div align="center"><img src="images/indexlogo.jpg"/></div>
+<hr />
+<div align="right"><a href="index.html">BACK</a></div>
 <hr />
 <%}%>
 
