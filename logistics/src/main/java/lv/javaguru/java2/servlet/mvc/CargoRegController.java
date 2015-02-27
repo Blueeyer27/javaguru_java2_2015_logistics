@@ -27,6 +27,15 @@ public class CargoRegController implements MVCController {
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
 
+        List<User> userListFromDB = getUserListFromDatabase();
+
+        MVCModel model = new MVCModel("/jsp/cargoreg.jsp", userListFromDB);
+        return model;
+    }
+
+
+
+    protected List<User> getUserListFromDatabase() {
         List<User> userList = new ArrayList<User>();
 
         try {
@@ -35,9 +44,7 @@ public class CargoRegController implements MVCController {
             System.out.println("Exception while getting user list CargoRegController");
             e.printStackTrace();
         }
-
-        MVCModel model = new MVCModel("/jsp/cargoreg.jsp", userList);
-        return model;
+        return userList;
     }
 }
 

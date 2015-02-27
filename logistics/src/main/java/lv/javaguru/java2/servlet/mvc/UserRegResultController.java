@@ -40,7 +40,7 @@ public class UserRegResultController implements MVCController {
         String lastname = request.getParameter("lastname");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
-        int companyid = Integer.parseInt(request.getParameter("companyid"));
+        Long companyid = Long.parseLong(request.getParameter("companyid"));
 
 
         Long userId = createNewUserInDB(login, hashedPassword, firstname, lastname, email, phone, companyid);
@@ -69,7 +69,7 @@ public class UserRegResultController implements MVCController {
     }
 
 
-    protected Long createNewUserInDB(String login, String password, String firstname, String lastname, String email, String phone, int companyid) {
+    protected Long createNewUserInDB(String login, String password, String firstname, String lastname, String email, String phone, Long companyid) {
         User user = new User(login, password, firstname, lastname, email, phone, companyid);
         Long id = null;
         try {
