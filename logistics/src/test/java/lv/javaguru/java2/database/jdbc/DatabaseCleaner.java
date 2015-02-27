@@ -44,5 +44,13 @@ public class DatabaseCleaner extends DBConnection {
         }
     }
 
+    public static void main(String[] args) throws DBException {
+
+        DatabaseCleaner databaseCleaner = new DatabaseCleaner();
+        databaseCleaner.cleanDatabase();
+        System.out.println("Done");
+
+    }
+
 
 }
