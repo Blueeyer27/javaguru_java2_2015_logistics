@@ -53,6 +53,7 @@
     <%
     if (session.getAttribute("userType").equals("transport")) {%>
     <h2>-=T=- transport profile buttons</h2>
+    <div align="center"><img src="http://ts4.mm.bing.net/th?id=HN.608025893360110011&pid=15.1&H=109&W=160"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
             <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
@@ -66,6 +67,7 @@
     <%} else
     if (session.getAttribute("userType").equals("cargo")) {%>
     <h2>-=C=- cargo profile buttons</h2>
+    <div align="center"><img src="http://knowin.files.wordpress.com/2010/12/gift-8.jpg"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
             <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
@@ -79,6 +81,12 @@
     <%} else { %>
     <h1>Sorry! Your company type is not -=C=-"cargo" and not -=T=-"transport"</h1>
     <div align="center"><img src="http://nextchapternewlife.com/wp-content/uploads/2012/08/no-pic.jpg"/></div>
+    <script language="Javascript">
+        <!--
+        alert ("Sorry! Your company type is not 'cargo' and not 'transport'. So no buttons to press for You :(")
+        //-->
+    </script>
+
     <%}%>
     <hr />
 

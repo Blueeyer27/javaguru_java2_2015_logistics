@@ -47,9 +47,6 @@ public class UserRegResultController implements MVCController {
 
         User userNewFromDB = getNewUserFromDB(userId);
 
-//        String message = "New User -" + login + "- created! :)";
-//        MVCModel model = new MVCModel("/jsp/userreg.jsp", message);
-
         MVCModel model = new MVCModel("/jsp/userRegResult.jsp", userNewFromDB);
         return model;
 
