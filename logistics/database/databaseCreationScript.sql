@@ -111,3 +111,33 @@ ALTER TABLE `company` ENGINE = InnoDB AUTO_INCREMENT = 1002;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+/*==================================================
+PAROL user1,user2,user3  =123(heshing code)*/
+insert into company values (DEFAULT, "CompanyCargo", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "cargo");
+insert into company values (DEFAULT, "CompanyTransport", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "transport");
+insert into company values (DEFAULT, "CompanyNone", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "figna");
+
+SELECT id INTO @companyID  FROM company  WHERE name ='CompanyCargo';
+insert into user values (DEFAULT, "user1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Name1", "Surname1", "user1@user1.lv", "67900000", @companyID);
+SELECT id INTO @companyID  FROM company  WHERE name ='CompanyTransport';
+insert into user values (DEFAULT, "user2", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Name1", "Surname1", "user1@user1.lv", "67900000", @companyID);
+SELECT id INTO @companyID  FROM company  WHERE name ='CompanyNone';
+insert into user values (DEFAULT, "user3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Name1", "Surname1", "user1@user1.lv", "67900000", @companyID);
+
+
+
+insert into cargo values (DEFAULT, 11, "platform", 11, "Moskow", "Berlin", "2015/02/01", "2015/02/05", "pending");
+insert into cargo values (DEFAULT, 11, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "pending");
+insert into cargo values (DEFAULT, 11, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "pending");
+
+INSERT INTO vehicle VALUES (default, 11, "GAZEL", "platform", "GG111", "TT222", 9.0, "PENDING");
+INSERT INTO vehicle VALUES (default, 11, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "PENDING");
+INSERT INTO vehicle VALUES (default, 11, "MAN", "refrigerator", "GG111", "TT222", 22.0, "PENDING");
+
+insert into agreement values(default, 1, 2, "PENDING");
+insert into agreement values(default, 1, 2, "PENDING");
+insert into agreement values(default, 1, 2, "PENDING");
+
