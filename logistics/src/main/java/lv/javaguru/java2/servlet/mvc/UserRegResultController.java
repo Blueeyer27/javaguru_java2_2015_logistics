@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component;
 import lv.javaguru.java2.servlet.model.URL;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.UserDAOImpl;
 import lv.javaguru.java2.domain.User;
-//import lv.javaguru.java2.PasswordHash;
 
 
 
@@ -31,7 +29,6 @@ public class UserRegResultController implements MVCController {
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
 
-
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
@@ -42,20 +39,12 @@ public class UserRegResultController implements MVCController {
         String phone = request.getParameter("phone");
         Long companyid = Long.parseLong(request.getParameter("companyid"));
 
-
         Long userId = createNewUserInDB(login, hashedPassword, firstname, lastname, email, phone, companyid);
 
         User userNewFromDB = getNewUserFromDB(userId);
 
-        MVCModel model = new MVCModel("/jsp/userRegResult.jsp", userNewFromDB);
-        return model;
-
+        return new MVCModel("/jsp/userRegResult.jsp", userNewFromDB);
     }
-
-
-
-
-
 
     protected User getNewUserFromDB(Long userId) {
         User user = null;

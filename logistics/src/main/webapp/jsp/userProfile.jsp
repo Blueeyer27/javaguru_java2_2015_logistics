@@ -1,15 +1,31 @@
 <%@ page import="lv.javaguru.java2.domain.User" %>
+<%@ page import="lv.javaguru.java2.domain.Vehicle" %>
+<%@ page import="java.util.List" %>
+<%@ page import="lv.javaguru.java2.domain.Cargo" %>
+<%@ page import="lv.javaguru.java2.database.jdbc.CargoDAOImpl" %>
+<%@ page import="lv.javaguru.java2.database.jdbc.VehicleDAOImpl" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<%
+
+    User user = (User)session.getAttribute("user");
+
+    CargoDAOImpl cargoDAO = new CargoDAOImpl();
+    VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+    List<Cargo> cargoList = cargoDAO.getAll();
+    List<Vehicle> vehicleList = vehicleDAO.getAll();
+
+
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>:) Login successfull!</title>
+    <title><%=user.getFirstName()%>
+        <%=user.getLastName()%> (<%=user.getLogin()%>) profile</title>
 </head>
 <body>
-<% User user = (User)session.getAttribute("user");%>
 <div align="right"><U><b>Hello,
     <%=user.getFirstName()%>
     <%=user.getLastName()%> (<%=user.getLogin()%>)!
@@ -50,34 +66,114 @@
 <BR><BR>
 
     <hr />
+
+
+
+
+
+    <%--======================================--%>
     <%
     if (session.getAttribute("userType").equals("transport")) {%>
     <h2>-=T=- TRANSPORT PROFILE</h2>
     <div align="center"><img src="http://ts4.mm.bing.net/th?id=HN.608025893360110011&pid=15.1&H=109&W=160"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
-            <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
-            <td><form method="get" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
-            <td><form method="get" action="../userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
+            <td><form method="get" target="_blank" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
+            <td><form method="get" target="_blank" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
+            <td><form method="get" target="_blank" action="../userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
 
+    <hr />
+    <table align="center" border="1" width="90%">
+        <tr>
+            <td width="50"><b>Id</b></td>
+            <td width="200"><b>Name</b></td>
+            <td width="200"><b>Type</b></td>
+            <td width="200"><b>PlateNumber</b></td>
+            <td width="200"><b>Trailer Number</b></td>
+            <td width="200"><b>Capacity</b></td>
+            <td width="200"><b>Current Status</b></td>
+        </tr>
+            <%
+            for (int i = 0; i < vehicleList.size(); i ++) {
+                Vehicle vehicle = vehicleList.get(i);
+        %>
+        <tr>
+            <td width="50"><%=vehicle.getVehicleId()%></td>
+            <td width="200"><%=vehicle.getName()%></td>
+            <td width="200"><%=vehicle.getType()%></td>
+            <td width="200"><%=vehicle.getplateNumber()%></td>
+            <td width="200"><%=vehicle.gettrailerNumber()%></td>
+            <td width="200"><%=vehicle.getCapacity()%></td>
+            <td width="200"><%=vehicle.getStatus()%></td>
+        </tr>
+            <%}%>
+    </table>
 
+
+
+
+
+
+
+
+
+
+
+    <%--======================================--%>
     <%} else
     if (session.getAttribute("userType").equals("cargo")) {%>
     <h2>-=C=- CARGO PROFILE</h2>
     <div align="center"><img src="http://knowin.files.wordpress.com/2010/12/gift-8.jpg"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
-            <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
-            <td><form method="get" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
-            <td><form method="get" action="../userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
+            <td><form method="get" target="_blank" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
+            <td><form method="get" target="_blank" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
+            <td><form method="get" target="_blank" action="../userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
 
+    <hr />
+    <table align="center" border="1" width="90%">
+        <tr>
+            <td width="50"><b>Id</b></td>
+            <td width="200"><b>Cargo veh. Type</b></td>
+            <td width="200"><b>Weight</b></td>
+            <td width="200"><b>Load Address</b></td>
+            <td width="200"><b>Unload Address</b></td>
+            <td width="200"><b>Load Date</b></td>
+            <td width="200"><b>Unload Date</b></td>
+            <td width="200"><b>Status</b></td>
+            <td width="200"><b>User ID</b></td>
+        </tr>
+        <%
+            for (int i = 0; i < cargoList.size(); i ++) {
+                Cargo cargo = cargoList.get(i);
+        %>
+        <tr>
+            <td width="50"><%=cargo.getCargoId()%></td>
+            <td width="50"><%=cargo.getVehicleType()%></td>
+            <td width="50"><%=cargo.getWeight()%></td>
+            <td width="50"><%=cargo.getLoadAddress()%></td>
+            <td width="50"><%=cargo.getUnloadAddress()%></td>
+            <td width="50"><%=cargo.getLoadDate()%></td>
+            <td width="50"><%=cargo.getUnloadDate()%></td>
+            <td width="50"><%=cargo.getStatus()%></td>
+            <td width="50"><%=cargo.getUserId()%></td>
+        </tr>
+            <%}%>
+    </table>
 
+
+
+
+
+
+
+    <%--======================================--%>
     <%} else { %>
     <h1>-=N=- NO PROFILE</h1>
     <h1>Sorry! Your company type is not -=C=-"cargo" and not -=T=-"transport"</h1>
@@ -93,16 +189,16 @@
 
 
 
-    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
     <h4><U>******** invisible BAR with all buttons. Lets pretend u dont see it ;) ******** invisible BAR with all buttons. Lets pretend u dont see it ;)</U></h4>
     <table align="center" border="1" width="90%">
         <tr align="center">
-            <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
-            <td><form method="get" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
-            <td><form method="get" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
-            <td><form method="get" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
-            <td><form method="get" action="../userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
+            <td><form method="get" target="_blank" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
+            <td><form method="get" target="_blank" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
+            <td><form method="get" target="_blank" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
+            <td><form method="get" target="_blank" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
+            <td><form method="get" target="_blank" action="../userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
     <h4><U>******** invisible BAR with all buttons. Lets pretend u dont see it ;) ******** invisible BAR with all buttons. Lets pretend u dont see it ;)</U></h4>

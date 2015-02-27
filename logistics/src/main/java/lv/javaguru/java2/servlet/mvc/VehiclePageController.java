@@ -13,8 +13,6 @@ public class VehiclePageController implements MVCController {
 
         String lol = ":)";
 
-        MVCModel model = new MVCModel("/jsp/vehicles.jsp", lol);
-
-        return model;
+        return new MVCModel("/jsp/vehicles.jsp", lol);
     }
 }

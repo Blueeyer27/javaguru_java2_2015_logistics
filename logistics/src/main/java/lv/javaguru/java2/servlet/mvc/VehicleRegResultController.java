@@ -46,20 +46,17 @@ public class VehicleRegResultController implements MVCController {
 
         Vehicle vehicleFromDb = getCreatedVehicleFromDatabase(vehicleId);
 
-        MVCModel model = new MVCModel("/jsp/vehicleregresult.jsp", vehicleFromDb);
-
-        return model;
+        return new MVCModel("/jsp/vehicleregresult.jsp", vehicleFromDb);
     }
 
     protected long createVehicleInDatabase(Vehicle vehicle){
-        Vehicle newVehicle = vehicle;
         long vehicleId;
         try {
-            vehicleDAO.create(newVehicle);
+            vehicleDAO.create(vehicle);
         } catch (DBException e) {
             e.printStackTrace();
         }
-        vehicleId = newVehicle.getVehicleId();
+        vehicleId = vehicle.getVehicleId();
         return vehicleId;
     }
 

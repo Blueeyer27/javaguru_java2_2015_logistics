@@ -1,9 +1,7 @@
 package lv.javaguru.java2.servlet.mvc;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,8 +24,6 @@ public class AgreementOverviewController implements MVCController {
     public MVCModel processRequest(HttpServletRequest request, 
                                    HttpServletResponse response) {
 
-        Map<String, Object> modelHashMap = new HashMap<String, Object> ();
-
         List<Agreement> agreementList = new ArrayList<Agreement>();
 
         try {
@@ -37,7 +33,6 @@ public class AgreementOverviewController implements MVCController {
             e.printStackTrace();
         }
 
-        MVCModel model = new MVCModel("/jsp/agreementOverview.jsp", agreementList);
-        return model;
+        return new MVCModel("/jsp/agreementOverview.jsp", agreementList);
     }
 }

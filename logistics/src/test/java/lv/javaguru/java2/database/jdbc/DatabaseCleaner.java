@@ -23,7 +23,6 @@ public class DatabaseCleaner extends DBConnection {
         tableNames.add("agreement");
         tableNames.add("cargo");
         tableNames.add("company");
-        tableNames.add("countries");
         return tableNames;
     }
 

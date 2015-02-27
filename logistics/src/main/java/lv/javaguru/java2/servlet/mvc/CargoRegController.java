@@ -29,12 +29,8 @@ public class CargoRegController implements MVCController {
 
         List<User> userListFromDB = getUserListFromDatabase();
 
-        MVCModel model = new MVCModel("/jsp/cargoreg.jsp", userListFromDB);
-        return model;
+        return new MVCModel("/jsp/cargoreg.jsp", userListFromDB);
     }
-
-
-
     protected List<User> getUserListFromDatabase() {
         List<User> userList = new ArrayList<User>();
 
