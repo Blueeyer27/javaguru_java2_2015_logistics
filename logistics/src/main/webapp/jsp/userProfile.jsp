@@ -54,7 +54,7 @@
     if (session.getAttribute("userType").equals("transport")) {%>
     <h2>-=T=- transport profile buttons</h2>
     <table align="center" border="1" width="90%">
-        <tr>
+        <tr align="center">
             <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
             <td><form method="get" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
             <td><form method="get" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
@@ -67,7 +67,7 @@
     if (session.getAttribute("userType").equals("cargo")) {%>
     <h2>-=C=- cargo profile buttons</h2>
     <table align="center" border="1" width="90%">
-        <tr>
+        <tr align="center">
             <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
             <td><form method="get" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
             <td><form method="get" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
@@ -86,7 +86,7 @@
     <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
     <h4><U>******** invisible BAR with all buttons. Lets pretend u dont see it ;) ******** invisible BAR with all buttons. Lets pretend u dont see it ;)</U></h4>
     <table align="center" border="1" width="90%">
-        <tr>
+        <tr align="center">
             <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
             <td><form method="get" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
             <td><form method="get" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
