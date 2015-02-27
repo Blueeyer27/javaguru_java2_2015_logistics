@@ -77,10 +77,10 @@
     <div align="center"><img src="http://ts4.mm.bing.net/th?id=HN.608025893360110011&pid=15.1&H=109&W=160"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
-            <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
-            <td><form method="get" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
-            <td><form method="get" action="../userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
+            <td><form method="get" target="_blank" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
+            <td><form method="get" target="_blank" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
+            <td><form method="get" target="_blank" action="../userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
 
@@ -128,10 +128,10 @@
     <div align="center"><img src="http://knowin.files.wordpress.com/2010/12/gift-8.jpg"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
-            <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
-            <td><form method="get" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
-            <td><form method="get" action="../userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
+            <td><form method="get" target="_blank" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
+            <td><form method="get" target="_blank" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
+            <td><form method="get" target="_blank" action="../userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
 
@@ -192,12 +192,12 @@
     <h4><U>******** invisible BAR with all buttons. Lets pretend u dont see it ;) ******** invisible BAR with all buttons. Lets pretend u dont see it ;)</U></h4>
     <table align="center" border="1" width="90%">
         <tr align="center">
-            <td><form method="get" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
-            <td><form method="get" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
-            <td><form method="get" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
-            <td><form method="get" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
-            <td><form method="get" action="../userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="../agreementOverview"><button type="submit">Agreement overview</button></form></td>
+            <td><form method="get" target="_blank" action="../cargoReg"><button type="submit">Add new CARGO</button></form></td>
+            <td><form method="get" target="_blank" action="../vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
+            <td><form method="get" target="_blank" action="cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
+            <td><form method="get" target="_blank" action="vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
+            <td><form method="get" target="_blank" action="../userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
     <h4><U>******** invisible BAR with all buttons. Lets pretend u dont see it ;) ******** invisible BAR with all buttons. Lets pretend u dont see it ;)</U></h4>
