@@ -41,7 +41,7 @@ public class CompanyDAOImpl extends DAOImpl<Company> implements CompanyDAO {
         preparedStatement.setString(4, company.getActualAddress());
         preparedStatement.setString(5, company.getBank());
         preparedStatement.setString(6, company.getIban());
-        preparedStatement.setLong(7, company.getCountryId());
+        preparedStatement.setString(7, company.getCountry());
         preparedStatement.setString(8, company.getType());
     }
 
@@ -62,7 +62,7 @@ public class CompanyDAOImpl extends DAOImpl<Company> implements CompanyDAO {
             company.setActualAddress(resultSet.getString("actual_address"));
             company.setBank(resultSet.getString("bank"));
             company.setIban(resultSet.getString("iban"));
-            company.setCountryId(resultSet.getLong("country"));
+            company.setCountry(resultSet.getString("country"));
             company.setType(resultSet.getString("type"));
         }
         return company;
@@ -76,7 +76,7 @@ public class CompanyDAOImpl extends DAOImpl<Company> implements CompanyDAO {
         preparedStatement.setString(4, company.getActualAddress());
         preparedStatement.setString(5, company.getBank());
         preparedStatement.setString(6, company.getIban());
-        preparedStatement.setLong(7, company.getCountryId());
+        preparedStatement.setString(7, company.getCountry());
         preparedStatement.setString(8, company.getType());
         preparedStatement.setLong(9, company.getCompanyId());
     }
@@ -92,7 +92,7 @@ public class CompanyDAOImpl extends DAOImpl<Company> implements CompanyDAO {
             company.setActualAddress(resultSet.getString("actual_address"));
             company.setBank(resultSet.getString("bank"));
             company.setIban(resultSet.getString("iban"));
-            company.setCountryId(resultSet.getLong("country"));
+            company.setCountry(resultSet.getString("country"));
             company.setType(resultSet.getString("type"));
             objectsList.add(company);
         }
