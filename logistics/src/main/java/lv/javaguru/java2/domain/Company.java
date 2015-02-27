@@ -9,21 +9,21 @@ public class Company {
     private String actualAddress;
     private String bank;
     private String iban;
-    private String country;
+    private long countryId;
     private String type;
 
     public Company() {
     }
 
     public Company(String name, String regNumber, String regAddress, String actualAddress,
-                   String bank, String iban, String country, String type) {
+                   String bank, String iban, long country, String type) {
         this.name = name;
         this.regNumber = regNumber;
         this.regAddress = regAddress;
         this.actualAddress = actualAddress;
         this.bank = bank;
         this.iban = iban;
-        this.country = country;
+        this.countryId = country;
         this.type = type;
     }
 
@@ -83,12 +83,12 @@ public class Company {
         this.iban = iban;
     }
 
-    public String getCountry() {
-        return country;
+    public long getCountryId() {
+        return countryId;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryId(long countryId) {
+        this.countryId = countryId;
     }
 
     public String getType() {

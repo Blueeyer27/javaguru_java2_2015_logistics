@@ -1,6 +1,11 @@
 <%@ page import="lv.javaguru.java2.domain.Vehicle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="lv.javaguru.java2.database.jdbc.CompanyDAOImpl" %>
+<%@ page import="lv.javaguru.java2.domain.Company" %>
+<%@ page import="lv.javaguru.java2.database.jdbc.CountryDAOImpl" %>
+<%@ page import="lv.javaguru.java2.domain.Country" %>
+<%@ page import="lv.javaguru.java2.database.CountryDAO" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -53,5 +58,20 @@
        </td>
 
 <%}%>
+
+        <select name="country">
+      <%
+            CountryDAOImpl countryDAO = new CountryDAOImpl();
+            List<Country> countries = countryDAO.getAll();
+            if (countries.size()>0)
+                for (Country country : countries) {
+                %>
+        <option value=<%=country.getCountryId()%>> <%=country.getName()%>
+            <%  }
+            else {%>
+        <option value="1">! id=1 no countries
+            <%}%>
+        </select>
+
 </body>
 </html>
