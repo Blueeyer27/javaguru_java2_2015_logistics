@@ -14,8 +14,7 @@ public class HelloWorldController implements MVCController {
     public MVCModel processRequest(HttpServletRequest request, 
                                    HttpServletResponse response) {
         String message = "Hello from MVC!";
-        MVCModel model = new MVCModel("/jsp/helloWorld.jsp", message);
-        return model;
+        return new MVCModel("/jsp/helloWorld.jsp", message);
     }
     
 }

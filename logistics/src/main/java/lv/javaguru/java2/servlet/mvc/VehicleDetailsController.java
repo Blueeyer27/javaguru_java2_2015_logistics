@@ -36,7 +36,6 @@ public class VehicleDetailsController implements MVCController {
         }
 
 
-        MVCModel model = new MVCModel("/jsp/vehicleDetails.jsp", vehicle);
-        return model;
+        return new MVCModel("/jsp/vehicleDetails.jsp", vehicle);
     }
 }

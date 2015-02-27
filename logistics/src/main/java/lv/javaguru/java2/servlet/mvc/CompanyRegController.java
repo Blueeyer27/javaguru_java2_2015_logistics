@@ -40,8 +40,7 @@ public class CompanyRegController implements MVCController {
         Long companyId = createNewCompanyInDB(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
         Company companyNewFromDB = getNewCompanyFromDB(companyId);
 
-        MVCModel model = new MVCModel("/jsp/companyreg.jsp", companyNewFromDB);
-        return model;
+        return new MVCModel("/jsp/companyreg.jsp", companyNewFromDB);
     }
 
 

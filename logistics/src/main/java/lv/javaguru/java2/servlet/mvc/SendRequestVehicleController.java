@@ -53,7 +53,6 @@ public class SendRequestVehicleController implements MVCController {
         modelHashMap.put("vehicle", vehicle);
         modelHashMap.put("cargoList", cargoList);
 
-        MVCModel model = new MVCModel("/jsp/sendRequestVehicle.jsp", modelHashMap);
-        return model;
+        return new MVCModel("/jsp/sendRequestVehicle.jsp", modelHashMap);
     }
 }

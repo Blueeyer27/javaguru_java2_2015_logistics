@@ -40,7 +40,6 @@ public class SendRequestCargoController implements MVCController {
         modelMap.put("cargo", cargo);
         modelMap.put("vehicleList", vehicleList);
 
-        MVCModel model = new MVCModel("/jsp/sendRequestCargo.jsp", modelMap);
-        return model;
+        return new MVCModel("/jsp/sendRequestCargo.jsp", modelMap);
     }
 }

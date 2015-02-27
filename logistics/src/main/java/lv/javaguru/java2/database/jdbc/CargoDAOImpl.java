@@ -14,6 +14,7 @@ import java.util.*;
  * Created by Dinjvald on 07/02/15.
  */
 
+@SuppressWarnings("UnnecessaryLocalVariable")
 @Component
 public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
     private static final String TABLE_NAME = "cargo";
