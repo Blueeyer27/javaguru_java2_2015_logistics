@@ -71,6 +71,16 @@ CREATE TABLE `agreement` (
 );
 
 -- -----------------------------------------------------
+-- Table `logistics`.`countries`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `logistics`.`countries`;
+ CREATE TABLE `countries` (
+ `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+ `name` CHAR(50) NOT NULL,
+ PRIMARY KEY (`id`)
+ );
+
+-- -----------------------------------------------------
 -- Table `logistics`.`cargo`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `logistics`.`cargo`;
