@@ -14,7 +14,7 @@
 <body>
 <div align="center"><img src="../images/indexlogo.jpg"/></div>
 <hr />
-<div align="right"><a href="index.html">BACK</a></div>
+<div align="right"><a href="../index.html">BACK</a></div>
 <hr />
 
 <div align="center"><a href = "../jsp/vehiclereg.jsp">Vehicle Registration</a></div>

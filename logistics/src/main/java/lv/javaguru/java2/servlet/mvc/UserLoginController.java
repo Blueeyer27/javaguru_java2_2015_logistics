@@ -18,7 +18,7 @@ import lv.javaguru.java2.servlet.model.URL;
  */
 
 @Component
-@URL(value="/userLogin")
+@URL(value="/jsp/userLogin")
 public class UserLoginController implements MVCController {
 
     @Autowired
@@ -42,7 +42,7 @@ public class UserLoginController implements MVCController {
 
         if (user != null && user.getUserCompanyType() != null) {
             setSessionAttributes(session, user);
-            model = new MVCModel("/jsp/userlogin.jsp", user);
+            model = new MVCModel("/jsp/userProfile.jsp", user);
         }
         else
             model = new MVCModel("/jsp/errorPage.jsp", "Incorrect LOGIN or PASSWORD entered. Sorry!");
