@@ -7,13 +7,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>:) Login successfull!</title>
-</head>
-<body>
 <%
 
     User user = (User)session.getAttribute("user");
@@ -25,6 +18,14 @@
 
 
 %>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title><%=user.getFirstName()%>
+        <%=user.getLastName()%> (<%=user.getLogin()%>) profile</title>
+</head>
+<body>
 <div align="right"><U><b>Hello,
     <%=user.getFirstName()%>
     <%=user.getLastName()%> (<%=user.getLogin()%>)!
