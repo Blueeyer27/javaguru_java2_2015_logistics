@@ -26,7 +26,10 @@
         <br/>
         Phone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="phone" /><br/>
         <br/>
-        Company:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Company:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <BR><BR>
         <select name="companyid">
             <%
             CompanyDAOImpl companyDAO = new CompanyDAOImpl();
@@ -34,7 +37,7 @@
             if (companyes.size()>0)
                 for (Company company : companyes) {
                 %>
-                    <option value=<%=company.getCompanyId()%>> id=<%=company.getCompanyId()%> <%=company.getName()%>
+                    <option value=<%=company.getCompanyId()%>> id=<%=company.getCompanyId()%> <%=company.getName()%> type=<%=company.getType()%>
                 <%  }
             else {%>
                 <option value="1">! id=1 NoCompany found
