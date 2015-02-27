@@ -20,7 +20,7 @@
 <div align="right"><a href="../index.html">BACK</a></div>
 <hr />
 <div align="center">
-    <table align="center" border="1" width="700">
+    <table align="center" border="1" width="90%">
         <tr>
             <td width="400"><b>Hi, :) <%=user.getFirstName() + " " + user.getLastName()%> </b></td>
         <tr>
@@ -78,6 +78,7 @@
 
     <%} else { %>
     <h1>Sorry! Your company type is not -=C=-"cargo" and not -=T=-"transport"</h1>
+    <div align="center"><img src="http://nextchapternewlife.com/wp-content/uploads/2012/08/no-pic.jpg"/></div>
     <%}%>
     <hr />
 

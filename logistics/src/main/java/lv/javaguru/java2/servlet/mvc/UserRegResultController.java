@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lv.javaguru.java2.database.UserDAO;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import lv.javaguru.java2.servlet.model.URL;
@@ -33,8 +34,7 @@ public class UserRegResultController implements MVCController {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-//        password = PasswordHash.createHash(password));
-        //user.setPassword(PasswordHash.createHash(user.getPassword()));
+        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
@@ -43,7 +43,7 @@ public class UserRegResultController implements MVCController {
         int companyid = Integer.parseInt(request.getParameter("companyid"));
 
 
-        Long userId = createNewUserInDB(login, password, firstname, lastname, email, phone, companyid);
+        Long userId = createNewUserInDB(login, hashedPassword, firstname, lastname, email, phone, companyid);
 
         User userNewFromDB = getNewUserFromDB(userId);
 

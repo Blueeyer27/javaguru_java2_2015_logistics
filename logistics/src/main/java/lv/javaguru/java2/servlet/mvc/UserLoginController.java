@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,6 @@ public class UserLoginController implements MVCController {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-
         List<User> users = getUserListFromDatabase();
 
         User user = getUserIfExist(users, login, password);
@@ -55,17 +55,20 @@ public class UserLoginController implements MVCController {
                                   String password) {
         for (User user : users) {
             if (user.getLogin().equals(login)
-                    && user.getPassword().equals(password)) {
+                    && BCrypt.checkpw(password, user.getPassword())/*user.getPassword().equals(password)*/) {
                 return user;
             }
         }
         return null;
     }
 
+
+
     private void setSessionAttributes(HttpSession session, User user) {
         session.setAttribute("user", user);
         session.setAttribute("userType", user.getUserCompanyType());
     }
+
 
     protected List<User> getUserListFromDatabase() {
         List<User> users = null;

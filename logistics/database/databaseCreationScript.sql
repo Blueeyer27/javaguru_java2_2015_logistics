@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `logistics`.`user`;
 CREATE TABLE `user` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `login` CHAR(32) NOT NULL,
-  `password` CHAR(32) NOT NULL,
+  `password` CHAR(100) NOT NULL,
   `first_name` CHAR(32) NOT NULL,
   `last_name` CHAR(32) NOT NULL,
   `e_mail` CHAR(32) NOT NULL,
