@@ -40,7 +40,7 @@ public class UserLoginController implements MVCController {
 
         MVCModel model = null;
 
-        if (user != null && user.getUserCompanyType() != null) {
+        if (user != null && user.getUserCompanyType() != null  && !login.equals("")) {
             setSessionAttributes(session, user);
             model = new MVCModel("/jsp/userProfile.jsp", user);
         }

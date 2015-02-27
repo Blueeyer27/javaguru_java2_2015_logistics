@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.servlet.model.URL;
@@ -32,6 +33,9 @@ public class CargoSearchResultController implements MVCController {
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(true);
+        session.setAttribute("pageName", "CargoSearch");
+
         errorMessage = "";
         String type = request.getParameter("type");
         String weightFrom = request.getParameter("weightFrom");

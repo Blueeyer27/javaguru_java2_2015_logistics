@@ -14,8 +14,8 @@
     <%=user.getFirstName()%>
     (<%=user.getLastName()%>)!
     -----[Type: <%=session.getAttribute("userType")%>]</b></U></div>
+<div align="right"><a href="logout.jsp"><U>Exit</U></a></div>
 <div align="center"><img src="../images/indexlogo.jpg"/></div>
-<div align="right"><a href="logout.jsp"><U>logout</U></a></div>
 <hr />
 <div align="right"><a href="../index.html">BACK</a></div>
 <hr />

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import lv.javaguru.java2.database.VehicleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class VehicleSearchResultController implements MVCController {
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession(true);
+        session.setAttribute("pageName", "VehicleSearch");
+
         List<Vehicle> vehicles = null;
 
         errorMessage = "";
