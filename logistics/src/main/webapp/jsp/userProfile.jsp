@@ -1,4 +1,9 @@
 <%@ page import="lv.javaguru.java2.domain.User" %>
+<%@ page import="lv.javaguru.java2.domain.Vehicle" %>
+<%@ page import="java.util.List" %>
+<%@ page import="lv.javaguru.java2.domain.Cargo" %>
+<%@ page import="lv.javaguru.java2.database.jdbc.CargoDAOImpl" %>
+<%@ page import="lv.javaguru.java2.database.jdbc.VehicleDAOImpl" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,7 +14,17 @@
     <title>:) Login successfull!</title>
 </head>
 <body>
-<% User user = (User)session.getAttribute("user");%>
+<%
+
+    User user = (User)session.getAttribute("user");
+
+    CargoDAOImpl cargoDAO = new CargoDAOImpl();
+    VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+    List<Cargo> cargoList = cargoDAO.getAll();
+    List<Vehicle> vehicleList = vehicleDAO.getAll();
+
+
+%>
 <div align="right"><U><b>Hello,
     <%=user.getFirstName()%>
     <%=user.getLastName()%> (<%=user.getLogin()%>)!
@@ -50,6 +65,12 @@
 <BR><BR>
 
     <hr />
+
+
+
+
+
+    <%--======================================--%>
     <%
     if (session.getAttribute("userType").equals("transport")) {%>
     <h2>-=T=- TRANSPORT PROFILE</h2>
@@ -63,7 +84,44 @@
         </tr>
     </table>
 
+    <hr />
+    <table align="center" border="1" width="90%">
+        <tr>
+            <td width="50"><b>Id</b></td>
+            <td width="200"><b>Name</b></td>
+            <td width="200"><b>Type</b></td>
+            <td width="200"><b>PlateNumber</b></td>
+            <td width="200"><b>Trailer Number</b></td>
+            <td width="200"><b>Capacity</b></td>
+            <td width="200"><b>Current Status</b></td>
+        </tr>
+            <%
+            for (int i = 0; i < vehicleList.size(); i ++) {
+                Vehicle vehicle = vehicleList.get(i);
+        %>
+        <tr>
+            <td width="50"><%=vehicle.getVehicleId()%></td>
+            <td width="200"><%=vehicle.getName()%></td>
+            <td width="200"><%=vehicle.getType()%></td>
+            <td width="200"><%=vehicle.getplateNumber()%></td>
+            <td width="200"><%=vehicle.gettrailerNumber()%></td>
+            <td width="200"><%=vehicle.getCapacity()%></td>
+            <td width="200"><%=vehicle.getStatus()%></td>
+        </tr>
+            <%}%>
+    </table>
 
+
+
+
+
+
+
+
+
+
+
+    <%--======================================--%>
     <%} else
     if (session.getAttribute("userType").equals("cargo")) {%>
     <h2>-=C=- CARGO PROFILE</h2>
@@ -77,7 +135,44 @@
         </tr>
     </table>
 
+    <hr />
+    <table align="center" border="1" width="90%">
+        <tr>
+            <td width="50"><b>Id</b></td>
+            <td width="200"><b>Cargo veh. Type</b></td>
+            <td width="200"><b>Weight</b></td>
+            <td width="200"><b>Load Address</b></td>
+            <td width="200"><b>Unload Address</b></td>
+            <td width="200"><b>Load Date</b></td>
+            <td width="200"><b>Unload Date</b></td>
+            <td width="200"><b>Status</b></td>
+            <td width="200"><b>User ID</b></td>
+        </tr>
+        <%
+            for (int i = 0; i < cargoList.size(); i ++) {
+                Cargo cargo = cargoList.get(i);
+        %>
+        <tr>
+            <td width="50"><%=cargo.getCargoId()%></td>
+            <td width="50"><%=cargo.getVehicleType()%></td>
+            <td width="50"><%=cargo.getWeight()%></td>
+            <td width="50"><%=cargo.getLoadAddress()%></td>
+            <td width="50"><%=cargo.getUnloadAddress()%></td>
+            <td width="50"><%=cargo.getLoadDate()%></td>
+            <td width="50"><%=cargo.getUnloadDate()%></td>
+            <td width="50"><%=cargo.getStatus()%></td>
+            <td width="50"><%=cargo.getUserId()%></td>
+        </tr>
+            <%}%>
+    </table>
 
+
+
+
+
+
+
+    <%--======================================--%>
     <%} else { %>
     <h1>-=N=- NO PROFILE</h1>
     <h1>Sorry! Your company type is not -=C=-"cargo" and not -=T=-"transport"</h1>
@@ -93,7 +188,7 @@
 
 
 
-    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
     <h4><U>******** invisible BAR with all buttons. Lets pretend u dont see it ;) ******** invisible BAR with all buttons. Lets pretend u dont see it ;)</U></h4>
     <table align="center" border="1" width="90%">
         <tr align="center">
