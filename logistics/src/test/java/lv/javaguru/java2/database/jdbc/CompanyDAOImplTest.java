@@ -2,6 +2,7 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Company;
+import lv.javaguru.java2.domain.Country;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +18,8 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     private CompanyDAOImpl companyDAO = new CompanyDAOImpl();
 
+    private CountryDAOImpl countryDAO = new CountryDAOImpl();
+
     @Before
     public void init() throws DBException {
         databaseCleaner.cleanDatabase();
@@ -24,8 +27,10 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
+        Country country = createCountry("Latvia");
+        countryDAO.create(country);
         Company company = createCompany("FirstCompany", "asdf1234567890", "Riga, registred",
-                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", country.getCountryId(), "Transporter");
         companyDAO.create(company);
         Company companyFromDB = companyDAO.getById((company.getCompanyId()));
         assertNotNull(companyFromDB);
@@ -36,17 +41,21 @@ public class CompanyDAOImplTest extends DAOImplTest {
         assertEquals(company.getActualAddress(), companyFromDB.getActualAddress());
         assertEquals(company.getBank(), companyFromDB.getBank());
         assertEquals(company.getIban(), companyFromDB.getIban());
-        assertEquals(company.getCountry(), companyFromDB.getCountry());
+        assertEquals(company.getCountryId(), companyFromDB.getCountryId());
         assertEquals(company.getType(), companyFromDB.getType());
     }
 
     @Test
     public void testMultipleCompanyCreation() throws DBException {
+        Country country = createCountry("Latvia");
+        Country secondCountry = createCountry("Spain");
+        countryDAO.create(country);
+        countryDAO.create(secondCountry);
         List<Company> companies = companyDAO.getAll();
         Company company1 = createCompany("FirstCompany", "111", "Riga, registred",
-                "Riga, actual 1", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+                "Riga, actual 1", "FIGBANK", "BLABLA100500", country.getCountryId(), "Transporter");
         Company company2 = createCompany("SecondCompany", "222", "Barcelona, registred",
-                "Riga, actual 2", "ABC", "666", "Spain", "Transporter");
+                "Riga, actual 2", "ABC", "666", secondCountry.getCountryId(), "Transporter");
         companyDAO.create(company1);
         companyDAO.create(company2);
         assertEquals(companyDAO.getAll().size(), companies.size() + 2);
@@ -54,8 +63,10 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     @Test
     public void testUpdate() throws DBException {
+        Country country = createCountry("Latvia");
+        countryDAO.create(country);
         Company company = createCompany("TestCompany", "asdf1234567890", "Riga, registred",
-                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", country.getCountryId(), "Transporter");
         companyDAO.create(company);
         Company companyFromDB = companyDAO.getById((company.getCompanyId()));
         assertEquals(company.getName(), companyFromDB.getName());
@@ -68,12 +79,18 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     @Test
     public void testMultipleCompanyDeletion() throws DBException {
+        Country country = createCountry("Latvia");
+        Country secondCountry = createCountry("Spain");
+        Country thirdCountry = createCountry("Russia");
+        countryDAO.create(country);
+        countryDAO.create(secondCountry);
+        countryDAO.create(thirdCountry);
         Company company1 = createCompany("FirstCompany", "111", "Riga, registred",
-                "Riga, actual 1", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+                "Riga, actual 1", "FIGBANK", "BLABLA100500", country.getCountryId(), "Transporter");
         Company company2 = createCompany("SecondCompany", "222", "Barcelona, registred",
-                "Riga, actual 2", "ABC", "666", "Spain", "Transporter");
+                "Riga, actual 2", "ABC", "666", secondCountry.getCountryId(), "Transporter");
         Company company3 = createCompany("ThirdCompany", "333", "Moscow, registred",
-                "Saint-P., actual 3", "Sberbank", "SBER100500", "Russia", "Transporter");
+                "Saint-P., actual 3", "Sberbank", "SBER100500", thirdCountry.getCountryId(), "Transporter");
         companyDAO.create(company1);
         companyDAO.create(company2);
         companyDAO.create(company3);
