@@ -118,8 +118,7 @@ public class CargoSearchResultController implements MVCController {
     public java.util.Date stringToDate(String incomingDate) {
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            java.util.Date date = formater.parse(incomingDate);
-            return date;
+            return formater.parse(incomingDate);
         } catch (ParseException e) {
             System.out.println("Invalid Date format in method stringToDate(). Should be yyyy-MM-dd");
             e.printStackTrace();

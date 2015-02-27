@@ -58,8 +58,7 @@ public class VehicleSearchResultController implements MVCController {
 
         vehicles = getVehiclesByParameters(type, capacityFromDouble, capacityToDouble);
 
-        MVCModel model = new MVCModel("/jsp/vehicleSearchResult.jsp", vehicles);
-        return model;
+        return new MVCModel("/jsp/vehicleSearchResult.jsp", vehicles);
     }
 
     private Boolean isNotEmptyOrNull(String string) {

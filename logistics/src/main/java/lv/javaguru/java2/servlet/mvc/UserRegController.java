@@ -16,8 +16,7 @@ public class UserRegController implements MVCController {
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
-        MVCModel model = new MVCModel("/jsp/userreg.jsp");
-        return model;
+        return new MVCModel("/jsp/userreg.jsp");
     }
 }
 
