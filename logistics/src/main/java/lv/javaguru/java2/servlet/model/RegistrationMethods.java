@@ -59,20 +59,20 @@ public class RegistrationMethods {
 
     }
 
-    public void companyCreate(List<String> parameteres) throws DBException {
+  /*  public void companyCreate(List<String> parameteres) throws DBException {
         String name = parameteres.get(0);
         String regNumber = parameteres.get(1);
         String regAddress = parameteres.get(2);
         String actualAddress = parameteres.get(3);
         String bank = parameteres.get(4);
         String iban = parameteres.get(5);
-        String country = parameteres.get(6);
+        long countryId = parameteres.get(6);
         String type = parameteres.get(7);
 
-        Company company = new Company(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
+        Company company = new Company(name, regNumber, regAddress, actualAddress, bank, iban, countryId, type);
         companyDAO.create(company);
     }
-
+*/
 
     public void cargoCreate(List<String> parameteres) throws DBException {
 

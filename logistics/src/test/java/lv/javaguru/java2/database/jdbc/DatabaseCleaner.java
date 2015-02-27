@@ -18,13 +18,11 @@ public class DatabaseCleaner extends DBConnection {
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<String>();
-
         tableNames.add("user");
         tableNames.add("vehicle");
         tableNames.add("agreement");
         tableNames.add("cargo");
         tableNames.add("company");
-
         return tableNames;
     }
 
@@ -44,14 +42,6 @@ public class DatabaseCleaner extends DBConnection {
                 closeConnection(connection);
             }
         }
-    }
-
-    public static void main(String[] args) throws DBException {
-
-        DatabaseCleaner databaseCleaner = new DatabaseCleaner();
-        databaseCleaner.cleanDatabase();
-        System.out.println("Done");
-
     }
 
 

@@ -1,5 +1,7 @@
 <%@ page import="lv.javaguru.java2.servlet.mvc.MVCModel" %>
 <%@ page import="lv.javaguru.java2.domain.Company" %>
+<%@ page import="lv.javaguru.java2.database.jdbc.CountryDAOImpl" %>
+<%@ page import="lv.javaguru.java2.domain.Country" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -41,6 +43,8 @@
         </tr>
         <%
             Company company = (Company)request.getAttribute("model");
+            CountryDAOImpl countryDAO = new CountryDAOImpl();
+           Country country = countryDAO.getById(company.getCountryId());
         %>
         <tr>
             <td width="200"><%=company.getName()%></td>
@@ -49,7 +53,7 @@
             <td width="200"><%=company.getActualAddress()%></td>
             <td width="200"><%=company.getBank()%></td>
             <td width="200"><%=company.getIban()%></td>
-            <td width="200"><%=company.getCountry()%></td>
+            <td width="200"><%=country.getName()%></td>
             <td width="200"><%=company.getType()%></td>
         </tr>
     </table>
