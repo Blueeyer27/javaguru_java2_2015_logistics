@@ -11,7 +11,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-
 public class VehicleDAOImplTest extends DAOImplTest {
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
@@ -27,10 +26,10 @@ public class VehicleDAOImplTest extends DAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-        User user = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Vehicle vehicle = createVehicle(userFromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
+        Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
         vehicleDAO.create(vehicle);
         Vehicle vehicleFromDB = vehicleDAO.getById(vehicle.getVehicleId());
         assertNotNull(userFromDB);
@@ -41,63 +40,53 @@ public class VehicleDAOImplTest extends DAOImplTest {
         assertEquals(vehicle.getplateNumber(), vehicleFromDB.getplateNumber());
         assertEquals(vehicle.getType(), vehicleFromDB.getType());
         assertEquals(vehicle.gettrailerNumber(), vehicleFromDB.gettrailerNumber());
-       assertEquals(vehicle.getCapacity(), vehicleFromDB.getCapacity());
+        assertEquals(vehicle.getCapacity(), vehicleFromDB.getCapacity());
         assertEquals(vehicle.getStatus(), vehicleFromDB.getStatus());
-
     }
 
     @Test
     public void testGetAll() throws DBException{
-        User user1 = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
-        User user2 = createUser("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
         userDAO.create(user1);
         userDAO.create(user2);
         User user1FromDB = userDAO.getById(user1.getUserId());
         User user2FromDB = userDAO.getById(user2.getUserId());
 
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
-        Vehicle vehicle1 = createVehicle(user1FromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
-        Vehicle vehicle2 = createVehicle(user2FromDB.getUserId(), "VOLVO" , "platform", "DF3908", "UF440", 14.9, "PENDING");
+        Vehicle vehicle1 = new Vehicle(user1FromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
+        Vehicle vehicle2 = new Vehicle(user2FromDB.getUserId(), "VOLVO" , "platform", "DF3908", "UF440", 14.9, "PENDING");
         vehicles.add(vehicle1);
         vehicles.add(vehicle2);
         vehicleDAO.create(vehicle1);
         vehicleDAO.create(vehicle2);
-        Vehicle vehicle1FromDB = vehicleDAO.getById(vehicle1.getVehicleId());
-        Vehicle vehicle2FromDB = vehicleDAO.getById(vehicle2.getVehicleId());
         List<Vehicle> vehiclesFromDB = vehicleDAO.getAll();
         assertEquals(vehicles.size(), vehiclesFromDB.size());
-
-
     }
 
     @Test
     public void testDeleteVehicle() throws DBException {
-        User user1 = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
-        User user2 = createUser("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
         userDAO.create(user1);
         userDAO.create(user2);
         User user1FromDB = userDAO.getById(user1.getUserId());
         User user2FromDB = userDAO.getById(user2.getUserId());
-
-        List<Vehicle> vehicles = new ArrayList<Vehicle>();
-        Vehicle vehicle1 = createVehicle(user1FromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 13.8, "PENDING");
-        Vehicle vehicle2 = createVehicle(user2FromDB.getUserId(), "VOLVO" , "platform", "DF3908", "UF440", 15.1, "PENDING");
+        Vehicle vehicle1 = new Vehicle(user1FromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 13.8, "PENDING");
+        Vehicle vehicle2 = new Vehicle(user2FromDB.getUserId(), "VOLVO" , "platform", "DF3908", "UF440", 15.1, "PENDING");
         vehicleDAO.create(vehicle1);
         vehicleDAO.create(vehicle2);
-        Vehicle vehicle1FromDB = vehicleDAO.getById(vehicle1.getVehicleId());
-        Vehicle vehicle2FromDB = vehicleDAO.getById(vehicle2.getVehicleId());
         vehicleDAO.delete(vehicle1.getVehicleId());
         List<Vehicle> vehiclesFromDB = vehicleDAO.getAll();
         assertEquals(1, vehiclesFromDB.size());
-
     }
 
     @Test
     public void testUpdateVehicle() throws DBException {
-        User user = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Vehicle vehicle = createVehicle(userFromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 14.8, "PENDING");
+        Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 14.8, "PENDING");
         vehicleDAO.create(vehicle);
         Vehicle vehicleFromDB = vehicleDAO.getById(vehicle.getVehicleId());
         assertNotNull(userFromDB);
@@ -128,17 +117,14 @@ public class VehicleDAOImplTest extends DAOImplTest {
         assertEquals(vehicle.gettrailerNumber(), vehicleFromDBUpdated.gettrailerNumber());
         assertEquals(vehicle.getCapacity(), vehicleFromDBUpdated.getCapacity());
         assertEquals(vehicle.getStatus(), vehicleFromDBUpdated.getStatus());
-
-
     }
 
 
     @Test
     public void testGetByParameters() throws DBException {
-
-        User user1 = createUser("username1", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
-        User user2 = createUser("username2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
-        User user3 = createUser("username3", "pass3", "Nikolajs", "Petrovs", "petr@email.com", "+37125551111", 11111L);
+        User user1 = new User("username1", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user2 = new User("username2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        User user3 = new User("username3", "pass3", "Nikolajs", "Petrovs", "petr@email.com", "+37125551111", 11111L);
         userDAO.create(user1);
         userDAO.create(user2);
         userDAO.create(user3);
@@ -159,7 +145,4 @@ public class VehicleDAOImplTest extends DAOImplTest {
         vehicles = vehicleDAO.getByParameters("tilt", 5.0, 22.0);
         assertEquals(1, vehicles.size());
     }
-
-
-
 }

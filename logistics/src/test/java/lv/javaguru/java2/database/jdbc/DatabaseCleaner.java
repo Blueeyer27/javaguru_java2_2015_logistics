@@ -14,8 +14,6 @@ import java.util.List;
  */
 public class DatabaseCleaner extends DBConnection {
 
-
-
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<String>();
         tableNames.add("user");
@@ -44,6 +42,4 @@ public class DatabaseCleaner extends DBConnection {
             }
         }
     }
-
-
 }

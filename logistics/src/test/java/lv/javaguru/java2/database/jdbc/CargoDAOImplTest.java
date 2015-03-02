@@ -27,11 +27,11 @@ public class CargoDAOImplTest extends DAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-        User user = createUser("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
+        User user = new User("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Cargo cargo = createCargo(userFromDB.getUserId(), "tilt", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo = new Cargo(userFromDB.getUserId(), "tilt", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
         cargoDAO.create(cargo);
         Cargo cargoFromDB = cargoDAO.getById(cargo.getCargoId());
@@ -51,15 +51,15 @@ public class CargoDAOImplTest extends DAOImplTest {
 
     @Test
     public void testDeleteAndGetAll() throws DBException {
-        User user1 = createUser("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
+        User user1 = new User("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
-        User user2 = createUser("dinjab", "ytrewq", "Sergejs", "Popovs", "ytrewq@email.com",
+        User user2 = new User("dinjab", "ytrewq", "Sergejs", "Popovs", "ytrewq@email.com",
                 "+37128453698", 54321L);
         userDAO.create(user1);
         userDAO.create(user2);
-        Cargo cargo1 = createCargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo1 = new Cargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
-        Cargo cargo2 = createCargo(user2.getUserId(), "tilt", 19.4, "LV Kurzemes", "DE Rein",
+        Cargo cargo2 = new Cargo(user2.getUserId(), "tilt", 19.4, "LV Kurzemes", "DE Rein",
                 cargoDAO.stringToDate("05/02/2015"), cargoDAO.stringToDate("10/02/2015"), "ready");
         cargoDAO.create(cargo1);
         cargoDAO.create(cargo2);
@@ -70,10 +70,10 @@ public class CargoDAOImplTest extends DAOImplTest {
 
     @Test
     public void testUpdate() throws DBException {
-        User user1 = createUser("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
+        User user1 = new User("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
         userDAO.create(user1);
-        Cargo cargo1 = createCargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo1 = new Cargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
         cargoDAO.create(cargo1);
         Cargo cargoFromDB = cargoDAO.getById(cargo1.getCargoId());

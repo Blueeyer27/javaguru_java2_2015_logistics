@@ -24,7 +24,7 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-        Company company = createCompany("FirstCompany", "asdf1234567890", "Riga, registred",
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
                 "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
         companyDAO.create(company);
         Company companyFromDB = companyDAO.getById((company.getCompanyId()));
@@ -43,9 +43,9 @@ public class CompanyDAOImplTest extends DAOImplTest {
     @Test
     public void testMultipleCompanyCreation() throws DBException {
         List<Company> companies = companyDAO.getAll();
-        Company company1 = createCompany("FirstCompany", "111", "Riga, registred",
+        Company company1 = new Company("FirstCompany", "111", "Riga, registred",
                 "Riga, actual 1", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
-        Company company2 = createCompany("SecondCompany", "222", "Barcelona, registred",
+        Company company2 = new Company("SecondCompany", "222", "Barcelona, registred",
                 "Riga, actual 2", "ABC", "666", "Spain", "Transporter");
         companyDAO.create(company1);
         companyDAO.create(company2);
@@ -54,7 +54,7 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     @Test
     public void testUpdate() throws DBException {
-        Company company = createCompany("TestCompany", "asdf1234567890", "Riga, registred",
+        Company company = new Company("TestCompany", "asdf1234567890", "Riga, registred",
                 "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
         companyDAO.create(company);
         Company companyFromDB = companyDAO.getById((company.getCompanyId()));
@@ -68,11 +68,11 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     @Test
     public void testMultipleCompanyDeletion() throws DBException {
-        Company company1 = createCompany("FirstCompany", "111", "Riga, registred",
+        Company company1 = new Company("FirstCompany", "111", "Riga, registred",
                 "Riga, actual 1", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
-        Company company2 = createCompany("SecondCompany", "222", "Barcelona, registred",
+        Company company2 = new Company("SecondCompany", "222", "Barcelona, registred",
                 "Riga, actual 2", "ABC", "666", "Spain", "Transporter");
-        Company company3 = createCompany("ThirdCompany", "333", "Moscow, registred",
+        Company company3 = new Company("ThirdCompany", "333", "Moscow, registred",
                 "Saint-P., actual 3", "Sberbank", "SBER100500", "Russia", "Transporter");
         companyDAO.create(company1);
         companyDAO.create(company2);
@@ -91,5 +91,4 @@ public class CompanyDAOImplTest extends DAOImplTest {
         assertEquals(null, companyDAO.getById(company3.getCompanyId()));
         assertEquals(size - 3, companyDAO.getAll().size());
     }
-
 }

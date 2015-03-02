@@ -31,7 +31,7 @@ public class AgreementDAOImplTest extends DAOImplTest{
 
     @Test
     public void testCreate() throws DBException {
-        Agreement agreement = createAgreement(111L, 222L, "ON");
+        Agreement agreement = new Agreement(111L, 222L, "ON");
         agreementDAO.create(agreement);
 
         Agreement agreementFromDB = agreementDAO.getById((agreement.getAgreementId()));
@@ -45,8 +45,8 @@ public class AgreementDAOImplTest extends DAOImplTest{
     @Test
     public void testMultipleAgreementCreation() throws DBException {
         List<Agreement> agreements = agreementDAO.getAll();
-        Agreement agreement1 = createAgreement(1L, 2L, "ON");
-        Agreement agreement2 = createAgreement(3L, 4L, "ON");
+        Agreement agreement1 = new Agreement(1L, 2L, "ON");
+        Agreement agreement2 = new Agreement(3L, 4L, "ON");
         agreementDAO.create(agreement1);
         agreementDAO.create(agreement2);
         assertEquals(agreementDAO.getAll().size(), agreements.size() + 2);
@@ -55,7 +55,7 @@ public class AgreementDAOImplTest extends DAOImplTest{
 
     @Test
     public void testUpdate() throws DBException {
-        Agreement agreement = createAgreement(5L, 6L, "ON");
+        Agreement agreement = new Agreement(5L, 6L, "ON");
         agreementDAO.create(agreement);
         Agreement agreementFromDB = agreementDAO.getById((agreement.getAgreementId()));
         assertEquals(agreement.getCargoId(), agreementFromDB.getCargoId());
@@ -75,9 +75,9 @@ public class AgreementDAOImplTest extends DAOImplTest{
     @Test
     public void testMultipleAgreementDeletion() throws DBException {
 
-        Agreement agreement1 = createAgreement(11L, 22L, "ON");
-        Agreement agreement2 = createAgreement(33L, 44L, "ON");
-        Agreement agreement3 = createAgreement(55L, 66L, "ON");
+        Agreement agreement1 = new Agreement(11L, 22L, "ON");
+        Agreement agreement2 = new Agreement(33L, 44L, "ON");
+        Agreement agreement3 = new Agreement(55L, 66L, "ON");
         agreementDAO.create(agreement1);
         agreementDAO.create(agreement2);
         agreementDAO.create(agreement3);

@@ -17,6 +17,8 @@ public class UserDAOImplTest extends DAOImplTest {
 
     private UserDAOImpl userDAO = new UserDAOImpl();
 
+    private CompanyDAOImpl companyDAO = new CompanyDAOImpl();
+
     @Before
     public void init() throws DBException {
         databaseCleaner.cleanDatabase();
@@ -24,9 +26,7 @@ public class UserDAOImplTest extends DAOImplTest {
 
     @Test
     public void testCreate() throws DBException {
-
-
-        User user = createUser("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
+        User user = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         assertNotNull(userFromDB);
@@ -42,8 +42,8 @@ public class UserDAOImplTest extends DAOImplTest {
 
     @Test
     public void testMultipleUserCreation() throws DBException {
-        User user1 = createUser("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
-        User user2 = createUser("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
         userDAO.create(user1);
         userDAO.create(user2);
         List<User> users = userDAO.getAll();
@@ -52,7 +52,7 @@ public class UserDAOImplTest extends DAOImplTest {
 
     @Test
     public void testUpdateUser() throws DBException {
-        User user = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         assertEquals(user.getUserId(), userFromDB.getUserId());
@@ -71,7 +71,7 @@ public class UserDAOImplTest extends DAOImplTest {
 
     @Test
     public void testUserDeletion() throws DBException {
-        User user = createUser("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
         int size = userDAO.getAll().size();
         userDAO.delete(user.getUserId());
@@ -81,9 +81,9 @@ public class UserDAOImplTest extends DAOImplTest {
 
     @Test
     public void testMultipleUserDeletion() throws DBException {
-        User user1 = createUser("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
-        User user2 = createUser("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
-        User user3 = createUser("login3", "pass3", "Janis", "Berzins", "j.berzins@email.com", "+371234000", 11111L);
+        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        User user3 = new User("login3", "pass3", "Janis", "Berzins", "j.berzins@email.com", "+371234000", 11111L);
         userDAO.create(user1);
         userDAO.create(user2);
         userDAO.create(user3);
@@ -102,4 +102,14 @@ public class UserDAOImplTest extends DAOImplTest {
         assertEquals(size - 3, userDAO.getAll().size());
     }
 
+    @Test
+    public void testGetUserCompanyType() throws DBException {
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company.getCompanyId());
+        userDAO.create(user);
+        String userCompanyType = user.getUserCompanyType();
+        assertEquals(userCompanyType, company.getType());
+    }
 }
