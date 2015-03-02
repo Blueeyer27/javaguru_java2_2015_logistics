@@ -12,6 +12,13 @@
     %>
         <title>logout. Bye, <%=user.getLogin()%>!</title>
 
+    <%} else {%>
+
+    <script language="Javascript">
+    <!--
+        alert ("YOU ARE ALREADY SIGNED OUT, DUDE!")
+        //-->
+    </script>
     <%}%>
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
 </head>
