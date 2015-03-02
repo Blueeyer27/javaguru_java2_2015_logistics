@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.ValueDAO;
 import lv.javaguru.java2.domain.Value;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,13 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by user on 26.02.2015.
- */
+@Component
 public class ValueDAOImpl extends DAOImpl<Value> implements ValueDAO{
 
     private static final String TABLE_NAME = "value";
-    private static final String UPDATE_STRING = " set type = ?, value = ?, where id = ?";
+    private static final String UPDATE_STRING = " set type = ?, value = ? where id = ?";
     private static final String INSERT_STRING = " values (default,?,?)";
 
     @Override
