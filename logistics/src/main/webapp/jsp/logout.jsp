@@ -11,16 +11,7 @@
         User user = (User)session.getAttribute("user");
     %>
         <title>logout. Bye, <%=user.getLogin()%>!</title>
-
-    <%} else {%>
-    <script language="Javascript">
-    <!--
-        alert ("YOU ARE ALREADY SIGNED OUT, DUDE!")
-        //-->
-    </script>
-    <meta http-equiv="REFRESH" content="0;url=/java2/index.html">
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
-    <%}%>
 </head>
 <body>
 <div id="content_wrapper">
@@ -38,4 +29,13 @@
     </div>
 </div>
 </body>
+    <%} else {%>
+        <script language="Javascript">
+            <!--
+            alert ("YOU ARE ALREADY SIGNED OUT, DUDE!")
+            //-->
+        </script>
+        <meta http-equiv="REFRESH" content="0;url=/java2/index.html">
+    <%}%>
+
 </html>
