@@ -8,7 +8,7 @@ public class DAOImplTest {
 
     protected Company createCompany(String name, String regNumber, String regAddress,
                                   String actualAddress, String bank, String iban,
-                                  long countryId, String type) {
+                                  String country, String type) {
         Company company = new Company();
         company.setName(name);
         company.setRegNumber(regNumber);
@@ -16,7 +16,7 @@ public class DAOImplTest {
         company.setActualAddress(actualAddress);
         company.setBank(bank);
         company.setIban(iban);
-        company.setCountryId(countryId);
+        company.setCountry(country);
         company.setType(type);
         return company;
     }
@@ -67,11 +67,4 @@ public class DAOImplTest {
         agreement.setStatus(status);
         return agreement;
     }
-
-    protected Country createCountry(String name){
-        Country country = new Country();
-        country.setName(name);
-        return country;
-    }
-
 }

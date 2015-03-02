@@ -1,16 +1,15 @@
-<%@ page import="lv.javaguru.java2.database.jdbc.CountryDAOImpl" %>
-<%@ page import="lv.javaguru.java2.domain.Country" %>
+<%@ page import="lv.javaguru.java2.domain.Value" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="../style.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <title>Add new company:</title>
 </head>
 <body>
-<div align="center"><img src="../images/indexlogo.jpg"/></div>
+<div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
-<div align="right"><a href="../index.html">BACK</a></div>
+<div align="right"><a href="index.html">BACK</a></div>
 <hr />
 <div align="center">
   <form method="post" action="../companyReg">
@@ -32,25 +31,15 @@
     &nbsp;&nbsp;&nbsp;&nbsp;
     <input type="text" name="iban" /><br/>
     <br/>
-    Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="country">
-    <br/>
-    <%
-      CountryDAOImpl countryDAO = new CountryDAOImpl();
-      List<Country> countries = countryDAO.getAll();
-      if (countries.size()>0)
-        for (Country country : countries) {
-    %>
-    <option value=<%=country.getCountryId()%>> <%=country.getName()%>
-        <%  }
-            else {%>
-    <option value="1">! id=1 no countries
+    Country:
+    <select name="country">
+        <%List<Value> countries = (List<Value>) request.getAttribute("model");%>
+        <%for (Value country : countries) {%>
+          <option value=<%=country.getValue()%> >&nbsp;<%=country.getValue()%>
         <%}%>
-  </select>
+    </select><br/>
     <br/>
-    Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Type:
     <select name="type">
       <option value="transport" selected>&nbsp;transport
       <option value="cargo" >&nbsp;cargo

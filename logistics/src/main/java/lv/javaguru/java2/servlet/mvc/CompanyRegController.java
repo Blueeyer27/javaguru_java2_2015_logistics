@@ -32,20 +32,13 @@ public class CompanyRegController implements MVCController {
         String actualAddress = request.getParameter("actualAddress");
         String bank = request.getParameter("bank");
         String iban = request.getParameter("iban");
-        long countryId = Long.parseLong(request.getParameter("country"));
+        String country = request.getParameter("country");
         String type = request.getParameter("type");
-
-
-
-
-
-        Long companyId = createNewCompanyInDB(name, regNumber, regAddress, actualAddress, bank, iban, countryId, type);
+        Long companyId = createNewCompanyInDB(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
         Company companyNewFromDB = getNewCompanyFromDB(companyId);
 
         return new MVCModel("/jsp/companyreg.jsp", companyNewFromDB);
     }
-
-
 
     protected Company getNewCompanyFromDB(Long companyId) {
         Company company = null;
@@ -58,8 +51,8 @@ public class CompanyRegController implements MVCController {
         return company;
     }
 
-
-    protected Long createNewCompanyInDB(String name, String regNumber, String regAddress, String actualAddress, String bank, String iban, long country, String type) {
+    protected Long createNewCompanyInDB(String name, String regNumber, String regAddress, String actualAddress,
+                                        String bank, String iban, String country, String type) {
         Company companyNew = new Company(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
         Long id = null;
         try {
