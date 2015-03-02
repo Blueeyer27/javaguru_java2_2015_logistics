@@ -34,7 +34,7 @@
     <%=user.getFirstName()%>
     <%=user.getLastName()%> (<%=user.getLogin()%>)!
     -----[Type: <%=session.getAttribute("userType")%>]</b></U></div>
-<div align="right"><a href="logout.jsp"><U>Exit</U></a></div>
+<div align="right"><a href="jsp/logout.jsp"><U>Exit</U></a></div>
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
 <div align="right"><a href="index.html">BACK</a></div>
@@ -79,7 +79,7 @@
     <%
     if (session.getAttribute("userType").equals("transport")) {%>
     <h2>-=T=- TRANSPORT PROFILE</h2>
-    <div align="center"><img src="http://ts4.mm.bing.net/th?id=HN.608025893360110011&pid=15.1&H=109&W=160"/></div>
+    <div align="center"><img src="images/vehicle.jpg"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
             <td><form method="get" target="_blank" action="agreementOverview"><button type="submit">Agreement overview</button></form></td>
@@ -143,7 +143,7 @@
     <%} else
     if (session.getAttribute("userType").equals("cargo")) {%>
     <h2>-=C=- CARGO PROFILE</h2>
-    <div align="center"><img src="http://knowin.files.wordpress.com/2010/12/gift-8.jpg"/></div>
+    <div align="center"><img src="images/cargo.jpg"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
             <td><form method="get" target="_blank" action="agreementOverview"><button type="submit">Agreement overview</button></form></td>
