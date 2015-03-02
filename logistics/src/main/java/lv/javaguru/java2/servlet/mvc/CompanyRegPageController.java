@@ -1,9 +1,7 @@
 package lv.javaguru.java2.servlet.mvc;
 
-import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.ValueDAO;
-import lv.javaguru.java2.database.jdbc.ValueDAOImpl;
 import lv.javaguru.java2.domain.Value;
 import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,6 @@ import java.util.List;
 public class CompanyRegPageController implements MVCController {
 
     @Autowired
-    private CompanyDAO companyDAO;
-
-    @Autowired
     private ValueDAO valueDAO;
 
     @Override
@@ -29,7 +24,6 @@ public class CompanyRegPageController implements MVCController {
                                    HttpServletResponse response) {
 
         List<Value> countries = new ArrayList<Value>();
-   //     ValueDAOImpl valueDAO = new ValueDAOImpl();
         try {
             countries = valueDAO.getLovByType("Country");
         } catch (DBException e) {
