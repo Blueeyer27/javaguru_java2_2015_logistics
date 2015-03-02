@@ -73,7 +73,7 @@ public class VehicleSearchResultController implements MVCController {
             errorMessage += "Error: Capacity: second number can't be less than first!<br/>";
     }
 
-    private List<Vehicle> getVehiclesByParameters(String type, Double capacityFromDouble,
+    protected List<Vehicle> getVehiclesByParameters(String type, Double capacityFromDouble,
                                                   Double capacityToDouble) {
         try {
             return vehicleDAO.getByParameters(type, capacityFromDouble, capacityToDouble);
