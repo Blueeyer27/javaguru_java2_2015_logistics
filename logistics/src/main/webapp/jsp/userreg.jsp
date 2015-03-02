@@ -32,8 +32,8 @@
         <BR><BR>
         <select name="companyid">
             <%
-            CompanyDAOImpl companyDAO = new CompanyDAOImpl();
-            List<Company> companyes = companyDAO.getAll();
+
+            List<Company> companyes = (List<Company>)request.getAttribute("model");
             if (companyes.size()>0)
                 for (Company company : companyes) {
                 %>
