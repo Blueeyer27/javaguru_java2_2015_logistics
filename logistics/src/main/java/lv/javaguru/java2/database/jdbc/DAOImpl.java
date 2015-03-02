@@ -95,10 +95,7 @@ public abstract class DAOImpl<T> extends DBConnection implements BaseDAO<T> {
             connection = getConnection();
             PreparedStatement preparedStatement = connection
                     .prepareStatement("update " + getTableName() + getUpdateString());
-
             setUpdateArguments(preparedStatement, type);
-
-
             preparedStatement.executeUpdate();
         } catch (Throwable e) {
             System.out.println("Exception while execute DAOImpl.update()");
