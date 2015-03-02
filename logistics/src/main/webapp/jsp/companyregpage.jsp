@@ -12,7 +12,7 @@
 <div align="right"><a href="index.html">BACK</a></div>
 <hr />
 <div align="center">
-  <form method="post" action="../companyReg">
+  <form method="post" action="companyReg">
     Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input type="text" name="name" /><br/>
