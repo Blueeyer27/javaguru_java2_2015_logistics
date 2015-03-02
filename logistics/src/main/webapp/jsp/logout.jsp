@@ -6,8 +6,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="refresh" content="3;url=/java2/index.html" />
-    <% User user = (User)session.getAttribute("user");%>
-    <title>logout. Bye, <%=user.getLogin()%>!</title>
+    <%
+    if (((User) session.getAttribute("user")) != null) {
+        User user = (User)session.getAttribute("user");
+    %>
+        <title>logout. Bye, <%=user.getLogin()%>!</title>
+
+    <%}%>
     <link href="styles/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
