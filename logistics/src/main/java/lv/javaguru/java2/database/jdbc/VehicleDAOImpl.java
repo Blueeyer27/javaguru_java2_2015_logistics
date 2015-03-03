@@ -94,8 +94,6 @@ public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
         }
     }
 
-    //Insert into vehicle values (default, 11, "KAMAZ", "platform", 111, 222, 22, "pending")
-    //SELECT * FROM logistics.vehicle where type = "platform" and (capacity between 1 and 22)
     @Override
     public List<Vehicle> getByParameters(String vehicleType, Double capacityFrom, Double capacityTo) throws DBException {
         Connection connection = null;

@@ -7,9 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class CompanyDAOImplTest extends DAOImplTest {
 
@@ -90,5 +88,19 @@ public class CompanyDAOImplTest extends DAOImplTest {
         companyDAO.delete(company3.getCompanyId());
         assertEquals(null, companyDAO.getById(company3.getCompanyId()));
         assertEquals(size - 3, companyDAO.getAll().size());
+    }
+
+    @Test
+    public void testCreateNullCbject() throws DBException {
+        Company company = null;
+        companyDAO.create(company);
+        assertNull(company);
+    }
+
+    @Test
+    public void testUpdateNullCbject() throws DBException {
+        Company company = null;
+        companyDAO.update(company);
+        assertNull(company);
     }
 }

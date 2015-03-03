@@ -1,6 +1,5 @@
 package lv.javaguru.java2.servlet.mvc;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,6 @@ public class UserLoginController implements MVCController {
     @Autowired
     private VehicleDAO vehicleDAO;
 
-
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
@@ -50,40 +48,27 @@ public class UserLoginController implements MVCController {
 
         User user = null;
 
-
-
-        if (((User) session.getAttribute("user")) != null) {
+        if ((session.getAttribute("user")) != null) {
             user = (User)session.getAttribute("user");
-//            login = user.getLogin();
-//            password = user.getPassword();
-            System.out.println("session");
-         } else {
+        } else {
             login = request.getParameter("login");
             password = request.getParameter("password");
-            System.out.println("login.jsp");
             List<User> users = getUserListFromDatabase();
             user = getUserIfExist(users, login, password);
         }
 
-
-
-
         MVCModel model = null;
-
 
         List<Cargo> cargoList = getCargoListFromDB();
         List<Vehicle> vehicleList = getVehicleListFromDB();
         Map<String, Object> modelHashMap = putItemToModelHasMap(user, cargoList, vehicleList);
 
-//        if (user != null && user.getUserCompanyType() != null  && !login.equals("")) {
         if (user != null ) {
             setSessionAttributes(session, user);
             model = new MVCModel("/jsp/userProfile.jsp", modelHashMap);
-//            model = new MVCModel("/jsp/userProfile.jsp", user);
         }
         else
             model = new MVCModel("/jsp/errorPage.jsp", "Incorrect LOGIN '" +login+ "' or PASSWORD '"+password+"' entered. Sorry!");
-
         return model;
     }
 
@@ -100,7 +85,6 @@ public class UserLoginController implements MVCController {
         return modelHashMap;
     }
 
-
     protected List<Vehicle> getVehicleListFromDB() {
         List<Vehicle> vehicleList = null;
         try {
@@ -111,12 +95,8 @@ public class UserLoginController implements MVCController {
         return vehicleList;
     }
 
-
-
-
     protected List<Cargo> getCargoListFromDB() {
         List<Cargo> cargoList =null;
-
         try {
             cargoList = cargoDAO.getAll();
         } catch (DBException e) {
@@ -125,21 +105,13 @@ public class UserLoginController implements MVCController {
         return cargoList;
     }
 
-
-
-
-    protected User getUserIfExist(List<User> users,
-                                  String login,
-                                  String password) {
+    protected User getUserIfExist(List<User> users, String login, String password) {
         for (User user : users) {
-            if (user.getLogin().equals(login) && BCrypt.checkpw(password, user.getPassword()) /*|| (user.getPassword().equals(password)))*/ ) {
+            if (user.getLogin().equals(login) && BCrypt.checkpw(password, user.getPassword()))
                 return user;
-            }
         }
         return null;
     }
-
-
 
     protected List<User> getUserListFromDatabase() {
         List<User> users = null;

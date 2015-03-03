@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by Dinjvald on 07/02/15.
@@ -46,7 +47,6 @@ public class CargoDAOImplTest extends DAOImplTest {
         assertEquals(cargo.getLoadDate(), cargoFromDB.getLoadDate());
         assertEquals(cargo.getUnloadDate(), cargoFromDB.getUnloadDate());
         assertEquals(cargo.getStatus(), cargoFromDB.getStatus());
-
     }
 
     @Test
@@ -121,5 +121,21 @@ public class CargoDAOImplTest extends DAOImplTest {
         cargos = cargoDAO.getByParameters("platform", 15.0, 32.0, cargoDAO.stringToDate("01/02/2015"),
                 cargoDAO.stringToDate("25/02/2015"), cargoDAO.stringToDate("10/03/2015"), cargoDAO.stringToDate("26/03/2015"));
         assertEquals(3, cargos.size());
+    }
+
+    @Test
+    public void testGetNullByNonExistentId() throws DBException {
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        userDAO.create(user);
+        Cargo cargo = new Cargo(user.getUserId(), "platform", 21.5, "LV Maskavas", "RU Moscow",
+                cargoDAO.stringToDate("01/02/2015"), cargoDAO.stringToDate("15/03/2015"), "ready");
+        cargoDAO.create(cargo);
+
+        Cargo cargoFromDB;
+        if(cargo.getCargoId() == 111L)
+            cargoFromDB = cargoDAO.getById(222L);
+        else
+            cargoFromDB = cargoDAO.getById(111L);
+        assertNull(cargoFromDB);
     }
 }

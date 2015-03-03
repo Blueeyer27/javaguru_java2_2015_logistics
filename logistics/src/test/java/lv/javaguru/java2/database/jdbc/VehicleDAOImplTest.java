@@ -145,4 +145,20 @@ public class VehicleDAOImplTest extends DAOImplTest {
         vehicles = vehicleDAO.getByParameters("tilt", 5.0, 22.0);
         assertEquals(1, vehicles.size());
     }
+
+    @Test
+    public void testGetNullByNonExistentId() throws DBException {
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        userDAO.create(user);
+        User userFromDB = userDAO.getById(user.getUserId());
+        Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
+        vehicleDAO.create(vehicle);
+
+        Vehicle vehicleFromDB;
+        if(vehicle.getVehicleId() == 111L)
+            vehicleFromDB = vehicleDAO.getById(222L);
+        else
+            vehicleFromDB = vehicleDAO.getById(111L);
+        assertNull(vehicleFromDB);
+    }
 }
