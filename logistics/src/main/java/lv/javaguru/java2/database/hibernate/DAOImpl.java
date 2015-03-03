@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class DAOImpl<T> extends DBConnection implements BaseDAO<T> {
 
     @Autowired
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     @Override
     public void create(T type) throws DBException {
@@ -29,16 +29,20 @@ public abstract class DAOImpl<T> extends DBConnection implements BaseDAO<T> {
 
     @Override
     public void delete(Long id) throws DBException {
-
+        Session session = sessionFactory.getCurrentSession();
+        T type = (T) session.get(Value.class, id);
+        session.delete(type);
     }
 
     @Override
     public void update(T type) throws DBException {
-
+        Session session = sessionFactory.getCurrentSession();
+        session.update(type);
     }
 
     @Override
     public List<T> getAll() throws DBException {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(Value.class).list();
     }
 }

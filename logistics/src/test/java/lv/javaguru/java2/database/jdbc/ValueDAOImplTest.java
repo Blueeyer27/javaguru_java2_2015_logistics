@@ -1,13 +1,9 @@
 package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.ValueDAO;
 import lv.javaguru.java2.domain.Value;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -30,8 +26,6 @@ public class ValueDAOImplTest extends DAOImplTest {
     @Test
     public void testCreate() throws DBException {
         Value value = new Value("Country", "Japan");
-        System.out.println("valueDAO=============" + valueDAO);
-
         valueDAO.create(value);
         Value valueFromDB = valueDAO.getById((value.getValueId()));
         assertNotNull(valueFromDB);
@@ -41,7 +35,7 @@ public class ValueDAOImplTest extends DAOImplTest {
     }
 
     @Test
-    public void testGetByType() throws DBException {
+    public void getLovByType() throws DBException {
         Value valueLatvia = new Value("Country", "Latvia");
         Value valueAustralia = new Value("Country", "Australia");
         Value valueJapan = new Value("Country", "Japan");

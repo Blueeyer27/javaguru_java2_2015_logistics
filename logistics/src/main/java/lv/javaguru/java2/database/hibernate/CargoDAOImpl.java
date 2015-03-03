@@ -1,17 +1,13 @@
 package lv.javaguru.java2.database.hibernate;
 
-
 import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.ValueDAO;
 import lv.javaguru.java2.domain.Cargo;
-import lv.javaguru.java2.domain.Value;
 
 import java.util.Date;
 import java.util.List;
 
 public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
-
 
     @Override
     public List<Cargo> getByParameters(String vehicleType, Double weightFrom, Double weightTo, Date loadDateFrom, Date loadDateTo, Date unloadDateFrom, Date unloadDateTo) throws DBException {

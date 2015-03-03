@@ -19,9 +19,6 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 
-/**
- * Created by Juris on 15.11.2014.
- */
 @Configuration
 @ComponentScan(basePackages = {"lv.javaguru.java2"})
 @EnableTransactionManagement
@@ -77,8 +74,7 @@ public class SpringAppConfig {
                                          @Value("${hibernate.packagesToScan}") String packagesToScan,
                                          @Qualifier("hibernateProperties") Properties properties) throws Exception {
 
-        LocalSessionFactoryBean sessionFactoryBean
-                = new LocalSessionFactoryBean();
+        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setPackagesToScan(packagesToScan);
         sessionFactoryBean.setHibernateProperties(properties);
