@@ -1,9 +1,15 @@
 package lv.javaguru.java2.database.jdbc;
 
+import lv.javaguru.java2.database.AgreementDAO;
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.hibernate.*;
+import lv.javaguru.java2.database.hibernate.AgreementDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
+import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
@@ -17,17 +23,16 @@ import static org.junit.Assert.assertNotNull;
 
 public class AgreementDAOImplTest extends DAOImplTest{
 
+    @Autowired
+    @Qualifier("HibAgreementDAO")
+    private AgreementDAO agreementDAO;
+
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
-
-    private AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
-
 
     @Before
     public void init() throws DBException {
         databaseCleaner.cleanDatabase();
     }
-
-
 
     @Test
     public void testCreate() throws DBException {

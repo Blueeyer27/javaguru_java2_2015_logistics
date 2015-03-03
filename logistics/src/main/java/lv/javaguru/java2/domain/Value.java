@@ -1,9 +1,20 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "value")
 public class Value {
 
-    private long lovId;
+    @Column(name="id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long valueId;
+
+    @Column(name = "type")
     private String type;
+
+    @Column(name = "value")
     private String value;
 
     public Value(){
@@ -16,11 +27,11 @@ public class Value {
     }
 
     public long getValueId() {
-        return lovId;
+        return valueId;
     }
 
     public void setValueId(long lovId) {
-        this.lovId = lovId;
+        this.valueId = lovId;
     }
 
     public String getType() {
