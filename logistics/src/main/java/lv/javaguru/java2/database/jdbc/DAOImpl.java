@@ -18,7 +18,7 @@ public abstract class DAOImpl<T> extends DBConnection implements BaseDAO<T> {
         if (type == null) {
             return;
         }
-
+        System.out.println("TESTSTSTSTT = JDBC");
         Connection connection = null;
         try {
             connection = getConnection();

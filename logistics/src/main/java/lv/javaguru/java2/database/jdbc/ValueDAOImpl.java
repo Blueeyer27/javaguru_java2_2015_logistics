@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Component("JdbcValueDAO")
 public class ValueDAOImpl extends DAOImpl<Value> implements ValueDAO{
 
     private static final String TABLE_NAME = "value";

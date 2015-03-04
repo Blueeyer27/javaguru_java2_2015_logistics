@@ -1,5 +1,6 @@
 package lv.javaguru.java2.database.hibernate;
 
+import java.util.List;
 import lv.javaguru.java2.database.BaseDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.DBConnection;
@@ -8,23 +9,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
-
 public abstract class DAOImpl<T> extends DBConnection implements BaseDAO<T> {
 
     @Autowired
-    protected SessionFactory sessionFactory;
+    public SessionFactory sessionFactory;
+
+    public Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
     @Override
     public void create(T type) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        session.persist(type);
+        getCurrentSession().persist(type);
     }
 
     @Override
     public T getById(Long id) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        return (T) session.get(Value.class, id);
+        return (T) getCurrentSession().get(Value.class, id);
     }
 
     @Override
@@ -36,13 +37,11 @@ public abstract class DAOImpl<T> extends DBConnection implements BaseDAO<T> {
 
     @Override
     public void update(T type) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        session.update(type);
+        getCurrentSession().update(type);
     }
 
     @Override
     public List<T> getAll() throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Value.class).list();
+        return getCurrentSession().createCriteria(Value.class).list();
     }
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import lv.javaguru.java2.database.AgreementDAO;
 import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
@@ -18,6 +19,7 @@ import lv.javaguru.java2.domain.Agreement;
 public class AgreementOverviewController implements MVCController {
 
     @Autowired
+    @Qualifier("HibAgreementDAO")
     private AgreementDAO agreementDAO;
 
     @Override

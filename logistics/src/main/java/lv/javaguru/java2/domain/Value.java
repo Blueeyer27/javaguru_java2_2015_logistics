@@ -6,15 +6,15 @@ import javax.persistence.*;
 @Table(name = "value")
 public class Value {
 
-    @Column(name="id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", columnDefinition = "int(11)")
     private long valueId;
 
-    @Column(name = "type")
+    @Column(name = "type", columnDefinition = "char(50)")
     private String type;
 
-    @Column(name = "value")
+    @Column(name = "value", columnDefinition = "char(50)")
     private String value;
 
     public Value(){
