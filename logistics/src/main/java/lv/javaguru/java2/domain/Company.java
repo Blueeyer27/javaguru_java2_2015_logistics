@@ -1,15 +1,38 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "company")
 public class Company {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", columnDefinition = "int(11)")
     private long companyId;
+
+    @Column(name = "name", columnDefinition = "char(50)")
     private String name;
+
+    @Column(name = "reg_number", columnDefinition = "char(50)")
     private String regNumber;
+
+    @Column(name = "reg_address", columnDefinition = "char(100)")
     private String regAddress;
+
+    @Column(name = "actual_address", columnDefinition = "char(100)")
     private String actualAddress;
+
+    @Column(name = "bank", columnDefinition = "char(50)")
     private String bank;
+
+    @Column(name = "iban", columnDefinition = "char(50)")
     private String iban;
+
+    @Column(name = "country", columnDefinition = "char(50)")
     private String country;
+
+    @Column(name = "type", columnDefinition = "char(30)")
     private String type;
 
     public Company() {
