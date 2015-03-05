@@ -34,6 +34,7 @@ public class UserLoginController implements MVCController {
     private UserDAO userDAO;
 
     @Autowired
+    @Qualifier("HibernateCargoDAO")
     private CargoDAO cargoDAO;
 
     @Autowired

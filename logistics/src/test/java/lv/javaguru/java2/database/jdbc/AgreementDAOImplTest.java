@@ -32,6 +32,7 @@ public class AgreementDAOImplTest extends DAOImplTest{
         databaseCleaner.cleanDatabase();
     }
 
+
     @Test
     @Transactional
     public void testCreate() throws DBException {
@@ -45,6 +46,7 @@ public class AgreementDAOImplTest extends DAOImplTest{
         assertEquals(agreement.getVehicleId(), agreementFromDB.getVehicleId());
         assertEquals(agreement.getStatus(), agreementFromDB.getStatus());
     }
+
 
     @Test
     @Transactional

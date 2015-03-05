@@ -8,6 +8,7 @@ import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
 import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
@@ -23,6 +24,7 @@ public class CargoRegResultController implements MVCController {
     public static final String PENDING = "PENDING";
 
     @Autowired
+    @Qualifier("HibernateCargoDAO")
     private CargoDAO cargoDAO;
 
     @Override

@@ -1,11 +1,16 @@
 package lv.javaguru.java2.database.jdbc;
 
+import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -17,9 +22,15 @@ import static org.junit.Assert.assertNull;
  */
 public class CargoDAOImplTest extends DAOImplTest {
 
+    @Autowired
+    @Qualifier("HibernateCargoDAO")
+    private CargoDAO cargoDAO;
+
+    @Autowired
+    @Qualifier("HibernateUserDAO")
+    private UserDAO userDAO;
+
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
-    private CargoDAOImpl cargoDAO = new CargoDAOImpl();
-    private UserDAOImpl userDAO = new UserDAOImpl();
 
     @Before
     public void init() throws DBException {
@@ -27,6 +38,7 @@ public class CargoDAOImplTest extends DAOImplTest {
     }
 
     @Test
+    @Transactional
     public void testCreate() throws DBException {
         User user = new User("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
@@ -49,7 +61,9 @@ public class CargoDAOImplTest extends DAOImplTest {
         assertEquals(cargo.getStatus(), cargoFromDB.getStatus());
     }
 
+
     @Test
+    @Transactional
     public void testDeleteAndGetAll() throws DBException {
         User user1 = new User("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
@@ -68,7 +82,9 @@ public class CargoDAOImplTest extends DAOImplTest {
         assertEquals(1, cargos.size());
     }
 
+
     @Test
+    @Transactional
     public void testUpdate() throws DBException {
         User user1 = new User("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", 12345L);
@@ -101,7 +117,9 @@ public class CargoDAOImplTest extends DAOImplTest {
         assertEquals(cargo1.getStatus(), updatedCargoFromDB.getStatus());
     }
 
+
     @Test
+    @Transactional
     public void testGetByParameters() throws DBException {
         Cargo cargo1 = new Cargo(1111, "platform", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("01/02/2015"), cargoDAO.stringToDate("15/03/2015"), "ready");
@@ -124,6 +142,7 @@ public class CargoDAOImplTest extends DAOImplTest {
     }
 
     @Test
+    @Transactional
     public void testGetNullByNonExistentId() throws DBException {
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);

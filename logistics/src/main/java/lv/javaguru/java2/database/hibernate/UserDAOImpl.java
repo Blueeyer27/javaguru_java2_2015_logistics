@@ -14,14 +14,12 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
 
     @Override
     public User getById(Long id) throws DBException {
-//        return super.getById(id);
         return (User) getCurrentSession().get(User.class, id);
 
     }
 
     @Override
     public void delete(Long id) throws DBException {
-//        super.delete(id);
         Session session = sessionFactory.getCurrentSession();
         User user = (User) session.get(User.class, id);
         session.delete(user);
@@ -30,7 +28,6 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
 
     @Override
     public List<User> getAll() throws DBException {
-//        return super.getAll();
         return getCurrentSession().createCriteria(User.class).list();
     }
 }
