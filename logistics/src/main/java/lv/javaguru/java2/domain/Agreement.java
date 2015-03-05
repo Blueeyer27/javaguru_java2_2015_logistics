@@ -2,22 +2,22 @@ package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name = "agreement")
+@Entity
+@Table(name = "agreement")
 public class Agreement {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name="id", columnDefinition = "int(11)")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", columnDefinition = "int(11)")
     private long agreementId;
 
-//    @Column(name = "cargoId", columnDefinition = "int(11)")
+    @Column(name = "cargo_id", columnDefinition = "int(11)")
     private long cargoId;
 
-//    @Column(name = "vehicleId", columnDefinition = "int(11)")
+    @Column(name = "vehicle_id", columnDefinition = "int(11)")
     private long vehicleId;
 
-//    @Column(name = "status", columnDefinition = "char(30)")
+    @Column(name = "status", columnDefinition = "char(30)")
     private String status;
 
 

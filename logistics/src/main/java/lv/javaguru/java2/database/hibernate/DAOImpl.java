@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.BaseDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.DBConnection;
 import lv.javaguru.java2.domain.Value;
+import lv.javaguru.java2.domain.Agreement;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
