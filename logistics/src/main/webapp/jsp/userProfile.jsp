@@ -201,7 +201,7 @@
     <%} else { %>
     <h1>-=N=- NO PROFILE</h1>
     <h1>Sorry! Your company type is not -=C=-"cargo" and not -=T=-"transport"</h1>
-    <div align="center"><img src="http://nextchapternewlife.com/wp-content/uploads/2012/08/no-pic.jpg"/></div>
+    <div align="center"><img src="images/none.jpg"/></div>
     <script language="Javascript">
         <!--
         alert ("Sorry! Your company type is not 'cargo' and not 'transport'. So no buttons to press for You :(")
@@ -214,18 +214,20 @@
 
 
     <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
-    <h4><U>******** invisible BAR with all buttons. Lets pretend u dont see it ;) ******** invisible BAR with all buttons. Lets pretend u dont see it ;)</U></h4>
+    <h4><U> ********** admin bar with all buttons. (must be putted somewhere) ********** admin bar with all buttons. (must be putted somewhere) ********** 
     <table align="center" border="1" width="90%">
         <tr align="center">
+            <td><form method="get" target="_blank" action="companyRegPage"><button type="submit">Add new COMPANY</button></form></td>
+            <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="jsp/vehicles.jsp"><button type="submit">Vehicles</button></form></td>
             <td><form method="get" target="_blank" action="agreementOverview"><button type="submit">Agreement overview</button></form></td>
             <td><form method="get" target="_blank" action="cargoReg"><button type="submit">Add new CARGO</button></form></td>
             <td><form method="get" target="_blank" action="vehiclereg"><button type="submit">Add new Vehicle</button></form></td>
             <td><form method="get" target="_blank" action="jsp/cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
             <td><form method="get" target="_blank" action="jsp/vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
-            <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
-    <h4><U>******** invisible BAR with all buttons. Lets pretend u dont see it ;) ******** invisible BAR with all buttons. Lets pretend u dont see it ;)</U></h4>
+    <h4><U> ********** admin bar with all buttons. (must be putted somewhere) ********** admin bar with all buttons. (must be putted somewhere) ********** 
 
 
 </div>
