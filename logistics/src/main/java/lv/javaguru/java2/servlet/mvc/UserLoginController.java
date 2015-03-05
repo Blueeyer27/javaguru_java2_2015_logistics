@@ -13,6 +13,7 @@ import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
@@ -35,6 +36,7 @@ public class UserLoginController implements MVCController {
     private CargoDAO cargoDAO;
 
     @Autowired
+    @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
     @Override

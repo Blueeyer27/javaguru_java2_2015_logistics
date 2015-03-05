@@ -1,17 +1,36 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "vehicle")
 public class Vehicle {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", columnDefinition = "int(11)")
     private long vehicleId;
+
+    @Column(name = "user_id", columnDefinition = "int(11)")
     private long userId;
+
+    @Column(name = "name", columnDefinition = "char(50)")
     private String name;
+
+    @Column(name = "type", columnDefinition = "char(30)")
     private String type;
+
+    @Column(name = "plate_number", columnDefinition = "char(30)")
     private String plateNumber;
+
+    @Column(name = "trailer_number", columnDefinition = "char(30)")
     private String trailerNumber;
+
+    @Column(name = "capacity", columnDefinition = "float(8,2)")
     private Double capacity;
+
+    @Column(name = "status", columnDefinition = "char(30)")
     private String status;
-
-
 
     public Vehicle(){
 
@@ -26,7 +45,6 @@ public class Vehicle {
         this.capacity = capacity;
         this.status = status;
     }
-
 
     public long getVehicleId() {
         return vehicleId;
