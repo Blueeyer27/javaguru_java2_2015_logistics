@@ -5,6 +5,7 @@ import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.domain.Vehicle;
 import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import java.io.IOException;
 public class VehicleDetailsController implements MVCController {
 
     @Autowired
+    @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
     @Override

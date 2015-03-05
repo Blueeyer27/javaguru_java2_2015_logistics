@@ -1,21 +1,28 @@
 package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.Vehicle;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class VehicleDAOImplTest extends DAOImplTest {
 
+    @Autowired
+    @Qualifier("HibVehicleDAO")
+    private VehicleDAO vehicleDAO;
+
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
-    private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+//    private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
 
     private UserDAOImpl userDAO = new UserDAOImpl();
 
@@ -25,6 +32,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
     }
 
     @Test
+    @Transactional
     public void testCreate() throws DBException {
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
@@ -45,6 +53,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
     }
 
     @Test
+    @Transactional
     public void testGetAll() throws DBException{
         User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
@@ -65,6 +74,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
     }
 
     @Test
+    @Transactional
     public void testDeleteVehicle() throws DBException {
         User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
@@ -82,6 +92,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
     }
 
     @Test
+    @Transactional
     public void testUpdateVehicle() throws DBException {
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);
@@ -121,6 +132,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
 
 
     @Test
+    @Transactional
     public void testGetByParameters() throws DBException {
         User user1 = new User("username1", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         User user2 = new User("username2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
@@ -147,6 +159,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
     }
 
     @Test
+    @Transactional
     public void testGetNullByNonExistentId() throws DBException {
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
         userDAO.create(user);

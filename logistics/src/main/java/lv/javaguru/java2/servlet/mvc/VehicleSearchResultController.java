@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import lv.javaguru.java2.database.VehicleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import lv.javaguru.java2.servlet.model.URL;
 
@@ -23,6 +24,7 @@ public class VehicleSearchResultController implements MVCController {
     private String errorMessage;
 
     @Autowired
+    @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
     @Override

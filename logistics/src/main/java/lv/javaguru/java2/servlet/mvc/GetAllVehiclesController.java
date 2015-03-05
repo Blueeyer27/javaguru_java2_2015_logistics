@@ -6,7 +6,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.servlet.model.URL;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
@@ -20,7 +23,9 @@ import lv.javaguru.java2.domain.Vehicle;
 @URL(value="/getallvehicles")
 public class GetAllVehiclesController implements MVCController {
 
-    private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+    @Autowired
+    @Qualifier("HibVehicleDAO")
+    private VehicleDAO vehicleDAO;
 
     @Override
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {

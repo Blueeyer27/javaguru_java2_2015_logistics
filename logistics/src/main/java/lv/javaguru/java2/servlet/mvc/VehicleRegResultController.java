@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import lv.javaguru.java2.database.VehicleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import lv.javaguru.java2.servlet.model.URL;
 
@@ -22,6 +23,7 @@ import lv.javaguru.java2.servlet.model.RegistrationMethods;
 public class VehicleRegResultController implements MVCController {
 
     @Autowired
+    @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
     @Override

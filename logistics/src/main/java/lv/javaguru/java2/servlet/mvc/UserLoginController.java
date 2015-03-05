@@ -37,6 +37,7 @@ public class UserLoginController implements MVCController {
     private CargoDAO cargoDAO;
 
     @Autowired
+    @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
     @Override
