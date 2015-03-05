@@ -20,7 +20,6 @@ public class AgreementOverviewController implements MVCController {
 
     @Autowired
     @Qualifier("HibAgreementDAO")
-//    @Qualifier("JdbcAgreementDAO")
     private AgreementDAO agreementDAO;
 
     @Override

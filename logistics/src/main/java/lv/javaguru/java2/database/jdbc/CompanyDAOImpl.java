@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Component
+@Component("JdbcCompanyDAO")
 public class CompanyDAOImpl extends DAOImpl<Company> implements CompanyDAO {
 
     private static final String TABLE_NAME = "company";
