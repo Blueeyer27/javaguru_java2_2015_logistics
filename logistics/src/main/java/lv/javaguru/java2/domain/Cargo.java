@@ -1,17 +1,39 @@
 package lv.javaguru.java2.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "cargo")
 public class Cargo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", columnDefinition = "int(11)")
     private long cargoId;
+
+    @Column(name = "user_id", columnDefinition = "int(11)")
     private long userId;
+
+    @Column(name = "vehicle_type", columnDefinition = "char(20)")
     private String vehicleType;
+
+    @Column(name = "weight", columnDefinition = "float(8)")
     private Double weight;
+
+    @Column(name = "load_address", columnDefinition = "char(100)")
     private String loadAddress;
+
+    @Column(name = "unload_address", columnDefinition = "char(100)")
     private String unloadAddress;
+
+    @Column(name = "load_date", columnDefinition = "date")
     private Date loadDate;
+
+    @Column(name = "unload_date", columnDefinition = "date")
     private Date unloadDate;
+
+    @Column(name = "status", columnDefinition = "char(30)")
     private String status;
 
 
