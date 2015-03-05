@@ -19,8 +19,8 @@ import lv.javaguru.java2.domain.Agreement;
 public class AgreementOverviewController implements MVCController {
 
     @Autowired
-//    @Qualifier("HibAgreementDAO")
-    @Qualifier("JdbcAgreementDAO")
+    @Qualifier("HibAgreementDAO")
+//    @Qualifier("JdbcAgreementDAO")
     private AgreementDAO agreementDAO;
 
     @Override

@@ -13,6 +13,7 @@ import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
@@ -29,6 +30,7 @@ import lv.javaguru.java2.servlet.model.URL;
 public class UserLoginController implements MVCController {
 
     @Autowired
+    @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
 
     @Autowired
