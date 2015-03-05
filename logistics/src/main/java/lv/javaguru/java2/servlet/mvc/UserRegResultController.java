@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import lv.javaguru.java2.database.UserDAO;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import lv.javaguru.java2.servlet.model.URL;
 
@@ -22,6 +23,7 @@ import lv.javaguru.java2.domain.User;
 public class UserRegResultController implements MVCController {
 
     @Autowired
+    @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
 
 

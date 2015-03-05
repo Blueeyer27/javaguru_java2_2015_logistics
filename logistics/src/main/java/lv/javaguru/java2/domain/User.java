@@ -3,16 +3,40 @@ package lv.javaguru.java2.domain;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.CompanyDAOImpl;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class User {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", columnDefinition = "int(11)")
     private long userId;
+
+    @Column(name = "login", columnDefinition = "char(32)")
     private String login;
+
+    @Column(name = "password", columnDefinition = "char(100)")
     private String password;
+
+    @Column(name = "first_name", columnDefinition = "char(32)")
     private String firstName;
+
+    @Column(name = "last_name", columnDefinition = "char(32)")
     private String lastName;
+
+    @Column(name = "e_mail", columnDefinition = "char(32)")
     private String eMail;
+
+    @Column(name = "phone_number", columnDefinition = "char(20)")
     private String phoneNumber;
+
+    @Column(name = "company_id", columnDefinition = "int(11)")
     private long companyId;
+
+
 
     public User() {
 

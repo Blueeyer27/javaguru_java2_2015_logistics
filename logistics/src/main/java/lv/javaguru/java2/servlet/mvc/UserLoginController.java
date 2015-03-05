@@ -30,6 +30,7 @@ import lv.javaguru.java2.servlet.model.URL;
 public class UserLoginController implements MVCController {
 
     @Autowired
+    @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
 
     @Autowired
