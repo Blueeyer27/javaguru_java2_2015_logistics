@@ -15,23 +15,6 @@ import java.util.List;
 public class ValueDAOImpl extends DAOImpl<Value> implements ValueDAO {
 
     @Override
-    public Value getById(Long id) throws DBException {
-        return (Value) getCurrentSession().get(Value.class, id);
-    }
-
-    @Override
-    public void delete(Long id) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        Value value = (Value) session.get(Value.class, id);
-        session.delete(value);
-    }
-
-    @Override
-    public List<Value> getAll() throws DBException {
-        return getCurrentSession().createCriteria(Value.class).list();
-    }
-
-    @Override
     public List<Value> getLovByType(String type) throws DBException {
         List listOfValues = getCurrentSession().createCriteria(Value.class)
                 .add(Restrictions.eq("type", type))

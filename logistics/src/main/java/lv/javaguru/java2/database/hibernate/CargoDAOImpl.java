@@ -29,14 +29,6 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
         return cargos;
     }
 
-    /*
-    PreparedStatement preparedStatement = connection.prepareStatement("select * from " + getTableName() +
-                    " where vehicle_type = ? and (weight between ? and ?) and " +
-                    "(load_date between ? and ?) and (unload_date between ? and ?);");
-     */
-
-
-
     @Override
     public java.sql.Date utilDateToSQL(java.util.Date date) {
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -78,22 +70,4 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
             return null;
         }
     }
-
-    @Override
-    public Cargo getById(Long id) throws DBException {
-        return (Cargo) getCurrentSession().get(Cargo.class, id);
-    }
-
-    @Override
-    public void delete(Long id) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        Cargo cargo = (Cargo) session.get(Cargo.class, id);
-        session.delete(cargo);
-    }
-
-    @Override
-    public List<Cargo> getAll() throws DBException {
-        return getCurrentSession().createCriteria(Cargo.class).list();
-    }
-
 }

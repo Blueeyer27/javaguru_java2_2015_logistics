@@ -11,14 +11,11 @@ import java.util.Properties;
 
 public abstract class DAOImpl<T> extends DBConnection implements BaseDAO<T> {
 
-
-
     @Override
     public void create(T type) throws DBException {
         if (type == null) {
             return;
         }
-        System.out.println("TESTSTSTSTT = JDBC");
         Connection connection = null;
         try {
             connection = getConnection();

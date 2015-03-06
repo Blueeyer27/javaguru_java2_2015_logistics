@@ -18,23 +18,4 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
         return (User) getCurrentSession().createCriteria(User.class)
                 .add(Restrictions.eq("login", login)).uniqueResult();
     }
-
-    @Override
-    public User getById(Long id) throws DBException {
-        return (User) getCurrentSession().get(User.class, id);
-
-    }
-
-    @Override
-    public void delete(Long id) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        User user = (User) session.get(User.class, id);
-        session.delete(user);
-    }
-
-    @Override
-    public List<User> getAll() throws DBException {
-        return getCurrentSession().createCriteria(User.class).list();
-    }
-
 }

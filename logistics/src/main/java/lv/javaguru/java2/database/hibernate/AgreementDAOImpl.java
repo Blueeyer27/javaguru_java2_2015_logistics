@@ -12,21 +12,4 @@ import java.util.List;
 @Transactional
 public class AgreementDAOImpl extends DAOImpl<Agreement> implements AgreementDAO {
 
-    @Override
-    public Agreement getById(Long id) throws DBException {
-        return (Agreement) getCurrentSession().get(Agreement.class, id);
-    }
-
-    @Override
-    public void delete(Long id) throws DBException {
-        Session session = sessionFactory.getCurrentSession();
-        Agreement agreement = (Agreement) session.get(Agreement.class, id);
-        session.delete(agreement);
-    }
-
-    @Override
-    public List<Agreement> getAll() throws DBException {
-        return getCurrentSession().createCriteria(Agreement.class).list();
-    }
-
 }
