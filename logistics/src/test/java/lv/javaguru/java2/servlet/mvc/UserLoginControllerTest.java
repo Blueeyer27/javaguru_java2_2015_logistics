@@ -28,16 +28,13 @@ public class UserLoginControllerTest {
 
 
     @Test
-    public void shouldReturnUserListFromDatabase() throws DBException {
-        List<User> users = new ArrayList<User>();
-        users.add(createUser("A", "A"));
-        users.add(createUser("B", "B"));
-        users.add(createUser("B", "B"));
+    public void shouldReturnUserFromDatabase() throws DBException {
+        User user = createUser("A", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m");
+        Mockito.doReturn(user).when(userDAO).getByLogin("A");
 
-        Mockito.doReturn(users).when(userDAO).getAll();
-
-        List<User> usersFromDB = controller.getUserListFromDatabase();
-        assertEquals(users == usersFromDB, true);
+        User userFromDB = controller.getUserIfExist("A",
+                "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m"); // 123 hash
+        assertEquals(user == userFromDB, true);
     }
 
     private User createUser(String login, String password) {

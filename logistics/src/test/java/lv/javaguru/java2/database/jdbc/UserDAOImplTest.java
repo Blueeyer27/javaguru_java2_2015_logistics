@@ -129,4 +129,17 @@ public class UserDAOImplTest extends DAOImplTest {
         String userCompanyType = user.getUserCompanyType();
         assertEquals(userCompanyType, company.getType());
     }
+
+    @Test
+    @Transactional
+    public void testGetUserByLogin() throws DBException {
+        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        userDAO.create(user1);
+        userDAO.create(user2);
+        User userFromDB1 = userDAO.getByLogin("login1");
+        assertEquals(userFromDB1.getEMail(), "fb@email.com");
+        User userFromDB2 = userDAO.getByLogin("login2");
+        assertEquals(userFromDB2.getPhoneNumber(), "+37124324890");
+    }
 }

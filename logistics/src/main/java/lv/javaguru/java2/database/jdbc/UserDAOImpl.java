@@ -1,10 +1,12 @@
 package lv.javaguru.java2.database.jdbc;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import lv.javaguru.java2.database.DBException;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.UserDAO;
@@ -12,6 +14,26 @@ import lv.javaguru.java2.domain.User;
 
 @Component
 public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
+
+    @Override
+    public User getByLogin(String login) throws DBException {
+        Connection connection = null;
+
+        try {
+            connection = getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("select * from " + getTableName() +" where login = ?");
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return createObject(resultSet);
+        } catch (Throwable e) {
+            System.out.println("Exception while execute DAOImpl.getById()");
+            e.printStackTrace();
+            throw new DBException(e);
+        } finally {
+            closeConnection(connection);
+        }
+    }
 
     private static final String TABLE_NAME = "user";
     private static final String UPDATE_STRING = " set login = ?, password = ? , " +

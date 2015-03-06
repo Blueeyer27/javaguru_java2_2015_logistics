@@ -57,8 +57,8 @@ public class UserLoginController implements MVCController {
         } else {
             login = request.getParameter("login");
             password = request.getParameter("password");
-            List<User> users = getUserListFromDatabase();
-            user = getUserIfExist(users, login, password);
+    //        List<User> users = getUserListFromDatabase();
+            user = getUserIfExist(login, password);
         }
 
         MVCModel model = null;
@@ -109,22 +109,16 @@ public class UserLoginController implements MVCController {
         return cargoList;
     }
 
-    protected User getUserIfExist(List<User> users, String login, String password) {
-        for (User user : users) {
-            if (user.getLogin().equals(login) && BCrypt.checkpw(password, user.getPassword()))
-                return user;
-        }
-        return null;
-    }
-
-    protected List<User> getUserListFromDatabase() {
-        List<User> users = null;
+    protected User getUserIfExist(String login, String password) {
+        User user = null;
         try {
-            users = userDAO.getAll();
+            user = userDAO.getByLogin(login);
+            if (user != null && user.getLogin().equals(login) && BCrypt.checkpw(password, user.getPassword()))
+                return user;
         } catch (DBException e) {
-            System.out.println("Exception while getting all users UserLoginController");
+            System.out.println("Exception while getting user UserLoginController.getUserIfExist()");
             e.printStackTrace();
         }
-        return users;
+        return user;
     }
 }
