@@ -21,4 +21,12 @@ public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
                 .list();
         return vehicles;
     }
+
+    @Override
+    public List<Vehicle> getByType(String vehicleType) throws DBException {
+        List vehicles = getCurrentSession().createCriteria(Vehicle.class)
+                .add(Restrictions.eq("type", vehicleType))
+                .list();
+        return vehicles;
+    }
 }

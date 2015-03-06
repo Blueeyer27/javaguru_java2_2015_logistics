@@ -8,5 +8,7 @@ public interface VehicleDAO extends BaseDAO<Vehicle> {
 
     List<Vehicle> getByParameters(String vehicleType, Double capacityFrom, Double capacityTo) throws DBException;
 
+    List<Vehicle> getByType(String vehicleType) throws DBException;
+
 
 }

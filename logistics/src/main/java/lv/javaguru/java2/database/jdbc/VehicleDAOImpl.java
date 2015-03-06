@@ -116,4 +116,10 @@ public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
             closeConnection(connection);
         }
     }
+
+    @Override
+    public List<Vehicle> getByType(String vehicleType) throws DBException {
+        return null;
+        ///// implemented in hibernate
+    }
 }
