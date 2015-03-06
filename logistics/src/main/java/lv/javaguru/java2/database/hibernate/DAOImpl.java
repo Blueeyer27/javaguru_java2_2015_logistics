@@ -10,6 +10,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
+
+@Transactional
 public abstract class DAOImpl<T> extends DBConnection implements BaseDAO<T> {
 
     @Autowired
