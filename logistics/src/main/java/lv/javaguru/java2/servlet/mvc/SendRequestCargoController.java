@@ -42,7 +42,8 @@ public class SendRequestCargoController implements MVCController {
 
         try {
             cargo = cargoDAO.getById(cargoId);
-            vehicleList = vehicleDAO.getByType(cargo.getVehicleType());
+            vehicleList = vehicleDAO.getByParameters(cargo.getVehicleType(),
+                    cargo.getWeight(), cargo.MAX_WEIGHT);
         } catch (DBException e) {
             e.printStackTrace();
         }

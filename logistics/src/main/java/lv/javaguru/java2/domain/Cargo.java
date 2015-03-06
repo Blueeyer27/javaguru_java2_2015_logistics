@@ -7,6 +7,11 @@ import java.util.Date;
 @Table(name = "cargo")
 public class Cargo {
 
+    public static final Double MIN_WEIGHT = 0.0;
+    public static final Double MAX_WEIGHT = 99.99;
+    public static final String MIN_DATE = "1000-01-01";
+    public static final String MAX_DATE = "9999-12-31";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", columnDefinition = "int(11)")
