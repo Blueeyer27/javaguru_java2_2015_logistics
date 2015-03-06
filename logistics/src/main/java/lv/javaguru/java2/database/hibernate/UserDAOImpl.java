@@ -36,4 +36,5 @@ public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
     public List<User> getAll() throws DBException {
         return getCurrentSession().createCriteria(User.class).list();
     }
+
 }

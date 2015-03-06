@@ -2,6 +2,7 @@ package lv.javaguru.java2.servlet.mvc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import lv.javaguru.java2.database.UserDAO;
 import org.mindrot.jbcrypt.BCrypt;
@@ -31,6 +32,9 @@ public class UserRegResultController implements MVCController {
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
 
+        HttpSession session = request.getSession(true);
+        session.setAttribute("pageName", "UserRegResult");
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12));
@@ -41,11 +45,26 @@ public class UserRegResultController implements MVCController {
         String phone = request.getParameter("phone");
         Long companyid = Long.parseLong(request.getParameter("companyid"));
 
-        Long userId = createNewUserInDB(login, hashedPassword, firstname, lastname, email, phone, companyid);
+        User userExist = checkUserLoginExist(login);
 
+        if (userExist != null )
+            return new MVCModel("/jsp/errorPage.jsp", "LOGIN '" +login+ "' already EXIST! Sorry!");
+
+        Long userId = createNewUserInDB(login, hashedPassword, firstname, lastname, email, phone, companyid);
         User userNewFromDB = getNewUserFromDB(userId);
 
         return new MVCModel("/jsp/userRegResult.jsp", userNewFromDB);
+    }
+
+
+    protected User checkUserLoginExist(String login) {
+        User userExist = null;
+        try {
+            userExist = userDAO.getByLogin(login);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        return userExist;
     }
 
     protected User getNewUserFromDB(Long userId) {
