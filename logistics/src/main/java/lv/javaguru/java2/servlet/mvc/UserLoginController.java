@@ -110,15 +110,15 @@ public class UserLoginController implements MVCController {
     }
 
     protected User getUserIfExist(String login, String password) {
-        User user = null;
         try {
-            user = userDAO.getByLogin(login);
-            if (user != null && user.getLogin().equals(login) && BCrypt.checkpw(password, user.getPassword()))
+            User user = userDAO.getByLogin(login);
+            if (user != null && user.getLogin().equals(login) && BCrypt.checkpw(password, user.getPassword())) {
                 return user;
+            }
         } catch (DBException e) {
             System.out.println("Exception while getting user UserLoginController.getUserIfExist()");
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 }
