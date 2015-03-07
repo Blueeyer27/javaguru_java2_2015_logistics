@@ -40,6 +40,15 @@ public class ValueDAOImplTest extends DAOImplTest {
 
     @Test
     @Transactional
+    public void testLookupValue() throws DBException {
+        Value value = new Value("Country", "Japan");
+        valueDAO.create(value);
+        String valueJapan = valueDAO.lookupValue("Country", "Japan");
+        assertEquals(value.getValue(), valueJapan);
+    }
+
+    @Test
+    @Transactional
     public void getLovByType() throws DBException {
         Value valueLatvia = new Value("Country", "Latvia");
         Value valueAustralia = new Value("Country", "Australia");

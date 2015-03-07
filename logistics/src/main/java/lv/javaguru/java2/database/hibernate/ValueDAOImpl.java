@@ -22,4 +22,12 @@ public class ValueDAOImpl extends DAOImpl<Value> implements ValueDAO {
                 .list();
         return listOfValues;
     }
+
+    @Override
+    public String lookupValue(String type, String value) throws DBException {
+        Value valueFromDB = (Value) getCurrentSession().createCriteria(Value.class)
+                .add(Restrictions.eq("type", type))
+                .add(Restrictions.eq("value", value)).uniqueResult();
+        return valueFromDB.getValue();
+    }
 }

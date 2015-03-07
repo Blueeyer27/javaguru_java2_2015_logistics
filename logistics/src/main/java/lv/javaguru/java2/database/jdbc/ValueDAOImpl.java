@@ -15,6 +15,11 @@ import java.util.List;
 @Component("JdbcValueDAO")
 public class ValueDAOImpl extends DAOImpl<Value> implements ValueDAO{
 
+    @Override
+    public String lookupValue(String type, String value) throws DBException {
+        return null; // implemented in hibernate
+    }
+
     private static final String TABLE_NAME = "value";
     private static final String UPDATE_STRING = " set type = ?, value = ? where id = ?";
     private static final String INSERT_STRING = " values (default,?,?)";
