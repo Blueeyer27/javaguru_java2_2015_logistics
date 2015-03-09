@@ -4,6 +4,8 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.CompanyDAOImpl;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -35,7 +37,6 @@ public class User {
 
     @Column(name = "company_id", columnDefinition = "int(11)")
     private long companyId;
-
 
 
     public User() {

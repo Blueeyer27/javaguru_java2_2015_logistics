@@ -2,7 +2,9 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Company;
+import lv.javaguru.java2.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +21,56 @@ public class CompanyDAOImplTest extends DAOImplTest {
     @Qualifier("HibCompanyDAO")
     private CompanyDAO companyDAO;
 
+    @Autowired
+    @Qualifier("HibernateUserDAO")
+    private UserDAO userDAO;
+
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
     @Before
     public void init() throws DBException {
-        databaseCleaner.cleanDatabase();
+        //databaseCleaner.cleanDatabase();
     }
 
+
+
+
     @Test
+    @Transactional
+    public void getCompanyesWithUsers() throws DBException {
+
+
+
+
+        Company company1 = new Company("CompanyCargo", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "cargo");
+        companyDAO.create(company1);
+
+        User user1 = new User("user1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
+        User user2 = new User("user2", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
+        User user3 = new User("user3", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
+        userDAO.create(user1);
+        userDAO.create(user2);
+        userDAO.create(user3);
+
+
+
+
+
+        List<Company> companyList = companyDAO.getAll();
+
+        for (Company company : companyList) {
+            List<User> userList = company.getUserList();
+            for (User user : userList) {
+                System.out.println("comp.name -->  " + company.getName());
+                System.out.println("logins -->  " + user.getLogin());
+            }
+        }
+
+
+    }
+
+
+        @Test
     @Transactional
     public void testCreate() throws DBException {
         Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",

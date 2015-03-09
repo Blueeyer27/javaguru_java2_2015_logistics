@@ -1,6 +1,8 @@
 package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "company")
@@ -35,6 +37,11 @@ public class Company {
     @Column(name = "type", columnDefinition = "char(30)")
     private String type;
 
+    @OneToMany
+    @JoinColumn(name = "company_id")
+    public List<User> userList = new ArrayList<User>();
+
+
     public Company() {
     }
 
@@ -49,6 +56,11 @@ public class Company {
         this.country = country;
         this.type = type;
     }
+
+    public List getUserList() {
+        return userList;
+    }
+
 
     public long getCompanyId() {
         return companyId;
