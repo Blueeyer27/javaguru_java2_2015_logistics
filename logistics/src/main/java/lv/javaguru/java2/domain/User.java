@@ -4,8 +4,7 @@ import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.CompanyDAOImpl;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "user")
