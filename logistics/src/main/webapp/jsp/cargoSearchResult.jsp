@@ -45,6 +45,15 @@
                 </td>
             </tr>
         </form>
+        <%}
+        if (cargoList.size()==0) {
+        %>
+        <script language="Javascript">
+            <!--
+            alert ("Sorry, NO CARGOS FOUND in DB by Your criteria! :(")
+            //-->
+        </script>
+
         <%}%>
 
     </table>

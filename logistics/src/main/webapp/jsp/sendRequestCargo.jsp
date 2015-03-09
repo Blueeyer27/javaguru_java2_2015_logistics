@@ -19,10 +19,11 @@
         Cargo cargo = (Cargo) modelMap.get("cargo");
         List<Vehicle> vehicleList = (List<Vehicle>) modelMap.get("vehicleList");
     %>
-    <h1>Choosen Cargo id = <%=cargo.getCargoId()%>
-        (Vehicle Type = <%=cargo.getVehicleType()%>)</h1>
-    <b>Please choose vehicle(type = <%=cargo.getVehicleType()%>) from list:</b>
-    <table align="center" border="1" width="750">
+    <h2>Choosen Cargo id = <%=cargo.getCargoId()%>
+        (Cargo Type = <%=cargo.getVehicleType()%>) (Cargo Weight = <%=cargo.getWeight()%>)</h2>
+    <h2><font color="red" ><b>Important!  Vehicle serch result by TYPE = <%=cargo.getVehicleType()%> and CAPACITY >=  <%=cargo.getWeight()%>.</b></font>
+    <BR><b>Please choose vehicle from the list:</b></h2>
+    <table align="center" border="1" width="950">
         <tr>
             <td width="50"><b>Id</b></td>
             <td width="200"><b>Name</b></td>
