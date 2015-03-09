@@ -14,6 +14,9 @@ public class Value {
     @Column(name = "type", columnDefinition = "char(50)")
     private String type;
 
+    @Column(name = "code", columnDefinition = "char(50)")
+    private String code;
+
     @Column(name = "value", columnDefinition = "char(50)")
     private String value;
 
@@ -21,8 +24,9 @@ public class Value {
 
     }
 
-    public Value(String type, String value) {
+    public Value(String type, String code, String value) {
         this.type = type;
+        this.code = code;
         this.value = value;
     }
 
@@ -40,6 +44,14 @@ public class Value {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getValue() {

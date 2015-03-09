@@ -29,7 +29,7 @@ public class ValueDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testCreate() throws DBException {
-        Value value = new Value("Country", "Japan");
+        Value value = new Value("Country", "Japan", "Japan");
         valueDAO.create(value);
         Value valueFromDB = valueDAO.getById((value.getValueId()));
         assertNotNull(valueFromDB);
@@ -41,20 +41,24 @@ public class ValueDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testLookupValue() throws DBException {
-        Value value = new Value("Country", "Japan");
+        Value value = new Value("Country", "Japan", "Japan");
         valueDAO.create(value);
         String valueJapan = valueDAO.lookupValue("Country", "Japan");
         assertEquals(value.getValue(), valueJapan);
+        value.setValue("JPN");
+        valueDAO.update(value);
+        String valueJPN = valueDAO.lookupValue("Country", "Japan");
+        assertEquals(value.getValue(), valueJPN);
     }
 
     @Test
     @Transactional
     public void getLovByType() throws DBException {
-        Value valueLatvia = new Value("Country", "Latvia");
-        Value valueAustralia = new Value("Country", "Australia");
-        Value valueJapan = new Value("Country", "Japan");
-        Value valueUSA = new Value("Country", "USA");
-        Value statusNew = new Value("Agreement status", "New");
+        Value valueLatvia = new Value("Country", "Latvia", "Latvia");
+        Value valueAustralia = new Value("Country", "Australia", "Australia");
+        Value valueJapan = new Value("Country", "Japan", "Japan");
+        Value valueUSA = new Value("Country", "USA", "USA");
+        Value statusNew = new Value("Agreement status", "New", "New");
         valueDAO.create(valueLatvia);
         valueDAO.create(valueAustralia);
         valueDAO.create(valueJapan);
@@ -71,7 +75,7 @@ public class ValueDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testUpdate() throws DBException {
-        Value valueLatvia = new Value("Country", "Latvia");
+        Value valueLatvia = new Value("Country", "Latvia", "Latvia");
         valueDAO.create(valueLatvia);
         Value valueFromDB = valueDAO.getById((valueLatvia.getValueId()));
         assertEquals(valueLatvia.getValue(), valueFromDB.getValue());
@@ -85,11 +89,11 @@ public class ValueDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testMultipleValuesDeletion() throws DBException {
-        Value valueLatvia = new Value("Country", "Latvia");
-        Value valueAustralia = new Value("Country", "Australia");
-        Value valueJapan = new Value("Country", "Japan");
-        Value valueUSA = new Value("Country", "USA");
-        Value statusNew = new Value("Agreement status", "New");
+        Value valueLatvia = new Value("Country", "Latvia", "Latvia");
+        Value valueAustralia = new Value("Country", "Australia", "Australia");
+        Value valueJapan = new Value("Country", "Japan", "Japan");
+        Value valueUSA = new Value("Country", "USA", "USA");
+        Value statusNew = new Value("Agreement status", "New", "New");
         valueDAO.create(valueLatvia);
         valueDAO.create(valueAustralia);
         valueDAO.create(valueJapan);

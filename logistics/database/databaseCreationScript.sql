@@ -76,6 +76,7 @@ CREATE TABLE `agreement` (
 DROP TABLE IF EXISTS `logistics`.`value`;
  CREATE TABLE `value` (
  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+ `code` CHAR(50) NOT NULL,
  `type` CHAR(50) NOT NULL,
  `value` CHAR(50) NOT NULL,
  PRIMARY KEY (`id`)
@@ -154,15 +155,15 @@ insert into agreement values(default, 1, 2, "PENDING");
 insert into agreement values(default, 1, 2, "PENDING");
 insert into agreement values(default, 1, 2, "PENDING");
 
-insert into value values (DEFAULT, "Country", "Albania");
-insert into value values (DEFAULT, "Country", "Russia");
-insert into value values (DEFAULT, "Country", "Latvia");
-insert into value values (DEFAULT, "Country", "Germany");
-insert into value values (DEFAULT, "Country", "Poland");
-insert into value values (DEFAULT, "Country", "Lithuania");
-insert into value values (DEFAULT, "Country", "France");
-insert into value values (DEFAULT, "Country", "Holland");
-insert into value values (DEFAULT, "Country", "Denmark");
-insert into value values (DEFAULT, "Country", "Spain");
-insert into value values (DEFAULT, "Country", "Italy");
-insert into value values (DEFAULT, "Country", "Finland");
+insert into value values (DEFAULT, "Country", "Albania", "Albania");
+insert into value values (DEFAULT, "Country", "Russia", "Russia");
+insert into value values (DEFAULT, "Country", "Latvia", "Latvia");
+insert into value values (DEFAULT, "Country", "Germany", "Germany");
+insert into value values (DEFAULT, "Country", "Poland", "Poland");
+insert into value values (DEFAULT, "Country", "Lithuania", "Lithuania");
+insert into value values (DEFAULT, "Country", "France", "France");
+insert into value values (DEFAULT, "Country", "Holland", "Holland");
+insert into value values (DEFAULT, "Country", "Denmark", "Denmark");
+insert into value values (DEFAULT, "Country", "Spain", "Spain");
+insert into value values (DEFAULT, "Country", "Italy", "Italy");
+insert into value values (DEFAULT, "Country", "Finland", "Finland");

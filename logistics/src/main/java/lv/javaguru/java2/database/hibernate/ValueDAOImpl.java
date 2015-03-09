@@ -24,10 +24,10 @@ public class ValueDAOImpl extends DAOImpl<Value> implements ValueDAO {
     }
 
     @Override
-    public String lookupValue(String type, String value) throws DBException {
+    public String lookupValue(String type, String code) throws DBException {
         Value valueFromDB = (Value) getCurrentSession().createCriteria(Value.class)
                 .add(Restrictions.eq("type", type))
-                .add(Restrictions.eq("value", value)).uniqueResult();
+                .add(Restrictions.eq("code", code)).uniqueResult();
         return valueFromDB.getValue();
     }
 }
