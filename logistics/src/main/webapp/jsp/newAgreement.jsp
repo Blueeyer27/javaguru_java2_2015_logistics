@@ -12,9 +12,9 @@
 <div align="center">
     <%Agreement agreement = (Agreement) request.getAttribute("model");%>
     <b>Created new Agreement!</b><br>
-    <b>Agreement id = <%=agreement.getAgreementId()%></b><br>
+    <b>Agreement Id = <%=agreement.getAgreementId()%></b><br>
     <b>Cargo Id = <%=agreement.getCargoId()%></b><br>
-    <b>Vehicle id = <%=agreement.getVehicleId()%></b><br>
+    <b>Vehicle Id = <%=agreement.getVehicleId()%></b><br>
     <b>Status = <%=agreement.getStatus()%></b><br>
 </div>
 

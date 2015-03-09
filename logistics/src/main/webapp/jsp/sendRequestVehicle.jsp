@@ -23,7 +23,7 @@
         (Vehicle Type = <%=vehicle.getType()%>) (Vehicle Capacity = <%=vehicle.getCapacity()%>) </h2>
     <h2><font color="red" ><b>Important!  Cargo serch result by TYPE = <%=vehicle.getType()%> and WEIGHT <=  <%=vehicle.getCapacity()%>.</b></font>
     <BR><b>Please choose cargo from the list:</b></h2>
-    <table align="center" border="1" width="750">
+    <table align="center" border="1" width="950">
         <tr>
             <td width="50"><b>Id</b></td>
             <td width="200"><b>Vehicle Type</b></td>
@@ -42,14 +42,14 @@
         <form method="post" action="createAgreement">
             <tr>
                 <td width="50"><%=cargo.getCargoId()%></td>
-                <td width="50"><%=cargo.getVehicleType()%></td>
-                <td width="50"><%=cargo.getWeight()%></td>
-                <td width="50"><%=cargo.getLoadAddress()%></td>
-                <td width="50"><%=cargo.getUnloadAddress()%></td>
-                <td width="50"><%=cargo.getLoadDate()%></td>
-                <td width="50"><%=cargo.getUnloadDate()%></td>
-                <td width="50"><%=cargo.getStatus()%></td>
-                <td width="50"><%=cargo.getUserId()%></td>
+                <td width="200"><%=cargo.getVehicleType()%></td>
+                <td width="200"><%=cargo.getWeight()%></td>
+                <td width="200"><%=cargo.getLoadAddress()%></td>
+                <td width="200"><%=cargo.getUnloadAddress()%></td>
+                <td width="200"><%=cargo.getLoadDate()%></td>
+                <td width="200"><%=cargo.getUnloadDate()%></td>
+                <td width="200"><%=cargo.getStatus()%></td>
+                <td width="200"><%=cargo.getUserId()%></td>
                 <td>
                     <input type="hidden" name="cargoId" value="<%=cargo.getCargoId()%>">
                     <input type="hidden" name="vehicleId" value="<%=vehicle.getVehicleId()%>">

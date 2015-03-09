@@ -27,8 +27,9 @@ public class SendRequestVehicleController implements MVCController {
         Map<String, Object> modelHashMap = new HashMap<String, Object> ();
         VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
         CargoDAOImpl cargoDAO = new CargoDAOImpl();
-        Vehicle vehicle = new Vehicle();
+        Vehicle vehicle = null;
         List<Cargo> cargoList = new ArrayList<Cargo>();
+        Cargo cargo =null;
 
         try {
             vehicle = vehicleDAO.getById(vehicleId);
@@ -41,9 +42,9 @@ public class SendRequestVehicleController implements MVCController {
 
         try {
 //            cargoList = cargoDAO.getAll();
-            cargoList = cargoDAO.getByParameters(vehicle.getType(),0.0,vehicle.getCapacity(),
-                    cargoDAO.stringToDate2("1000-01-01",2), cargoDAO.stringToDate2("9999-12-31", 2),
-                    cargoDAO.stringToDate2("1000-01-01",2), cargoDAO.stringToDate2("9999-12-31",2));
+            cargoList = cargoDAO.getByParameters(vehicle.getType(), cargo.MIN_WEIGHT,vehicle.getCapacity(),
+                    cargoDAO.stringToDate2(cargo.MIN_DATE, 2), cargoDAO.stringToDate2(cargo.MAX_DATE, 2),
+                    cargoDAO.stringToDate2(cargo.MIN_DATE, 2), cargoDAO.stringToDate2(cargo.MAX_DATE, 2));
         } catch (DBException e) {
             System.out.println("Exception while getting cargoDAO.getByParameters() SendRequestVehicleController");
             e.printStackTrace();

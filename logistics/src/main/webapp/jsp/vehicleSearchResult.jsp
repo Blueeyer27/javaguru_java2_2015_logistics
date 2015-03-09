@@ -49,7 +49,7 @@
         %>
         <script language="Javascript">
             <!--
-            alert ("Sorry, NO VEHICLES FOUND in DB! :(")
+            alert ("Sorry, NO VEHICLES FOUND in DB by Your criteria! :(")
             //-->
         </script>
         <%}%>
