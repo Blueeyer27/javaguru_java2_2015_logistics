@@ -11,7 +11,7 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="../style.css">
-  <title>Vehicle list</title>
+  <title>Company + userList</title>
 </head>
 <body>
 <div align="center"><img src="images/indexlogo.jpg"/></div>

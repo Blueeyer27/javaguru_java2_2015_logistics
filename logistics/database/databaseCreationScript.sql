@@ -103,6 +103,7 @@ CREATE TABLE `cargo` (
 -- -----------------------------------------------------
 -- Foreign Keys 
 -- -----------------------------------------------------
+ALTER TABLE `user` ADD FOREIGN KEY (company_id) REFERENCES `company` (`id`);
 /*
 ALTER TABLE `user` ADD FOREIGN KEY (company_id) REFERENCES `company` (`id`);
 ALTER TABLE `cargo` ADD FOREIGN KEY (user_id) REFERENCES `user` (`id`);
