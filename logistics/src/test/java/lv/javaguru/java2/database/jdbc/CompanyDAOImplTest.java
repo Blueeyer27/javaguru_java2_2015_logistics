@@ -29,7 +29,7 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     @Before
     public void init() throws DBException {
-        //databaseCleaner.cleanDatabase();
+        databaseCleaner.cleanDatabase();
     }
 
 
