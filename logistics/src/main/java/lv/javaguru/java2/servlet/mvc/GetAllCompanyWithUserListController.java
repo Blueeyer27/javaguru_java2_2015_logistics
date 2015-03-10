@@ -37,7 +37,7 @@ public class GetAllCompanyWithUserListController implements MVCController {
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Random rn = new Random();
-        int nr =rn.nextInt(100000);        int nr1 =rn.nextInt(100000);        int nr2 =rn.nextInt(100000);        int nr3 =rn.nextInt(100000);
+        int nr =rn.nextInt(100000);int nr1=nr+1;int nr2=nr+2;int nr3=nr+3;
         System.out.println(nr + " " + nr1 + " " + nr2 + " " + nr3 );
 
         Company company1 = new Company("CompanyCargo"+nr, "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "cargo");
