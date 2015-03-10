@@ -9,13 +9,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.Assert.*;
 
 public class CompanyDAOImplTest extends DAOImplTest {
+
+    @Autowired
+    PlatformTransactionManager transactionManager;
 
     @Autowired
     @Qualifier("HibCompanyDAO")
@@ -32,47 +41,54 @@ public class CompanyDAOImplTest extends DAOImplTest {
         databaseCleaner.cleanDatabase();
     }
 
-
-
-
     @Test
-    @Transactional
     public void testGetCompanyesWithUsers() throws DBException {
 
-/*
-        List<Company> companyList = companyDAO.getAll();
+        TransactionTemplate tt = new TransactionTemplate(transactionManager);
+        final AtomicLong companyId = new AtomicLong();
 
-        for (Company company : companyList) {
-            List<User> userList = company.getUserList();
-            for (User user : userList) {
-                System.out.println("comp.name -->  " + company.getName());
-                System.out.println("logins -->  " + user.getLogin());
+        tt.execute(new TransactionCallbackWithoutResult() {
+            protected void doInTransactionWithoutResult(TransactionStatus paramTransactionStatus) {
+                Company company1 = new Company("CompanyCargo", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "cargo");
+                try {
+                    companyDAO.create(company1);
+                    companyId.set(company1.getCompanyId());
+                } catch (DBException e) {
+                    throw new RuntimeException(e);
+                }
             }
-        }
-*/
+        });
 
-//================================================================================================================================================
+        tt.execute(new TransactionCallbackWithoutResult() {
+            protected void doInTransactionWithoutResult(TransactionStatus paramTransactionStatus) {
+                try {
+                    Company company = companyDAO.getById((companyId.get()));
+                    User user1 = new User("user1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company);
+                    User user2 = new User("user2", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company);
+                    User user3 = new User("user3", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company);
+                    userDAO.create(user1);
+                    userDAO.create(user2);
+                    userDAO.create(user3);
+                } catch (DBException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
-        Company company1 = new Company("CompanyCargo", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "cargo");
-        companyDAO.create(company1);
+        tt.execute(new TransactionCallbackWithoutResult() {
+            protected void doInTransactionWithoutResult(TransactionStatus paramTransactionStatus) {
+                try {
+                    Company company = companyDAO.getById((companyId.get()));
+                    List<User> userList = company.getUserList();
+                    int size = userDAO.getAll().size();
 
-        User user1 = new User("user1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
-        User user2 = new User("user2", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
-        User user3 = new User("user3", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
-        userDAO.create(user1);
-        userDAO.create(user2);
-        userDAO.create(user3);
-
-        Company companyFromDB = companyDAO.getById((company1.getCompanyId()));
-        List<User> userList = companyFromDB.getUserList();
-
-        int size = userDAO.getAll().size();
-        assertNotNull(companyFromDB);
-        assertEquals(company1.getName(), companyFromDB.getName());
-        //assertEquals(size, userList.size());
-
+                    assertEquals(size, userList.size());
+                } catch (DBException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
-
 
     @Test
     @Transactional

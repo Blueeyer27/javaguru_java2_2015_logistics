@@ -44,7 +44,7 @@ public class RegistrationMethods {
         vehicleDAO.create(vehicle);
 
     }
-
+/*
     public void userCreate(List<String> parameteres) throws DBException {
         String login = parameteres.get(0);
         String password = parameteres.get(1);
@@ -57,7 +57,7 @@ public class RegistrationMethods {
         User userNew = new User(login, password, firstname, lastname, email, phone, companyid);
         userDAO.create(userNew);
 
-    }
+    }*/
 
   /*  public void companyCreate(List<String> parameteres) throws DBException {
         String name = parameteres.get(0);

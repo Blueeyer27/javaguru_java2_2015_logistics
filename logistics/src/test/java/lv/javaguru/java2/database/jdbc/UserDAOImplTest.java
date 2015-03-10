@@ -37,7 +37,10 @@ public class UserDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testCreate() throws DBException {
-        User user = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
+        Company company = new Company("TestCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+        companyDAO.create(company);
+        User user = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         assertNotNull(userFromDB);
@@ -55,8 +58,11 @@ public class UserDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testMultipleUserCreation() throws DBException {
-        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
-        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        Company company = new Company("TestCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+        companyDAO.create(company);
+        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", company);
         userDAO.create(user1);
         userDAO.create(user2);
         List<User> users = userDAO.getAll();
@@ -66,7 +72,10 @@ public class UserDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testUpdateUser() throws DBException {
-        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        Company company = new Company("TestCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+        companyDAO.create(company);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         assertEquals(user.getUserId(), userFromDB.getUserId());
@@ -86,7 +95,10 @@ public class UserDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testUserDeletion() throws DBException {
-        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        Company company = new Company("TestCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+        companyDAO.create(company);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         int size = userDAO.getAll().size();
         userDAO.delete(user.getUserId());
@@ -97,9 +109,13 @@ public class UserDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testMultipleUserDeletion() throws DBException {
-        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
-        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
-        User user3 = new User("login3", "pass3", "Janis", "Berzins", "j.berzins@email.com", "+371234000", 11111L);
+
+        Company company = new Company("TestCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvia", "Transporter");
+        companyDAO.create(company);
+        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", company);
+        User user3 = new User("login3", "pass3", "Janis", "Berzins", "j.berzins@email.com", "+371234000", company);
         userDAO.create(user1);
         userDAO.create(user2);
         userDAO.create(user3);
@@ -124,7 +140,7 @@ public class UserDAOImplTest extends DAOImplTest {
         Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
                 "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
         companyDAO.create(company);
-        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company.getCompanyId());
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         String userCompanyType = user.getUserCompanyType();
         assertEquals(userCompanyType, company.getType());
@@ -133,8 +149,11 @@ public class UserDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testGetUserByLogin() throws DBException {
-        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", 11111L);
-        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user1 = new User("login1", "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", company);
         userDAO.create(user1);
         userDAO.create(user2);
         User userFromDB1 = userDAO.getByLogin("login1");

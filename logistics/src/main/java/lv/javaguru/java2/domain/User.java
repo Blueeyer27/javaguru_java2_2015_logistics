@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", columnDefinition = "int(11)")
@@ -34,22 +33,25 @@ public class User {
     @Column(name = "phone_number", columnDefinition = "char(20)")
     private String phoneNumber;
 
-    @Column(name = "company_id", columnDefinition = "int(11)")
+    @Transient
     private long companyId;
 
+    @ManyToOne (fetch=FetchType.EAGER)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     public User() {
 
     }
 
-    public User(String login, String password, String firstName, String lastName, String eMail, String phoneNumber, long companyId) {
+    public User(String login, String password, String firstName, String lastName, String eMail, String phoneNumber, Company company) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
-        this.companyId = companyId;
+        this.company = company;
     }
 
     public long getUserId() {
@@ -118,6 +120,14 @@ public class User {
 
     public String getUserCompanyType() {
         return getUserCompany().getType();
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     private Company getUserCompany() {

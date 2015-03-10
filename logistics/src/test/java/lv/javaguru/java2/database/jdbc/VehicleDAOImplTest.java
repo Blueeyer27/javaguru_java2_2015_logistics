@@ -1,7 +1,9 @@
 package lv.javaguru.java2.database.jdbc;
 
+import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.VehicleDAO;
+import lv.javaguru.java2.domain.Company;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.Vehicle;
 import org.junit.Before;
@@ -20,9 +22,11 @@ public class VehicleDAOImplTest extends DAOImplTest {
     @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
-    private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
+    @Autowired
+    @Qualifier("HibCompanyDAO")
+    private CompanyDAO companyDAO;
 
-//    private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+    private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
 
     private UserDAOImpl userDAO = new UserDAOImpl();
 
@@ -34,7 +38,10 @@ public class VehicleDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testCreate() throws DBException {
-        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
@@ -55,8 +62,11 @@ public class VehicleDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testGetAll() throws DBException{
-        User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
-        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", company);
         userDAO.create(user1);
         userDAO.create(user2);
         User user1FromDB = userDAO.getById(user1.getUserId());
@@ -76,8 +86,11 @@ public class VehicleDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testDeleteVehicle() throws DBException {
-        User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
-        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
+        User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", company);
         userDAO.create(user1);
         userDAO.create(user2);
         User user1FromDB = userDAO.getById(user1.getUserId());
@@ -94,7 +107,10 @@ public class VehicleDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testUpdateVehicle() throws DBException {
-        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 14.8, "PENDING");
@@ -134,9 +150,12 @@ public class VehicleDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testGetByParameters() throws DBException {
-        User user1 = new User("username1", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
-        User user2 = new User("username2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", 22222L);
-        User user3 = new User("username3", "pass3", "Nikolajs", "Petrovs", "petr@email.com", "+37125551111", 11111L);
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user1 = new User("username1", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
+        User user2 = new User("username2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", company);
+        User user3 = new User("username3", "pass3", "Nikolajs", "Petrovs", "petr@email.com", "+37125551111", company);
         userDAO.create(user1);
         userDAO.create(user2);
         userDAO.create(user3);
@@ -161,7 +180,10 @@ public class VehicleDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testGetNullByNonExistentId() throws DBException {
-        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", 33333L);
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
         Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");

@@ -31,8 +31,7 @@ public class GetAllCompanyWithUserListController implements MVCController {
     @Autowired
     @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
-
-
+    
     @Override
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -48,10 +47,9 @@ public class GetAllCompanyWithUserListController implements MVCController {
             e.printStackTrace();
         }
 
-
-        User user1 = new User("user"+nr1, "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
-        User user2 = new User("user"+nr2, "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
-        User user3 = new User("user"+nr3, "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1.getCompanyId());
+        User user1 = new User("user"+nr1, "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1);
+        User user2 = new User("user"+nr2, "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1);
+        User user3 = new User("user"+nr3, "pass1", "Foo", "Barsky", "fb@email.com", "+371234567890", company1);
         try {
             userDAO.create(user1);
             userDAO.create(user2);
