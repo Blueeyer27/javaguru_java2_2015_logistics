@@ -1,16 +1,12 @@
-
 <%@ page import="java.util.List" %>
-
 <%@ page import="lv.javaguru.java2.domain.Company" %>
 <%@ page import="lv.javaguru.java2.domain.User" %>
+<%@ page import="lv.javaguru.java2.database.jdbc.CompanyDAOImpl" %>
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
+<%@ page import="org.springframework.beans.factory.annotation.Qualifier" %>
+<%@ page import="lv.javaguru.java2.database.CompanyDAO" %>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 19.02.2015
-  Time: 19:34
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -29,32 +25,27 @@
     </tr>
 
 <%
-/*
-            List<Company> companyes = (List<Company>)request.getAttribute("model");
-            for (Company company : companyes) {
-            List<User> userList = company.getUserList();
-            for (User user : userList) {
-*/
-            List<Company> companyes = (List<Company>)request.getAttribute("model");
-            for (int i = 0; i < companyes.size(); i ++) {
-                Company company = companyes.get(i);
-
+//            Company company = (Company)request.getAttribute("model");
+            List<Company> companyList = (List<Company>)request.getAttribute("model");
+            for (Company company : companyList) {
+%>
+      <tr>
+        <td width="200"><%=company.getName()%></td>
+      </tr>
+<%
             List<User> userList = company.getUserList();
             for (User user : userList) {
                 System.out.println("  " + user.getLogin());
-
-
-
 %>
       <tr>
-        <td width="200"><%=company.getName()%> AND <%=user.getLogin()%></td>
+        <td width="200"> Users = <%=user.getLogin()%></td>
       </tr>
 
 <%
+            }
 
-}
-}%>
-
+            }
+%>
 
 </body>
 </html>

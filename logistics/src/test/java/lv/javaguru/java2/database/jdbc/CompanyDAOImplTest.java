@@ -37,10 +37,21 @@ public class CompanyDAOImplTest extends DAOImplTest {
 
     @Test
     @Transactional
-    public void getCompanyesWithUsers() throws DBException {
+    public void testGetCompanyesWithUsers() throws DBException {
 
+/*
+        List<Company> companyList = companyDAO.getAll();
 
+        for (Company company : companyList) {
+            List<User> userList = company.getUserList();
+            for (User user : userList) {
+                System.out.println("comp.name -->  " + company.getName());
+                System.out.println("logins -->  " + user.getLogin());
+            }
+        }
+*/
 
+//================================================================================================================================================
 
         Company company1 = new Company("CompanyCargo", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "cargo");
         companyDAO.create(company1);
@@ -52,25 +63,18 @@ public class CompanyDAOImplTest extends DAOImplTest {
         userDAO.create(user2);
         userDAO.create(user3);
 
+        Company companyFromDB = companyDAO.getById((company1.getCompanyId()));
+        List<User> userList = companyFromDB.getUserList();
 
-
-
-
-        List<Company> companyList = companyDAO.getAll();
-
-        for (Company company : companyList) {
-            List<User> userList = company.getUserList();
-            for (User user : userList) {
-                System.out.println("comp.name -->  " + company.getName());
-                System.out.println("logins -->  " + user.getLogin());
-            }
-        }
-
+        int size = userDAO.getAll().size();
+        assertNotNull(companyFromDB);
+        assertEquals(company1.getName(), companyFromDB.getName());
+        //assertEquals(size, userList.size());
 
     }
 
 
-        @Test
+    @Test
     @Transactional
     public void testCreate() throws DBException {
         Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
