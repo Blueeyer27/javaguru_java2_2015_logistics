@@ -8,7 +8,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../style.css">
-    <title>Add new user wizard</title>
+    <title>New cargo registration</title>
 </head>
 <body>
 <div align="center"><img src="images/indexlogo.jpg"/></div>

@@ -2,6 +2,7 @@ package lv.javaguru.java2.servlet.mvc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Component
 @URL(value="/userReg")
+//@Transactional
 public class UserRegController implements MVCController {
 
     @Autowired

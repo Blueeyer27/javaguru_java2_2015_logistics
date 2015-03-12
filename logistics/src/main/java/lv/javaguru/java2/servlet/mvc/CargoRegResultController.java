@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lv.javaguru.java2.database.CargoDAO;
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
+import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +29,10 @@ public class CargoRegResultController implements MVCController {
     @Qualifier("HibernateCargoDAO")
     private CargoDAO cargoDAO;
 
+    @Autowired
+    @Qualifier("HibernateUserDAO")
+    private UserDAO userDAO;
+
     @Override
     public MVCModel processRequest(HttpServletRequest request,
                                    HttpServletResponse response) {
@@ -40,7 +46,16 @@ public class CargoRegResultController implements MVCController {
         Date unloaDdate = cargoDAO.stringToDate2(request.getParameter("unloaddate"), 2);
         String status = PENDING;
 
-        Long cargoId = createCargoInDatabase(userid, type, weight, loadAddress,
+
+        User user = null;
+        try {
+            user = userDAO.getById(userid);
+        } catch (DBException e) {
+            System.out.println("Exception while getting user from DB CargoRegResult");
+            e.printStackTrace();
+        }
+
+        Long cargoId = createCargoInDatabase(user, type, weight, loadAddress,
                 unloadAddress, loadDate, unloaDdate, status);
 
         Cargo cargo = getCreatedCargoFromDB(cargoId);
@@ -48,11 +63,11 @@ public class CargoRegResultController implements MVCController {
         return new MVCModel("/jsp/cargoRegResult.jsp", cargo);
     }
 
-    private Long createCargoInDatabase(Long userid, String type, Double weight,
+    private Long createCargoInDatabase(User user, String type, Double weight,
                                         String loadAddress, String unloadAddress,
                                         Date loadDate, Date unloaDdate, String status) {
         Long id = null;
-        Cargo cargoNew = new Cargo(userid, type, weight, loadAddress,
+        Cargo cargoNew = new Cargo(user, type, weight, loadAddress,
                 unloadAddress, loadDate, unloaDdate, status);
         try {
             cargoDAO.create(cargoNew);

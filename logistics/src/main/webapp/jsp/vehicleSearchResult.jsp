@@ -13,7 +13,7 @@
 <div align="right"><a href="index.html">BACK</a></div>
 <hr />
 <div align="center">
-    <table align="center" border="1" width="450">
+    <table align="center" border="1" width="950">
         <tr>
             <td width="50"><b>Id</b></td>
             <td width="200"><b>Vehicle Name</b></td>

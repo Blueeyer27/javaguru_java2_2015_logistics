@@ -11,23 +11,35 @@ public class Agreement {
     @Column(name="id", columnDefinition = "int(11)")
     private long agreementId;
 
-    @Column(name = "cargo_id", columnDefinition = "int(11)")
+    @Transient
+    //@Column(name = "cargo_id", columnDefinition = "int(11)")
     private long cargoId;
 
-    @Column(name = "vehicle_id", columnDefinition = "int(11)")
+    @Transient
+    //@Column(name = "vehicle_id", columnDefinition = "int(11)")
     private long vehicleId;
 
     @Column(name = "status", columnDefinition = "char(30)")
     private String status;
 
 
+    @ManyToOne (fetch=FetchType.EAGER)
+    @JoinColumn(name = "cargo_id")
+    private Cargo cargo;
+
+
+    @ManyToOne (fetch=FetchType.EAGER)
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
+
+
     public Agreement() {
 
     }
 
-    public Agreement(long cargoId, long vehicleId, String status) {
-        this.cargoId = cargoId;
-        this.vehicleId = vehicleId;
+    public Agreement(Cargo cargo, Vehicle vehicle, String status) {
+        this.cargo = cargo;
+        this.vehicle = vehicle;
         this.status = status;
     }
 
@@ -61,6 +73,22 @@ public class Agreement {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
 }

@@ -30,6 +30,7 @@ public class RegistrationMethods {
     //private AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
 
 
+/*
     public void vehicleCreate(List<String> parameteres) throws DBException {
         int userid = Integer.parseInt(parameteres.get(0));
         String name = parameteres.get(1);
@@ -42,8 +43,9 @@ public class RegistrationMethods {
 
         Vehicle vehicle = new Vehicle(userid, name, type, plateNumber, trailerNumber, capacity, status);
         vehicleDAO.create(vehicle);
-
     }
+*/
+
 /*
     public void userCreate(List<String> parameteres) throws DBException {
         String login = parameteres.get(0);
@@ -74,6 +76,7 @@ public class RegistrationMethods {
     }
 */
 
+/*
     public void cargoCreate(List<String> parameteres) throws DBException {
 
         int userid = Integer.parseInt(parameteres.get(0));
@@ -95,6 +98,7 @@ public class RegistrationMethods {
         cargoDAO.create(cargo);
 
     }
+*/
 
 
 

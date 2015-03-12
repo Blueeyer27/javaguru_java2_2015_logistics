@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.database.VehicleDAO;
+import lv.javaguru.java2.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -19,12 +21,18 @@ import lv.javaguru.java2.servlet.model.RegistrationMethods;
  * Created by user on 17.02.2015.
  */
 @Component
-@URL(value="/vehicleregresult")
+@URL(value="/vehicleRegResult")
 public class VehicleRegResultController implements MVCController {
+
+    public static final String PENDING = "PENDING";
 
     @Autowired
     @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
+
+    @Autowired
+    @Qualifier("HibernateUserDAO")
+    private UserDAO userDAO;
 
     @Override
     public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -33,18 +41,19 @@ public class VehicleRegResultController implements MVCController {
         String type = request.getParameter("type");
         String plateNumber = request.getParameter("platenumber");
         String trailerNumber = request.getParameter("trailernumber");
-        String capacity = request.getParameter("capacity");
+        Double capacity = Double.parseDouble(request.getParameter("capacity"));
+        Long userid = Long.parseLong(request.getParameter("userid"));
+        String status = PENDING;
 
-        //эту хрень тупо захардкодил покачто
-        String userid = "13";
-        String status = "new";
+        User user = null;
+        try {
+            user = userDAO.getById(userid);
+        } catch (DBException e) {
+            System.out.println("Exception while getting user from DB CargoRegResult");
+            e.printStackTrace();
+        }
 
-        //parsing
-        long realUserid = Integer.parseInt(userid);
-        double realcapacity = Double.parseDouble(capacity);
-
-
-        long vehicleId = createVehicleInDatabase(new Vehicle(realUserid, name, type, plateNumber, trailerNumber, realcapacity, status));
+        long vehicleId = createVehicleInDatabase(new Vehicle(user, name, type, plateNumber, trailerNumber, capacity, status));
 
         Vehicle vehicleFromDb = getCreatedVehicleFromDatabase(vehicleId);
 

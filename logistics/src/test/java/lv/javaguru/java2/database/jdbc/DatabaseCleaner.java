@@ -16,10 +16,10 @@ public class DatabaseCleaner extends DBConnection {
 
     private List<String> getTableNames() {
         List<String> tableNames = new ArrayList<String>();
-        tableNames.add("user");
-        tableNames.add("vehicle");
         tableNames.add("agreement");
+        tableNames.add("vehicle");
         tableNames.add("cargo");
+        tableNames.add("user");
         tableNames.add("company");
         tableNames.add("value");
         return tableNames;

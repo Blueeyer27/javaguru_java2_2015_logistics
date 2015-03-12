@@ -74,13 +74,13 @@ CREATE TABLE `agreement` (
 -- Table `logistics`.`value`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `logistics`.`value`;
- CREATE TABLE `value` (
- `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
- `code` CHAR(50) NOT NULL,
- `type` CHAR(50) NOT NULL,
- `value` CHAR(50) NOT NULL,
- PRIMARY KEY (`id`)
- );
+CREATE TABLE `value` (
+  `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+  `type` CHAR(50) NOT NULL,
+  `code` CHAR(50) NOT NULL,
+  `value` CHAR(50) NOT NULL,
+  PRIMARY KEY (`id`)
+);
 
 -- -----------------------------------------------------
 -- Table `logistics`.`cargo`
@@ -104,6 +104,11 @@ CREATE TABLE `cargo` (
 -- Foreign Keys 
 -- -----------------------------------------------------
 ALTER TABLE `user` ADD FOREIGN KEY (company_id) REFERENCES `company` (`id`);
+ALTER TABLE `cargo` ADD FOREIGN KEY (user_id) REFERENCES `user` (`id`);
+ALTER TABLE `vehicle` ADD FOREIGN KEY (user_id) REFERENCES `user` (`id`);
+ALTER TABLE `agreement` ADD FOREIGN KEY (cargo_id) REFERENCES `cargo` (`id`);
+ALTER TABLE `agreement` ADD FOREIGN KEY (vehicle_id) REFERENCES `vehicle` (`id`);
+
 /*
 ALTER TABLE `user` ADD FOREIGN KEY (company_id) REFERENCES `company` (`id`);
 ALTER TABLE `cargo` ADD FOREIGN KEY (user_id) REFERENCES `user` (`id`);
@@ -143,22 +148,54 @@ SELECT id INTO @companyID  FROM company  WHERE name ='CompanyNone';
 insert into user values (DEFAULT, "user3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Name1", "Surname1", "user1@user1.lv", "67900000", @companyID);
 
 
+SELECT id INTO @userID  FROM user  WHERE login ='user1';
+insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City1", "Berlin", "2015/02/01", "2015/02/05", "pending");
+insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "pending");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "pending");
+SELECT id INTO @userID  FROM user  WHERE login ='user2';
+insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City2", "Berlin", "2015/02/01", "2015/02/05", "pending");
+insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "pending");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "pending");
+SELECT id INTO @userID  FROM user  WHERE login ='user3';
+insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City3", "Berlin", "2015/02/01", "2015/02/05", "pending");
+insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "pending");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "pending");
 
-insert into cargo values (DEFAULT, 11, "platform", 11, "Moskow", "Berlin", "2015/02/01", "2015/02/05", "pending");
-insert into cargo values (DEFAULT, 11, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "pending");
-insert into cargo values (DEFAULT, 11, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "pending");
 
-INSERT INTO vehicle VALUES (default, 11, "GAZEL", "platform", "GG111", "TT222", 9.0, "PENDING");
-INSERT INTO vehicle VALUES (default, 11, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "PENDING");
-INSERT INTO vehicle VALUES (default, 11, "MAN", "refrigerator", "GG111", "TT222", 22.0, "PENDING");
+SELECT id INTO @userID  FROM user  WHERE login ='user1';
+INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK1", "platform", "GG111", "TT222", 9.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "PENDING");
+SELECT id INTO @userID  FROM user  WHERE login ='user2';
+INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK2", "platform", "GG111", "TT222", 9.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "PENDING");
+SELECT id INTO @userID  FROM user  WHERE login ='user3';
+INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK3", "platform", "GG111", "TT222", 9.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "PENDING");
 
-insert into agreement values(default, 1, 2, "PENDING");
-insert into agreement values(default, 1, 2, "PENDING");
-insert into agreement values(default, 1, 2, "PENDING");
+
+SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Moskow City1';
+SELECT id INTO @vehicleID  FROM vehicle  WHERE name ='GAZEL GLK1';
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Moskow City2';
+SELECT id INTO @vehicleID  FROM vehicle  WHERE name ='GAZEL GLK2';
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Moskow City3';
+SELECT id INTO @vehicleID  FROM vehicle  WHERE name ='GAZEL GLK3';
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+
 
 insert into value values (DEFAULT, "Country", "Albania", "Albania");
 insert into value values (DEFAULT, "Country", "Russia", "Russia");
-insert into value values (DEFAULT, "Country", "Latvia", "Latvia");
+insert into value values (DEFAULT, "vehicleCountry", "Latvia", "Latvia");
 insert into value values (DEFAULT, "Country", "Germany", "Germany");
 insert into value values (DEFAULT, "Country", "Poland", "Poland");
 insert into value values (DEFAULT, "Country", "Lithuania", "Lithuania");

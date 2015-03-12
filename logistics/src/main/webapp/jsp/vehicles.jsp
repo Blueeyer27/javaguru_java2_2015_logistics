@@ -17,7 +17,7 @@
 <div align="right"><a href="../index.html">BACK</a></div>
 <hr />
 
-<div align="center"><a href = "../jsp/vehiclereg.jsp">Vehicle Registration</a></div>
+<div align="center"><a href = "../vehicleReg">Vehicle Registration</a></div>
 <br/>
 <div align="center"><a href = "../getallvehicles">Show all vehicles</a></div>
 <br/>

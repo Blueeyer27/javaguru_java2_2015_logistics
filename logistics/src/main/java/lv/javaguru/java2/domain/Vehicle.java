@@ -1,6 +1,8 @@
 package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "vehicle")
@@ -11,7 +13,8 @@ public class Vehicle {
     @Column(name="id", columnDefinition = "int(11)")
     private long vehicleId;
 
-    @Column(name = "user_id", columnDefinition = "int(11)")
+    @Transient
+    //@Column(name = "user_id", columnDefinition = "int(11)")
     private long userId;
 
     @Column(name = "name", columnDefinition = "char(50)")
@@ -32,18 +35,34 @@ public class Vehicle {
     @Column(name = "status", columnDefinition = "char(30)")
     private String status;
 
+
+    @ManyToOne (fetch=FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany (fetch=FetchType.EAGER, mappedBy = "vehicle")
+    public List<Agreement> agreementList = new ArrayList<Agreement>();
+
+
+
     public Vehicle(){
 
     }
 
-    public Vehicle(long userId, String name, String type, String plateNumber, String trailerNumber, Double capacity, String status) {
-        this.userId = userId;
+
+    public Vehicle(User user, String name, String type, String plateNumber, String trailerNumber, Double capacity, String status) {
+        this.user = user;
         this.name = name;
+
         this.type = type;
         this.plateNumber = plateNumber;
         this.trailerNumber = trailerNumber;
         this.capacity = capacity;
         this.status = status;
+    }
+
+    public List<Agreement> getAgreementList() {
+        return agreementList;
     }
 
     public long getVehicleId() {
@@ -109,5 +128,16 @@ public class Vehicle {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 
 }

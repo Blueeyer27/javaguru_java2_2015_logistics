@@ -138,7 +138,7 @@ public class UserDAOImplTest extends DAOImplTest {
     @Transactional
     public void testGetUserCompanyType() throws DBException {
         Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
-                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "transport");
         companyDAO.create(company);
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);

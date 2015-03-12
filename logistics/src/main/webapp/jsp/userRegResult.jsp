@@ -49,7 +49,7 @@
             <td width="200"><%=user.getLastName()%></td>
             <td width="200"><%=user.getEMail()%></td>
             <td width="200"><%=user.getPhoneNumber()%></td>
-            <td width="200"><%=user.getCompanyId()%></td>
+            <td width="200"><%=user.getCompany().getCompanyId()%></td>
         </tr>
     </table>
 </div>

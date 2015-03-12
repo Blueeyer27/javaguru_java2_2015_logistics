@@ -3,6 +3,7 @@ package lv.javaguru.java2.servlet.mvc;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.UserDAO;
@@ -21,6 +22,7 @@ import lv.javaguru.java2.domain.User;
  */
 @Component
 @URL(value="/userRegResult")
+//@Transactional
 public class UserRegResultController implements MVCController {
 
     @Autowired

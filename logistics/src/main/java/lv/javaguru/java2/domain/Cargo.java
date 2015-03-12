@@ -1,7 +1,9 @@
 package lv.javaguru.java2.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "cargo")
@@ -17,7 +19,8 @@ public class Cargo {
     @Column(name="id", columnDefinition = "int(11)")
     private long cargoId;
 
-    @Column(name = "user_id", columnDefinition = "int(11)")
+    @Transient
+    //@Column(name = "user_id", columnDefinition = "int(11)")
     private long userId;
 
     @Column(name = "vehicle_type", columnDefinition = "char(20)")
@@ -41,6 +44,14 @@ public class Cargo {
     @Column(name = "status", columnDefinition = "char(30)")
     private String status;
 
+    @ManyToOne (fetch=FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany (fetch=FetchType.EAGER, mappedBy = "cargo")
+    public List<Agreement> agreementList = new ArrayList<Agreement>();
+
+
 
 
     public Cargo() {
@@ -48,8 +59,8 @@ public class Cargo {
 
 
 
-    public Cargo(long userId, String vehicleType, Double weight, String loadAddress, String unloadAddress, Date loadDate, Date unloadDate, String status) {
-        this.userId = userId;
+    public Cargo(User user, String vehicleType, Double weight, String loadAddress, String unloadAddress, Date loadDate, Date unloadDate, String status) {
+        this.user = user;
         this.vehicleType = vehicleType;
         this.weight = weight;
         this.loadAddress = loadAddress;
@@ -60,6 +71,9 @@ public class Cargo {
     }
 
 
+    public List<Agreement> getAgreementList() {
+        return agreementList;
+    }
 
     public long getCargoId() {
         return cargoId;
@@ -133,4 +147,11 @@ public class Cargo {
         this.status = status;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

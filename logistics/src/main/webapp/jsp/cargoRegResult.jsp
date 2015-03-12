@@ -33,6 +33,7 @@
             <td width="200"><b>Cargo data:</b></td>
         <tr>
         <tr>
+            <td width="200"><b>Cargo ID</b></td>
             <td width="200"><b>Type</b></td>
             <td width="200"><b>Weight</b></td>
             <td width="200"><b>Load address</b></td>
@@ -42,13 +43,14 @@
             <td width="200"><b>User ID</b></td>
         </tr>
         <tr>
+            <td width="200"><%=cargo.getCargoId()%></td>
             <td width="200"><%=cargo.getVehicleType()%></td>
             <td width="200"><%=cargo.getWeight()%></td>
             <td width="200"><%=cargo.getLoadAddress()%></td>
             <td width="200"><%=cargo.getUnloadAddress()%></td>
             <td width="200"><%=cargo.getLoadDate()%></td>
             <td width="200"><%=cargo.getUnloadDate()%></td>
-            <td width="200"><%=cargo.getUserId()%></td>
+            <td width="200"><%=cargo.getUser().getUserId()%></td>
         </tr>
     </table>
 

@@ -13,7 +13,7 @@
 <hr />
 <div align="center">
 
-    <table align="center" border="1" width="750">
+    <table align="center" border="1" width="950">
         <tr>
             <td width="50"><b>Id</b></td>
             <td width="100"><b>Weight</b></td>

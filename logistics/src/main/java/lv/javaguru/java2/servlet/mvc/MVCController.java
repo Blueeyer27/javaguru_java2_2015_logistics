@@ -1,5 +1,7 @@
 package lv.javaguru.java2.servlet.mvc;
 
+import org.springframework.stereotype.Controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

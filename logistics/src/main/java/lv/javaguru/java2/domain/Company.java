@@ -37,8 +37,9 @@ public class Company {
     @Column(name = "type", columnDefinition = "char(30)")
     private String type;
 
-    @OneToMany (fetch=FetchType.LAZY, mappedBy = "company")
+    @OneToMany (fetch=FetchType.EAGER, mappedBy = "company")
     public List<User> userList = new ArrayList<User>();
+
 
     public Company() {
     }

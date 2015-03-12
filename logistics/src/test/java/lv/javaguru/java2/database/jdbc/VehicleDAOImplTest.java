@@ -2,6 +2,7 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.domain.Company;
 import lv.javaguru.java2.domain.User;
@@ -23,12 +24,14 @@ public class VehicleDAOImplTest extends DAOImplTest {
     private VehicleDAO vehicleDAO;
 
     @Autowired
+    @Qualifier("HibernateUserDAO")
+    private UserDAO userDAO;
+
+    @Autowired
     @Qualifier("HibCompanyDAO")
     private CompanyDAO companyDAO;
 
     private DatabaseCleaner databaseCleaner = new DatabaseCleaner();
-
-    private UserDAOImpl userDAO = new UserDAOImpl();
 
     @Before
     public void init() throws DBException {
@@ -44,13 +47,13 @@ public class VehicleDAOImplTest extends DAOImplTest {
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
+        Vehicle vehicle = new Vehicle(userFromDB, "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
         vehicleDAO.create(vehicle);
         Vehicle vehicleFromDB = vehicleDAO.getById(vehicle.getVehicleId());
         assertNotNull(userFromDB);
         assertNotNull(vehicleFromDB);
         assertEquals(vehicle.getVehicleId(), vehicleFromDB.getVehicleId());
-        assertEquals(vehicle.getUserId(), vehicleFromDB.getUserId());
+        assertEquals(vehicle.getUser().getUserId(), vehicleFromDB.getUser().getUserId());
         assertEquals(vehicle.getName(), vehicleFromDB.getName());
         assertEquals(vehicle.getplateNumber(), vehicleFromDB.getplateNumber());
         assertEquals(vehicle.getType(), vehicleFromDB.getType());
@@ -63,7 +66,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
     @Transactional
     public void testGetAll() throws DBException{
         Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
-                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "transport");
         companyDAO.create(company);
         User user1 = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         User user2 = new User("login2", "pass2", "Steve", "Surname", "steve@email.com", "+37124324890", company);
@@ -73,8 +76,8 @@ public class VehicleDAOImplTest extends DAOImplTest {
         User user2FromDB = userDAO.getById(user2.getUserId());
 
         List<Vehicle> vehicles = new ArrayList<Vehicle>();
-        Vehicle vehicle1 = new Vehicle(user1FromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
-        Vehicle vehicle2 = new Vehicle(user2FromDB.getUserId(), "VOLVO" , "platform", "DF3908", "UF440", 14.9, "PENDING");
+        Vehicle vehicle1 = new Vehicle(user1FromDB, "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
+        Vehicle vehicle2 = new Vehicle(user2FromDB, "VOLVO" , "platform", "DF3908", "UF440", 14.9, "PENDING");
         vehicles.add(vehicle1);
         vehicles.add(vehicle2);
         vehicleDAO.create(vehicle1);
@@ -95,8 +98,8 @@ public class VehicleDAOImplTest extends DAOImplTest {
         userDAO.create(user2);
         User user1FromDB = userDAO.getById(user1.getUserId());
         User user2FromDB = userDAO.getById(user2.getUserId());
-        Vehicle vehicle1 = new Vehicle(user1FromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 13.8, "PENDING");
-        Vehicle vehicle2 = new Vehicle(user2FromDB.getUserId(), "VOLVO" , "platform", "DF3908", "UF440", 15.1, "PENDING");
+        Vehicle vehicle1 = new Vehicle(user1FromDB, "MAN" , "tilt", "GG4107", "DZ855", 13.8, "PENDING");
+        Vehicle vehicle2 = new Vehicle(user2FromDB, "VOLVO" , "platform", "DF3908", "UF440", 15.1, "PENDING");
         vehicleDAO.create(vehicle1);
         vehicleDAO.create(vehicle2);
         vehicleDAO.delete(vehicle1.getVehicleId());
@@ -113,7 +116,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "Reefer", "GG4107", "DZ855", 14.8, "PENDING");
+        Vehicle vehicle = new Vehicle(userFromDB, "MAN" , "Reefer", "GG4107", "DZ855", 14.8, "PENDING");
         vehicleDAO.create(vehicle);
         Vehicle vehicleFromDB = vehicleDAO.getById(vehicle.getVehicleId());
         assertNotNull(userFromDB);
@@ -163,9 +166,9 @@ public class VehicleDAOImplTest extends DAOImplTest {
         User user2FromDB = userDAO.getById(user2.getUserId());
         User user3FromDB = userDAO.getById(user3.getUserId());
 
-        Vehicle vehicle1 = new Vehicle(user1FromDB.getUserId(), "KAMAZ" , "tilt", "GG4107", "DZ855", 12.5, "PENDING");
-        Vehicle vehicle2 = new Vehicle(user2FromDB.getUserId(), "URAL" , "platform", "DF3908", "UF440", 18.5, "PENDING");
-        Vehicle vehicle3 = new Vehicle(user3FromDB.getUserId(), "ZIL" , "platform", "DF3908", "UF440", 8.0, "PENDING");
+        Vehicle vehicle1 = new Vehicle(user1FromDB, "KAMAZ" , "tilt", "GG4107", "DZ855", 12.5, "PENDING");
+        Vehicle vehicle2 = new Vehicle(user2FromDB, "URAL" , "platform", "DF3908", "UF440", 18.5, "PENDING");
+        Vehicle vehicle3 = new Vehicle(user3FromDB, "ZIL" , "platform", "DF3908", "UF440", 8.0, "PENDING");
         vehicleDAO.create(vehicle1);
         vehicleDAO.create(vehicle2);
         vehicleDAO.create(vehicle3);
@@ -186,7 +189,7 @@ public class VehicleDAOImplTest extends DAOImplTest {
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Vehicle vehicle = new Vehicle(userFromDB.getUserId(), "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
+        Vehicle vehicle = new Vehicle(userFromDB, "MAN" , "tilt", "GG4107", "DZ855", 18.5, "PENDING");
         vehicleDAO.create(vehicle);
 
         Vehicle vehicleFromDB;

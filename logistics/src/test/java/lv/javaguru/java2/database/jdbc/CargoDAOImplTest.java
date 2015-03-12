@@ -53,14 +53,14 @@ public class CargoDAOImplTest extends DAOImplTest {
                 "+37126957815", company);
         userDAO.create(user);
         User userFromDB = userDAO.getById(user.getUserId());
-        Cargo cargo = new Cargo(userFromDB.getUserId(), "tilt", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo = new Cargo(userFromDB, "tilt", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
         cargoDAO.create(cargo);
         Cargo cargoFromDB = cargoDAO.getById(cargo.getCargoId());
         assertNotNull(userFromDB);
         assertNotNull(cargoFromDB);
         assertEquals(cargo.getCargoId(), cargoFromDB.getCargoId());
-        assertEquals(user.getUserId(), cargoFromDB.getUserId());
+        assertEquals(user.getUserId(), cargoFromDB.getUser().getUserId());
         assertEquals(cargo.getVehicleType(), cargoFromDB.getVehicleType());
         assertEquals(cargo.getWeight(), cargoFromDB.getWeight());
         assertEquals(cargo.getLoadAddress(), cargoFromDB.getLoadAddress());
@@ -83,9 +83,9 @@ public class CargoDAOImplTest extends DAOImplTest {
                 "+37128453698", company);
         userDAO.create(user1);
         userDAO.create(user2);
-        Cargo cargo1 = new Cargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo1 = new Cargo(user1, "ref", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
-        Cargo cargo2 = new Cargo(user2.getUserId(), "tilt", 19.4, "LV Kurzemes", "DE Rein",
+        Cargo cargo2 = new Cargo(user2, "tilt", 19.4, "LV Kurzemes", "DE Rein",
                 cargoDAO.stringToDate("05/02/2015"), cargoDAO.stringToDate("10/02/2015"), "ready");
         cargoDAO.create(cargo1);
         cargoDAO.create(cargo2);
@@ -103,7 +103,7 @@ public class CargoDAOImplTest extends DAOImplTest {
         User user1 = new User("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
                 "+37126957815", company);
         userDAO.create(user1);
-        Cargo cargo1 = new Cargo(user1.getUserId(), "ref", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo1 = new Cargo(user1, "ref", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("09/02/2015"), cargoDAO.stringToDate("15/02/2015"), "ready");
         cargoDAO.create(cargo1);
         Cargo cargoFromDB = cargoDAO.getById(cargo1.getCargoId());
@@ -135,13 +135,20 @@ public class CargoDAOImplTest extends DAOImplTest {
     @Test
     @Transactional
     public void testGetByParameters() throws DBException {
-        Cargo cargo1 = new Cargo(1111, "platform", 21.5, "LV Maskavas", "RU Moscow",
+        Company company = new Company("FirstCompany", "asdf1234567890", "Riga, registred",
+                "Riga, sdfdfsdfdsf", "FIGBANK", "BLABLA100500", "Latvija", "Transporter");
+        companyDAO.create(company);
+        User user1 = new User("Dinjvald", "qwerty", "Deniss", "Beskorovainijs", "qwerty@email.com",
+                "+37126957815", company);
+        userDAO.create(user1);
+
+        Cargo cargo1 = new Cargo(user1, "platform", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("01/02/2015"), cargoDAO.stringToDate("15/03/2015"), "ready");
-        Cargo cargo2 = new Cargo(1111, "platform", 19.4, "LV Kurzemes", "DE Rein",
+        Cargo cargo2 = new Cargo(user1, "platform", 19.4, "LV Kurzemes", "DE Rein",
                 cargoDAO.stringToDate("12/02/2015"), cargoDAO.stringToDate("10/03/2015"), "ready");
-        Cargo cargo3 = new Cargo(1111, "platform", 31.4, "LV AAA", "RU Moscow",
+        Cargo cargo3 = new Cargo(user1, "platform", 31.4, "LV AAA", "RU Moscow",
                 cargoDAO.stringToDate("23/02/2015"), cargoDAO.stringToDate("25/03/2015"), "ready");
-        Cargo cargo4 = new Cargo(1111, "platform", 9.8, "LV BBB", "DE Rein",
+        Cargo cargo4 = new Cargo(user1, "platform", 9.8, "LV BBB", "DE Rein",
                 cargoDAO.stringToDate("05/02/2015"), cargoDAO.stringToDate("13/03/2015"), "ready");
         cargoDAO.create(cargo1);
         cargoDAO.create(cargo2);
@@ -163,7 +170,7 @@ public class CargoDAOImplTest extends DAOImplTest {
         companyDAO.create(company);
         User user = new User("qwerty", "pass1", "Foo", "Bar", "qwerty@email.com", "+371111167890", company);
         userDAO.create(user);
-        Cargo cargo = new Cargo(user.getUserId(), "platform", 21.5, "LV Maskavas", "RU Moscow",
+        Cargo cargo = new Cargo(user, "platform", 21.5, "LV Maskavas", "RU Moscow",
                 cargoDAO.stringToDate("01/02/2015"), cargoDAO.stringToDate("15/03/2015"), "ready");
         cargoDAO.create(cargo);
 

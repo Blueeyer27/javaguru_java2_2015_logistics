@@ -2,8 +2,12 @@ package lv.javaguru.java2.domain;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.jdbc.CompanyDAOImpl;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -40,9 +44,21 @@ public class User {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    public User() {
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany (/*fetch=FetchType.EAGER,*/ mappedBy = "user")
+    public List<Vehicle> vehicleList = new ArrayList<Vehicle>();
+
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany (/*fetch=FetchType.EAGER,*/ mappedBy = "user")
+    public List<Cargo> cargoList = new ArrayList<Cargo>();
+
+
+
+    public User() {
     }
+
 
     public User(String login, String password, String firstName, String lastName, String eMail, String phoneNumber, Company company) {
         this.login = login;
@@ -52,6 +68,15 @@ public class User {
         this.eMail = eMail;
         this.phoneNumber = phoneNumber;
         this.company = company;
+    }
+
+
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
+
+    public List<Cargo> getCargoList() {
+        return cargoList;
     }
 
     public long getUserId() {
@@ -134,7 +159,7 @@ public class User {
         CompanyDAOImpl companyDAO = new CompanyDAOImpl();
         Company company = null;
         try {
-            company = companyDAO.getById(getCompanyId());
+            company = companyDAO.getById(getCompany().getCompanyId());
         } catch (DBException e) {
             e.printStackTrace();
         }
