@@ -2,26 +2,18 @@
 <%@ page import="lv.javaguru.java2.domain.Vehicle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="lv.javaguru.java2.domain.Cargo" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.CargoDAOImpl" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.VehicleDAOImpl" %>
 <%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <%
-
     User user = (User)session.getAttribute("user");
 
-
     Map<String, Object> modelHashMap = (Map<String, Object>) request.getAttribute("model");
-//    User user = (User) modelHashMap.get("user");
     List<Cargo> cargoList = (List<Cargo>) modelHashMap.get("cargoList");
     List<Vehicle> vehicleList = (List<Vehicle>) modelHashMap.get("vehicleList");
-
-
-
-
 %>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -49,33 +41,26 @@
         <tr>
         <tr>
             <td width="200"><b>Login</b></td>
-            <td width="200"><b>Password</b></td>
             <td width="200"><b>Firstname</b></td>
             <td width="200"><b>Lastname</b></td>
             <td width="200"><b>Email</b></td>
             <td width="200"><b>Phone</b></td>
-            <td width="200"><b>Company ID</b></td>
+            <td width="200"><b>Company</b></td>
         </tr>
         <tr>
             <td width="200"><%=user.getLogin()%></td>
-            <td width="200"><%=user.getPassword()%></td>
             <td width="200"><%=user.getFirstName()%></td>
             <td width="200"><%=user.getLastName()%></td>
             <td width="200"><%=user.getEMail()%></td>
             <td width="200"><%=user.getPhoneNumber()%></td>
-            <td width="200"><%=user.getCompanyId()%></td>
+            <td width="200"><%=user.getCompany().getName()%></td>
         </tr>
     </table>
 
 <BR><BR>
 
-    <hr />
-
-
-
-
-
     <%--======================================--%>
+    <hr />
     <%
     if (session.getAttribute("userType").equals("transport")) {%>
     <h2>-=T=- TRANSPORT PROFILE</h2>
@@ -88,7 +73,6 @@
             <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
-
 
     <hr />
     <table align="center" border="1" width="90%">
@@ -117,7 +101,7 @@
             <td width="200"><%=vehicle.gettrailerNumber()%></td>
             <td width="200"><%=vehicle.getCapacity()%></td>
             <td width="200"><%=vehicle.getStatus()%></td>
-            <td width="200"><%=vehicle.getUserId()%></td>
+            <td width="200"><%=vehicle.getUser().getUserId()%></td>
             <td>
                 <input type="hidden" name="id" value="<%=vehicle.getVehicleId()%>">
                 <input type="submit" target="_blank" name="action" value="Find 4 this vehicle">
@@ -127,17 +111,6 @@
         </form>
         <%}%>
     </table>
-
-
-
-
-
-
-
-
-
-
-
 
     <%--======================================--%>
     <%} else
@@ -181,7 +154,7 @@
             <td width="50"><%=cargo.getLoadDate()%></td>
             <td width="50"><%=cargo.getUnloadDate()%></td>
             <td width="50"><%=cargo.getStatus()%></td>
-            <td width="50"><%=cargo.getUserId()%></td>
+            <td width="50"><%=cargo.getUser().getUserId()%></td>
             <td>
                 <input type="hidden" name="id" value="<%=cargo.getCargoId()%>">
                 <input type="submit" name="action" value="Find 4 this cargo">
@@ -190,11 +163,6 @@
         </form>
          <%}%>
          </table>
-
-
-
-
-
 
 
     <%--======================================--%>

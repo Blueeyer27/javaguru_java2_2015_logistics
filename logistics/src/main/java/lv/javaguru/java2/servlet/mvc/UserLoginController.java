@@ -57,7 +57,6 @@ public class UserLoginController implements MVCController {
         } else {
             login = request.getParameter("login");
             password = request.getParameter("password");
-    //        List<User> users = getUserListFromDatabase();
             user = getUserIfExist(login, password);
         }
 
