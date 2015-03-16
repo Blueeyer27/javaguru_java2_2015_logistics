@@ -22,7 +22,6 @@ import lv.javaguru.java2.domain.User;
  */
 @Component
 @URL(value="/userRegResult")
-//@Transactional
 public class UserRegResultController implements MVCController {
 
     @Autowired

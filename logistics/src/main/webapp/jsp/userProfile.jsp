@@ -68,7 +68,7 @@
     <table align="center" border="1" width="90%">
         <tr align="center">
             <td><form method="get" target="_blank" action="agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" target="_blank" action="vehiclereg"><button type="submit">Add new VEHICLE</button></form></td>
+            <td><form method="get" target="_blank" action="vehicleReg"><button type="submit">Add new VEHICLE</button></form></td>
             <td><form method="get" target="_blank" action="jsp/cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
             <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
