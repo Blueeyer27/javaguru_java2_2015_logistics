@@ -187,7 +187,7 @@ insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
 
 insert into value values (DEFAULT, "Country", "Albania", "Albania");
 insert into value values (DEFAULT, "Country", "Russia", "Russia");
-insert into value values (DEFAULT, "vehicleCountry", "Latvia", "Latvia");
+insert into value values (DEFAULT, "Country", "Latvia", "Latvia");
 insert into value values (DEFAULT, "Country", "Germany", "Germany");
 insert into value values (DEFAULT, "Country", "Poland", "Poland");
 insert into value values (DEFAULT, "Country", "Lithuania", "Lithuania");
@@ -197,3 +197,11 @@ insert into value values (DEFAULT, "Country", "Denmark", "Denmark");
 insert into value values (DEFAULT, "Country", "Spain", "Spain");
 insert into value values (DEFAULT, "Country", "Italy", "Italy");
 insert into value values (DEFAULT, "Country", "Finland", "Finland");
+
+
+insert into value values (DEFAULT, "Vehicle Type", "platform", "platform");
+insert into value values (DEFAULT, "Vehicle Type", "tilt", "tilt");
+insert into value values (DEFAULT, "Vehicle Type", "refrigirator", "refrigirator");
+
+insert into value values (DEFAULT, "Company Type", "transport", "transport");
+insert into value values (DEFAULT, "Company Type", "cargo", "cargo");
