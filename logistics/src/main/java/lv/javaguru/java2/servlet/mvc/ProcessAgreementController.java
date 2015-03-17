@@ -14,10 +14,13 @@ import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
 import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-@Component
-@URL(value="/processAgreement")
-public class ProcessAgreementController implements MVCController {
+@Controller
+public class ProcessAgreementController {
 
     public static final String ACCEPT = "accept";
     public static final String CANCEL = "cancel";
@@ -26,9 +29,11 @@ public class ProcessAgreementController implements MVCController {
     private CargoDAOImpl cargoDAO = new CargoDAOImpl();
     private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request,
-                                   HttpServletResponse response) {
+    @RequestMapping(value = "processAgreement", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+
+        ModelAndView model = new ModelAndView();
         Long agreementId = Long.parseLong(request.getParameter("agreementId"));
         Long cargoId = Long.parseLong(request.getParameter("cargoId"));
         Long vehicleId = Long.parseLong(request.getParameter("vehicleId"));
@@ -51,7 +56,9 @@ public class ProcessAgreementController implements MVCController {
 
         List<Agreement> agreementList = getAgreementListFromDB();
 
-        return new MVCModel("/jsp/agreementOverview.jsp", agreementList);
+        model.setViewName("agreementOverview");
+        model.addObject("model",agreementList);
+        return model;
     }
 
     private void updateObjectsStatuses(Agreement agreement, Cargo cargo,

@@ -1,3 +1,4 @@
+/*
 package lv.javaguru.java2.servlet.mvc;
 
 import java.io.IOException;
@@ -100,3 +101,4 @@ public class MVCFilter implements Filter {
 
     }
 }
+*/

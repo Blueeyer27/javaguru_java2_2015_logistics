@@ -17,10 +17,13 @@ import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Cargo;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-@Component
-@URL(value="/cargoSearchResult")
-public class CargoSearchResultController implements MVCController {
+@Controller
+public class CargoSearchResultController {
 
     public static final Double MIN_WEIGHT = 0.0;
     public static final Double MAX_WEIGHT = 99.99;
@@ -32,11 +35,12 @@ public class CargoSearchResultController implements MVCController {
     @Qualifier("HibernateCargoDAO")
     private CargoDAO cargoDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request,
-                                   HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "cargoSearchResult", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "CargoSearch");
+        ModelAndView model = new ModelAndView();
 
         errorMessage = "";
         String type = request.getParameter("type");
@@ -62,13 +66,17 @@ public class CargoSearchResultController implements MVCController {
         validateEnteredDates(loadDateFrom, loadDateTo, "Load date");
         validateEnteredDates(unloadDateFrom, unloadDateTo, "Unload date");
 
-        if(!errorMessage.isEmpty())
-            return new MVCModel("/jsp/errorPage.jsp", errorMessage);
-
+        if(!errorMessage.isEmpty()) {
+            model.setViewName("errorPage");
+            model.addObject("model",errorMessage);
+            return model;
+        }
         List<Cargo> cargoList = getCargoesByParameters(type, weightFromDouble,
                 weightToDouble, loadDateFrom, loadDateTo, unloadDateFrom, unloadDateTo);
 
-        return new MVCModel("/jsp/cargoSearchResult.jsp", cargoList);
+        model.setViewName("cargoSearchResult");
+        model.addObject("model",cargoList);
+        return model;
     }
 
     private Double parseWeightValue (String weight) {

@@ -15,12 +15,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-@Component
+@Controller
 @URL(value="/createAgreement")
-public class CreateAgreementController implements MVCController {
+public class CreateAgreementController {
 
     @Autowired
     @Qualifier("HibAgreementDAO")
@@ -34,9 +37,11 @@ public class CreateAgreementController implements MVCController {
     @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request,
-                                   HttpServletResponse response) {
+    @RequestMapping(value = "createAgreement", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+
+        ModelAndView model = new ModelAndView();
 
         Long cargoId = Long.parseLong(request.getParameter("cargoId"));
         Long vehicleId = Long.parseLong(request.getParameter("vehicleId"));
@@ -62,8 +67,9 @@ public class CreateAgreementController implements MVCController {
         Long agreementId = createNewAgreementInDB(cargo, vehicle, status);
         Agreement agreementNewFromDB = getNewAgreementFromDB(agreementId);
 
-
-        return new MVCModel("/jsp/newAgreement.jsp", agreementNewFromDB);
+        model.setViewName("newAgreement");
+        model.addObject("model",agreementNewFromDB);
+        return model;
     }
 
 

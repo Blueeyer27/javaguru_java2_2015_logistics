@@ -14,10 +14,13 @@ import lv.javaguru.java2.servlet.model.URL;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Vehicle;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-@Component
-@URL(value="/vehicleSearchResult")
-public class VehicleSearchResultController implements MVCController {
+@Controller
+public class VehicleSearchResultController {
 
     public static final Double MIN_WEIGHT = 0.0;
     public static final Double MAX_WEIGHT = 99.99;
@@ -27,11 +30,12 @@ public class VehicleSearchResultController implements MVCController {
     @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request,
-                                   HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "vehicleSearchResult", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "VehicleSearch");
+        ModelAndView model = new ModelAndView();
 
         List<Vehicle> vehicles = null;
 
@@ -55,12 +59,17 @@ public class VehicleSearchResultController implements MVCController {
 
         validateCapacityValues(capacityFromDouble, capacityToDouble);
 
-        if(!errorMessage.isEmpty())
-            return new MVCModel("/jsp/errorPage.jsp", errorMessage);
+        if(!errorMessage.isEmpty()) {
+
+            model.setViewName("errorPage");
+            model.addObject("model",errorMessage);
+            return model;
+        }
 
         vehicles = getVehiclesByParameters(type, capacityFromDouble, capacityToDouble);
-
-        return new MVCModel("/jsp/vehicleSearchResult.jsp", vehicles);
+        model.setViewName("vehicleSearchResult");
+        model.addObject("model",vehicles);
+        return model;
     }
 
     private Boolean isNotEmptyOrNull(String string) {

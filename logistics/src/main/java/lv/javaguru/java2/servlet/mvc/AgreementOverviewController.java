@@ -13,19 +13,22 @@ import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Agreement;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-@Component
-@URL(value="/agreementOverview")
-public class AgreementOverviewController implements MVCController {
+@Controller
+public class AgreementOverviewController {
 
     @Autowired
     @Qualifier("HibAgreementDAO")
     private AgreementDAO agreementDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request, 
-                                   HttpServletResponse response) {
-
+    @RequestMapping(value = "agreementOverview", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+        ModelAndView model = new ModelAndView();
         List<Agreement> agreementList = new ArrayList<Agreement>();
 
         try {
@@ -34,7 +37,8 @@ public class AgreementOverviewController implements MVCController {
             System.out.println("Exception while getting agreementList AgreementOverviewController");
             e.printStackTrace();
         }
-
-        return new MVCModel("/jsp/agreementOverview.jsp", agreementList);
+        model.setViewName("agreementOverview");
+        model.addObject("model",agreementList);
+        return model;
     }
 }

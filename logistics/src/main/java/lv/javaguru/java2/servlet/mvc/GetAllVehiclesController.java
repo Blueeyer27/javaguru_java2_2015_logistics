@@ -13,30 +13,34 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Vehicle;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by user on 19.02.2015.
  */
-@Component
-@URL(value="/getallvehicles")
-public class GetAllVehiclesController implements MVCController {
+@Controller
+public class GetAllVehiclesController {
 
     @Autowired
     @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "getallvehicles", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        ModelAndView model = new ModelAndView();
         List<Vehicle> vehicleList = new ArrayList<Vehicle>();
         try {
             vehicleList = vehicleDAO.getAll();
         } catch (DBException e) {
             e.printStackTrace();
         }
-
-        return new MVCModel("/jsp/getallvehicles.jsp", vehicleList);
+        model.setViewName("getallvehicles");
+        model.addObject("model",vehicleList);
+        return model;
     }
 }

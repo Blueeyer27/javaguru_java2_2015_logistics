@@ -10,25 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallbackWithoutResult;
-import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by user on 19.02.2015.
  */
-@Component
-@URL(value="/getallcompanywithuserlist")
+@Controller
 
 //@Transactional
 public class GetAllCompanyWithUserListController implements MVCController {
@@ -41,10 +37,10 @@ public class GetAllCompanyWithUserListController implements MVCController {
     @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(value = "getallcompanywithuserlist", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-
+        ModelAndView model = new ModelAndView();
         Random rn = new Random();
         int nr =rn.nextInt(100000);int nr1=nr+1;int nr2=nr+2;int nr3=nr+3;
         System.out.println(nr + " " + nr1 + " " + nr2 + " " + nr3 );
@@ -78,7 +74,8 @@ public class GetAllCompanyWithUserListController implements MVCController {
         } catch (DBException e) {
             e.printStackTrace();
         }
-
-        return new MVCModel("/jsp/getAllCompanyWithUserList.jsp", companyList);
+        model.setViewName("getAllCompanyWithUserList");
+        model.addObject("model",companyList);
+        return model;
     }
 }

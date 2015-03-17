@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -21,6 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.Assert.*;
 
+@WebAppConfiguration
 public class CompanyDAOImplTest extends DAOImplTest {
 
     @Autowired

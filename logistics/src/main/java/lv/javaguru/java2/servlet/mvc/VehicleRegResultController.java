@@ -15,14 +15,15 @@ import lv.javaguru.java2.servlet.model.URL;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Vehicle;
-import lv.javaguru.java2.servlet.model.RegistrationMethods;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by user on 17.02.2015.
  */
 @Component
-@URL(value="/vehicleRegResult")
-public class VehicleRegResultController implements MVCController {
+public class VehicleRegResultController {
 
     public static final String PENDING = "PENDING";
 
@@ -34,9 +35,10 @@ public class VehicleRegResultController implements MVCController {
     @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "vehicleRegResult", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request, HttpServletResponse response) {
 
+        ModelAndView model = new ModelAndView();
         String name = request.getParameter("name");
         String type = request.getParameter("type");
         String plateNumber = request.getParameter("platenumber");
@@ -57,7 +59,10 @@ public class VehicleRegResultController implements MVCController {
 
         Vehicle vehicleFromDb = getCreatedVehicleFromDatabase(vehicleId);
 
-        return new MVCModel("/jsp/vehicleregresult.jsp", vehicleFromDb);
+        model.setViewName("vehicleregresult");
+        model.addObject("model",vehicleFromDb);
+
+        return model;
     }
 
     protected long createVehicleInDatabase(Vehicle vehicle){

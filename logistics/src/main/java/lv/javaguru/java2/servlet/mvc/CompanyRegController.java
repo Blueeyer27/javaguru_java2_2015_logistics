@@ -3,7 +3,6 @@ package lv.javaguru.java2.servlet.mvc;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import lv.javaguru.java2.database.AgreementDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -11,23 +10,27 @@ import lv.javaguru.java2.servlet.model.URL;
 
 import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.CompanyDAOImpl;
 import lv.javaguru.java2.domain.Company;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by andre on 17.02.2015.
  */
-@Component
-@URL(value="/companyReg")
-public class CompanyRegController implements MVCController {
+@Controller
+public class CompanyRegController {
 
     @Autowired
     @Qualifier("HibCompanyDAO")
     private CompanyDAO companyDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request,
-                                   HttpServletResponse response) {
+    @RequestMapping(value = "companyReg", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+
+        ModelAndView model = new ModelAndView();
         String name = request.getParameter("name");
         String regNumber = request.getParameter("regNumber");
         String regAddress = request.getParameter("regAddress");
@@ -39,7 +42,9 @@ public class CompanyRegController implements MVCController {
         Long companyId = createNewCompanyInDB(name, regNumber, regAddress, actualAddress, bank, iban, country, type);
         Company companyNewFromDB = getNewCompanyFromDB(companyId);
 
-        return new MVCModel("/jsp/companyreg.jsp", companyNewFromDB);
+        model.setViewName("companyreg");
+        model.addObject("model",companyNewFromDB);
+        return model;
     }
 
     protected Company getNewCompanyFromDB(Long companyId) {

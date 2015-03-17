@@ -13,9 +13,11 @@ import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 
+@WebAppConfiguration
 public class UserDAOImplTest extends DAOImplTest {
 
     @Autowired

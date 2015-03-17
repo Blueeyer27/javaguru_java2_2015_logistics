@@ -15,14 +15,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
-import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-@Component
-@URL(value="/sendRequestCargo")
-public class SendRequestCargoController implements MVCController {
+@Controller
+public class SendRequestCargoController {
 
     @Autowired
     @Qualifier("HibernateCargoDAO")
@@ -32,9 +33,11 @@ public class SendRequestCargoController implements MVCController {
     @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request, 
-                                   HttpServletResponse response) {
+    @RequestMapping(value = "sendRequestCargo", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+
+        ModelAndView model = new ModelAndView();
         Long cargoId = Long.parseLong(request.getParameter("id"));
         Map<String, Object> modelMap = new HashMap<String, Object> ();
         Cargo cargo = null;
@@ -51,6 +54,8 @@ public class SendRequestCargoController implements MVCController {
         modelMap.put("cargo", cargo);
         modelMap.put("vehicleList", vehicleList);
 
-        return new MVCModel("/jsp/sendRequestCargo.jsp", modelMap);
+        model.setViewName("sendRequestCargo");
+        model.addObject("model",modelMap);
+        return model;
     }
 }

@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -22,6 +23,8 @@ import static org.junit.Assert.assertNull;
 /**
  * Created by Dinjvald on 07/02/15.
  */
+
+@WebAppConfiguration
 public class CargoDAOImplTest extends DAOImplTest {
 
     @Autowired

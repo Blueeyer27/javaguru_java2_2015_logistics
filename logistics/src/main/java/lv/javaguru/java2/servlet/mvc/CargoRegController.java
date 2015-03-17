@@ -13,28 +13,31 @@ import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by andre on 17.02.2015.
  */
-@Component
-@URL(value="/cargoReg")
-public class CargoRegController implements MVCController {
+@Controller
+public class CargoRegController {
 
     @Autowired
     @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request,
-                                   HttpServletResponse response) {
-
+    @RequestMapping(value = "cargoReg", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+        ModelAndView model = new ModelAndView();
         List<User> userListFromDB = getUserListFromDatabase();
 
-        return new MVCModel("/jsp/cargoreg.jsp", userListFromDB);
+        model.setViewName("cargoreg");
+        model.addObject("model",userListFromDB);
+        return model;
     }
-
-
 
     protected List<User> getUserListFromDatabase() {
         List<User> userList = new ArrayList<User>();

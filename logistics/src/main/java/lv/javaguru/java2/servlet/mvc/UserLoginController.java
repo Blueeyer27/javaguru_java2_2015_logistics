@@ -14,20 +14,22 @@ import lv.javaguru.java2.domain.Vehicle;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.servlet.model.URL;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by andre on 17.02.2015.
  */
 
-@Component
-@URL(value="/userLogin")
-public class UserLoginController implements MVCController {
+@Controller
+public class UserLoginController {
 
     @Autowired
     @Qualifier("HibernateUserDAO")
@@ -41,9 +43,12 @@ public class UserLoginController implements MVCController {
     @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request,
-                                   HttpServletResponse response) {
+    @RequestMapping(value = "userLogin", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+
+        ModelAndView model = new ModelAndView();
+
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "UserLogin");
 
@@ -60,18 +65,21 @@ public class UserLoginController implements MVCController {
             user = getUserIfExist(login, password);
         }
 
-        MVCModel model = null;
-
         List<Cargo> cargoList = getCargoListFromDB();
         List<Vehicle> vehicleList = getVehicleListFromDB();
         Map<String, Object> modelHashMap = putItemToModelHasMap(user, cargoList, vehicleList);
 
         if (user != null ) {
             setSessionAttributes(session, user);
-            model = new MVCModel("/jsp/userProfile.jsp", modelHashMap);
+
+            model.setViewName("userProfile");
+            model.addObject("model",modelHashMap);
         }
-        else
-            model = new MVCModel("/jsp/errorPage.jsp", "Incorrect LOGIN '" +login+ "' or PASSWORD '"+password+"' entered. Sorry!");
+        else {
+            model.setViewName("errorPage");
+            model.addObject("model","Incorrect LOGIN '" +login+ "' or PASSWORD '"+password+"' entered. Sorry!");
+
+        }
         return model;
     }
 

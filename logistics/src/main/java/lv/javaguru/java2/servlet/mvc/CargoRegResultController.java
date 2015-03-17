@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.database.UserDAO;
-import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +14,17 @@ import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Cargo;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by andre on 20.02.2015.
  */
-@Component
-@URL(value="/cargoRegResult")
-public class CargoRegResultController implements MVCController {
+
+@Controller
+public class CargoRegResultController {
 
     public static final String PENDING = "PENDING";
 
@@ -33,9 +36,11 @@ public class CargoRegResultController implements MVCController {
     @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request,
-                                   HttpServletResponse response) {
+    @RequestMapping(value = "cargoRegResult", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+
+        ModelAndView model = new ModelAndView();
 
         Long userid = Long.parseLong(request.getParameter("userid"));
         String type = request.getParameter("type");
@@ -60,7 +65,9 @@ public class CargoRegResultController implements MVCController {
 
         Cargo cargo = getCreatedCargoFromDB(cargoId);
 
-        return new MVCModel("/jsp/cargoRegResult.jsp", cargo);
+        model.setViewName("cargoRegResult");
+        model.addObject("model",cargo);
+        return model;
     }
 
     private Long createCargoInDatabase(User user, String type, Double weight,

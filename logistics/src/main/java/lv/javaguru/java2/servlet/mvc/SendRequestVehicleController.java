@@ -15,14 +15,19 @@ import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
 import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-@Component
-@URL(value="/sendRequestVehicle")
-public class SendRequestVehicleController implements MVCController {
+@Controller
+public class SendRequestVehicleController {
 
-    @Override
-    public MVCModel processRequest(HttpServletRequest request, 
-                                   HttpServletResponse response) {
+    @RequestMapping(value = "sendRequestVehicle", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView processRequest(HttpServletRequest request,
+                                       HttpServletResponse response) {
+
+        ModelAndView model = new ModelAndView();
         Long vehicleId = Long.parseLong(request.getParameter("id"));
         Map<String, Object> modelHashMap = new HashMap<String, Object> ();
         VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
@@ -54,6 +59,9 @@ public class SendRequestVehicleController implements MVCController {
         modelHashMap.put("vehicle", vehicle);
         modelHashMap.put("cargoList", cargoList);
 
-        return new MVCModel("/jsp/sendRequestVehicle.jsp", modelHashMap);
+        model.setViewName("sendRequestVehicle");
+        model.addObject("model",modelHashMap);
+
+        return model;
     }
 }

@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by andre on 07.02.2015.
  */
-
+@WebAppConfiguration
 public class AgreementDAOImplTest extends DAOImplTest{
 
     @Autowired
