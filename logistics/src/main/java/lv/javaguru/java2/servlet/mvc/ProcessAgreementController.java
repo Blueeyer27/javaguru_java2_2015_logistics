@@ -4,13 +4,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lv.javaguru.java2.database.AgreementDAO;
+import lv.javaguru.java2.database.CargoDAO;
+import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.servlet.model.URL;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.jdbc.AgreementDAOImpl;
-import lv.javaguru.java2.database.jdbc.CargoDAOImpl;
-import lv.javaguru.java2.database.jdbc.VehicleDAOImpl;
 import lv.javaguru.java2.domain.Agreement;
 import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
@@ -22,12 +24,24 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProcessAgreementController {
 
+    @Autowired
+    @Qualifier("HibAgreementDAO")
+    private AgreementDAO agreementDAO;
+
+    @Autowired
+    @Qualifier("HibernateCargoDAO")
+    private CargoDAO cargoDAO;
+
+    @Autowired
+    @Qualifier("HibVehicleDAO")
+    private VehicleDAO vehicleDAO;
+
     public static final String ACCEPT = "accept";
     public static final String CANCEL = "cancel";
     public static final String ACCEPTED = "ACCEPTED";
-    private AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
-    private CargoDAOImpl cargoDAO = new CargoDAOImpl();
-    private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
+//    private AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
+//    private CargoDAOImpl cargoDAO = new CargoDAOImpl();
+//    private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
 
     @RequestMapping(value = "processAgreement", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView processRequest(HttpServletRequest request,

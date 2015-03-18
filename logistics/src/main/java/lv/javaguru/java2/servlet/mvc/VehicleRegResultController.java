@@ -15,6 +15,7 @@ import lv.javaguru.java2.servlet.model.URL;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Vehicle;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * Created by user on 17.02.2015.
  */
-@Component
+@Controller
 public class VehicleRegResultController {
 
     public static final String PENDING = "PENDING";

@@ -33,10 +33,12 @@ public class AgreementOverviewController {
 
         try {
             agreementList = agreementDAO.getAll();
+
         } catch (DBException e) {
             System.out.println("Exception while getting agreementList AgreementOverviewController");
             e.printStackTrace();
         }
+
         model.setViewName("agreementOverview");
         model.addObject("model",agreementList);
         return model;

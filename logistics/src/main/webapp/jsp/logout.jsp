@@ -5,22 +5,26 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="refresh" content="3;url=/java2/index.html" />
+    <meta http-equiv="refresh" content="4;url=/java2/index.html" />
     <%
     if (((User) session.getAttribute("user")) != null) {
         User user = (User)session.getAttribute("user");
     %>
-        <title>logout. Bye, <%=user.getLogin()%>!</title>
-    <link href="styles/style.css" rel="stylesheet" type="text/css" />
+    <title>logout. Bye, <%=user.getLogin()%>!</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
 <div id="content_wrapper">
     <div id="content">
         <% session.invalidate(); %>
-        <div id="column_w530">
+        <div align="center"><img src="../images/indexlogo.jpg"/></div>
+        <hr />
+        <div align="center"><img src="../images/seebelow.gif"/></div>
+        <hr />
+        <div align="center">
             <div class="header_02">Logout</div>
             <p>You have successfully logged out.<br>
-                You will be redirected automatically in 3 seconds...</p>
+                You will be redirected automatically in 4 seconds...</p>
             <div class="margin_bottom_20"></div>
             <div class="cleaner"></div>
         </div>
