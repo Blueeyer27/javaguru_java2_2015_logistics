@@ -10,7 +10,6 @@
     Map<String, Object> modelHashMap = (Map<String, Object>) request.getAttribute("model");
     List<Cargo> cargoList = (List<Cargo>) modelHashMap.get("cargoList");
 %>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

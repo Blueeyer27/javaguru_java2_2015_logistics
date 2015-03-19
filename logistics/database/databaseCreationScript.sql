@@ -125,33 +125,32 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-
 /*==================================================
 PAROL user1,user2,user3  =123(heshing code)*/
-insert into company values (DEFAULT, "CompanyCargo", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "cargo");
-insert into company values (DEFAULT, "CompanyTransport", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "transport");
-insert into company values (DEFAULT, "CompanyNone", "123", "Reg address 1", "Actual address 2", "Hansabank", "HABA21", "Latvia", "figna");
+insert into company values (DEFAULT, "Cargo Service Inc.", "123", "Maza Kalna 13-1, Rīga", "Maza Kalna 13-1, Rīga", "Swedbank", "HABA2132524325734", "Latvia", "cargo");
+insert into company values (DEFAULT, "Baltic Transport", "123", "Teraudlietuves 22, Rīga", "Teraudlietuves 22, Rīga", "Swedbank", "HABA246363534561", "Latvia", "transport");
+insert into company values (DEFAULT, "Dummy company", "123", "Brivibas iela, 1", "Brivibas iela, 1", "Swedbank", "HABA234567891", "Latvia", "dummy");
 
-SELECT id INTO @companyID  FROM company  WHERE name ='CompanyCargo';
-insert into user values (DEFAULT, "user1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Name1", "Surname1", "user1@user1.lv", "67900000", @companyID);
-SELECT id INTO @companyID  FROM company  WHERE name ='CompanyTransport';
-insert into user values (DEFAULT, "user2", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Name1", "Surname1", "user1@user1.lv", "67900000", @companyID);
-SELECT id INTO @companyID  FROM company  WHERE name ='CompanyNone';
-insert into user values (DEFAULT, "user3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Name1", "Surname1", "user1@user1.lv", "67900000", @companyID);
+SELECT id INTO @companyID  FROM company  WHERE name ='Cargo Service Inc.';
+insert into user values (DEFAULT, "user1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Andris", "Berzins", "ab@email.com", "+371 27689837", @companyID);
+SELECT id INTO @companyID  FROM company  WHERE name ='Baltic Transport';
+insert into user values (DEFAULT, "user2", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Janis", "Andersons", "ja@email.com", "+371 24567897", @companyID);
+SELECT id INTO @companyID  FROM company  WHERE name ='Dummy company';
+insert into user values (DEFAULT, "user3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "John", "Smith", "js@email.com", "+371 27127645", @companyID);
 
 
 SELECT id INTO @userID  FROM user  WHERE login ='user1';
-insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City1", "Berlin", "2015/02/01", "2015/02/05", "In Progress");
-insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "Available");
-insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "Available");
+insert into cargo values (DEFAULT, @userID, "platform", 11, "Riga", "Moscow", "2015/02/01", "2015/02/05", "In Progress");
+insert into cargo values (DEFAULT, @userID, "tilt", 11, "Riga", "Warszawa", "2015/02/11", "2015/02/25", "Available");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Minsk", "Riga", "2015/02/09", "2015/02/15", "Available");
 
 SELECT id INTO @userID  FROM user  WHERE login ='user2';
-INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK2", "platform", "GG111", "TT222", 9.0, "Reserved");
-INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "Available");
-INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "KAMAZ", "platform", "FG-2056", "KA-4309", 9.0, "Reserved");
+INSERT INTO vehicle VALUES (default, @userID, "SCANIA", "tilt", "PA-5611", "MZ-5098", 12.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "KL-9986", "LM-7831", 22.0, "Available");
 
-SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Moskow City1';
-SELECT id INTO @vehicleID  FROM vehicle  WHERE name ='GAZEL GLK2';
+SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Riga' and unload_address ='Moscow';
+SELECT id INTO @vehicleID  FROM vehicle  WHERE plate_number ='FG-2056';
 insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
 
 insert into value values (DEFAULT, "Country", "Albania", "Albania");
@@ -167,7 +166,6 @@ insert into value values (DEFAULT, "Country", "Spain", "Spain");
 insert into value values (DEFAULT, "Country", "Italy", "Italy");
 insert into value values (DEFAULT, "Country", "Finland", "Finland");
 
-
 insert into value values (DEFAULT, "Vehicle Type", "platform", "platform");
 insert into value values (DEFAULT, "Vehicle Type", "tilt", "tilt");
 insert into value values (DEFAULT, "Vehicle Type", "refrigirator", "refrigirator");
@@ -180,10 +178,5 @@ insert into value values (DEFAULT, "Cargo Status", "Available", "Available");
 insert into value values (DEFAULT, "Cargo Status", "In Progress", "In Progress");
 insert into value values (DEFAULT, "Cargo Status", "Processed", "Processed");
 
-
 insert into value values (DEFAULT, "Company Type", "transport", "transport");
 insert into value values (DEFAULT, "Company Type", "cargo", "cargo");
-
-
-
-
