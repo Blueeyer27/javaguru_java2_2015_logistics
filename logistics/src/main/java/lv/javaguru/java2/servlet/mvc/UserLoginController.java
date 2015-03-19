@@ -7,16 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import lv.javaguru.java2.database.CargoDAO;
-import lv.javaguru.java2.database.VehicleDAO;
+import lv.javaguru.java2.database.*;
 import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.stereotype.Controller;
@@ -43,6 +40,10 @@ public class UserLoginController {
     @Qualifier("HibVehicleDAO")
     private VehicleDAO vehicleDAO;
 
+    @Autowired
+    @Qualifier("HibValueDAO")
+    private ValueDAO valueDAO;
+
     @RequestMapping(value = "userLogin", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView processRequest(HttpServletRequest request,
                                        HttpServletResponse response) {
@@ -66,7 +67,7 @@ public class UserLoginController {
         }
 
         List<Cargo> cargoList = getCargoListFromDB();
-        List<Vehicle> vehicleList = getVehicleListFromDB();
+        List<Vehicle> vehicleList = getVehicleListFromDB(user);
         Map<String, Object> modelHashMap = putItemToModelHasMap(user, cargoList, vehicleList);
 
         if (user != null ) {
@@ -96,10 +97,10 @@ public class UserLoginController {
         return modelHashMap;
     }
 
-    protected List<Vehicle> getVehicleListFromDB() {
+    protected List<Vehicle> getVehicleListFromDB(User user) {
         List<Vehicle> vehicleList = null;
         try {
-            vehicleList = vehicleDAO.getAll();
+            vehicleList = vehicleDAO.getUserVehiclesByStatus(user, valueDAO.lookupValue("Vehicle Status", "Available"));
         } catch (DBException e) {
             e.printStackTrace();
         }

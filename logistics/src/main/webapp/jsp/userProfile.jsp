@@ -71,9 +71,10 @@
             <td><form method="get" target="_blank" action="vehicleReg"><button type="submit">Add new VEHICLE</button></form></td>
             <td><form method="get" target="_blank" action="jsp/cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
             <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="manageVehicles"><button type="submit">Manage Other Vehicles</button></form></td>
         </tr>
     </table>
-
+    <h2>Availible vehicles:</h2>
     <hr />
     <table align="center" border="1" width="90%">
         <tr>

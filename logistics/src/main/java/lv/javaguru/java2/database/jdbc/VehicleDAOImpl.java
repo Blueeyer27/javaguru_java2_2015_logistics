@@ -2,6 +2,7 @@ package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.VehicleDAO;
+import lv.javaguru.java2.domain.User;
 import lv.javaguru.java2.domain.Vehicle;
 import org.springframework.stereotype.Component;
 
@@ -119,6 +120,12 @@ public class VehicleDAOImpl extends DAOImpl<Vehicle> implements VehicleDAO {
 
     @Override
     public List<Vehicle> getByType(String vehicleType) throws DBException {
+        return null;
+        ///// implemented in hibernate
+    }
+
+    @Override
+    public List<Vehicle> getUserVehiclesByStatus(User user, String vehicleStatus) throws DBException {
         return null;
         ///// implemented in hibernate
     }

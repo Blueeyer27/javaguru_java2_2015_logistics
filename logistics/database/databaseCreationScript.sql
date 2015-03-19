@@ -155,17 +155,17 @@ insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berli
 
 
 SELECT id INTO @userID  FROM user  WHERE login ='user1';
-INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK1", "platform", "GG111", "TT222", 9.0, "PENDING");
-INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "PENDING");
-INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK1", "platform", "GG111", "TT222", 9.0, "Reserved");
+INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "Available");
 SELECT id INTO @userID  FROM user  WHERE login ='user2';
-INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK2", "platform", "GG111", "TT222", 9.0, "PENDING");
-INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "PENDING");
-INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK2", "platform", "GG111", "TT222", 9.0, "Reserved");
+INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "Available");
 SELECT id INTO @userID  FROM user  WHERE login ='user3';
-INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK3", "platform", "GG111", "TT222", 9.0, "PENDING");
-INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "PENDING");
-INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "PENDING");
+INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK3", "platform", "GG111", "TT222", 9.0, "Reserved");
+INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "Available");
 
 
 SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Moskow City1';
@@ -203,5 +203,14 @@ insert into value values (DEFAULT, "Vehicle Type", "platform", "platform");
 insert into value values (DEFAULT, "Vehicle Type", "tilt", "tilt");
 insert into value values (DEFAULT, "Vehicle Type", "refrigirator", "refrigirator");
 
+insert into value values (DEFAULT, "Vehicle Status", "Available", "Available");
+insert into value values (DEFAULT, "Vehicle Status", "Reserved", "Reserved");
+insert into value values (DEFAULT, "Vehicle Status", "In Use", "In Use");
+
+
 insert into value values (DEFAULT, "Company Type", "transport", "transport");
 insert into value values (DEFAULT, "Company Type", "cargo", "cargo");
+
+
+
+
