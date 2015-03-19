@@ -5,9 +5,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="refresh" content="4;url=/java2/index.html" />
+    <meta http-equiv="refresh" content="4;url=/java2/" />
     <%
-    if (((User) session.getAttribute("user")) != null) {
+    if ((session.getAttribute("user")) != null) {
         User user = (User)session.getAttribute("user");
     %>
     <title>logout. Bye, <%=user.getLogin()%>!</title>
@@ -33,13 +33,5 @@
     </div>
 </div>
 </body>
-    <%} else {%>
-        <script language="Javascript">
-            <!--
-            alert ("YOU ARE ALREADY SIGNED OUT, DUDE!")
-            //-->
-        </script>
-        <meta http-equiv="REFRESH" content="0;url=/java2/index.html">
-    <%}%>
-
+<%}%>
 </html>

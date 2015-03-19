@@ -1,11 +1,6 @@
 <%@ page import="lv.javaguru.java2.domain.Vehicle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.CompanyDAOImpl" %>
-<%@ page import="lv.javaguru.java2.domain.Company" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.CountryDAOImpl" %>
-<%@ page import="lv.javaguru.java2.domain.Country" %>
-<%@ page import="lv.javaguru.java2.database.CountryDAO" %>
 <%--
   Created by IntelliJ IDEA.
   User: user
@@ -22,7 +17,7 @@
 <body>
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
-<div align="right"><a href="index.html">BACK</a></div>
+<div align="right"><a href="../java2">Back to home</a></div>
 <hr />
 <div align="center">
   <table align="center" border="1" width="450">

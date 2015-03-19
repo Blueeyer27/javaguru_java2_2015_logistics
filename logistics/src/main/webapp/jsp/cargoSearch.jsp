@@ -7,7 +7,7 @@
 <body>
 <div align="center"><img src="../images/indexlogo.jpg"/></div>
 <hr />
-<div align="right"><a href="../index.html">BACK</a></div>
+<div align="right"><a href="../indexx.html">BACK</a></div>
 <hr />
 <div align="center">
     <form method="post" action="../cargoSearchResult">

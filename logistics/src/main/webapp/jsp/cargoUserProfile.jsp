@@ -20,13 +20,11 @@
 </head>
 <body>
 <div align="right"><U><b>Hello,
-    <%=user.getFirstName()%>
-    <%=user.getLastName()%> (<%=user.getLogin()%>)!
-    -----[Type: <%=session.getAttribute("userType")%>]</b></U></div>
+    <%=user.getFirstName()%> <%=user.getLastName()%>!</b></U></div>
 <div align="right"><a href="jsp/logout.jsp"><U>Exit</U></a></div>
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
-<div align="right"><a href="index.html">BACK</a></div>
+<div align="right"><a href="../java2">Back to home</a></div>
 <hr />
 <div align="center">
     <table align="center" border="1" width="90%">

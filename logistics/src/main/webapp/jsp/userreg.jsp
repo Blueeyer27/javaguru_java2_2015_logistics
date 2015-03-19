@@ -1,6 +1,5 @@
 <%@ page import="lv.javaguru.java2.domain.Company" %>
 <%@ page import="java.util.List" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.CompanyDAOImpl" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,7 @@
 <body>
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
-<div align="right"><a href="index.html">BACK</a></div>
+<div align="right"><a href="../java2">Back to home</a></div>
 <hr />
 <div align="center">
     <form method="post" action="userRegResult">
@@ -32,7 +31,6 @@
         <BR><BR>
         <select name="companyid">
             <%
-
             List<Company> companyes = (List<Company>)request.getAttribute("model");
             if (companyes.size()>0)
                 for (Company company : companyes) {
@@ -47,7 +45,6 @@
                     alert ("Sorry, NO company found in DB! :( You can use default id=1 instead")
                     //-->
                 </script>
-
             <%}%>
         </select><br/>
         <br/>

@@ -13,7 +13,7 @@
 
 <div align="center"><img src="images/indexlogo.jpg"/></div>
 <hr />
-<div align="right"><a href="index.html">BACK</a></div>
+<div align="right"><a href="../java2">Back to home</a></div>
 <hr />
 <div align="center">
     <table align="center" border="3" width="700">
