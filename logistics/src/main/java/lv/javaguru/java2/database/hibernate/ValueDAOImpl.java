@@ -25,9 +25,12 @@ public class ValueDAOImpl extends DAOImpl<Value> implements ValueDAO {
 
     @Override
     public String lookupValue(String type, String code) throws DBException {
+        String value = null;
         Value valueFromDB = (Value) getCurrentSession().createCriteria(Value.class)
                 .add(Restrictions.eq("type", type))
                 .add(Restrictions.eq("code", code)).uniqueResult();
-        return valueFromDB.getValue();
+        if (valueFromDB != null)
+            value = valueFromDB.getValue();
+        return value;
     }
 }

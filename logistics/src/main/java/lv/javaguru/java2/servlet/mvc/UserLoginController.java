@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,59 +46,53 @@ public class UserLoginController {
     @RequestMapping(value = "userLogin", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView processRequest(HttpServletRequest request,
                                        HttpServletResponse response) {
-
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "UserLogin");
-        String login = null;
-        String password = null;
-        User user = null;
+        User user;
 
         if ((session.getAttribute("user")) != null) {
             user = (User)session.getAttribute("user");
         } else {
-            login = request.getParameter("login");
-            password = request.getParameter("password");
-            user = getUserIfExist(login, password);
+            user = getUserFromRequest(request);
+            if (user == null) {
+                model.setViewName("errorPage");
+                model.addObject("model","Wrong login or password entered. Try again!");
+                return model;
+            }
         }
-
-        if (user != null ) {
-            setSessionAttributes(session, user);
-            fillModelForUser(user, model);
-        }
-        else {
-            model.setViewName("errorPage");
-            model.addObject("model","Incorrect LOGIN '" +login+ "' or PASSWORD '"+password+"' entered. Sorry!");
-        }
+        fillModelForUser(user, model, session);
         return model;
     }
 
-    private void fillModelForUser(User user, ModelAndView model) {
+    private void fillModelForUser(User user, ModelAndView model, HttpSession session) {
         String userType = user.getUserCompanyType();
         String transport = getCompanyTypeValue("transport");
         String cargo = getCompanyTypeValue("cargo");
 
-        if (transport != null && cargo != null) {
-            Map<String, Object> modelHashMap = new HashMap<String, Object>();
-            modelHashMap.put("user", user);
-
-            if (userType.equals(transport)) {
-                List<Vehicle> vehicleList = getVehicleListFromDB(user);
-                modelHashMap.put("vehicleList", vehicleList);
-                model.setViewName("transportUserProfile");
-                model.addObject("model",modelHashMap);
-            } else if (userType.equals(cargo)) {
-                List<Cargo> cargoList = getCargoListFromDB(user);
-                modelHashMap.put("cargoList", cargoList);
-                model.setViewName("cargoUserProfile");
-                model.addObject("model",modelHashMap);
-            } else {
-                model.setViewName("errorPage");
-                model.addObject("model","Unknown user type: " + userType);
-            }
-        } else {
+        if (transport == null || cargo == null) {
             model.setViewName("errorPage");
             model.addObject("model","Needed company types is missing in database. Sorry!");
+        } else {
+            if(!userType.equals(transport) && !userType.equals(cargo)) {
+                model.setViewName("errorPage");
+                model.addObject("model","Unknown user type: " + userType);
+            } else {
+                setSessionAttributes(session, user);
+                Map<String, Object> modelHashMap = new HashMap<String, Object>();
+                modelHashMap.put("user", user);
+
+                if (userType.equals(transport)) {
+                    List<Vehicle> vehicleList = getVehicleListFromDB(user);
+                    modelHashMap.put("vehicleList", vehicleList);
+                    model.setViewName("transportUserProfile");
+                } else if (userType.equals(cargo)) {
+                    List<Cargo> cargoList = getCargoListFromDB(user);
+                    modelHashMap.put("cargoList", cargoList);
+                    model.setViewName("cargoUserProfile");
+                }
+                model.addObject("model",modelHashMap);
+            }
         }
     }
 
@@ -140,7 +133,13 @@ public class UserLoginController {
         return cargoList;
     }
 
-    protected User getUserIfExist(String login, String password) {
+    protected User getUserFromRequest(HttpServletRequest request) {
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        return getUserFromDBIfExists(login, password);
+    }
+
+    private User getUserFromDBIfExists(String login, String password) {
         try {
             User user = userDAO.getByLogin(login);
             if (user != null && user.getLogin().equals(login) && BCrypt.checkpw(password, user.getPassword())) {
