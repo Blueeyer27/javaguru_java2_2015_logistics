@@ -141,17 +141,17 @@ insert into user values (DEFAULT, "user3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qja
 
 
 SELECT id INTO @userID  FROM user  WHERE login ='user1';
-insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City1", "Berlin", "2015/02/01", "2015/02/05", "pending");
-insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "pending");
-insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "pending");
+insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City1", "Berlin", "2015/02/01", "2015/02/05", "In Progress");
+insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "Available");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "Available");
 SELECT id INTO @userID  FROM user  WHERE login ='user2';
-insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City2", "Berlin", "2015/02/01", "2015/02/05", "pending");
-insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "pending");
-insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "pending");
+insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City2", "Berlin", "2015/02/01", "2015/02/05", "In Progress");
+insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "Available");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "Available");
 SELECT id INTO @userID  FROM user  WHERE login ='user3';
-insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City3", "Berlin", "2015/02/01", "2015/02/05", "pending");
-insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "pending");
-insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "pending");
+insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City3", "Berlin", "2015/02/01", "2015/02/05", "In Progress");
+insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "Available");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "Available");
 
 
 SELECT id INTO @userID  FROM user  WHERE login ='user1';
@@ -206,6 +206,10 @@ insert into value values (DEFAULT, "Vehicle Type", "refrigirator", "refrigirator
 insert into value values (DEFAULT, "Vehicle Status", "Available", "Available");
 insert into value values (DEFAULT, "Vehicle Status", "Reserved", "Reserved");
 insert into value values (DEFAULT, "Vehicle Status", "In Use", "In Use");
+
+insert into value values (DEFAULT, "Cargo Status", "Available", "Available");
+insert into value values (DEFAULT, "Cargo Status", "In Progress", "In Progress");
+insert into value values (DEFAULT, "Cargo Status", "Processed", "Processed");
 
 
 insert into value values (DEFAULT, "Company Type", "transport", "transport");
