@@ -10,7 +10,6 @@
     Map<String, Object> modelHashMap = (Map<String, Object>) request.getAttribute("model");
     List<Vehicle> vehicleList = (List<Vehicle>) modelHashMap.get("vehicleList");
 %>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -18,14 +17,7 @@
     <title><%=user.getFirstName()%>
         <%=user.getLastName()%> (<%=user.getLogin()%>) profile</title>
 </head>
-<body>
-<div align="right"><U><b>Hello,
-    <%=user.getFirstName()%> <%=user.getLastName()%>!</b></U></div>
-<div align="right"><a href="jsp/logout.jsp"><U>Exit</U></a></div>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
+<jsp:include page="header.jsp" />
 <div align="center">
     <table align="center" border="1" width="90%">
         <tr>

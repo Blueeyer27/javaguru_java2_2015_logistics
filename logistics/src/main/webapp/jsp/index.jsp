@@ -6,8 +6,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
+<jsp:include page="header.jsp" />
 <div align="right" style="background-image:url(.jpg);border: 3px dotted grey;position:absolute;top:110;left:100;height:120;width:140;">
     <% User user = (User)session.getAttribute("user"); %>
     <table align="center" border="0" width="260">
@@ -28,7 +27,6 @@
             <%}%>
     </table>
 </div>
-<hr />
 <br/><br/><br/><br/><br/>
 <div align="left"><a href="companyRegPage">Add new COMPANY</a></div>
 <div align="left">.</div>
