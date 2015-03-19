@@ -13,17 +13,23 @@
     <table align="center" border="0" width="260">
         <tr align="center">
             <%if (user == null) {%>
-                <td><form method="get" action="jsp/login.jsp"><button type="submit">Login</button></form></td>
+                <tr align="center">
+                    <td><form method="get" action="jsp/login.jsp"><button type="submit">Login</button></form></td>
+                </tr>
             <%} else {%>
-                <td><form method="get" action="userLogin"><button type="submit">My Profile</button></form></td>
-                <td><form method="get" action="jsp/logout.jsp"><button type="submit">Exit</button></form></td>
-                <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new</button></form></td>
+                <tr align="center">
+                    <td colspan="3"><b>You are logged in as <%=user.getFirstName()%> <%=user.getLastName()%></b></td>
+                </tr>
+                <tr align="center">
+                    <td><form method="get" action="userLogin"><button type="submit">My Profile </button></form></td>
+                    <td><form method="get" action="jsp/logout.jsp"><button type="submit">Exit</button></form></td>
+                    <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new</button></form></td>
+                </tr>
             <%}%>
-        </tr>
     </table>
 </div>
 <hr />
-<br/><br/><br/>
+<br/><br/><br/><br/><br/>
 <div align="left"><a href="companyRegPage">Add new COMPANY</a></div>
 <div align="left">.</div>
 <div align="left"><a href="getallcompanywithuserlist">G-E-T CompanyList joined with UserList!(strategy EAGER works only = @OneToMany (fetch=FetchType.EAGER)
