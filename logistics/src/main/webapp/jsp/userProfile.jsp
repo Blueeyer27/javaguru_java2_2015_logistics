@@ -126,7 +126,7 @@
             <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new USER</button></form></td>
         </tr>
     </table>
-
+    <h2>Availible cargoes:</h2>
     <hr />
     <table align="center" border="1" width="90%">
         <tr>

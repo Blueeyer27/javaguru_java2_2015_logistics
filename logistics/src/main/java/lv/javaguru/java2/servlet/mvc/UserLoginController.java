@@ -66,7 +66,7 @@ public class UserLoginController {
             user = getUserIfExist(login, password);
         }
 
-        List<Cargo> cargoList = getCargoListFromDB();
+        List<Cargo> cargoList = getCargoListFromDB(user);
         List<Vehicle> vehicleList = getVehicleListFromDB(user);
         Map<String, Object> modelHashMap = putItemToModelHasMap(user, cargoList, vehicleList);
 
@@ -107,10 +107,10 @@ public class UserLoginController {
         return vehicleList;
     }
 
-    protected List<Cargo> getCargoListFromDB() {
+    protected List<Cargo> getCargoListFromDB(User user) {
         List<Cargo> cargoList =null;
         try {
-            cargoList = cargoDAO.getAll();
+            cargoList = cargoDAO.getUserCargoesByStatus(user, valueDAO.lookupValue("Cargo Status", "Available"));
         } catch (DBException e) {
             e.printStackTrace();
         }

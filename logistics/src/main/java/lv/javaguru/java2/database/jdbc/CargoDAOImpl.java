@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Cargo;
+import lv.javaguru.java2.domain.User;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -170,5 +171,11 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
         } finally {
             closeConnection(connection);
         }
+    }
+
+    @Override
+    public List<Cargo> getUserCargoesByStatus(User user, String cargoStatus) throws DBException {
+        return null;
+        // implemented in hibernate!
     }
 }

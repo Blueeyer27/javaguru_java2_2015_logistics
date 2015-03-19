@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.hibernate;
 import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Cargo;
+import lv.javaguru.java2.domain.User;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,15 @@ public class CargoDAOImpl extends DAOImpl<Cargo> implements CargoDAO {
                 .add(Restrictions.between("unloadDate", unloadDateFrom, unloadDateTo))
                 .list();
         return cargos;
+    }
+
+    @Override
+    public List<Cargo> getUserCargoesByStatus(User user, String cargoStatus) throws DBException {
+        List cargoes = getCurrentSession().createCriteria(Cargo.class)
+                .add(Restrictions.eq("status", cargoStatus))
+                .add(Restrictions.eq("user", user))
+                .list();
+        return cargoes;
     }
 
     @Override
