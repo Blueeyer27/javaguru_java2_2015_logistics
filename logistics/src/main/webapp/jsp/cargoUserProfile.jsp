@@ -1,5 +1,4 @@
 <%@ page import="lv.javaguru.java2.domain.User" %>
-<%@ page import="lv.javaguru.java2.domain.Vehicle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="lv.javaguru.java2.domain.Cargo" %>
 <%@ page import="java.util.Map" %>
@@ -8,10 +7,8 @@
 <!DOCTYPE html>
 <%
     User user = (User)session.getAttribute("user");
-
     Map<String, Object> modelHashMap = (Map<String, Object>) request.getAttribute("model");
     List<Cargo> cargoList = (List<Cargo>) modelHashMap.get("cargoList");
-    List<Vehicle> vehicleList = (List<Vehicle>) modelHashMap.get("vehicleList");
 %>
 
 <html>
@@ -59,63 +56,6 @@
 
 <BR><BR>
 
-    <%--======================================--%>
-    <hr />
-    <%
-    if (session.getAttribute("userType").equals("transport")) {%>
-    <h2>-=T=- TRANSPORT PROFILE</h2>
-    <div align="center"><img src="images/vehicle.jpg"/></div>
-    <table align="center" border="1" width="90%">
-        <tr align="center">
-            <td><form method="get" target="_blank" action="agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" target="_blank" action="vehicleReg"><button type="submit">Add new VEHICLE</button></form></td>
-            <td><form method="get" target="_blank" action="jsp/cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
-            <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new USER</button></form></td>
-            <td><form method="get" target="_blank" action="manageVehicles"><button type="submit">Manage Other Vehicles</button></form></td>
-        </tr>
-    </table>
-    <h2>Availible vehicles:</h2>
-    <hr />
-    <table align="center" border="1" width="90%">
-        <tr>
-            <td width="50"><b>Id</b></td>
-            <td width="200"><b>Name</b></td>
-            <td width="200"><b>Type</b></td>
-            <td width="200"><b>PlateNumber</b></td>
-            <td width="200"><b>Trailer Number</b></td>
-            <td width="200"><b>Capacity</b></td>
-            <td width="200"><b>Current Status</b></td>
-            <td width="200"><b>User ID</b></td>
-            <td width="200"><b>Find cargo</b></td>
-        </tr>
-
-        <%
-        for (int i = 0; i < vehicleList.size(); i ++) {
-            Vehicle vehicle = vehicleList.get(i);
-        %>
-        <form method="post" action="sendRequestVehicle">
-        <tr>
-            <td width="50"><%=vehicle.getVehicleId()%></td>
-            <td width="200"><%=vehicle.getName()%></td>
-            <td width="200"><%=vehicle.getType()%></td>
-            <td width="200"><%=vehicle.getplateNumber()%></td>
-            <td width="200"><%=vehicle.gettrailerNumber()%></td>
-            <td width="200"><%=vehicle.getCapacity()%></td>
-            <td width="200"><%=vehicle.getStatus()%></td>
-            <td width="200"><%=vehicle.getUser().getUserId()%></td>
-            <td>
-                <input type="hidden" name="id" value="<%=vehicle.getVehicleId()%>">
-                <input type="submit" target="_blank" name="action" value="Find 4 this vehicle">
-            </td>
-
-        </tr>
-        </form>
-        <%}%>
-    </table>
-
-    <%--======================================--%>
-    <%} else
-    if (session.getAttribute("userType").equals("cargo")) {%>
     <h2>-=C=- CARGO PROFILE</h2>
     <div align="center"><img src="images/cargo.jpg"/></div>
     <table align="center" border="1" width="90%">
@@ -164,26 +104,10 @@
         </form>
          <%}%>
          </table>
-
-
-    <%--======================================--%>
-    <%} else { %>
-    <h1>-=N=- NO PROFILE</h1>
-    <h1>Sorry! Your company type is not -=C=-"cargo" and not -=T=-"transport"</h1>
-    <div align="center"><img src="images/none.jpg"/></div>
-    <script language="Javascript">
-        <!--
-        alert ("Sorry! Your company type is not 'cargo' and not 'transport'. So no buttons to press for You :(")
-        //-->
-    </script>
-
-    <%}%>
     <hr />
 
-
-
     <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>    <BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
-    <h4><U> ********** admin bar with all buttons. (must be putted somewhere) ********** admin bar with all buttons. (must be putted somewhere) ********** 
+    <h4><U> ********** admin bar with all buttons. (must be putted somewhere) ********** admin bar with all buttons. (must be putted somewhere) ********** </U></h4>
     <table align="center" border="1" width="90%">
         <tr align="center">
             <td><form method="get" target="_blank" action="companyRegPage"><button type="submit">Add new COMPANY</button></form></td>
@@ -196,7 +120,7 @@
             <td><form method="get" target="_blank" action="jsp/vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
         </tr>
     </table>
-    <h4><U> ********** admin bar with all buttons. (must be putted somewhere) ********** admin bar with all buttons. (must be putted somewhere) ********** 
+    <h4><U> ********** admin bar with all buttons. (must be putted somewhere) ********** admin bar with all buttons. (must be putted somewhere) ********** </U></h4>
 
 
 </div>

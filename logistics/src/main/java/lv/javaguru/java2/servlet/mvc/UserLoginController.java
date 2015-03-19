@@ -49,13 +49,10 @@ public class UserLoginController {
                                        HttpServletResponse response) {
 
         ModelAndView model = new ModelAndView();
-
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "UserLogin");
-
         String login = null;
         String password = null;
-
         User user = null;
 
         if ((session.getAttribute("user")) != null) {
@@ -66,35 +63,61 @@ public class UserLoginController {
             user = getUserIfExist(login, password);
         }
 
-        List<Cargo> cargoList = getCargoListFromDB(user);
-        List<Vehicle> vehicleList = getVehicleListFromDB(user);
-        Map<String, Object> modelHashMap = putItemToModelHasMap(user, cargoList, vehicleList);
-
         if (user != null ) {
             setSessionAttributes(session, user);
-
-            model.setViewName("userProfile");
-            model.addObject("model",modelHashMap);
+            fillModelForUser(user, model);
         }
         else {
             model.setViewName("errorPage");
             model.addObject("model","Incorrect LOGIN '" +login+ "' or PASSWORD '"+password+"' entered. Sorry!");
-
         }
         return model;
+    }
+
+    private void fillModelForUser(User user, ModelAndView model) {
+        String userType = user.getUserCompanyType();
+        String transport = getCompanyTypeValue("transport");
+        String cargo = getCompanyTypeValue("cargo");
+
+        if (transport != null && cargo != null) {
+            Map<String, Object> modelHashMap = new HashMap<String, Object>();
+            modelHashMap.put("user", user);
+
+            if (userType.equals(transport)) {
+                List<Vehicle> vehicleList = getVehicleListFromDB(user);
+                modelHashMap.put("vehicleList", vehicleList);
+                model.setViewName("transportUserProfile");
+                model.addObject("model",modelHashMap);
+            } else if (userType.equals(cargo)) {
+                List<Cargo> cargoList = getCargoListFromDB(user);
+                modelHashMap.put("cargoList", cargoList);
+                model.setViewName("cargoUserProfile");
+                model.addObject("model",modelHashMap);
+            } else {
+                model.setViewName("errorPage");
+                model.addObject("model","Unknown user type: " + userType);
+            }
+        } else {
+            model.setViewName("errorPage");
+            model.addObject("model","Needed company types is missing in database. Sorry!");
+        }
+    }
+
+    private String getCompanyTypeValue(String type) {
+        String value = null;
+        try {
+            value = valueDAO.lookupValue("Company Type", type);
+        } catch (DBException e) {
+            System.out.println("Exception while getting company type '" + type +
+                    "' in UserLoginController.getCompanyTypeValue()");
+            e.printStackTrace();
+        }
+        return value;
     }
 
     private void setSessionAttributes(HttpSession session, User user) {
         session.setAttribute("user", user);
         session.setAttribute("userType", user.getUserCompanyType());
-    }
-
-    protected Map<String, Object> putItemToModelHasMap(User user, List<Cargo> cargoList, List<Vehicle> vehicleList) {
-        Map<String, Object> modelHashMap = new HashMap<String, Object>();
-        modelHashMap.put("user", user);
-        modelHashMap.put("cargoList", cargoList);
-        modelHashMap.put("vehicleList", vehicleList);
-        return modelHashMap;
     }
 
     protected List<Vehicle> getVehicleListFromDB(User user) {
