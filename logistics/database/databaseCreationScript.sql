@@ -144,46 +144,15 @@ SELECT id INTO @userID  FROM user  WHERE login ='user1';
 insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City1", "Berlin", "2015/02/01", "2015/02/05", "In Progress");
 insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "Available");
 insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "Available");
-SELECT id INTO @userID  FROM user  WHERE login ='user2';
-insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City2", "Berlin", "2015/02/01", "2015/02/05", "In Progress");
-insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "Available");
-insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "Available");
-SELECT id INTO @userID  FROM user  WHERE login ='user3';
-insert into cargo values (DEFAULT, @userID, "platform", 11, "Moskow City3", "Berlin", "2015/02/01", "2015/02/05", "In Progress");
-insert into cargo values (DEFAULT, @userID, "tilt", 11, "BERLIN", "Warsaw", "2015/02/11", "2015/02/25", "Available");
-insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Moskow", "Berlin", "2015/02/09", "2015/02/15", "Available");
 
-
-SELECT id INTO @userID  FROM user  WHERE login ='user1';
-INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK1", "platform", "GG111", "TT222", 9.0, "Reserved");
-INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "Available");
-INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "Available");
 SELECT id INTO @userID  FROM user  WHERE login ='user2';
 INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK2", "platform", "GG111", "TT222", 9.0, "Reserved");
 INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "Available");
 INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "Available");
-SELECT id INTO @userID  FROM user  WHERE login ='user3';
-INSERT INTO vehicle VALUES (default, @userID, "GAZEL GLK3", "platform", "GG111", "TT222", 9.0, "Reserved");
-INSERT INTO vehicle VALUES (default, @userID, "GAZELKA", "tilt", "GG111", "TT222", 12.0, "Available");
-INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "GG111", "TT222", 22.0, "Available");
-
 
 SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Moskow City1';
-SELECT id INTO @vehicleID  FROM vehicle  WHERE name ='GAZEL GLK1';
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Moskow City2';
 SELECT id INTO @vehicleID  FROM vehicle  WHERE name ='GAZEL GLK2';
 insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Moskow City3';
-SELECT id INTO @vehicleID  FROM vehicle  WHERE name ='GAZEL GLK3';
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
-
 
 insert into value values (DEFAULT, "Country", "Albania", "Albania");
 insert into value values (DEFAULT, "Country", "Russia", "Russia");
