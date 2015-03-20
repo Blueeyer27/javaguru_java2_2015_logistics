@@ -106,7 +106,7 @@
             <td><form method="get" target="_blank" action="jsp/vehicles.jsp"><button type="submit">Vehicles</button></form></td>
             <td><form method="get" target="_blank" action="agreementOverview"><button type="submit">Agreement overview</button></form></td>
             <td><form method="get" target="_blank" action="cargoReg"><button type="submit">Add new CARGO</button></form></td>
-            <td><form method="get" target="_blank" action="vehiclereg"><button type="submit">Add new VEHICLE</button></form></td>
+            <td><form method="get" target="_blank" action="vehicleReg"><button type="submit">Add new VEHICLE</button></form></td>
             <td><form method="get" target="_blank" action="jsp/cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
             <td><form method="get" target="_blank" action="jsp/vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
         </tr>

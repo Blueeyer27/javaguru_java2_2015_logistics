@@ -13,7 +13,8 @@
         <tr align="center">
             <%if (user == null) {%>
                 <tr align="center">
-                    <td><form method="get" action="jsp/login.jsp"><button type="submit">Login</button></form></td>
+        <td><form method="get" action="jsp/login.jsp"><button type="submit">Login</button></form></td>
+        <td><form method="get" action="admin"><button type="submit">Admin login</button></form></td>
                 </tr>
             <%} else {%>
                 <tr align="center">
@@ -27,27 +28,5 @@
             <%}%>
     </table>
 </div>
-<br/><br/><br/><br/><br/>
-<div align="left"><a href="companyRegPage">Add new COMPANY</a></div>
-<div align="left">.</div>
-<div align="left"><a href="getallcompanywithuserlist">G-E-T CompanyList joined with UserList!(strategy EAGER works only = @OneToMany (fetch=FetchType.EAGER)
-    )</a></div>
-<div align="left">.</div>
-<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
-<div align="left"><U>Lets hide these options below?</U></div>
-<div align="left">.</div>
-<div align="left"><a href="jsp/vehicles.jsp">VEHICLES</a></div>
-<div align="left">.</div>
-<div align="left"><a href="cargoReg">Add new CARGO</a></div>
-<div align="left">.</div>
-<div align="left"><a href="vehicleReg">Add new VEHICLE</a></div>
-<div align="left">.</div>
-<div align="left">.</div>
-<div align="left"><a href="jsp/cargoSearch.jsp">FIND CARGO &nbsp;&nbsp;&nbsp;-- (agreement wizard)</a></div>
-<div align="left">.</div>
-<div align="left"><a href="jsp/vehicleSearch.jsp">FIND VEHICLE -- (agreement wizard)</a></div>
-<div align="left">.</div>
-<div align="left"><a href="agreementOverview">Agreement overview</a></div>
-<div align="left">.</div>
 </body>
 </html>
