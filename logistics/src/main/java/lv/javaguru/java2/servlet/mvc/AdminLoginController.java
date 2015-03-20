@@ -31,7 +31,7 @@ public class AdminLoginController {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "AdminLogin");
-        User user = getUserFromRequest(request);;
+        User user = getUserFromRequest(request);
         checkUserTypeAndPassword(user, model, session);
         return model;
     }
