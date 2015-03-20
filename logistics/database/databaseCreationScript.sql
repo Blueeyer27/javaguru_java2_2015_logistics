@@ -130,6 +130,7 @@ PAROL user1,user2,user3  =123(heshing code)*/
 insert into company values (DEFAULT, "Cargo Service Inc.", "123", "Maza Kalna 13-1, Rīga", "Maza Kalna 13-1, Rīga", "Swedbank", "HABA2132524325734", "Latvia", "cargo");
 insert into company values (DEFAULT, "Baltic Transport", "123", "Teraudlietuves 22, Rīga", "Teraudlietuves 22, Rīga", "Swedbank", "HABA246363534561", "Latvia", "transport");
 insert into company values (DEFAULT, "Dummy company", "123", "Brivibas iela, 1", "Brivibas iela, 1", "Swedbank", "HABA234567891", "Latvia", "dummy");
+insert into company values (DEFAULT, "ADMIN", "dummy", "dummy", "dummy", "dummy", "dummy", "Latvia", "admin");
 
 SELECT id INTO @companyID  FROM company  WHERE name ='Cargo Service Inc.';
 insert into user values (DEFAULT, "user1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Andris", "Berzins", "ab@email.com", "+371 27689837", @companyID);
@@ -137,7 +138,8 @@ SELECT id INTO @companyID  FROM company  WHERE name ='Baltic Transport';
 insert into user values (DEFAULT, "user2", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Janis", "Andersons", "ja@email.com", "+371 24567897", @companyID);
 SELECT id INTO @companyID  FROM company  WHERE name ='Dummy company';
 insert into user values (DEFAULT, "user3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "John", "Smith", "js@email.com", "+371 27127645", @companyID);
-
+SELECT id INTO @companyID  FROM company  WHERE name ='ADMIN';
+insert into user values (DEFAULT, "admin1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Admin", "Adminov", "admin@email.com", "+371 27127645", @companyID);
 
 SELECT id INTO @userID  FROM user  WHERE login ='user1';
 insert into cargo values (DEFAULT, @userID, "platform", 11, "Riga", "Moscow", "2015/02/01", "2015/02/05", "In Progress");
@@ -180,3 +182,4 @@ insert into value values (DEFAULT, "Cargo Status", "Processed", "Processed");
 
 insert into value values (DEFAULT, "Company Type", "transport", "transport");
 insert into value values (DEFAULT, "Company Type", "cargo", "cargo");
+insert into value values (DEFAULT, "Company Type", "admin", "admin");
