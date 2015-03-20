@@ -31,10 +31,13 @@ public class AdminLoginController {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "AdminLogin");
-        User user;
+        User user = getUserFromRequest(request);;
+        checkUserTypeAndPassword(user, model, session);
+        return model;
+    }
 
+    private void checkUserTypeAndPassword(User user, ModelAndView model, HttpSession session) {
         model.setViewName("adminProfile");
-        user = getUserFromRequest(request);
         if (user != null && isAdmin(user)) {
             model.setViewName("adminProfile");
             setSessionAttributes(session, user);
@@ -42,7 +45,6 @@ public class AdminLoginController {
             model.setViewName("errorPage");
             model.addObject("model","Wrong login or password entered. Try again!");
         }
-        return model;
     }
 
     private boolean isAdmin(User user) {

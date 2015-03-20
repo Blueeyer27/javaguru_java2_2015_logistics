@@ -28,24 +28,21 @@ public class AdminHomeController {
         HttpSession session = request.getSession(true);
         session.setAttribute("pageName", "AdminLogin");
         User user = (User) (session.getAttribute("user"));
-        String admin = null;
-
-        try {
-            admin = valueDAO.lookupValue("Company Type", "admin");
-        } catch (DBException e) {
-            e.printStackTrace();
-        }
+        String admin = getAdminValueFromDB();
 
         if (admin == null) {
             model.setViewName("errorPage");
             model.addObject("model", "Missing value for admin type in database.");
             return model;
         }
+        fillModelForUser(user, model, admin);
+        return model;
+    }
 
+    private void fillModelForUser(User user, ModelAndView model, String admin) {
         if (user == null) {
             // if no one logged in - go to admin login page
             model.setViewName("adminLoginPage");
-
         } else {
             if (user.getUserCompanyType().equals(admin)) {
                 model.setViewName("adminProfile");
@@ -55,6 +52,14 @@ public class AdminHomeController {
                 model.addObject("model", "You do not have sufficient permissions to access this page");
             }
         }
-        return model;
+    }
+
+    private String getAdminValueFromDB() {
+        try {
+            return valueDAO.lookupValue("Company Type", "admin");
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
