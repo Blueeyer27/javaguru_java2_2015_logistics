@@ -12,11 +12,7 @@
     <title>Vehicles Page</title>
 </head>
 <body>
-<div align="center"><img src="../images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
-
+<jsp:include page="header.jsp" />
 <div align="center"><a href = "../vehicleReg">Vehicle Registration</a></div>
 <br/>
 <div align="center"><a href = "../getallvehicles">Show all vehicles</a></div>

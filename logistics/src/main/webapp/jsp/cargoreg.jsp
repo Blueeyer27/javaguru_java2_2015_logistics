@@ -1,24 +1,13 @@
-<%@ page import="lv.javaguru.java2.domain.Company" %>
-<%@ page import="java.util.List" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.CompanyDAOImpl" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.UserDAOImpl" %>
 <%@ page import="lv.javaguru.java2.domain.User" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>New cargo registration</title>
 </head>
-<body>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
-
-
-
-
+<jsp:include page="header.jsp" />
 <div align="center">
     <form method="post" action="cargoRegResult">
         Vehicle type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

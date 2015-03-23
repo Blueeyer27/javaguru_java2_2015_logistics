@@ -14,10 +14,7 @@
   <title>Company + userList</title>
 </head>
 <body>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
+<jsp:include page="header.jsp" />
 <div align="center">
   <table align="center" border="1" width="450">
     <tr>

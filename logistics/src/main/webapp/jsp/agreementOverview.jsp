@@ -1,28 +1,15 @@
-<%@ page import="lv.javaguru.java2.domain.Cargo" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="lv.javaguru.java2.domain.Vehicle" %>
 <%@ page import="lv.javaguru.java2.domain.Agreement" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.CargoDAOImpl" %>
-<%@ page import="lv.javaguru.java2.database.jdbc.VehicleDAOImpl" %>
-<%@ page import="lv.javaguru.java2.database.VehicleDAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Agreement overview</title>
 </head>
 <body>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
+<jsp:include page="header.jsp" />
 <div align="center">
-    <%
-        List<Agreement> agreementList = (ArrayList<Agreement>)request.getAttribute("model");
-//        CargoDAOImpl cargoDAO = new CargoDAOImpl();
-//        VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
-    %>
+<%List<Agreement> agreementList = (ArrayList<Agreement>)request.getAttribute("model");%>
     <h2><b><U>Agreements overview list:</U></b></h2>
     <table align="center" border="1" width="80%">
     <tr>

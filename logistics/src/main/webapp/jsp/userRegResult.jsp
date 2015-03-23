@@ -10,11 +10,7 @@
     <title>New User created!</title>
 </head>
 <body>
-
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
+<jsp:include page="header.jsp" />
 <div align="center">
     <table align="center" border="3" width="700">
         <tr>

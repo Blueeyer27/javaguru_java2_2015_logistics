@@ -10,10 +10,7 @@
     <title>New Vehicle registration</title>
 </head>
 <body>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
+<jsp:include page="header.jsp" />
     <%
     Map<String, Object> modelHashMap = (Map<String, Object>) request.getAttribute("model");
     List<User> userList = (ArrayList<User>) modelHashMap.get("users");

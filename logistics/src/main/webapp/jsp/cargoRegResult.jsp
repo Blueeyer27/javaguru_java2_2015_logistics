@@ -1,4 +1,3 @@
-<%@ page import="lv.javaguru.java2.servlet.mvc.MVCModel" %>
 <%@ page import="lv.javaguru.java2.domain.Cargo" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
@@ -10,11 +9,7 @@
     <title>New CARGO created!</title>
 </head>
 <body>
-
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
+<jsp:include page="header.jsp" />
 <div align="center">
     <%
         Cargo cargo = (Cargo)request.getAttribute("model");

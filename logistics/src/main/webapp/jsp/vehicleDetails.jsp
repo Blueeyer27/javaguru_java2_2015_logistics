@@ -13,10 +13,7 @@
     <title></title>
 </head>
 <body>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr/>
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr/>
+<jsp:include page="header.jsp" />
 <div align="center"><h1>Vehicle additional information</h1></div>
 
 <% Vehicle vehicle = (Vehicle)request.getAttribute("model");

@@ -1,13 +1,4 @@
 <%@ page import="lv.javaguru.java2.domain.Vehicle" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 17.02.2015
-  Time: 21:57
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,13 +6,8 @@
     <title>New VEHICLE created!</title>
 </head>
 <body>
-<div align="center"><img src="images/indexlogo.jpg"/></div>
-<hr />
-<div align="right"><a href="../java2">Back to home</a></div>
-<hr />
-
+<jsp:include page="header.jsp" />
 <h1><div align="center">Registration successfull!</div></h1>
-
 <div align="center">
     <table align="center" border="3" width="700">
         <tr>
@@ -29,7 +15,6 @@
         <tr>
         </tr>
     </table>
-
   <table align="center" border="1" width="700">
     <tr>
       <td width="200"><b>Vehicle ID</b></td>
