@@ -43,7 +43,7 @@ public class UserRegController {
     protected List<Company> getCompanyListFromDB() {
         List<Company> companyList = null;
         try {
-            companyList = companyDAO.getAll();
+            companyList = companyDAO.getAllClientCompanies();
         } catch (DBException e) {
             System.out.println("Exception while getting companyList from DB UserRegController");
             e.printStackTrace();

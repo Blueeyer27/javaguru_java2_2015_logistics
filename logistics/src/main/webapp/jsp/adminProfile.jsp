@@ -11,15 +11,22 @@
     <h2>-=A=- ADMIN PROFILE</h2>
     <div align="center"><img src="images/admin.jpg"/></div>
 
-    <BR>
+    <h2>Insert new record into database:</h2>
     <table align="center" border="1" width="90%">
         <tr align="center">
-            <td><form method="get" target="_blank" action="companyRegPage"><button type="submit">Add new COMPANY</button></form></td>
-            <td><form method="get" target="_blank" action="userReg"><button type="submit">Register new USER</button></form></td>
+            <td><form method="get" target="_blank" action="companyRegPage"><button type="submit">New Company</button></form></td>
+            <td><form method="get" target="_blank" action="userReg"><button type="submit">New User</button></form></td>
+            <td><form method="get" target="_blank" action="cargoReg"><button type="submit">New Cargo</button></form></td>
+            <td><form method="get" target="_blank" action="vehicleReg"><button type="submit">New Vehicle</button></form></td>
+        </tr>
+    </table>
+
+    <BR>
+    <h2>temporary:</h2>
+    <table align="center" border="1" width="90%">
+        <tr align="center">
             <td><form method="get" target="_blank" action="jsp/vehicles.jsp"><button type="submit">Vehicles</button></form></td>
             <td><form method="get" target="_blank" action="agreementOverview"><button type="submit">Agreement overview</button></form></td>
-            <td><form method="get" target="_blank" action="cargoReg"><button type="submit">Add new CARGO</button></form></td>
-            <td><form method="get" target="_blank" action="vehicleReg"><button type="submit">Add new VEHICLE</button></form></td>
             <td><form method="get" target="_blank" action="jsp/cargoSearch.jsp"><button type="submit">CARGO overview(create agreement)</button></form></td>
             <td><form method="get" target="_blank" action="jsp/vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>
         </tr>

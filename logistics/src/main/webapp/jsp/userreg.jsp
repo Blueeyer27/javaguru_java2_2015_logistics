@@ -31,9 +31,9 @@
         <BR><BR>
         <select name="companyid">
             <%
-            List<Company> companyes = (List<Company>)request.getAttribute("model");
-            if (companyes.size()>0)
-                for (Company company : companyes) {
+            List<Company> companies = (List<Company>)request.getAttribute("model");
+            if (companies.size()>0)
+                for (Company company : companies) {
                 %>
                     <option value=<%=company.getCompanyId()%>> id=<%=company.getCompanyId()%> <%=company.getName()%> type=<%=company.getType()%>
                 <%  }

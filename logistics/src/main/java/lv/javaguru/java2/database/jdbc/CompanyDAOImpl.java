@@ -1,6 +1,7 @@
 package lv.javaguru.java2.database.jdbc;
 
 import lv.javaguru.java2.database.CompanyDAO;
+import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Company;
 import org.springframework.stereotype.Component;
 
@@ -96,5 +97,11 @@ public class CompanyDAOImpl extends DAOImpl<Company> implements CompanyDAO {
             company.setType(resultSet.getString("type"));
             objectsList.add(company);
         }
+    }
+
+    @Override
+    public List<Company> getAllClientCompanies() throws DBException {
+        // implemented in hibernate!
+        return null;
     }
 }

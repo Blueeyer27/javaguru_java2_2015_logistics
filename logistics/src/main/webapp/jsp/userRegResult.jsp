@@ -55,13 +55,3 @@
 </div>
 </body>
 </html>
-
-
-<html>
-<script language="Javascript">
-    <!--
-    alert ("New User created! Urra,  tovarishi-comrads, URRA! :)")
-    //-->
-</script>
-</body>
-</html>
