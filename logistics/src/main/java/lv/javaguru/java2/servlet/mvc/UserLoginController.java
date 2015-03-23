@@ -139,7 +139,7 @@ public class UserLoginController {
         return getUserFromDBIfExists(login, password);
     }
 
-    private User getUserFromDBIfExists(String login, String password) {
+    protected User getUserFromDBIfExists(String login, String password) {
         try {
             User user = userDAO.getByLogin(login);
             if (user != null && user.getLogin().equals(login) && BCrypt.checkpw(password, user.getPassword())) {

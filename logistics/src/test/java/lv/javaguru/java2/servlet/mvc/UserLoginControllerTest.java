@@ -26,14 +26,11 @@ public class UserLoginControllerTest {
     @InjectMocks
     private UserLoginController controller = new UserLoginController();
 
-
     @Test
     public void shouldReturnUserFromDatabase() throws DBException {
         User user = createUser("A", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m");
         Mockito.doReturn(user).when(userDAO).getByLogin("A");
-
-        User userFromDB = controller.getUserIfExist("A",
-                "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m"); // 123 hash
+        User userFromDB = controller.getUserFromDBIfExists("A","123");
         assertEquals(user == userFromDB, true);
     }
 
@@ -42,11 +39,5 @@ public class UserLoginControllerTest {
         Mockito.doReturn(login).when(userMock).getLogin();
         Mockito.doReturn(password).when(userMock).getPassword();
         return userMock;
-        /*
-        User user = new User();
-        user.setLogin(login);
-        user.setPassword(password);
-        return user;*/
     }
-
 }
