@@ -9,4 +9,6 @@ public interface ValueDAO extends BaseDAO<Value> {
 
     String lookupValue(String type, String value) throws DBException;
 
+    List<String> getLovStringValuesByType(String type) throws DBException;
+
 }

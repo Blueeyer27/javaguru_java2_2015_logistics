@@ -127,8 +127,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 /*==================================================
 PAROL user1,user2,user3  =123(heshing code)*/
-insert into company values (DEFAULT, "Cargo Service Inc.", "123", "Maza Kalna 13-1, Rīga", "Maza Kalna 13-1, Rīga", "Swedbank", "HABA2132524325734", "Latvia", "cargo");
-insert into company values (DEFAULT, "Baltic Transport", "123", "Teraudlietuves 22, Rīga", "Teraudlietuves 22, Rīga", "Swedbank", "HABA246363534561", "Latvia", "transport");
+insert into company values (DEFAULT, "Cargo Service Inc.", "123", "Maza Kalna 13-1, Riga", "Maza Kalna 13-1, Riga", "Swedbank", "HABA2132524325734", "Latvia", "cargo");
+insert into company values (DEFAULT, "Baltic Transport", "123", "Teraudlietuves 22, Riga", "Teraudlietuves 22, Riga", "Swedbank", "HABA246363534561", "Latvia", "transport");
 insert into company values (DEFAULT, "Dummy company", "123", "Brivibas iela, 1", "Brivibas iela, 1", "Swedbank", "HABA234567891", "Latvia", "dummy");
 insert into company values (DEFAULT, "ADMIN", "dummy", "dummy", "dummy", "dummy", "dummy", "Latvia", "admin");
 

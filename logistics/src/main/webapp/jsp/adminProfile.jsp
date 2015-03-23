@@ -21,6 +21,13 @@
         </tr>
     </table>
 
+    <h2>Manage existing records:</h2>
+    <table align="center" border="1" width="90%">
+        <tr align="center">
+            <td><form method="get" action="manageCompanies"><button type="submit">Manage Companies</button></form></td>
+        </tr>
+    </table>
+
     <BR>
     <h2>temporary:</h2>
     <table align="center" border="1" width="90%">

@@ -20,6 +20,11 @@ public class ValueDAOImpl extends DAOImpl<Value> implements ValueDAO{
         return null; // implemented in hibernate
     }
 
+    @Override
+    public List<String> getLovStringValuesByType(String type) throws DBException {
+        return null; // implemented in hibernate
+    }
+
     private static final String TABLE_NAME = "value";
     private static final String UPDATE_STRING = " set type = ?, value = ? where id = ?";
     private static final String INSERT_STRING = " values (default,?,?)";
