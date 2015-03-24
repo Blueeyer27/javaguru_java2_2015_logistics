@@ -2,9 +2,7 @@ package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
-import lv.javaguru.java2.database.UserDAO;
 import lv.javaguru.java2.domain.Company;
-import lv.javaguru.java2.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,25 +25,23 @@ public class UserRegControllerTest {
     @InjectMocks
     private UserRegController controller = new UserRegController();
 
-
     @Test
     public void shouldReturnCompanyListFromDatabase() throws DBException {
         List<Company> companies = new ArrayList<Company>();
-        companies.add(createCompany("A company", "123"));
-        companies.add(createCompany("B company", "123"));
-        companies.add(createCompany("C company", "123"));
+        companies.add(createCompany("A company", "123", "cargo"));
+        companies.add(createCompany("B company", "123", "transport"));
+        companies.add(createCompany("C company", "123", "transport"));
 
-        Mockito.doReturn(companies).when(companyDAO).getAll();
-
-        List<Company> companyFromDB = controller.getCompanyListFromDB();
-        assertEquals(companies == companyFromDB, true);
+        Mockito.doReturn(companies).when(companyDAO).getAllClientCompanies();
+        List<Company> companiesFromDB = controller.getCompanyListFromDB();
+        assertEquals(companies == companiesFromDB, true);
     }
 
-    private Company createCompany(String name, String regnumber) {
+    private Company createCompany(String name, String regnumber, String type) {
         Company companyMock = Mockito.mock(Company.class);
         Mockito.doReturn(name).when(companyMock).getName();
         Mockito.doReturn(regnumber).when(companyMock).getRegNumber();
+        Mockito.doReturn(type).when(companyMock).getType();
         return companyMock;
     }
-
 }
