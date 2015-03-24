@@ -1,5 +1,8 @@
 package lv.javaguru.java2.domain;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +40,9 @@ public class Company {
     @Column(name = "type", columnDefinition = "char(30)")
     private String type;
 
-    @OneToMany (fetch=FetchType.EAGER, mappedBy = "company")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany (/*fetch=FetchType.EAGER,*/ mappedBy = "company")
     public List<User> userList = new ArrayList<User>();
-
 
     public Company() {
     }
@@ -56,7 +59,7 @@ public class Company {
         this.type = type;
     }
 
-    public List getUserList() {
+    public List<User> getUserList() {
         return userList;
     }
 

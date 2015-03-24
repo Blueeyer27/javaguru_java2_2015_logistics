@@ -24,7 +24,8 @@
     <h2>Manage existing records:</h2>
     <table align="center" border="1" width="90%">
         <tr align="center">
-            <td><form method="get" action="manageCompanies"><button type="submit">Manage Companies</button></form></td>
+            <td><form method="get" action="manageCompanies"><button type="submit">Manage All Companies</button></form></td>
+            <td><form method="get" action="manageUsers"><button type="submit">Manage All Users</button></form></td>
         </tr>
     </table>
 

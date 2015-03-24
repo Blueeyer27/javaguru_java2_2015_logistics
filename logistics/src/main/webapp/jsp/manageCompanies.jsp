@@ -34,6 +34,7 @@
                 <th>Type</th>
                 <th>[Edit]</th>
                 <th>[Delete]</th>
+                <th>[Manage Users]</th>
             </tr>
         </thead>
         <tbody>
@@ -58,6 +59,12 @@
                     <td width="20">
                         <input type="hidden" name="companyId" value="<%=company.getCompanyId()%>">
                         <input type="submit" name="action" value="Delete">
+                    </td>
+                </form>
+                <form method="post" action="manageUsers">
+                    <td width="20">
+                        <input type="hidden" name="companyId" value="<%=company.getCompanyId()%>">
+                        <input type="submit" name="action" value="Manage Users">
                     </td>
                 </form>
             </tr>

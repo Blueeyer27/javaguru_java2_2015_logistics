@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 @Table(name = "user")
 public class User {
@@ -44,7 +43,6 @@ public class User {
     @JoinColumn(name = "company_id")
     private Company company;
 
-
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany (/*fetch=FetchType.EAGER,*/ mappedBy = "user")
     public List<Vehicle> vehicleList = new ArrayList<Vehicle>();
@@ -54,11 +52,8 @@ public class User {
     @OneToMany (/*fetch=FetchType.EAGER,*/ mappedBy = "user")
     public List<Cargo> cargoList = new ArrayList<Cargo>();
 
-
-
     public User() {
     }
-
 
     public User(String login, String password, String firstName, String lastName, String eMail, String phoneNumber, Company company) {
         this.login = login;
@@ -69,7 +64,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.company = company;
     }
-
 
     public List<Vehicle> getVehicleList() {
         return vehicleList;
