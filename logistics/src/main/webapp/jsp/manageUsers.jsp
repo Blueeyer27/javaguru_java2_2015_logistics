@@ -7,7 +7,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="sorttable.js"></script>
-    <title>Manage companies</title>
+    <title>Manage users</title>
 </head>
 <body>
 <jsp:include page="adminHeader.jsp" />
