@@ -2,6 +2,7 @@ package lv.javaguru.java2.servlet.mvc;
 
 import lv.javaguru.java2.database.CompanyDAO;
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.domain.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -22,11 +23,22 @@ public class CompanyDeleteController {
     @RequestMapping(value = "companyDelete", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView processRequest(HttpServletRequest request,
                                        HttpServletResponse response) {
-        ModelAndView model = new ModelAndView("redirect:manageCompanies");
+        ModelAndView model;
         Long companyId = Long.parseLong(request.getParameter("companyId"));
-        deleteCompanyFromDB(companyId);
-        String notification = "Company with Id = '" + companyId + "' was deleted!";
-        model.addObject("model" , notification);
+        Company company = getCompanyFromDB(companyId);
+
+        if(company.getUserList().size() == 0){
+            deleteCompanyFromDB(companyId);
+            String notification = "Company with Id = '" + companyId + "' was deleted!";
+            model = new ModelAndView("redirect:manageCompanies");
+            model.addObject("model" , notification);
+        } else {
+            model = new ModelAndView();
+            model.setViewName("errorPage");
+            model.addObject("model","You can not delete company with users! \n"
+                    + "Users count in company '" + company.getName() + "' : "
+                    + company.getUserList().size());
+        }
         return model;
     }
 
@@ -38,6 +50,18 @@ public class CompanyDeleteController {
                     "in CompanyDeleteController.deleteCompanyFromDB()");
             e.printStackTrace();
         }
+    }
+
+    protected Company getCompanyFromDB(Long companyId) {
+        Company company = null;
+        try {
+            company = companyDAO.getById(companyId);
+        } catch (DBException e) {
+            System.out.println("Exception while getting company from DB " +
+                    "in CompanyDeleteController.getCompanyFromDB()");
+            e.printStackTrace();
+        }
+        return company;
     }
 }
 
