@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserUpdateController {
@@ -30,6 +32,8 @@ public class UserUpdateController {
     public ModelAndView processRequest(HttpServletRequest request,
                                        HttpServletResponse response) {
         ModelAndView model = new ModelAndView("redirect:manageUsers");
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+
         Long userId = Long.parseLong(request.getParameter("userId"));
         Long updatedCompanyId = Long.parseLong(request.getParameter("company"));
         String updatedLogin = request.getParameter("login");
@@ -44,7 +48,8 @@ public class UserUpdateController {
         updateUserInDB(user, updatedLogin, updatedName, updatedSurname,
                 updatedEmail, updatedPhone, company);
         String notification = "User with Id = '" + userId + "' was updated!";
-        model.addObject("model" , notification);
+        model.addObject("companyId", updatedCompanyId);
+        model.addObject("notification" , notification);
         return model;
     }
 
