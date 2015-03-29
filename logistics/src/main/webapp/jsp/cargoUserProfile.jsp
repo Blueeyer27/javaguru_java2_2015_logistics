@@ -51,6 +51,7 @@
     <div align="center"><img src="images/cargo.jpg"/></div>
     <table align="center" border="1" width="90%">
         <tr align="center">
+            <td><form method="get" target="_blank" action="jsp/userEditData.jsp"><button type="submit">Edit My Profile</button></form></td>
             <td><form method="get" target="_blank" action="agreementOverview"><button type="submit">Agreement overview</button></form></td>
             <td><form method="get" target="_blank" action="cargoReg"><button type="submit">Add new CARGO</button></form></td>
             <td><form method="get" target="_blank" action="jsp/vehicleSearch.jsp"><button type="submit">Vehicle overview(create agreement)</button></form></td>

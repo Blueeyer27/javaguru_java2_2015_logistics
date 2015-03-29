@@ -28,5 +28,10 @@
             <%}%>
     </table>
 </div>
+<BR><BR><BR><BR>
+<BR><BR><BR><BR>
+<%--<hr />--%>
+<div align="center"><img src="images/gold.globe.spin.gif"/></div>
+<div align="center">...connecting people and bussinesses....</div>
 </body>
 </html>
