@@ -29,28 +29,26 @@
         Unload date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="date" name="unloaddate" /><br/>
         <br/>
-        User:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <select name="userid">
-            <%
 
-            List<User> userList = (ArrayList<User>)request.getAttribute("model");
+        <%  User loggedUser = (User)session.getAttribute("user");
+            if (loggedUser.getUserCompanyType().equals("admin")) { //hardcode%>
 
-            if (userList.size()>0)
-                for (User user : userList) {
-                %>
-                    <option value=<%=user.getUserId()%>> id=<%=user.getUserId()%> <%=user.getFirstName()%> <%=user.getLastName()%> (<%=user.getLogin()%>)
-                <%  }
-            else {%>
-            <option value="1">! id=1 NoUser found
+                User:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="userid">
+                    <%
 
-            <script language="Javascript">
-                <!--
-                alert ("Sorry, NO user found in DB! :( You can use default id=1 instead")
-                //-->
-            </script>
+                    List<User> userList = (ArrayList<User>)request.getAttribute("model");
 
-           <%}%>
-        </select><br/>
+                    if (userList.size()>0)
+                        for (User user : userList) {
+                        %>
+                            <option value=<%=user.getUserId()%>> id=<%=user.getUserId()%> <%=user.getFirstName()%> <%=user.getLastName()%> (<%=user.getLogin()%>)
+                        <%}%>
+
+                </select><br/>
+            <%} else{%>
+                <input type="hidden" name="userid" value="<%=loggedUser.getUserId()%>">
+            <%}%>
         <br/>
         <input type="submit" value="register" />
     </form>

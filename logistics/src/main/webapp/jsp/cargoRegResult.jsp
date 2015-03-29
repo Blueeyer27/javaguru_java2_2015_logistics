@@ -60,12 +60,3 @@
 </div>
 </body>
 </html>
-
-<html>
-<script language="Javascript">
-    <!--
-    alert ("New CARGO record inserted to main DB Pentagon server!  Urra, tovarishi-comrads, URRA! :)")
-    //-->
-</script>
-</body>
-</html>

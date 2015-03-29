@@ -6,11 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import lv.javaguru.java2.database.CargoDAO;
 import lv.javaguru.java2.database.UserDAO;
+import lv.javaguru.java2.database.ValueDAO;
 import lv.javaguru.java2.domain.User;
-import lv.javaguru.java2.servlet.model.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.domain.Cargo;
@@ -26,8 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CargoRegResultController {
 
-    public static final String PENDING = "PENDING";
-
     @Autowired
     @Qualifier("HibernateCargoDAO")
     private CargoDAO cargoDAO;
@@ -35,6 +32,10 @@ public class CargoRegResultController {
     @Autowired
     @Qualifier("HibernateUserDAO")
     private UserDAO userDAO;
+
+    @Autowired
+    @Qualifier("HibValueDAO")
+    private ValueDAO valueDAO;
 
     @RequestMapping(value = "cargoRegResult", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView processRequest(HttpServletRequest request,
@@ -49,7 +50,13 @@ public class CargoRegResultController {
         String unloadAddress = request.getParameter("unloadaddress");
         Date loadDate = cargoDAO.stringToDate2(request.getParameter("loaddate"), 2);
         Date unloaDdate = cargoDAO.stringToDate2(request.getParameter("unloaddate"), 2);
-        String status = PENDING;
+        String status = null;
+
+        try {
+            status = valueDAO.lookupValue("Cargo Status", "Available");
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
 
 
         User user = null;
