@@ -5,6 +5,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<script language="JavaScript">
+    function formop()
+    {
+        form = window.open("resetPassword", "name", "tollbar=no, menubar=no, fullscreen=no, scrollbars=yes, top=120, left=150, width=400, height=300");
+    }
+</script>
+<div align="right"><a href="javascript:formop();" target="" style="text-decoration:none"><U>Reset password</U></a></div>
+<%--<div align="left"><a href="resetPassword" target="_blank" style="text-decoration:none"><U>Reset password</U></a></div>--%>
+
 <%
     User user = (User)session.getAttribute("user");
     Map<String, Object> modelHashMap = (Map<String, Object>) request.getAttribute("model");

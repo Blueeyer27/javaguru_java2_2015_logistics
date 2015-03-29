@@ -1,4 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script language="JavaScript">
+    function formop()
+    {
+        form = window.open("resetPassword", "name", "tollbar=no, menubar=no, fullscreen=no, scrollbars=yes, top=120, left=150, width=400, height=300");
+    }
+</script>
+<div align="right"><a href="javascript:formop();" target="" style="text-decoration:none"><U>Reset password</U></a></div>
+<%--<div align="left"><a href="resetPassword" target="_blank" style="text-decoration:none"><U>Reset password</U></a></div>--%>
+
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../style.css">
