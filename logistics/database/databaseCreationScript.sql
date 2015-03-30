@@ -159,18 +159,54 @@ SELECT id INTO @companyID  FROM company  WHERE name ='ADMIN';
 insert into user values (DEFAULT, "admin1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Admin", "Adminov", "admin@email.com", "+371 27127645", @companyID);
 
 SELECT id INTO @userID  FROM user  WHERE login ='cuser1';
-insert into cargo values (DEFAULT, @userID, "platform", 11, "Riga", "Moscow", "2015/02/01", "2015/02/05", "In Progress");
-insert into cargo values (DEFAULT, @userID, "tilt", 11, "Riga", "Warszawa", "2015/02/11", "2015/02/25", "Available");
-insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Minsk", "Riga", "2015/02/09", "2015/02/15", "Available");
+
+-- IN USE
+insert into cargo values (DEFAULT, @userID, "platform", 15, "Riga", "Moscow", "2015/02/01", "2015/02/05", "In Progress");
+insert into cargo values (DEFAULT, @userID, "tilt", 20, "Riga", "Warszawa", "2015/04/11", "2015/04/25", "In Progress");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 10, "Paris", "Berlin", "2015/02/09", "2015/02/15", "In Progress");
+
+-- FREE
+insert into cargo values (DEFAULT, @userID, "tilt", 20, "Praha", "Riga", "2015/06/09", "2015/06/15", "Available");
+insert into cargo values (DEFAULT, @userID, "tilt", 23, "Riga", "Berlin", "2015/04/19", "2015/04/28", "Available");
+insert into cargo values (DEFAULT, @userID, "tilt", 6, "Dortmund", "Tallin", "2015/04/13", "2015/04/20", "Available");
+insert into cargo values (DEFAULT, @userID, "tilt", 15, "Krakow", "Riga", "2015/05/19", "2015/05/25", "Available");
+insert into cargo values (DEFAULT, @userID, "platform", 10, "Vilnius", "Warszawa", "2016/02/09", "2016/02/15", "Available");
+insert into cargo values (DEFAULT, @userID, "platform", 15, "Riga", "Tallin", "2015/05/12", "2015/05/15", "Available");
+insert into cargo values (DEFAULT, @userID, "platform", 10, "Riga", "Brest", "2015/04/07", "2015/04/10", "Available");
+insert into cargo values (DEFAULT, @userID, "platform", 20, "Riga", "Saint-Petersburg", "2015/05/01", "2015/05/11", "Available");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 20, "Saint-Petersburg", "Hamburg", "2015/04/30", "2015/05/11", "Available");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 20, "Ventspils", "Moscow", "2015/05/11", "2015/05/21", "Available");
+insert into cargo values (DEFAULT, @userID, "refrigirator", 20, "Riga", "Ventspils", "2016/04/01", "2016/04/11", "Available");
 
 SELECT id INTO @userID  FROM user  WHERE login ='tuser1';
+
+-- IN USE
 INSERT INTO vehicle VALUES (default, @userID, "KAMAZ", "platform", "FG-2056", "KA-4309", 9.0, "Reserved");
-INSERT INTO vehicle VALUES (default, @userID, "SCANIA", "tilt", "PA-5611", "MZ-5098", 12.0, "Available");
-INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "KL-9986", "LM-7831", 22.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "Scania", "tilt", "PA-5611", "MZ-5098", 12.0, "Reserved");
+INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "KL-9986", "LM-7831", 24.0, "Reserved");
+
+-- FREE
+INSERT INTO vehicle VALUES (default, @userID, "MAN",    "platform", "SE-5209", "SL-4551", 24.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "MAN",    "platform", "FD-2334", "FY-4091", 24.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "Scania", "platform", "AD-6671", "AR-0992", 24.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "Scania", "tilt", "EE-2543", "RT-1492", 24.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "Scania", "tilt", "BD-1432", "AW-6755", 24.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "Mercedes-Benz", "tilt", "RE-6671", "SQ-1332", 24.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "Mercedes-Benz", "refrigerator", "AD-6671", "HR-1892", 24.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "Scania",        "refrigerator", "LZ-1171", "LR-1180", 24.0, "Available");
+INSERT INTO vehicle VALUES (default, @userID, "Ford",          "refrigerator", "FR-1443", "FT-0998", 24.0, "Available");
 
 SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Riga' and unload_address ='Moscow';
 SELECT id INTO @vehicleID  FROM vehicle  WHERE plate_number ='FG-2056';
-insert into agreement values(default, @cargoID, @vehicleID, "PENDING");
+insert into agreement values(default, @cargoID, @vehicleID, "Pending");
+
+SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Riga' and unload_address ='Warszawa';
+SELECT id INTO @vehicleID  FROM vehicle  WHERE plate_number ='PA-5611';
+insert into agreement values(default, @cargoID, @vehicleID, "Pending");
+
+SELECT id INTO @cargoID  FROM cargo  WHERE load_address ='Paris' and unload_address ='Berlin';
+SELECT id INTO @vehicleID  FROM vehicle  WHERE plate_number ='KL-9986';
+insert into agreement values(default, @cargoID, @vehicleID, "Pending");
 
 insert into value values (DEFAULT, "Country", "Albania", "Albania");
 insert into value values (DEFAULT, "Country", "Russia", "Russia");
@@ -200,3 +236,8 @@ insert into value values (DEFAULT, "Cargo Status", "Processed", "Processed");
 insert into value values (DEFAULT, "Company Type", "transport", "transport");
 insert into value values (DEFAULT, "Company Type", "cargo", "cargo");
 insert into value values (DEFAULT, "Company Type", "admin", "admin");
+
+insert into value values (DEFAULT, "Agreement Status", "Pending", "Pending");
+insert into value values (DEFAULT, "Agreement Status", "Accepted", "Accepted");
+
+

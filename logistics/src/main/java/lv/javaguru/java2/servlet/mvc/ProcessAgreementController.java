@@ -1,25 +1,22 @@
 package lv.javaguru.java2.servlet.mvc;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import lv.javaguru.java2.database.AgreementDAO;
 import lv.javaguru.java2.database.CargoDAO;
-import lv.javaguru.java2.database.VehicleDAO;
-import lv.javaguru.java2.servlet.model.URL;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import lv.javaguru.java2.database.DBException;
+import lv.javaguru.java2.database.VehicleDAO;
 import lv.javaguru.java2.domain.Agreement;
 import lv.javaguru.java2.domain.Cargo;
 import lv.javaguru.java2.domain.Vehicle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class ProcessAgreementController {
@@ -38,10 +35,6 @@ public class ProcessAgreementController {
 
     public static final String ACCEPT = "accept";
     public static final String CANCEL = "cancel";
-    public static final String ACCEPTED = "ACCEPTED";
-//    private AgreementDAOImpl agreementDAO = new AgreementDAOImpl();
-//    private CargoDAOImpl cargoDAO = new CargoDAOImpl();
-//    private VehicleDAOImpl vehicleDAO = new VehicleDAOImpl();
 
     @RequestMapping(value = "processAgreement", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView processRequest(HttpServletRequest request,
@@ -97,10 +90,10 @@ public class ProcessAgreementController {
     }
 
     private void acceptAgreement(Agreement agreement, Cargo cargo, Vehicle vehicle) {
-        agreement.setStatus(ACCEPTED);
+        agreement.setStatus("Accepted");
         if (cargo !=null && vehicle != null) {
-            cargo.setStatus(ACCEPTED);
-            vehicle.setStatus(ACCEPTED);
+            cargo.setStatus("Processed");
+            vehicle.setStatus("In Use");
         }
         try {
             agreementDAO.update(agreement);
