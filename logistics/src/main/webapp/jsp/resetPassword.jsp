@@ -12,7 +12,6 @@
     String color = (String)modelHashMap.get("color");
 
     System.out.println(request.getMethod());
-
     System.out.println("=======================================    "+info);
 
 
@@ -31,11 +30,11 @@
         <input type="password" name="oldpassword" /><br/>
         <br/>
         new password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" name="newpassword1" /><br/>
+        <input type="password" name="newpassword1" /><br/>
         <br/>
-        confirm password:&nbsp;&nbsp;&nbsp;<input type="text" name="newpassword2" /><br/>
+        confirm password:&nbsp;&nbsp;&nbsp;
+        <input type="password" name="newpassword2" /><br/>
         <br/>
-        <input type="hidden" name="isPasswordPage" value="Yes">
         <input type="hidden" name="login" value=<%=user.getLogin()%>>
         <br/>
         <input type="submit" value="reset" />
