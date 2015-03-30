@@ -14,7 +14,7 @@
             <%if (user == null) {%>
                 <tr align="center">
         <td><form method="get" action="jsp/login.jsp"><button type="submit">Login</button></form></td>
-        <td><form method="get" action="admin"><button type="submit">Admin login</button></form></td>
+        <%--<td><form method="get" action="admin"><button type="submit">Admin login</button></form></td>--%>
                 </tr>
             <%} else {%>
                 <tr align="center">

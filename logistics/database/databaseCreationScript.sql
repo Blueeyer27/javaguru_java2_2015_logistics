@@ -125,28 +125,45 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-/*==================================================
-PAROL user1,user2,user3  =123(heshing code)*/
+/*================ COMPANIES =================================
+Cargo x1, Transport x1, Dummy x1, Empty(no users) x1, Admin x1
+*/
 insert into company values (DEFAULT, "Cargo Service Inc.", "123", "Maza Kalna 13-1, Riga", "Maza Kalna 13-1, Riga", "Swedbank", "HABA2132524325734", "Latvia", "cargo");
 insert into company values (DEFAULT, "Baltic Transport", "123", "Teraudlietuves 22, Riga", "Teraudlietuves 22, Riga", "Swedbank", "HABA246363534561", "Latvia", "transport");
-insert into company values (DEFAULT, "Dummy company", "123", "Brivibas iela, 1", "Brivibas iela, 1", "Swedbank", "HABA234567891", "Latvia", "dummy");
+insert into company values (DEFAULT, "Dummy company", "123", "Brivibas iela 1, Riga", "Brivibas iela 1, Riga", "Swedbank", "HABA234567891", "Latvia", "dummy");
+insert into company values (DEFAULT, "Epmty Company (can delete)", "123", "Pernavas iela 134, Riga", "Pernavas iela 134, Riga", "Swedbank", "HABA234567891", "Latvia", "cargo");
 insert into company values (DEFAULT, "ADMIN", "dummy", "dummy", "dummy", "dummy", "dummy", "Latvia", "admin");
 
+/*================ USERS =================================
+cuser - cargo, tuser - transport
+ALL PASWORDS = 123
+*/
 SELECT id INTO @companyID  FROM company  WHERE name ='Cargo Service Inc.';
-insert into user values (DEFAULT, "user1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Andris", "Berzins", "ab@email.com", "+371 27689837", @companyID);
+insert into user values (DEFAULT, "cuser1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Andris", "Berzins", "ab@email.com", "+371 27689837", @companyID);
+insert into user values (DEFAULT, "cuser2", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Martins", "Plavins", "mp@email.com", "+371 22567800", @companyID);
+insert into user values (DEFAULT, "cuser3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Lauris", "Darzins", "ld@email.com", "+371 21445087", @companyID);
+insert into user values (DEFAULT, "cuser4", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Mikelis", "Redlihs", "mr@email.com", "+371 24445611", @companyID);
+insert into user values (DEFAULT, "cuser5", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Laima", "Vaikule (no cargoes)", "lv@email.com", "+371 88933029", @companyID);
+
 SELECT id INTO @companyID  FROM company  WHERE name ='Baltic Transport';
-insert into user values (DEFAULT, "user2", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Janis", "Andersons", "ja@email.com", "+371 24567897", @companyID);
+insert into user values (DEFAULT, "tuser1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Janis", "Andersons", "ja@email.com", "+371 22012877", @companyID);
+insert into user values (DEFAULT, "tuser2", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Maris", "Verpakovskis", "mv@email.com", "+371 21189331", @companyID);
+insert into user values (DEFAULT, "tuser3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Mihails", "Miholaps", "mm@email.com", "+371 22023566", @companyID);
+insert into user values (DEFAULT, "tuser4", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Gints", "Meija", "gm@email.com", "+371 29005677", @companyID);
+insert into user values (DEFAULT, "tuser5", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Marians", "Pahars (no vehicles)", "mp@email.com", "+371 21235577", @companyID);
+
 SELECT id INTO @companyID  FROM company  WHERE name ='Dummy company';
-insert into user values (DEFAULT, "user3", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "John", "Smith", "js@email.com", "+371 27127645", @companyID);
+insert into user values (DEFAULT, "duser1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "John", "Smith", "js@email.com", "+371 27127645", @companyID);
+
 SELECT id INTO @companyID  FROM company  WHERE name ='ADMIN';
 insert into user values (DEFAULT, "admin1", "$2a$12$0EDKOqTMDTZYapdsRdgbR.Xy99qjaGbrE83y0sqZiN/b6irB9ht1m", "Admin", "Adminov", "admin@email.com", "+371 27127645", @companyID);
 
-SELECT id INTO @userID  FROM user  WHERE login ='user1';
+SELECT id INTO @userID  FROM user  WHERE login ='cuser1';
 insert into cargo values (DEFAULT, @userID, "platform", 11, "Riga", "Moscow", "2015/02/01", "2015/02/05", "In Progress");
 insert into cargo values (DEFAULT, @userID, "tilt", 11, "Riga", "Warszawa", "2015/02/11", "2015/02/25", "Available");
 insert into cargo values (DEFAULT, @userID, "refrigirator", 11, "Minsk", "Riga", "2015/02/09", "2015/02/15", "Available");
 
-SELECT id INTO @userID  FROM user  WHERE login ='user2';
+SELECT id INTO @userID  FROM user  WHERE login ='tuser1';
 INSERT INTO vehicle VALUES (default, @userID, "KAMAZ", "platform", "FG-2056", "KA-4309", 9.0, "Reserved");
 INSERT INTO vehicle VALUES (default, @userID, "SCANIA", "tilt", "PA-5611", "MZ-5098", 12.0, "Available");
 INSERT INTO vehicle VALUES (default, @userID, "MAN", "refrigerator", "KL-9986", "LM-7831", 22.0, "Available");
