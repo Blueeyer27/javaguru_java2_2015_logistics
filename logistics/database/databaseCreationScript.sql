@@ -240,4 +240,3 @@ insert into value values (DEFAULT, "Company Type", "admin", "admin");
 insert into value values (DEFAULT, "Agreement Status", "Pending", "Pending");
 insert into value values (DEFAULT, "Agreement Status", "Accepted", "Accepted");
 
-

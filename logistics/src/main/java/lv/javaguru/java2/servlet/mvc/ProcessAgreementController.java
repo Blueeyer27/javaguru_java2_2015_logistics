@@ -73,7 +73,7 @@ public class ProcessAgreementController {
         if(processType.equals(ACCEPT)) {
             acceptAgreement(agreement, cargo, vehicle);
         } else if(processType.equals(CANCEL)) {
-            cancelAgreement(agreement);
+            cancelAgreement(agreement, cargo, vehicle);
         } else
             System.out.println("Unknown Action in ProcessAgreementController.updateObjectsStatuses()");
     }
@@ -100,16 +100,22 @@ public class ProcessAgreementController {
             cargoDAO.update(cargo);
             vehicleDAO.update(vehicle);
         } catch (DBException e) {
-            System.out.println("Exception while agreementDAO.update() or cargoDAO.update() or vehicleDAO.update()  in ProcessAgreementController()");
+            System.out.println("Exception in ProcessAgreementController.acceptAgreement()");
             e.printStackTrace();
         }
     }
 
-    private void cancelAgreement(Agreement agreement) {
+    private void cancelAgreement(Agreement agreement, Cargo cargo, Vehicle vehicle) {
+        if (cargo !=null && vehicle != null) {
+            cargo.setStatus("Available");
+            vehicle.setStatus("Available");
+        }
         try {
+            cargoDAO.update(cargo);
+            vehicleDAO.update(vehicle);
             agreementDAO.delete(agreement.getAgreementId());
         } catch (DBException e) {
-            System.out.println("Exception while agreementDAO.delete()  in ProcessAgreementController()");
+            System.out.println("Exception in ProcessAgreementController.cancelAgreement()");
             e.printStackTrace();
         }
     }
